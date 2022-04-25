@@ -1,0 +1,102 @@
+[   
+    {
+        "category_id" : 0,
+        "id" : 0,
+        "title" : "Elektronik_&-Aksesuarlar"
+    },
+    {
+        "category_id" : 0,
+        "id" : 1,
+        "title" : "Oyun-Hobi_Oyuncak"
+    },
+    {
+        "category_id" : 0,
+        "id" : 2,
+        "title" : "Kitap,-Dergi_Film-&-Müzik"
+    },
+    {
+        "category_id" : 0,
+        "id" : 3,
+        "title" : "Enstrüman_Fotoğrafçılık_Sanat"
+    },
+    {
+        "category_id" : 1,
+        "id" : 0,
+        "title" : "Sağlık_Kişisel-Bakım_Kozmetik"
+    },
+    {
+        "category_id" : 1,
+        "id" : 1,
+        "title" : "Anne_Bebek_Petshop"
+    },
+    {
+        "category_id" : 1,
+        "id" : 2,
+        "title" : "Spor_Outdoor"
+    },
+    {
+        "category_id" : 1,
+        "id" : 3,
+        "title" : "Giyim_& Aksesuarlar"
+    },
+    {
+        "category_id" : 2,
+        "id" : 0,
+        "title" : "Ev_Ofis"
+    },
+    {
+        "category_id" : 2,
+        "id" : 1,
+        "title" : "Dekorasyon"
+    },
+    {
+        "category_id" : 2,
+        "id" : 2,
+        "title" : "Antika_Koleksiyonlar"
+    },
+    {
+        "category_id" : 2,
+        "id" : 3,
+        "title" : "Temizlik-Ürünleri"
+    },
+    {
+        "category_id" : 3,
+        "id" : 0,
+        "title" : "Araç_& Aksesuarlar"
+    },
+    {
+        "category_id" : 3,
+        "id" : 1,
+        "title" : "Bahçe_Yapı-Malzemeleri"
+    },
+    {
+        "category_id" : 3,
+        "id" : 2,
+        "title" : "Tamirat_Endüstriyel-Aletler"
+    },
+    {
+        "category_id" : 3,
+        "id" : 3,
+        "title" : "Kırtasiye"
+    },
+    {
+        "category_id" : 4,
+        "id" : 0,
+        "title" : "Manav_Baharatlar"
+    },
+    {
+        "category_id" : 4,
+        "id" : 1,
+        "title" : "Şarküteri"
+    },
+    {
+        "category_id" : 4,
+        "id" : 2,
+        "title" : "Bakliyatlar"
+    },
+    {
+        "category_id" : 4,
+        "id" : 3,
+        "title" : "Süt ürünleri"
+    }
+]
