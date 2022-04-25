@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/flow.dart';
-import 'package:sepet_demo/View/Style/textstyle.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class FlowAnnouncementWidget extends StatelessWidget {
@@ -25,7 +24,7 @@ class FlowAnnouncementWidget extends StatelessWidget {
             Center(
                 child: Text(
               data.title!,
-              style: getBlackBackgroundStyle(context),
+              style: Theme.of(context).textTheme.subtitle2,
             ))
           ],
         ));

@@ -10,3 +10,14 @@ extension GetSize on BuildContext {
   EdgeInsets get padding => mediaQuery.padding;
 }
 
+double discountedCalculate(double price, int? rate) {
+  if (rate == null) {
+    return price;
+  } else {
+    return (price - ((price * rate) / 100));
+  }
+}
+
+String getPrice(double price) {
+  return ' ${price.toStringAsFixed(2)} ₺ ';
+}

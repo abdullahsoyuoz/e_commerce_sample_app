@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/flow.dart';
-import 'package:sepet_demo/View/Style/textstyle.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class FlowDiscountWidget extends StatelessWidget {
@@ -43,7 +42,7 @@ class FlowDiscountWidget extends StatelessWidget {
                     .replaceAll('_', ' ')
                     .replaceAll('-', ' ')
                     .toUpperCase(),
-                style: getBlackBackgroundStyle(context).copyWith(fontSize: 17),
+                style: Theme.of(context).textTheme.subtitle2!,
               ),
             ),
           )

@@ -53,8 +53,8 @@ class AppBaseColors {
   static Color greyscaleS1 = const Color(0xffcccccc);
   static Color greyscaleS2 = const Color(0xff6b6e74);
   static Color greyscaleS3 = const Color(0xff393e46);
-  static Color greyscaleS4 = const Color(0xFF180627);
-  static Color greyscaleS5 = const Color(0xff262626);
+  static Color greyscaleS4 = const Color(0xFF33373D);
+  static Color greyscaleS5 = const Color(0xff1a1a1a);
 
   static Color orangeS1 = const Color(0xffffa000);
   static Color orangeS2 = const Color(0xffff9000);

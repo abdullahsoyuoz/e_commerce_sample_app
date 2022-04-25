@@ -30,7 +30,7 @@ class AppStarter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ThemeChanger(false),
+      create: (_) => ThemeChanger(),
       child: Consumer<ThemeChanger>(
         builder: (context, value, child) {
           return MaterialApp(
@@ -41,8 +41,8 @@ class AppStarter extends StatelessWidget {
                 ? ThemeMode.light
                 : ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            // home: const SplashScreen(),
-            home: const AuthMainPage(),
+            home: const SplashScreen(),
+            // home: const AuthMainPage(),
             // home: const HomePage(),
           );
         },

@@ -15,10 +15,3 @@ TextStyle getNoenStyle(BuildContext context, MaterialColor color) => TextStyle(
         Shadow(color: color.shade500, blurRadius: 30, offset: Offset.zero),
       ],
     );
-TextStyle getBlackBackgroundStyle(BuildContext context, {Color? backgroundColor}) => TextStyle(
-      color: Theme.of(context).textTheme.titleMedium!.color,
-      fontSize: 14,
-      backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.background,
-      height: 1.5,
-      letterSpacing: 1,
-    );

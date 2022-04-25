@@ -33,7 +33,7 @@ Widget buildLowLayerWidget(BuildContext context) {
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.white, width: 2),
+                        border: Border.all(color: Theme.of(context).iconTheme.color!, width: 3),
                         image: DecorationImage(
                           image: NetworkImage(loginUser.photoUrl!),
                           fit: BoxFit.cover,
@@ -52,7 +52,7 @@ Widget buildLowLayerWidget(BuildContext context) {
                             loginUser.name! + '',
                             style: GoogleFonts.josefinSans(
                               fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                              color: Theme.of(context).iconTheme.color,
                             ),
                           ),
                         ),
@@ -65,10 +65,7 @@ Widget buildLowLayerWidget(BuildContext context) {
             IconButton(
               icon: const Icon(
                 FontAwesomeIcons.solidPaperPlane,
-                color: Colors.white,
               ),
-              splashColor: Colors.red,
-              splashRadius: 5,
               onPressed: () => Navigator.push(
                 context,
                 CupertinoPageRoute(
@@ -79,10 +76,7 @@ Widget buildLowLayerWidget(BuildContext context) {
             IconButton(
               icon: const Icon(
                 FontAwesomeIcons.solidBookmark,
-                color: Colors.white,
               ),
-              splashColor: Colors.red,
-              splashRadius: 5,
               onPressed: () => Navigator.push(
                 context,
                 CupertinoPageRoute(
@@ -93,10 +87,7 @@ Widget buildLowLayerWidget(BuildContext context) {
             IconButton(
               icon: const Icon(
                 FontAwesomeIcons.solidBell,
-                color: Colors.white,
               ),
-              splashColor: Colors.red,
-              splashRadius: 5,
               onPressed: () {},
             ),
           ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
+import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/View/appbar.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
 import 'package:sepet_demo/View/Widget/drop_menu.dart';
@@ -41,36 +42,41 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       key: _scaffoldKey,
       body: DropMenu(
-        decoration: const BoxDecoration(boxShadow: [BoxShadow(blurRadius: 3)]),
-        backgroundColor: Theme.of(context).appBarTheme.foregroundColor,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         lowLayerHeight: 70,
         lowLayerBottomPadding: MediaQuery.of(context).padding.bottom,
         lowLayer: buildLowLayerWidget(context),
         indicator: const SizedBox(),
         animationController: _animationController,
         highLayer: Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          floatingActionButton: FloatingActionButton(
-            child: const FaIcon(
-              FontAwesomeIcons.solidUser,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(bottom: 50.0),
+            child: FloatingActionButton(
+              child: const FaIcon(
+                FontAwesomeIcons.solidUser,
+              ),
+              onPressed: () => toggleDropMenu(),
             ),
-            onPressed: () => toggleDropMenu(),
           ),
           appBar: homeAppbar(context),
-          body: ListView.builder(
-            shrinkWrap: true,
-            physics: const PageScrollPhysics(),
-            padding: const EdgeInsets.only(bottom: 100),
-            itemCount: flowList.length,
-            itemExtent: (context.height - context.padding.top - 70) * 0.25,
-            itemBuilder: (context, index) {
-              return FlowWidget(data: flowList[index]);
-            },
+          body: Padding(
+            padding: EdgeInsets.only(bottom: context.padding.bottom),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const PageScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 100),
+              itemCount: flowList.length,
+              itemExtent: (context.height - context.padding.top - context.padding.bottom - 70) * 0.25,
+              itemBuilder: (context, index) {
+                return FlowWidget(data: flowList[index]);
+              },
+            ),
           ),
         ),
       ),
     );
   }
+  
 
   void toggleDropMenu() {
     if (!_animationController.isAnimating && _animationController.value == 0) {
