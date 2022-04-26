@@ -21,7 +21,7 @@ class _NavigationPageState extends State<NavigationPage>
   @override
   void initState() {
     _scrollController = ScrollController(
-      initialScrollOffset: 100,
+      initialScrollOffset: 300,
     );
     super.initState();
   }
@@ -34,37 +34,71 @@ class _NavigationPageState extends State<NavigationPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        elevation: 0,
-        toolbarHeight: 70,
-        automaticallyImplyLeading: true,
-        centerTitle: false,
-        title: const Text('Navigasyon'),
-        actions: [
-          CupertinoSwitch(
-            value: Provider.of<ThemeChanger>(context, listen: false).isDark,
-            onChanged: (val) {
-              Provider.of<ThemeChanger>(context, listen: false).toggle();
-              setState(() {});
-            },
-          )
-        ],
-      ),
-      body: SizedBox.expand(
-        child: Padding(
-          padding: EdgeInsets.only(bottom: context.padding.bottom),
-          child: ListView.builder(
-            shrinkWrap: true,
-            controller: _scrollController,
-            physics: const PageScrollPhysics(),
-            itemExtent: safeArea(context) * 1/8,
-            itemCount: categoryList.length,
-            itemBuilder: (context, index) =>
-                CategoryWidget(data: categoryList[index]),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          elevation: 0,
+          toolbarHeight: 70,
+          automaticallyImplyLeading: true,
+          centerTitle: false,
+          title: const Text('Navigasyon'),
+          actions: [
+            CupertinoSwitch(
+              value: Provider.of<ThemeChanger>(context, listen: false).isDark,
+              onChanged: (val) {
+                Provider.of<ThemeChanger>(context, listen: false).toggle();
+                setState(() {});
+              },
+            )
+          ],
+          bottom: const TabBar(
+            tabs: [
+              Text(
+                'Kategoriler',
+                style: TextStyle(fontSize: 17),
+              ),
+              Text(
+                'Yapılandırmalar',
+                style: TextStyle(fontSize: 17),
+              ),
+            ],
           ),
         ),
+        body: SizedBox.expand(
+          child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              buildCategoriesBody(context),
+              buildConfigurationBody(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildConfigurationBody(){
+    return const SizedBox();
+  }
+
+  Widget buildCategoriesBody(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: context.padding.bottom),
+      child: ListView.builder(
+        shrinkWrap: true,
+        controller: _scrollController,
+        physics: const PageScrollPhysics(),
+        itemExtent: (safeArea(context) -
+                const TabBar(
+                  tabs: [],
+                ).preferredSize.height) *
+            1 /
+            8,
+        itemCount: categoryList.length,
+        itemBuilder: (context, index) =>
+            CategoryWidget(data: categoryList[index]),
       ),
     );
   }

@@ -28,8 +28,15 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       backgroundColor: Colors.black,
     ),
   ),
+  tabBarTheme: TabBarTheme(
+    indicatorSize: TabBarIndicatorSize.tab,
+    indicator: UnderlineTabIndicator(borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
+    labelColor: Colors.black,
+    labelPadding: const EdgeInsets.symmetric(vertical: 3),
+    unselectedLabelColor: Colors.black.withOpacity(.3),
+  ),
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.grey.shade100,
+    backgroundColor: AppColors.grey.shade200,
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     foregroundColor: Colors.black,
     iconTheme: const IconThemeData(
@@ -84,6 +91,13 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       height: 1.5,
       backgroundColor: Colors.white,
     ),
+  ),
+  tabBarTheme: TabBarTheme(
+    indicatorSize: TabBarIndicatorSize.tab,
+    indicator: UnderlineTabIndicator(borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
+    labelPadding: const EdgeInsets.symmetric(vertical: 3),
+    labelColor: Colors.white,
+    unselectedLabelColor: Colors.white.withOpacity(.3),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black,
