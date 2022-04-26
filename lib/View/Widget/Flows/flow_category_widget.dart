@@ -39,11 +39,7 @@ class FlowCategoryWidget extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 data.title!.toUpperCase(),
-                style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                      backgroundColor:
-                          _dark ? Colors.white : data.color!.shade300,
-                      color: Colors.black,
-                    ),
+                style: Theme.of(context).textTheme.subtitle2!,
               ),
             ),
           ),

@@ -75,10 +75,7 @@ class _FlowListWidgetState extends State<FlowListWidget> {
                     Expanded(
                       child: Text(
                         widget.data.title!.toUpperCase(),
-                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            backgroundColor: _dark
-                                ? Colors.white
-                                : widget.data.color!.shade300),
+                        style: Theme.of(context).textTheme.subtitle2!,
                         maxLines: 3,
                       ),
                     ),
