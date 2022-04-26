@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/Controller/utility.dart';
@@ -5,6 +7,7 @@ import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/View/appbar.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
+import 'package:sepet_demo/View/Widget/Flows/flow_shimmer_widget.dart';
 import 'package:sepet_demo/View/Widget/drop_menu.dart';
 import 'package:sepet_demo/View/Widget/flow_widget.dart';
 
@@ -39,6 +42,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       key: _scaffoldKey,
       body: DropMenu(
@@ -66,8 +70,11 @@ class _HomePageState extends State<HomePage>
               physics: const PageScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 100),
               itemCount: flowList.length,
-              itemExtent: (context.height - context.padding.top - context.padding.bottom - 70) * 0.25,
+              itemExtent: safeArea(context) * 0.25,
               itemBuilder: (context, index) {
+                // if (list.isEmpty || list == []) {
+                //   return const FlowShimmerWidget();
+                // }
                 return FlowWidget(data: flowList[index]);
               },
             ),
@@ -76,7 +83,6 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
-  
 
   void toggleDropMenu() {
     if (!_animationController.isAnimating && _animationController.value == 0) {

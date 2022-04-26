@@ -2,47 +2,47 @@
     {
         "category_id" : 0,
         "id" : 0,
-        "title" : "Elektronik_&-Aksesuarlar"
+        "title" : "Elektronik & Aksesuarlar"
     },
     {
         "category_id" : 0,
         "id" : 1,
-        "title" : "Oyun-Hobi_Oyuncak"
+        "title" : "Oyun, Hobi ve Oyuncak"
     },
     {
         "category_id" : 0,
         "id" : 2,
-        "title" : "Kitap,-Dergi_Film-&-Müzik"
+        "title" : "Kitap, Dergi, Film ve Müzik"
     },
     {
         "category_id" : 0,
         "id" : 3,
-        "title" : "Enstrüman_Fotoğrafçılık_Sanat"
+        "title" : "Enstrüman, Fotoğrafçılık ve Sanat"
     },
     {
         "category_id" : 1,
         "id" : 0,
-        "title" : "Sağlık_Kişisel-Bakım_Kozmetik"
+        "title" : "Sağlık, Kişisel Bakım ve Kozmetik"
     },
     {
         "category_id" : 1,
         "id" : 1,
-        "title" : "Anne_Bebek_Petshop"
+        "title" : "Anne, Bebek ve Petshop"
     },
     {
         "category_id" : 1,
         "id" : 2,
-        "title" : "Spor_Outdoor"
+        "title" : "Spor ve Outdoor"
     },
     {
         "category_id" : 1,
         "id" : 3,
-        "title" : "Giyim_& Aksesuarlar"
+        "title" : "Giyim & Aksesuarlar"
     },
     {
         "category_id" : 2,
         "id" : 0,
-        "title" : "Ev_Ofis"
+        "title" : "Ev ve Ofis"
     },
     {
         "category_id" : 2,
@@ -52,27 +52,27 @@
     {
         "category_id" : 2,
         "id" : 2,
-        "title" : "Antika_Koleksiyonlar"
+        "title" : "Antika ve Koleksiyonlar"
     },
     {
         "category_id" : 2,
         "id" : 3,
-        "title" : "Temizlik-Ürünleri"
+        "title" : "Temizlik Ürünleri"
     },
     {
         "category_id" : 3,
         "id" : 0,
-        "title" : "Araç_& Aksesuarlar"
+        "title" : "Araç & Aksesuarlar"
     },
     {
         "category_id" : 3,
         "id" : 1,
-        "title" : "Bahçe_Yapı-Malzemeleri"
+        "title" : "Bahçe ve Yapı malzemeleri"
     },
     {
         "category_id" : 3,
         "id" : 2,
-        "title" : "Tamirat_Endüstriyel-Aletler"
+        "title" : "Tamirat ve Endüstriyel aletler"
     },
     {
         "category_id" : 3,
@@ -82,7 +82,7 @@
     {
         "category_id" : 4,
         "id" : 0,
-        "title" : "Manav_Baharatlar"
+        "title" : "Manav ve Baharatlar"
     },
     {
         "category_id" : 4,

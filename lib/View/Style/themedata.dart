@@ -6,7 +6,10 @@ import 'package:sepet_demo/View/Style/colors.dart';
 ThemeData appLightTheme = ThemeData.light().copyWith(
   brightness: Brightness.light,
   primaryColor: AppColors.purple,
-  colorScheme: const ColorScheme.light().copyWith(background: Colors.black),
+  colorScheme: ColorScheme.light(
+    primaryContainer: AppColors.grey.shade100,
+    secondaryContainer: AppColors.grey.shade200,
+  ),
   scaffoldBackgroundColor: Colors.white,
   backgroundColor: Colors.white,
   hintColor: AppColors.grey.shade100,
@@ -28,13 +31,14 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   appBarTheme: AppBarTheme(
     backgroundColor: AppColors.grey.shade100,
     systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
     iconTheme: const IconThemeData(
       color: Colors.black,
     ),
   ),
   dividerColor: Colors.grey.shade300,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.black,
+    backgroundColor: AppColors.purple.shade200,
     foregroundColor: Colors.white,
     splashColor: AppColors.red,
   ),
@@ -59,7 +63,10 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
 ThemeData appDarkTheme = ThemeData.dark().copyWith(
   brightness: Brightness.dark,
   primaryColor: AppColors.orange,
-  colorScheme: const ColorScheme.dark().copyWith(background: Colors.white),
+  colorScheme: const ColorScheme.dark().copyWith(
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade500,
+  ),
   scaffoldBackgroundColor: AppColors.grey.shade500,
   backgroundColor: Colors.black,
   hintColor: AppColors.grey.shade100,
@@ -67,7 +74,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   splashColor: AppColors.red,
   splashFactory: InkRipple.splashFactory,
   textTheme: GoogleFonts.readexProTextTheme().copyWith(
-   bodyText2: const TextStyle(
+    bodyText2: const TextStyle(
       fontSize: 14,
       color: Colors.white,
     ),
@@ -81,11 +88,14 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black,
     systemOverlayStyle: SystemUiOverlayStyle.light,
-    iconTheme: IconThemeData(color: Colors.white),
+    foregroundColor: Colors.white,
+    iconTheme: IconThemeData(
+      color: Colors.white,
+    ),
   ),
   dividerColor: AppColors.grey.shade200,
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.black,
+    backgroundColor: AppColors.purple.shade200,
     foregroundColor: Colors.white,
     splashColor: AppColors.red,
   ),

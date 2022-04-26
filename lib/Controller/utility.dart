@@ -18,6 +18,11 @@ double discountedCalculate(double price, int? rate) {
   }
 }
 
+double safeArea(BuildContext context, {double appBarHeight = 70}) =>
+    (context.height - context.padding.top - context.padding.bottom - appBarHeight);
+
+//
+
 String getPrice(double price) {
   return ' ${price.toStringAsFixed(2)} ₺ ';
 }

@@ -28,67 +28,57 @@ class _FlowListWidgetState extends State<FlowListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.width,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Image.network(
-              widget.data.imageUrl!,
-              fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) =>
-                  loadingIndicator(context, child, loadingProgress),
+    return BouncingWidget(
+      onPressed: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => FlowListProductsView(
+              data: widget.data,
             ),
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.data.title!
-                              .replaceAll('_', ' ')
-                              .replaceAll('-', ' ')
-                              .toUpperCase() +
-                          '',
-                      style: Theme.of(context).textTheme.subtitle2,
-                      maxLines: 3,
-                    ),
-                  ),
-                  widget.data.targetProducts == null
-                      ? const SizedBox()
-                      : BouncingWidget(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => FlowListProductsView(
-                                  data: widget.data,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            ' İncele '.toUpperCase(),
-                            style: Theme.of(context).textTheme.subtitle2,
-                          ),
-                        ),
-                ],
+        );
+      },
+      child: SizedBox(
+        width: context.width,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Image.network(
+                widget.data.imageUrl!,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) =>
+                    loadingIndicator(context, child, loadingProgress),
               ),
             ),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.data.title!
+                                .replaceAll('_', ' ')
+                                .replaceAll('-', ' ')
+                                .toUpperCase() +
+                            '',
+                        style: Theme.of(context).textTheme.subtitle2,
+                        maxLines: 3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
-
-  
 }
-
-

@@ -5,7 +5,7 @@ import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/Dummy/products.dart';
-import 'package:sepet_demo/View/Style/theme_data.dart';
+import 'package:sepet_demo/View/Style/themedata.dart';
 // ignore: unused_import
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
 // ignore: unused_import
@@ -41,8 +41,8 @@ class AppStarter extends StatelessWidget {
                 ? ThemeMode.light
                 : ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
-            // home: const AuthMainPage(),
+            // home: const SplashScreen(),
+            home: const AuthMainPage(),
             // home: const HomePage(),
           );
         },
