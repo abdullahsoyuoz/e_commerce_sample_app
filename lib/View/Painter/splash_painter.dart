@@ -18,7 +18,7 @@ class SplashPainter extends CustomPainter {
     curvedAnimation = CurvedAnimation(
       parent: animation!,
       curve: const SpringCurve(),
-      reverseCurve: Curves.elasticIn,
+      // curve: Curves.elasticOut,
     );
   }
 
@@ -29,9 +29,10 @@ class SplashPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    paintLevel3(canvas, size);
-    paintLevel2(canvas, size);
-    paintLevel1(canvas, size);
+    // paintLevel3(canvas, size);
+    // paintLevel2(canvas, size);
+    // paintLevel1(canvas, size);
+    paintVerticalPainter(canvas, size);
   }
 
   void paintLevel1(Canvas canvas, Size size) {
@@ -95,6 +96,15 @@ class SplashPainter extends CustomPainter {
       lerpDouble(1, 3, curvedAnimation.value)!,
     );
 
+    canvas.drawPath(path, level3Paint);
+  }
+
+  void paintVerticalPainter(Canvas canvas, Size size) {
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width, 0);
+    path.lineTo(size.width, lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
+    path.lineTo(0,lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
     canvas.drawPath(path, level3Paint);
   }
 

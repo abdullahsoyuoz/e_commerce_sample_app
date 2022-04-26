@@ -24,22 +24,22 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(seconds: 3),
     );
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       animationController.forward();
     });
-    Future.delayed(
-      const Duration(seconds: 5),
-      () => Navigator.push(
-        context,
-        customRouteBuilder(
-          context,
-          const OnboardPage(),
-          barrierColor: AppColors.red,
-        ),
-      ),
-    ).whenComplete((){});
+    // Future.delayed(
+    //   const Duration(seconds: 5),
+    //   () => Navigator.push(
+    //     context,
+    //     customRouteBuilder(
+    //       context,
+    //       const OnboardPage(),
+    //       barrierColor: AppColors.red,
+    //     ),
+    //   ),
+    // ).whenComplete((){});
   }
 
   @override
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: AppColors.purple,
+      backgroundColor: AppColors.purple.shade200,
       body: SizedBox.expand(
         child: Stack(
           children: [
@@ -61,8 +61,14 @@ class _SplashScreenState extends State<SplashScreen>
                 painter: SplashPainter(animation: animationController),
               ),
             ),
-            Center(
-              child: LogoWidget(),
+            GestureDetector(
+              onTap: () {
+                animationController.reset();
+                animationController.forward();
+              },
+              child: Center(
+                child: LogoWidget(color: AppColors.purple,),
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
