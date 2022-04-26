@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/utility.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class FlowShimmerWidget extends StatelessWidget {

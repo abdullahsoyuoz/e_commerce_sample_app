@@ -19,16 +19,16 @@ class FlowWidget extends StatelessWidget {
       //     data: data,
       //   );
       case FlowType.personal:
-        return const SizedBox();
+        // return const SizedBox();
         return FlowPersonalWidget(data: data);
       case FlowType.campagne:
-        return const SizedBox();
+        // return const SizedBox();
         return FlowCampagneWidget(data: data);
       case FlowType.discount:
-        return const SizedBox();
+        // return const SizedBox();
         return FlowDiscountWidget(data: data);
       case FlowType.category:
-        return const SizedBox();
+        // return const SizedBox();
         return FlowCategoryWidget(data: data);
       case FlowType.list:
         return FlowListWidget(data: data);

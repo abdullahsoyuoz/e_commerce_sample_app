@@ -1,13 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/View/appbar.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
-import 'package:sepet_demo/View/Widget/Flows/flow_shimmer_widget.dart';
 import 'package:sepet_demo/View/Widget/drop_menu.dart';
 import 'package:sepet_demo/View/Widget/flow_widget.dart';
 

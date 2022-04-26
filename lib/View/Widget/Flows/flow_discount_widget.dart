@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
@@ -10,20 +12,18 @@ class FlowDiscountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _dark = Provider.of<ThemeChanger>(context, listen: false).isDark;
     return SizedBox(
       width: context.width,
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-            child: Transform.scale(
-              scale: 1,
-              alignment: Alignment.bottomCenter,
-              child: SizedBox.expand(
-                  child: ColoredBox(color: data.color!.withOpacity(1))),
-            ),
-          ),
+          _dark
+              ? Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: SizedBox.expand(
+                      child: ColoredBox(color: data.color!.shade300)))
+              : const SizedBox(),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Image.network(
@@ -34,15 +34,15 @@ class FlowDiscountWidget extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.bottomLeft,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                data.title!
-                    .replaceAll('_', ' ')
-                    .replaceAll('-', ' ')
-                    .toUpperCase(),
-                style: Theme.of(context).textTheme.subtitle2!,
+                data.title!.toUpperCase(),
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: Colors.black,
+                    backgroundColor:
+                        _dark ? Colors.white : data.color!.shade300),
               ),
             ),
           )

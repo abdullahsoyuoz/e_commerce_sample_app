@@ -1,6 +1,4 @@
 // ignore_for_file: must_be_immutable
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -136,7 +134,9 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
                         child: Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: hasSubscribe ? AppColors.red : Theme.of(context)
+                            color: hasSubscribe
+                                ? AppColors.red
+                                : Theme.of(context)
                                     .colorScheme
                                     .primaryContainer,
                           ),
@@ -146,9 +146,10 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
                               minHeight: 20,
                             ),
                             child: FittedBox(
-                              alignment: Alignment.center,
-                              child: hasSubscribe ? const Icon(FontAwesomeIcons.solidBell) : const Text('TAKİP ET')
-                            ),
+                                alignment: Alignment.center,
+                                child: hasSubscribe
+                                    ? const Icon(FontAwesomeIcons.solidBell)
+                                    : const Text('TAKİP ET')),
                           ),
                         ),
                       )
@@ -196,15 +197,15 @@ class _ProductViewBodyState extends State<ProductViewBody> {
           const EdgeInsets.only(top: 110.0, bottom: 50, left: 20, right: 20),
       child: Column(
         children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
-            ),
-            child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Column(
-                  children: [
-                    SizedBox(
+          Column(
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
+                child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: SizedBox(
                       width: context.width,
                       height: context.width * 0.5,
                       child: PageView.builder(
@@ -220,21 +221,22 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                           );
                         },
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5.0),
-                      child: SmoothPageIndicator(
-                        controller: _pageController,
-                        count: widget.data.photosUrl!.length,
-                        effect: SwapEffect(
-                            activeDotColor: AppColors.red,
-                            dotColor: Theme.of(context)
-                                .colorScheme
-                                .secondaryContainer),
-                      ),
-                    )
-                  ],
-                )),
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: SmoothPageIndicator(
+                    controller: _pageController,
+                    count: widget.data.photosUrl!.length,
+                    effect: SwapEffect(
+                        activeDotColor: AppColors.red,
+                        dotColor: Theme.of(context).colorScheme.primaryContainer),
+                  ),
+                ),
+              ),
+            ],
           ),
           Expanded(
             child: SizedBox.expand(

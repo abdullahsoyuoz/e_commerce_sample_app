@@ -2,16 +2,21 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/View/Page/User/Order/basket.dart';
-import 'package:sepet_demo/View/Page/User/Product/category.dart';
+import 'package:sepet_demo/View/Page/User/Product/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 
 AppBar homeAppbar(BuildContext context) {
+  List<String> searchHintList = [
+    'Ürünlerde ara',
+    'Kategorilerde ara',
+    'Kampanyalarde ara',
+    'Markalarda ara',
+    'Listelerde ara',
+  ];
+
   return AppBar(
     toolbarHeight: 70,
     title: BouncingWidget(
@@ -26,7 +31,7 @@ AppBar homeAppbar(BuildContext context) {
         width: context.width * 0.6,
         height: 40,
         decoration: BoxDecoration(
-          color: Provider.of<ThemeChanger>(context, listen: false).isDark ? AppColors.grey.shade500 : AppColors.grey.shade200,
+          color: Theme.of(context).colorScheme.secondaryContainer,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -43,12 +48,17 @@ AppBar homeAppbar(BuildContext context) {
                 ),
                 child: AnimatedTextKit(
                   repeatForever: true,
-                  animatedTexts: [
-                    RotateAnimatedText('Ürünlerde ara'),
-                    RotateAnimatedText('Kategorilerde ara'),
-                    RotateAnimatedText('Kampanyalarda ara'),
-                    RotateAnimatedText('Markalarda ara'),
-                  ],
+                  animatedTexts: searchHintList
+                      .map(
+                        (title) => TypewriterAnimatedText(
+                          title,
+                          cursor: '|',
+                          textAlign: TextAlign.end,
+                          textStyle: TextStyle(color: Theme.of(context).iconTheme.color!),
+                          speed: const Duration(milliseconds: 75)
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ),
@@ -69,14 +79,16 @@ AppBar homeAppbar(BuildContext context) {
     leading: IconButton(
       iconSize: 30,
       icon: const FaIcon(
-        FontAwesomeIcons.grip,
+        FontAwesomeIcons.solidMap,
         size: 30,
       ),
       onPressed: () => Navigator.push(
-          context, CupertinoPageRoute(builder: (context) =>  const CategoriesPage(),)),
+          context,
+          CupertinoPageRoute(
+            builder: (context) => const NavigationPage(),
+          )),
     ),
     actions: [
-      
       IconButton(
         iconSize: 30,
         icon: const FaIcon(

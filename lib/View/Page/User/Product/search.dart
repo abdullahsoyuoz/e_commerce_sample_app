@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/Controller/utility.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 
 class SearchPage extends StatefulWidget {
@@ -37,18 +37,34 @@ class _SearchPageState extends State<SearchPage>
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: AppColors.purple,
-        title: SizedBox(
-          width: context.width * 0.5,
-          child: TextField(
-            controller: _searchController,
-            focusNode: _searchNode,
-            textAlign: TextAlign.center,
-            style: const TextStyle().copyWith(color: Colors.white),
-            decoration: getSearchInputDecoration('aramaya başla')
+        toolbarHeight: 70,
+        centerTitle: true,
+        title: Container(
+          height: 40,
+          width: context.width * 0.6,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          alignment: Alignment.centerLeft,
+          child: SizedBox(
+            width: context.width * 0.6,
+            child: TextField(
+                controller: _searchController,
+                focusNode: _searchNode,
+                cursorColor: Theme.of(context).iconTheme.color,
+                style: const TextStyle().copyWith(color: Colors.white),
+                decoration: getSearchInputDecoration(context, 'aramaya başla')),
           ),
         ),
-        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            tooltip: 'Sonuçları sırala veya filtrele',
+            icon: const FaIcon(FontAwesomeIcons.sliders),
+          ),
+        ],
       ),
       body: const Center(
         child: Text('SearchPage'),

@@ -50,39 +50,39 @@ class AppColors {
 }
 
 class AppBaseColors {
-  static Color greyscaleS1 = const Color(0xffcccccc);
-  static Color greyscaleS2 = const Color(0xff6b6e74);
-  static Color greyscaleS3 = const Color(0xff393e46);
-  static Color greyscaleS4 = const Color(0xFF33373D);
-  static Color greyscaleS5 = const Color(0xff1a1a1a);
+  static Color greyscaleS1 = const Color(0xffDDDDDD);
+  static Color greyscaleS2 = const Color(0xff9C9DA0);
+  static Color greyscaleS3 = const Color(0xff393E46);
+  static Color greyscaleS4 = const Color(0xff27292C);
+  static Color greyscaleS5 = const Color(0xff0F0F0F);
 
-  static Color orangeS1 = const Color(0xffffa000);
-  static Color orangeS2 = const Color(0xffff9000);
-  static Color orangeS3 = const Color(0xffe27e12);
+  static Color orangeS1 = const Color(0xffFFA000);
+  static Color orangeS2 = const Color(0xffFF9000);
+  static Color orangeS3 = const Color(0xffE27E12);
 
-  static Color yellowS1 = const Color(0xffffff00);
-  static Color yellowS2 = const Color(0xfffff400);
-  static Color yellowS3 = const Color(0xffe8de00);
+  static Color yellowS1 = const Color(0xffFFFF00);
+  static Color yellowS2 = const Color(0xffFFF400);
+  static Color yellowS3 = const Color(0xffE8DE00);
 
   static Color greenS1 = const Color(0xff48963B);
   static Color greenS2 = const Color(0xff367833);
   static Color greenS3 = const Color(0xff1E5128);
 
-  static Color turquazS1 = const Color(0xff40a3c4);
-  static Color turquazS2 = const Color(0xff1e5f74);
+  static Color turquazS1 = const Color(0xff40A3C4);
+  static Color turquazS2 = const Color(0xff1E5F74);
   static Color turquazS3 = const Color(0xff194D68);
 
-  static Color blueS1 = const Color(0xff3d7cbe);
-  static Color blueS2 = const Color(0xff003e7d);
-  static Color blueS3 = const Color(0xff062f6a);
+  static Color blueS1 = const Color(0xff3D7CBE);
+  static Color blueS2 = const Color(0xff1C5A9A);
+  static Color blueS3 = const Color(0xff062F6A);
 
-  static Color purpleS1 = const Color(0xff592d86);
-  static Color purpleS2 = const Color(0xff3b185f);
-  static Color purpleS3 = const Color(0xff2a0944);
+  static Color purpleS1 = const Color(0xff592D86);
+  static Color purpleS2 = const Color(0xff3B185F);
+  static Color purpleS3 = const Color(0xff2A0944);
 
-  static Color redS1 = const Color(0xffff4545);
+  static Color redS1 = const Color(0xffFF4545);
   static Color redS2 = const Color(0xffFF0000);
-  static Color redS3 = const Color(0xffbf0016);
+  static Color redS3 = const Color(0xffBF0016);
 
   static Color paletteGreenS1 = const Color(0xff387d7a);
   static Color paletteGreenS2 = const Color(0xff32936f);

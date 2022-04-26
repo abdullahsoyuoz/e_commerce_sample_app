@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 library bouncing_widget;
 
 import 'dart:async';
@@ -110,10 +112,10 @@ class _BouncingWidgetState extends State<BouncingWidget>
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
       onLongPressEnd: (details) => _onLongPressEnd(details, context),
-      onHorizontalDragEnd: _onDragEnd,
-      onVerticalDragEnd: _onDragEnd,
-      onHorizontalDragUpdate: (details) => _onDragUpdate(details, context),
-      onVerticalDragUpdate: (details) => _onDragUpdate(details, context),
+      // onHorizontalDragEnd: _onDragEnd,
+      // onVerticalDragEnd: _onDragEnd,
+      // onHorizontalDragUpdate: (details) => _onDragUpdate(details, context),
+      // onVerticalDragUpdate: (details) => _onDragUpdate(details, context),
       child: Transform.scale(
         key: _childKey,
         scale: _scale,

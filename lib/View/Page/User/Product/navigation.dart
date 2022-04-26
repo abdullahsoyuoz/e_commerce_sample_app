@@ -4,17 +4,16 @@ import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
 
-class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({Key? key}) : super(key: key);
+class NavigationPage extends StatefulWidget {
+  const NavigationPage({Key? key}) : super(key: key);
 
   @override
-  _CategoriesPageState createState() => _CategoriesPageState();
+  _NavigationPageState createState() => _NavigationPageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage>
+class _NavigationPageState extends State<NavigationPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   late ScrollController _scrollController;
