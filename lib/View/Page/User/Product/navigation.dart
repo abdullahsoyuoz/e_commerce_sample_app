@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/utility.dart';
@@ -35,7 +36,7 @@ class _NavigationPageState extends State<NavigationPage>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
@@ -44,24 +45,19 @@ class _NavigationPageState extends State<NavigationPage>
           automaticallyImplyLeading: true,
           centerTitle: false,
           title: const Text('Navigasyon'),
-          actions: [
-            CupertinoSwitch(
-              value: Provider.of<ThemeChanger>(context, listen: false).isDark,
-              onChanged: (val) {
-                Provider.of<ThemeChanger>(context, listen: false).toggle();
-                setState(() {});
-              },
-            )
-          ],
           bottom: const TabBar(
             tabs: [
               Text(
-                'Kategoriler',
-                style: TextStyle(fontSize: 17),
+                'Kategori',
+                style: TextStyle(fontSize: 14),
               ),
               Text(
-                'Yapılandırmalar',
-                style: TextStyle(fontSize: 17),
+                'Yapılandırma',
+                style: TextStyle(fontSize: 14),
+              ),
+              Text(
+                'Yardım',
+                style: TextStyle(fontSize: 14),
               ),
             ],
           ),
@@ -72,6 +68,7 @@ class _NavigationPageState extends State<NavigationPage>
             children: [
               buildCategoriesBody(context),
               buildConfigurationBody(),
+              buildHelpBody(context)
             ],
           ),
         ),
@@ -79,27 +76,59 @@ class _NavigationPageState extends State<NavigationPage>
     );
   }
 
-  Widget buildConfigurationBody(){
-    return const SizedBox();
+  Widget buildConfigurationBody() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const FaIcon(FontAwesomeIcons.solidMoon),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Text('Karanlık Mod', style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17),),
+                  ),
+                ],
+              ),
+              CupertinoSwitch(
+                value: Provider.of<ThemeChanger>(context, listen: false).isDark,
+                onChanged: (val) {
+                  Provider.of<ThemeChanger>(context, listen: false).toggle();
+                  setState(() {});
+                },
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   Widget buildCategoriesBody(BuildContext context) {
+    debugPrint(context.height.toString());
     return Padding(
       padding: EdgeInsets.only(bottom: context.padding.bottom),
       child: ListView.builder(
         shrinkWrap: true,
         controller: _scrollController,
         physics: const PageScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 3),
         itemExtent: (safeArea(context) -
                 const TabBar(
                   tabs: [],
                 ).preferredSize.height) *
-            1 /
-            8,
+            (1 / 12),
         itemCount: categoryList.length,
         itemBuilder: (context, index) =>
             CategoryWidget(data: categoryList[index]),
       ),
     );
+  }
+
+  Widget buildHelpBody(BuildContext context) {
+    return const SizedBox();
   }
 }

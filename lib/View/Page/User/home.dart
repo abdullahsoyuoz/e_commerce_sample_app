@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       key: _scaffoldKey,
       body: DropMenu(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         lowLayerHeight: 70,
         lowLayerBottomPadding: MediaQuery.of(context).padding.bottom,
         lowLayer: buildLowLayerWidget(context),

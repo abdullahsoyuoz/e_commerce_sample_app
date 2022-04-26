@@ -7,10 +7,10 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   brightness: Brightness.light,
   primaryColor: AppColors.purple,
   colorScheme: ColorScheme.light(
-    primaryContainer: AppColors.grey.shade100,
-    secondaryContainer: AppColors.grey.shade200,
+    primaryContainer: AppColors.grey.shade200,
+    secondaryContainer: AppColors.grey.shade300,
   ),
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: AppColors.grey.shade100,
   backgroundColor: Colors.white,
   hintColor: AppColors.grey.shade100,
   highlightColor: Colors.transparent,
@@ -72,7 +72,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   primaryColor: AppColors.orange,
   colorScheme: const ColorScheme.dark().copyWith(
     primaryContainer: AppColors.grey.shade400,
-    secondaryContainer: AppColors.grey.shade500,
+    secondaryContainer: AppColors.grey.shade300,
   ),
   scaffoldBackgroundColor: AppColors.grey.shade500,
   backgroundColor: Colors.black,

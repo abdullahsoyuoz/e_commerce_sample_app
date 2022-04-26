@@ -19,19 +19,15 @@ class CategoryWidget extends StatelessWidget {
         color: Theme.of(context).appBarTheme.backgroundColor!,
         child: Row(
           children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: FittedBox(
-                  child: Center(
-                    child: FaIcon(
-                      data.icon,
-                      color: Provider.of<ThemeChanger>(context, listen: false)
-                              .isDark
-                          ? data.color!.shade100
-                          : data.color!.shade300,
-                    ),
-                  ),
+            AspectRatio(
+              aspectRatio: 1,
+              child: Center(
+                child: FaIcon(
+                  data.icon,
+                  color: Provider.of<ThemeChanger>(context, listen: false)
+                          .isDark
+                      ? data.color!.shade100
+                      : data.color!.shade300,
                 ),
               ),
             ),
@@ -40,11 +36,10 @@ class CategoryWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  data.title  + '',
-                  textAlign: TextAlign.start,
-                  maxLines: 2,
+                  data.title,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 21),
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17),
                 ),
               ),
             ),

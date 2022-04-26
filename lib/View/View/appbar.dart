@@ -31,7 +31,7 @@ AppBar homeAppbar(BuildContext context) {
         width: context.width * 0.6,
         height: 40,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondaryContainer,
+          color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -79,7 +79,7 @@ AppBar homeAppbar(BuildContext context) {
     leading: IconButton(
       iconSize: 30,
       icon: const FaIcon(
-        FontAwesomeIcons.solidMap,
+        FontAwesomeIcons.bars,
         size: 30,
       ),
       onPressed: () => Navigator.push(

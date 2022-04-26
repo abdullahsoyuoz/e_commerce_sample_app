@@ -18,8 +18,8 @@ double discountedCalculate(double price, int? rate) {
   }
 }
 
-double safeArea(BuildContext context, {double appBarHeight = 70}) =>
-    (context.height - context.padding.top - context.padding.bottom - appBarHeight);
+double safeArea(BuildContext context, {double appBarHeight = 70, double extra = 0}) =>
+    (context.height - context.padding.top - context.padding.bottom - appBarHeight - extra);
 
 //
 

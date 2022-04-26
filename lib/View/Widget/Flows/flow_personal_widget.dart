@@ -1,8 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/View/Widget/Flows/flow_products_view.dart';
@@ -15,7 +13,6 @@ class FlowPersonalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _dark = Provider.of<ThemeChanger>(context, listen: false).isDark;
     return BouncingWidget(
       onPressed: () {
         if (data.targetProducts!.isNotEmpty) {
@@ -34,12 +31,6 @@ class FlowPersonalWidget extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            _dark
-                ? Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: SizedBox.expand(
-                        child: ColoredBox(color: data.color!.shade200)))
-                : const SizedBox(),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Image.network(

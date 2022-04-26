@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
 import 'package:sepet_demo/View/Painter/onboarding_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';

@@ -11,7 +11,8 @@ Widget buildLowLayerWidget(BuildContext context) {
   return SizedBox.expand(
     child: Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).appBarTheme.backgroundColor,
+        // color: dark ? AppColors.grey.shade400 : AppColors.grey.shade100,
+        color: Theme.of(context).backgroundColor,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -33,7 +34,9 @@ Widget buildLowLayerWidget(BuildContext context) {
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Theme.of(context).iconTheme.color!, width: 3),
+                        border: Border.all(
+                            color: Theme.of(context).iconTheme.color!,
+                            width: 3),
                         image: DecorationImage(
                           image: NetworkImage(loginUser.photoUrl!),
                           fit: BoxFit.cover,
