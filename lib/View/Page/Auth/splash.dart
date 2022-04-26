@@ -24,22 +24,22 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
     );
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       animationController.forward();
     });
-    // Future.delayed(
-    //   const Duration(seconds: 5),
-    //   () => Navigator.push(
-    //     context,
-    //     customRouteBuilder(
-    //       context,
-    //       const OnboardPage(),
-    //       barrierColor: AppColors.red,
-    //     ),
-    //   ),
-    // ).whenComplete((){});
+    Future.delayed(
+      const Duration(seconds: 3),
+      () => Navigator.push(
+        context,
+        customRouteBuilder(
+          context,
+          const OnboardPage(),
+          barrierColor: AppColors.red,
+        ),
+      ),
+    ).whenComplete((){});
   }
 
   @override

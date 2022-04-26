@@ -100,19 +100,18 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     padding: const EdgeInsets.only(top: 25.0),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                         boxShadow: const [
                           BoxShadow(color: Colors.black, blurRadius: 5)
                         ],
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                         child: Container(
                           width: context.width * 0.75,
                           height: context.width * 0.75,
                           decoration: BoxDecoration(
                             color: AppColors.purple,
-                            borderRadius: BorderRadius.circular(20),
                           ),
                           child: Stack(
                             fit: StackFit.expand,

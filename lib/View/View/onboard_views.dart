@@ -17,7 +17,7 @@ List<Widget> onBoardList = [
     icon: FontAwesomeIcons.solidBookmark,
     title: 'Adaptif',
     description:
-        'Kullanıcı odaklı servislerimiz ile\nilgilendiğiniz ürünleri filtreleyerek\ntam da aradığınızı bulmada\nsizlere zaman kazandırmak istiyoruz.',
+        'Kullanıcı odaklı servislerimiz ile\ntam da aradığınızı bulmada\nsizlere zaman kazandırmak istiyoruz.',
   ),
   OnboardWidget(
     icon: FontAwesomeIcons.icons,

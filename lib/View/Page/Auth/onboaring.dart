@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
 import 'package:sepet_demo/View/Painter/onboarding_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -70,14 +71,7 @@ class _OnboardPageState extends State<OnboardPage>
                   padding: const EdgeInsets.only(bottom: 50.0),
                   child: IconButton(
                     splashColor: AppColors.purple,
-                    icon: AnimatedCrossFade(
-                      crossFadeState: _animationController.value > 2.5
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
-                      duration: const Duration(milliseconds: 300),
-                      firstChild: const SizedBox(),
-                      secondChild: const SizedBox(),
-                    ),
+                    icon: const SizedBox(),
                     onPressed: () {
                       if (_animationController.value < 3) {
                         _pageController.nextPage(

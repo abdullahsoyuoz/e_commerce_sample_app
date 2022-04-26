@@ -42,7 +42,7 @@ class OnboardingPainter extends CustomPainter {
 
   void paintBackground(Canvas canvas, Size size) {
     canvas.drawRect(Rect.largest,
-        level2Paint..color = getColor(animation.value).withOpacity(0.8));
+        level2Paint..color = getColor(animation.value).withOpacity(0.7));
   }
 
   void paintSliceProgress(Canvas canvas, Size size) {
