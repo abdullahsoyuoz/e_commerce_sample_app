@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -43,9 +44,10 @@ class _SearchPageState extends State<SearchPage>
           height: 40,
           width: context.width * 0.6,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: BorderRadius.circular(10),
-          ),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: appShadow(context),
+        ),
           padding: const EdgeInsets.symmetric(horizontal: 15),
           alignment: Alignment.centerLeft,
           child: SizedBox(

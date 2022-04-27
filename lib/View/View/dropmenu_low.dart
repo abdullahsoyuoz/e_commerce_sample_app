@@ -1,68 +1,74 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/Profile/messages.dart';
 import 'package:sepet_demo/View/Page/User/Profile/mylist.dart';
-import 'package:sepet_demo/View/Page/User/Profile/profile.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 
-Widget buildLowLayerWidget(BuildContext context) {
-  return SizedBox.expand(
-    child: Container(
-      decoration: BoxDecoration(
-        // color: dark ? AppColors.grey.shade400 : AppColors.grey.shade100,
-        color: Theme.of(context).backgroundColor,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+class LowLayerWidget extends StatefulWidget {
+  const LowLayerWidget({Key? key}) : super(key: key);
+
+  @override
+  State<LowLayerWidget> createState() => _LowLayerWidgetState();
+}
+
+class _LowLayerWidgetState extends State<LowLayerWidget> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: Container(
+        decoration: BoxDecoration(
+            color: Theme.of(context).appBarTheme.backgroundColor,
+            boxShadow: appShadow(context)),
+        child: ListView(
+          shrinkWrap: true,
+          controller: _scrollController,
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            Expanded(
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const ProfilePage(),
-                        )),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                            color: Theme.of(context).iconTheme.color!,
-                            width: 3),
-                        image: DecorationImage(
-                          image: NetworkImage(loginUser.photoUrl!),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 20),
-                        child: FittedBox(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            loginUser.name! + '',
-                            style: GoogleFonts.josefinSans(
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.solidUser,
+                ),
+                onPressed: () {}),
+            IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.box,
+                ),
+                onPressed: () {}),
+            IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.mapLocationDot,
+                ),
+                onPressed: () {}),
+            IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.solidHeart,
+                ),
+                onPressed: () {}),
+            IconButton(
+              icon: const Icon(
+                FontAwesomeIcons.solidBookmark,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const MyListPage(),
+                ),
               ),
             ),
             IconButton(
@@ -78,17 +84,6 @@ Widget buildLowLayerWidget(BuildContext context) {
             ),
             IconButton(
               icon: const Icon(
-                FontAwesomeIcons.solidBookmark,
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const MyListPage(),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(
                 FontAwesomeIcons.solidBell,
               ),
               onPressed: () {},
@@ -96,6 +91,6 @@ Widget buildLowLayerWidget(BuildContext context) {
           ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }

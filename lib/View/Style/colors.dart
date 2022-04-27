@@ -54,7 +54,7 @@ class AppBaseColors {
   static Color greyscaleS2 = const Color(0xff9C9DA0);
   static Color greyscaleS3 = const Color(0xff393E46);
   static Color greyscaleS4 = const Color(0xff27292C);
-  static Color greyscaleS5 = Color.fromARGB(255, 20,20,20);
+  static Color greyscaleS5 = const Color(0xFF141414);
 
   static Color orangeS1 = const Color(0xffFFA000);
   static Color orangeS2 = const Color(0xffFF9000);

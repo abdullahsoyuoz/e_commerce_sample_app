@@ -29,8 +29,10 @@ class AppStarter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ThemeChanger(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ThemeChanger>(create: (context) => ThemeChanger(), )
+      ],
       child: Consumer<ThemeChanger>(
         builder: (context, value, child) {
           return MaterialApp(

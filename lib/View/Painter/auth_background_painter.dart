@@ -30,7 +30,7 @@ class AuthBackgroundPainter extends CustomPainter {
     canvas.drawPath(
         path,
         Paint()
-          ..color = AppColors.purple.shade100
+          ..color = AppColors.grey.shade400
           ..style = PaintingStyle.fill);
   }
 
@@ -48,7 +48,7 @@ class AuthBackgroundPainter extends CustomPainter {
     canvas.drawPath(
         path,
         Paint()
-          ..color = AppColors.purple
+          ..color = AppColors.grey.shade500
           ..style = PaintingStyle.fill);
   }
 
@@ -65,7 +65,7 @@ class AuthBackgroundPainter extends CustomPainter {
     canvas.drawPath(
         path,
         Paint()
-          ..color = AppColors.purple.shade300
+          ..color = Colors.black
           ..style = PaintingStyle.fill);
   }
 

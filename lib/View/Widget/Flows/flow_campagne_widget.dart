@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/flow.dart';
-import 'package:sepet_demo/View/Widget/Flows/flow_products_view.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
+import 'package:sepet_demo/View/View/flow_products_view.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
@@ -33,11 +34,14 @@ class FlowCampagneWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Image.network(
-                data.imageUrl!,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) =>
-                    loadingIndicator(context, child, loadingProgress),
+              child: ClipRRect(
+                borderRadius: appRadius(context),
+                child: Image.network(
+                  data.imageUrl!,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      loadingIndicator(context, child, loadingProgress),
+                ),
               ),
             ),
             Align(

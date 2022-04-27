@@ -170,33 +170,42 @@ class _DropMenuState extends State<DropMenu>
   }
 
   Widget _buildLowLayerWidget(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (BuildContext context, Widget? child) {
-          return ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: lerpDouble(
-                  widget.lowLayerHeight! + 0,
-                  widget.lowLayerHeight! + widget.lowLayerBottomPadding!,
-                  _animationController.value)!,
-              maxWidth: MediaQuery.of(context).size.width,
-            ),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: widget.lowLayerHeight!,
-                  maxWidth: MediaQuery.of(context).size.width,
-                ),
-                child: child,
+    return GestureDetector(
+      onVerticalDragUpdate: (details) {
+        if (!_animationController.isAnimating) {
+          details.delta.dy < 0
+              ? _animationController.forward()
+              : _animationController.reverse();
+        }
+      },
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: AnimatedBuilder(
+          animation: _animation,
+          builder: (BuildContext context, Widget? child) {
+            return ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: lerpDouble(
+                    widget.lowLayerHeight! + 0,
+                    widget.lowLayerHeight! + widget.lowLayerBottomPadding!,
+                    _animationController.value)!,
+                maxWidth: MediaQuery.of(context).size.width,
               ),
-            ),
-          );
-        },
-        child: Center(
-          child: widget.lowLayer ?? const SizedBox(),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: widget.lowLayerHeight!,
+                    maxWidth: MediaQuery.of(context).size.width,
+                  ),
+                  child: child,
+                ),
+              ),
+            );
+          },
+          child: Center(
+            child: widget.lowLayer ?? const SizedBox(),
+          ),
         ),
       ),
     );

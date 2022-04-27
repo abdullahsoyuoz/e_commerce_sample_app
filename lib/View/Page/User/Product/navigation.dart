@@ -45,19 +45,19 @@ class _NavigationPageState extends State<NavigationPage>
           automaticallyImplyLeading: true,
           centerTitle: false,
           title: const Text('Navigasyon'),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
               Text(
                 'Kategori',
-                style: TextStyle(fontSize: 14),
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 14),
               ),
               Text(
                 'Yapılandırma',
-                style: TextStyle(fontSize: 14),
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 14),
               ),
               Text(
                 'Yardım',
-                style: TextStyle(fontSize: 14),
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 14),
               ),
             ],
           ),

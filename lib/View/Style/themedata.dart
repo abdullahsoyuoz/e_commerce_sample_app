@@ -16,12 +16,12 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   highlightColor: Colors.transparent,
   splashColor: AppColors.red,
   splashFactory: InkRipple.splashFactory,
-  textTheme: GoogleFonts.readexProTextTheme().copyWith(
-    bodyText2: const TextStyle(
+  textTheme: GoogleFonts.workSansTextTheme().copyWith(
+    bodyText2: GoogleFonts.workSans(
       fontSize: 14,
       color: Colors.black,
     ),
-    subtitle2: const TextStyle(
+    subtitle2: GoogleFonts.workSans(
       fontSize: 14,
       color: Colors.white,
       height: 1.5,
@@ -30,7 +30,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
-    indicator: UnderlineTabIndicator(borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
+    indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
     labelColor: Colors.black,
     labelPadding: const EdgeInsets.symmetric(vertical: 3),
     unselectedLabelColor: Colors.black.withOpacity(.3),
@@ -57,6 +58,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
         elevation: MaterialStateProperty.all(0),
+        // TODO: elevated fixed height ?
+        // fixedSize: MaterialStateProperty.all(const Size.fromHeight(40)),
         foregroundColor: MaterialStateProperty.all(Colors.white),
         backgroundColor: MaterialStateProperty.all(Colors.black),
         splashFactory: InkRipple.splashFactory,
@@ -80,12 +83,12 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   highlightColor: Colors.transparent,
   splashColor: AppColors.red,
   splashFactory: InkRipple.splashFactory,
-  textTheme: GoogleFonts.readexProTextTheme().copyWith(
-    bodyText2: const TextStyle(
+  textTheme: GoogleFonts.workSansTextTheme().copyWith(
+    bodyText2: GoogleFonts.workSans(
       fontSize: 14,
       color: Colors.white,
     ),
-    subtitle2: const TextStyle(
+    subtitle2: GoogleFonts.workSans(
       fontSize: 14,
       color: Colors.black,
       height: 1.5,
@@ -94,7 +97,8 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
-    indicator: UnderlineTabIndicator(borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
+    indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
     labelPadding: const EdgeInsets.symmetric(vertical: 3),
     labelColor: Colors.white,
     unselectedLabelColor: Colors.white.withOpacity(.3),
@@ -132,15 +136,9 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
 );
 
 /* GOOGLE FONTS
+  workSans
+  raleway
+  notoSans
   lexend
   readexPro
-  majorMonoDisplay
-  zenTokyoZoo
-  josefinSans
-  didactGothic
-  poiretOne
-  palanquin
-  palanquinDark
-  urbanist
-  leagueSpartan
 */

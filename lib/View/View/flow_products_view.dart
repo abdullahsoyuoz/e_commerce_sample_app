@@ -1,13 +1,18 @@
 // ignore_for_file: must_be_immutable
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -20,8 +25,12 @@ class FlowListProductsView extends StatefulWidget {
   State<FlowListProductsView> createState() => _FlowListProductsViewState();
 }
 
-class _FlowListProductsViewState extends State<FlowListProductsView> {
+class _FlowListProductsViewState extends State<FlowListProductsView>
+    with SingleTickerProviderStateMixin {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late PageController _pageController;
+  late AnimationController? _bellAnimationController;
+
   int pageIndex = 0;
   bool hasSubscribe = false;
   @override
@@ -32,15 +41,14 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
 
   @override
   void dispose() {
-    if (mounted) {
-      _pageController.dispose();
-      super.dispose();
-    }
+    super.dispose();
+    _pageController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SizedBox.expand(
         child: Stack(
           fit: StackFit.expand,
@@ -76,9 +84,8 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
                             width: 40,
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
+                              borderRadius: appRadius(context),
+                              color: Theme.of(context).iconTheme.color,
                             ),
                             child: ConstrainedBox(
                               constraints: const BoxConstraints(
@@ -89,10 +96,7 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
                                 alignment: Alignment.center,
                                 child: FaIcon(
                                   FontAwesomeIcons.chevronLeft,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyText2!
-                                      .color,
+                                  color: Theme.of(context).backgroundColor,
                                 ),
                               ),
                             )),
@@ -100,23 +104,24 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color:
-                                Theme.of(context).colorScheme.primaryContainer,
-                          ),
-                          child: Center(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                maxHeight: 40,
-                                minHeight: 20,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 7.0, vertical: 3.0),
-                                child: Text(
-                                  widget.data.title!.toUpperCase() + '',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxHeight: 40,
+                              minHeight: 40,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 7.0, vertical: 0),
+                              child: Center(
+                                child: Marquee(
+                                  text: widget.data.title!.toUpperCase(),
+                                  numberOfRounds: 1,
+                                  scrollAxis: Axis.horizontal,
+                                  fadingEdgeStartFraction: 0.03,
+                                  fadingEdgeEndFraction: 0.03,
+                                  showFadingOnlyWhenScrolling: true,
+                                  velocity: 30,
+                                  blankSpace: 100,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText2!
@@ -128,17 +133,25 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
                         ),
                       ),
                       BouncingWidget(
-                        onPressed: () => setState(() {
-                          hasSubscribe = !hasSubscribe;
-                        }),
+                        onPressed: () {
+                          setState(() {
+                            hasSubscribe = !hasSubscribe;
+                            if (hasSubscribe) {
+                              _bellAnimationController
+                                  ?.forward()
+                                  .whenComplete(() {
+                                _bellAnimationController?.reset();
+                              });
+                            }
+                          });
+                        },
                         child: Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
+                            borderRadius: appRadius(context),
                             color: hasSubscribe
                                 ? AppColors.red
-                                : Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer,
+                                : Theme.of(context).iconTheme.color,
                           ),
                           child: ConstrainedBox(
                             constraints: const BoxConstraints(
@@ -146,13 +159,22 @@ class _FlowListProductsViewState extends State<FlowListProductsView> {
                               minHeight: 20,
                             ),
                             child: FittedBox(
-                                alignment: Alignment.center,
-                                child: hasSubscribe
-                                    ? const Icon(FontAwesomeIcons.solidBell)
-                                    : const Text('TAKİP ET')),
+                              alignment: Alignment.center,
+                              child: Swing(
+                                child: Icon(
+                                  FontAwesomeIcons.solidBell,
+                                  color: Theme.of(context).backgroundColor,
+                                ),
+                                animate: false,
+                                manualTrigger: true,
+                                controller: (va) {
+                                  _bellAnimationController = va;
+                                },
+                              ),
+                            ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -175,17 +197,29 @@ class ProductViewBody extends StatefulWidget {
   State<ProductViewBody> createState() => _ProductViewBodyState();
 }
 
-class _ProductViewBodyState extends State<ProductViewBody> {
+class _ProductViewBodyState extends State<ProductViewBody>
+    with TickerProviderStateMixin {
   late PageController _pageController;
-
+  // late AnimationController _heartAnimationController;
+  // late AnimationController _bookmarkAnimationController;
+  // late AnimationController _basketAnimationController;
   @override
   void initState() {
     super.initState();
+    // _heartAnimationController = AnimationController(
+    //     vsync: this, duration: const Duration(milliseconds: 500));
+    // _bookmarkAnimationController = AnimationController(
+    //     vsync: this, duration: const Duration(milliseconds: 500));
+    // _basketAnimationController = AnimationController(
+    //     vsync: this, duration: const Duration(milliseconds: 500));
     _pageController = PageController(initialPage: 0);
   }
 
   @override
   void dispose() {
+    // _heartAnimationController.dispose();
+    // _bookmarkAnimationController.dispose();
+    // _basketAnimationController.dispose();
     _pageController.dispose();
     super.dispose();
   }
@@ -193,6 +227,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: UniqueKey(),
       padding:
           const EdgeInsets.only(top: 110.0, bottom: 50, left: 20, right: 20),
       child: Column(
@@ -201,7 +236,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
             children: [
               DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: Theme.of(context).iconTheme.color,
                 ),
                 child: Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -232,7 +267,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                     count: widget.data.photosUrl!.length,
                     effect: SwapEffect(
                         activeDotColor: AppColors.red,
-                        dotColor: Theme.of(context).colorScheme.primaryContainer),
+                        dotColor: Theme.of(context).iconTheme.color!),
                   ),
                 ),
               ),
@@ -313,55 +348,41 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 5.0),
-                                child: BouncingWidget(
-                                  onPressed: () {},
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5.0),
-                                        child: ConstrainedBox(
-                                          constraints: const BoxConstraints(
-                                            minHeight: 20,
-                                            maxHeight: 20,
-                                            maxWidth: 20,
-                                            minWidth: 20,
-                                          ),
-                                          child: FittedBox(
-                                            fit: BoxFit.fitHeight,
-                                            child: Center(
-                                              child: FaIcon(
-                                                FontAwesomeIcons.solidStar,
-                                                color: Provider.of<
-                                                                ThemeChanger>(
-                                                            context,
-                                                            listen: false)
-                                                        .isDark
-                                                    ? AppColors.orange.shade100
-                                                    : AppColors.orange.shade300,
-                                              ),
-                                            ),
-                                          ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    RatingBar.builder(
+                                      allowHalfRating: true,
+                                      onRatingUpdate: (v) {},
+                                      ignoreGestures: true,
+                                      initialRating: widget.data.rank!,
+                                      itemSize: 20,
+                                      itemBuilder: (context, index) {
+                                        return FaIcon(
+                                          FontAwesomeIcons.solidStar,
+                                          color: Provider.of<ThemeChanger>(
+                                                      context,
+                                                      listen: false)
+                                                  .isDark
+                                              ? AppColors.orange.shade100
+                                              : AppColors.orange.shade300,
+                                        );
+                                      },
+                                    ),
+                                    ConstrainedBox(
+                                      constraints: const BoxConstraints(
+                                        minHeight: 25,
+                                        maxHeight: 25,
+                                      ),
+                                      child: FittedBox(
+                                        fit: BoxFit.fitHeight,
+                                        child: Text(
+                                          widget.data.rank!.toStringAsFixed(1),
                                         ),
                                       ),
-                                      ConstrainedBox(
-                                        constraints: const BoxConstraints(
-                                          minHeight: 25,
-                                          maxHeight: 25,
-                                        ),
-                                        child: FittedBox(
-                                          fit: BoxFit.fitHeight,
-                                          child: Text(
-                                            widget.data.rank!
-                                                .toStringAsFixed(1),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Padding(
@@ -482,84 +503,147 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: ElevatedButton(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: BouncingWidget(
                                   onPressed: () {},
-                                  child:
-                                      const FaIcon(FontAwesomeIcons.shareNodes),
+                                  child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          color:
+                                              Theme.of(context).iconTheme.color,
+                                          borderRadius: appRadius(context)),
+                                      child: Center(
+                                        child: FaIcon(
+                                          FontAwesomeIcons.shareNodes,
+                                          color:
+                                              Theme.of(context).backgroundColor,
+                                        ),
+                                      )),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: ElevatedButton(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: BouncingWidget(
                                   onPressed: () {
+                                    // if (!_bookmarkAnimationController.isAnimating) {
                                     widget.data.isAddedBookmark =
                                         !widget.data.isAddedBookmark;
+                                    // if (widget.data.isAddedBookmark) {
+                                    //   _bookmarkAnimationController
+                                    //       .forward()
+                                    //       .whenComplete(() {
+                                    //     _bookmarkAnimationController.reset();
+                                    //   });
+                                    // }
                                     setState(() {});
+                                    // }
                                   },
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style!
-                                      .copyWith(
-                                          overlayColor:
-                                              MaterialStateProperty.all(
-                                                  !widget.data.isAddedBookmark
-                                                      ? AppColors.orange
-                                                      : Colors.white)),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.solidBookmark,
-                                    color: widget.data.isAddedBookmark
-                                        ? AppColors.orange
-                                        : Colors.white,
-                                  ),
+                                  child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          color:
+                                              Theme.of(context).iconTheme.color,
+                                          borderRadius: appRadius(context)),
+                                      child: Center(
+                                        // child: Bounce(
+                                        // animate: false,
+                                        // manualTrigger: true,
+                                        // controller: (c) {
+                                        // _bookmarkAnimationController = c;
+                                        // },
+                                        child: FaIcon(
+                                          FontAwesomeIcons.solidBookmark,
+                                          color: widget.data.isAddedBookmark
+                                              ? AppColors.orange
+                                              : Theme.of(context)
+                                                  .backgroundColor,
+                                        ),
+                                        // ),
+                                      )),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: ElevatedButton(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: BouncingWidget(
                                   onPressed: () {
+                                    // if (!_heartAnimationController.isAnimating) {
                                     widget.data.isLiked = !widget.data.isLiked;
+                                    // if (widget.data.isLiked) {
+                                    //   _heartAnimationController
+                                    //       .forward()
+                                    //       .whenComplete(() {
+                                    //     _heartAnimationController.reset();
+                                    //   });
+                                    // }
                                     setState(() {});
+                                    // }
                                   },
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style!
-                                      .copyWith(
-                                          overlayColor:
-                                              MaterialStateProperty.all(
-                                                  !widget.data.isLiked
-                                                      ? AppColors.red
-                                                      : Colors.white)),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.solidHeart,
-                                    color: widget.data.isLiked
-                                        ? AppColors.red
-                                        : Colors.white,
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                        borderRadius: appRadius(context)),
+                                    child: Center(
+                                      // child: Pulse(
+                                      // animate: false,
+                                      // manualTrigger: true,
+                                      // controller: (c) {
+                                      //   _heartAnimationController = c;
+                                      // },
+                                      child: FaIcon(
+                                        FontAwesomeIcons.solidHeart,
+                                        color: widget.data.isLiked
+                                            ? AppColors.red
+                                            : Theme.of(context).backgroundColor,
+                                      ),
+                                      // ),
+                                    ),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: ElevatedButton(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: BouncingWidget(
                                   onPressed: () {
+                                    // if (!_basketAnimationController.isAnimating) {
                                     widget.data.isAddedCart =
                                         !widget.data.isAddedCart;
+                                    // if (widget.data.isAddedCart) {
+                                    //   _basketAnimationController
+                                    //       .forward()
+                                    //       .whenComplete(() {
+                                    //     _basketAnimationController.reset();
+                                    //   });
+                                    // }
                                     setState(() {});
+                                    // }
                                   },
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style!
-                                      .copyWith(
-                                          overlayColor:
-                                              MaterialStateProperty.all(!widget
-                                                      .data.isAddedCart
-                                                  ? AppColors.turquaz.shade100
-                                                  : Colors.white)),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.bagShopping,
-                                    color: widget.data.isAddedCart
-                                        ? AppColors.turquaz.shade100
-                                        : Colors.white,
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                        borderRadius: appRadius(context)),
+                                    child: Center(
+                                      // child: Roulette(
+                                      // animate: false,
+                                      // manualTrigger: true,
+                                      // controller: (c) {
+                                      //   _basketAnimationController = c;
+                                      // },
+                                      child: FaIcon(
+                                        FontAwesomeIcons.bagShopping,
+                                        color: widget.data.isAddedCart
+                                            ? AppColors.turquaz.shade100
+                                            : Theme.of(context).backgroundColor,
+                                      ),
+                                      // ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -568,7 +652,7 @@ class _ProductViewBodyState extends State<ProductViewBody> {
                           ElevatedButton(
                             onPressed: () {},
                             child: const Text(
-                              'Ürünün sayfasına git',
+                              'Ürünün detayına git',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
