@@ -52,6 +52,7 @@ class _FlowListWidgetState extends State<FlowListWidget> {
                 child: Image.network(
                   widget.data.imageUrl!,
                   fit: BoxFit.cover,
+                  errorBuilder: (c,o,s) => errorIndicator(c, o, s??StackTrace.empty),
                   loadingBuilder: (context, child, loadingProgress) =>
                       loadingIndicator(context, child, loadingProgress),
                 ),
@@ -67,7 +68,7 @@ class _FlowListWidgetState extends State<FlowListWidget> {
                   children: [
                     Expanded(
                       child: Text(
-                        widget.data.title!.toUpperCase(),
+                        widget.data.title!.toUpperCase().addWhitespace,
                         style: Theme.of(context).textTheme.subtitle2!,
                         maxLines: 3,
                       ),

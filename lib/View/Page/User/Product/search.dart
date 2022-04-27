@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/Controller/utility.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
+import 'package:sepet_demo/View/Widget/rectangle_container.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -40,16 +41,7 @@ class _SearchPageState extends State<SearchPage>
       appBar: AppBar(
         toolbarHeight: 70,
         centerTitle: true,
-        title: Container(
-          height: 40,
-          width: context.width * 0.6,
-          decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: appShadow(context),
-        ),
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          alignment: Alignment.centerLeft,
+        title: RectangleContainer(
           child: SizedBox(
             width: context.width * 0.6,
             child: TextField(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/View/Page/User/Profile/messages.dart';
 import 'package:sepet_demo/View/Page/User/Profile/mylist.dart';
+import 'package:sepet_demo/View/Page/User/Profile/profile.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 
 class LowLayerWidget extends StatefulWidget {
@@ -41,18 +42,19 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
             IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.solidUser,
+              icon: const Icon(
+                FontAwesomeIcons.solidUser,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const ProfilePage(),
                 ),
-                onPressed: () {}),
+              ),
+            ),
             IconButton(
                 icon: const Icon(
                   FontAwesomeIcons.box,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.mapLocationDot,
                 ),
                 onPressed: () {}),
             IconButton(

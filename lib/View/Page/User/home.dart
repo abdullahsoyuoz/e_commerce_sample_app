@@ -16,6 +16,7 @@ import 'package:sepet_demo/View/View/dropmenu_low.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/drop_menu.dart';
 import 'package:sepet_demo/View/Widget/flow_widget.dart';
+import 'package:sepet_demo/View/Widget/rectangle_container.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       key: _scaffoldKey,
       body: DropMenu(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         lowLayerHeight: 40,
         lowLayerBottomPadding: MediaQuery.of(context).padding.bottom,
         lowLayer: const LowLayerWidget(),
@@ -111,16 +112,7 @@ class _HomePageState extends State<HomePage>
                 builder: (context) => const SearchPage(),
               ));
         },
-        child: Container(
-          width: context.width * 0.6,
-          height: 40,
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: appShadow(context),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          alignment: Alignment.centerLeft,
+        child: RectangleContainer(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -140,7 +132,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 5.0),
                 child: Icon(
                   FontAwesomeIcons.magnifyingGlass,
                   size: 15,
@@ -154,65 +146,66 @@ class _HomePageState extends State<HomePage>
         preferredSize: const Size.fromHeight(40),
         child: SizedBox(
           height: 40,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const FaIcon(FontAwesomeIcons.locationDot),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: BouncingWidget(
-                          onPressed: () => toggleDropMenu(),
-                          child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxHeight: 20,
-                                minHeight: 20,
-                                maxWidth: context.width * 0.5,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 20),
+                    child: FittedBox(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          const FaIcon(FontAwesomeIcons.locationDot),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: BouncingWidget(
+                              onPressed: () => toggleDropMenu(),
+                              child: Text(
+                                Faker.instance.locale.address.cityName![Random()
+                                        .nextInt(Faker.instance.locale.address
+                                            .cityName!.length)] +
+                                    '',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
-                              child: FittedBox(
-                                  alignment: Alignment.centerRight,
-                                  fit: BoxFit.fitWidth,
-                                  child: Text(
-                                    Faker.instance.locale.address.cityName![Random().nextInt(Faker.instance.locale.address.cityName!.length)],
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2!
-                                        .copyWith(fontWeight: FontWeight.bold),
-                                  ))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxHeight: 20),
+                        child: FittedBox(
+                          alignment: Alignment.centerRight,
+                          fit: BoxFit.fitWidth,
+                          child: BouncingWidget(
+                            onPressed: () => toggleDropMenu(),
+                            child: Text(
+                              loginUser.name! + '',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      BouncingWidget(
-                        onPressed: () => toggleDropMenu(),
-                        child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxHeight: 20,
-                              minHeight: 20,
-                              maxWidth: context.width * 0.5,
-                            ),
-                            child: FittedBox(
-                                alignment: Alignment.centerRight,
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  loginUser.name! + '',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText2!
-                                      .copyWith(fontWeight: FontWeight.bold),
-                                ))),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ),

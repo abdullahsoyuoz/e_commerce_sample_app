@@ -126,7 +126,7 @@ class BestsellerWidget extends StatelessWidget {
                           fit: BoxFit.fitHeight,
                           child: Text(
                             NumberFormat.compact(locale: 'en_US')
-                                .format(data!.rankCount!),
+                                .format(data!.purchasesCount!),
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),

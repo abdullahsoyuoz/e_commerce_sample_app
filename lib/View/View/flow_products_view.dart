@@ -330,150 +330,163 @@ class _ProductViewBodyState extends State<ProductViewBody>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Column(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    RatingBar.builder(
-                                      allowHalfRating: true,
-                                      onRatingUpdate: (v) {},
-                                      ignoreGestures: true,
-                                      initialRating: widget.data.rank!,
-                                      itemSize: 20,
-                                      itemBuilder: (context, index) {
-                                        return FaIcon(
-                                          FontAwesomeIcons.solidStar,
-                                          color: Provider.of<ThemeChanger>(
-                                                      context,
-                                                      listen: false)
-                                                  .isDark
-                                              ? AppColors.orange.shade100
-                                              : AppColors.orange.shade300,
-                                        );
-                                      },
-                                    ),
-                                    ConstrainedBox(
-                                      constraints: const BoxConstraints(
-                                        minHeight: 25,
-                                        maxHeight: 25,
-                                      ),
-                                      child: FittedBox(
-                                        fit: BoxFit.fitHeight,
-                                        child: Text(
-                                          widget.data.rank!.toStringAsFixed(1),
+                              Expanded(
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    minHeight: 25,
+                                    maxHeight: 25,
+                                  ),
+                                  child: FittedBox(
+                                    alignment: Alignment.centerLeft,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        RatingBar.builder(
+                                          allowHalfRating: true,
+                                          onRatingUpdate: (v) {},
+                                          ignoreGestures: true,
+                                          initialRating:
+                                              rankRound(widget.data.rank!),
+                                          itemSize: 20,
+                                          itemBuilder: (context, index) {
+                                            return FaIcon(
+                                              FontAwesomeIcons.solidStar,
+                                              color: Provider.of<ThemeChanger>(
+                                                          context,
+                                                          listen: false)
+                                                      .isDark
+                                                  ? AppColors.orange.shade100
+                                                  : AppColors.orange.shade300,
+                                            );
+                                          },
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5.0),
-                                child: BouncingWidget(
-                                  onPressed: () {},
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5.0),
-                                        child: ConstrainedBox(
-                                          constraints: const BoxConstraints(
-                                            minHeight: 20,
-                                            maxHeight: 20,
-                                            maxWidth: 20,
-                                            minWidth: 20,
-                                          ),
-                                          child: FittedBox(
-                                            fit: BoxFit.fitHeight,
-                                            child: Center(
-                                              child: FaIcon(
-                                                FontAwesomeIcons.solidComment,
-                                                color: Provider.of<
-                                                                ThemeChanger>(
-                                                            context,
-                                                            listen: false)
-                                                        .isDark
-                                                    ? AppColors.blue.shade100
-                                                    : AppColors.blue.shade200,
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: ConstrainedBox(
+                                            constraints: const BoxConstraints(
+                                              minHeight: 25,
+                                              maxHeight: 25,
+                                            ),
+                                            child: FittedBox(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                widget.data.rank!
+                                                    .toStringAsFixed(1),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      ConstrainedBox(
-                                        constraints: const BoxConstraints(
-                                          minHeight: 25,
-                                          maxHeight: 25,
-                                        ),
-                                        child: FittedBox(
-                                          fit: BoxFit.fitHeight,
-                                          child: Text(
-                                            NumberFormat.compact(
-                                                    locale: 'en_US')
-                                                .format(
-                                                    widget.data.commentCount!),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5.0),
-                                child: BouncingWidget(
-                                  onPressed: () {},
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5.0),
-                                        child: ConstrainedBox(
-                                          constraints: const BoxConstraints(
-                                            minHeight: 20,
-                                            maxHeight: 20,
-                                            maxWidth: 20,
-                                            minWidth: 20,
-                                          ),
-                                          child: const FittedBox(
-                                            fit: BoxFit.fitHeight,
-                                            child: Center(
-                                              child: FaIcon(
-                                                FontAwesomeIcons.box,
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    minHeight: 25,
+                                    maxHeight: 25,
+                                  ),
+                                  child: FittedBox(
+                                    alignment: Alignment.centerRight,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5.0),
+                                          child: ConstrainedBox(
+                                            constraints: const BoxConstraints(
+                                              minHeight: 20,
+                                              maxHeight: 20,
+                                              maxWidth: 20,
+                                              minWidth: 20,
+                                            ),
+                                            child: const FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: Center(
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.box,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      ConstrainedBox(
-                                        constraints: const BoxConstraints(
-                                          minHeight: 25,
-                                          maxHeight: 25,
-                                        ),
-                                        child: FittedBox(
-                                          fit: BoxFit.fitHeight,
-                                          child: Text(
-                                            NumberFormat.compact(
-                                                    locale: 'en_US')
-                                                .format(widget.data.rankCount!),
+                                        ConstrainedBox(
+                                          constraints: const BoxConstraints(
+                                            minHeight: 25,
+                                            maxHeight: 25,
+                                          ),
+                                          child: FittedBox(
+                                            fit: BoxFit.fitHeight,
+                                            child: Text(
+                                              NumberFormat.compact(
+                                                      locale: 'en_US')
+                                                  .format(widget
+                                                      .data.purchasesCount!),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5.0, left: 5.0),
+                                          child: ConstrainedBox(
+                                            constraints: const BoxConstraints(
+                                              minHeight: 20,
+                                              maxHeight: 20,
+                                              maxWidth: 20,
+                                              minWidth: 20,
+                                            ),
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: Center(
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.solidComment,
+                                                  color: Provider.of<
+                                                                  ThemeChanger>(
+                                                              context,
+                                                              listen: false)
+                                                          .isDark
+                                                      ? AppColors.blue.shade100
+                                                      : AppColors.blue.shade200,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        ConstrainedBox(
+                                          constraints: const BoxConstraints(
+                                            minHeight: 25,
+                                            maxHeight: 25,
+                                          ),
+                                          child: FittedBox(
+                                            fit: BoxFit.fitHeight,
+                                            child: Text(
+                                              NumberFormat.compact(
+                                                      locale: 'en_US')
+                                                  .format(widget
+                                                      .data.commentCount!),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -492,6 +505,29 @@ class _ProductViewBodyState extends State<ProductViewBody>
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: FittedBox(
+                                    child: Text(
+                                      'Ürün detayına git',
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).backgroundColor,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  style: ButtonStyle(
+                                    fixedSize: MaterialStateProperty.all(
+                                        const Size.fromHeight(40)),
+                                    shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                            borderRadius: appRadius(context))),
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Theme.of(context).iconTheme.color),
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: BouncingWidget(
@@ -517,21 +553,25 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 child: BouncingWidget(
                                   onPressed: () {
                                     if (_bookmarkAnimationController != null) {
-                                      if (!widget.data.isAddedBookmark) {
-                                        if (!_bookmarkAnimationController!
-                                            .isAnimating) {
-                                          widget.data.isAddedBookmark = true;
-                                          _bookmarkAnimationController!
-                                              .forward()
-                                              .whenComplete(() {
-                                            setState(() {});
-                                            _bookmarkAnimationController!.reset();
-                                          });
+                                      setState(() {
+                                        widget.data.isAddedBookmark =
+                                            !widget.data.isAddedBookmark;
+                                        if (widget.data.isAddedBookmark) {
+                                          if (!_bookmarkAnimationController!
+                                              .isAnimating) {
+                                            WidgetsBinding.instance!
+                                                .addPostFrameCallback(
+                                                    (timeStamp) {
+                                              _bookmarkAnimationController!
+                                                  .forward()
+                                                  .whenComplete(() {
+                                                _bookmarkAnimationController!
+                                                    .reset();
+                                              });
+                                            });
+                                          }
                                         }
-                                      } else if (widget.data.isAddedBookmark) {
-                                        widget.data.isAddedBookmark = false;
-                                        setState(() {});
-                                      }
+                                      });
                                     }
                                   },
                                   child: Container(
@@ -564,21 +604,25 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 child: BouncingWidget(
                                   onPressed: () {
                                     if (_heartAnimationController != null) {
-                                      if (!widget.data.isLiked) {
-                                        if (!_heartAnimationController!
-                                            .isAnimating) {
-                                          widget.data.isLiked = true;
-                                          _heartAnimationController!
-                                              .forward()
-                                              .whenComplete(() {
-                                            setState(() {});
-                                            _heartAnimationController!.reset();
-                                          });
+                                      setState(() {
+                                        widget.data.isLiked =
+                                            !widget.data.isLiked;
+                                        if (widget.data.isLiked) {
+                                          if (!_heartAnimationController!
+                                              .isAnimating) {
+                                            WidgetsBinding.instance!
+                                                .addPostFrameCallback(
+                                                    (timeStamp) {
+                                              _heartAnimationController!
+                                                  .forward()
+                                                  .whenComplete(() {
+                                                _heartAnimationController!
+                                                    .reset();
+                                              });
+                                            });
+                                          }
                                         }
-                                      } else if (widget.data.isLiked) {
-                                        widget.data.isLiked = false;
-                                        setState(() {});
-                                      }
+                                      });
                                     }
                                   },
                                   child: Container(
@@ -613,21 +657,25 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 child: BouncingWidget(
                                   onPressed: () {
                                     if (_basketAnimationController != null) {
-                                      if (!widget.data.isAddedCart) {
-                                        if (!_basketAnimationController!
-                                            .isAnimating) {
-                                          widget.data.isAddedCart = true;
-                                          _basketAnimationController!
-                                              .forward()
-                                              .whenComplete(() {
-                                            setState(() {});
-                                            _basketAnimationController!.reset();
-                                          });
+                                      setState(() {
+                                        widget.data.isAddedCart =
+                                            !widget.data.isAddedCart;
+                                        if (widget.data.isAddedCart) {
+                                          if (!_basketAnimationController!
+                                              .isAnimating) {
+                                            WidgetsBinding.instance!
+                                                .addPostFrameCallback(
+                                                    (timeStamp) {
+                                              _basketAnimationController!
+                                                  .forward()
+                                                  .whenComplete(() {
+                                                _basketAnimationController!
+                                                    .reset();
+                                              });
+                                            });
+                                          }
                                         }
-                                      } else if (widget.data.isAddedCart) {
-                                        widget.data.isAddedCart = false;
-                                        setState(() {});
-                                      }
+                                      });
                                     }
                                   },
                                   child: Container(
@@ -642,7 +690,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                         child: FaIcon(
                                           FontAwesomeIcons.bagShopping,
                                           color: widget.data.isAddedCart
-                                              ? AppColors.turquaz.shade100
+                                              ? AppColors.blue.shade100
                                               : Theme.of(context)
                                                   .backgroundColor,
                                         ),
@@ -657,13 +705,6 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 ),
                               ),
                             ],
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Ürünün detayına git',
-                              style: TextStyle(color: Colors.white),
-                            ),
                           ),
                         ],
                       ),

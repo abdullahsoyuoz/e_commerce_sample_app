@@ -26,6 +26,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       color: Colors.white,
       height: 1.5,
       backgroundColor: Colors.black,
+      wordSpacing: 1,
     ),
   ),
   tabBarTheme: TabBarTheme(
@@ -58,8 +59,6 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
         elevation: MaterialStateProperty.all(0),
-        // TODO: elevated fixed height ?
-        // fixedSize: MaterialStateProperty.all(const Size.fromHeight(40)),
         foregroundColor: MaterialStateProperty.all(Colors.white),
         backgroundColor: MaterialStateProperty.all(Colors.black),
         splashFactory: InkRipple.splashFactory,
@@ -93,6 +92,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       color: Colors.black,
       height: 1.5,
       backgroundColor: Colors.white,
+      wordSpacing: 1,
     ),
   ),
   tabBarTheme: TabBarTheme(

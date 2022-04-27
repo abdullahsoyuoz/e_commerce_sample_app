@@ -108,7 +108,6 @@ class _NavigationPageState extends State<NavigationPage>
   }
 
   Widget buildCategoriesBody(BuildContext context) {
-    debugPrint(context.height.toString());
     return Padding(
       padding: EdgeInsets.only(bottom: context.padding.bottom),
       child: ListView.builder(

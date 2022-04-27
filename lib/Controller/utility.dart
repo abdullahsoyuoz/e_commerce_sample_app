@@ -10,6 +10,10 @@ extension GetSize on BuildContext {
   EdgeInsets get padding => mediaQuery.padding;
 }
 
+extension AddWhitespace on String {
+  String get addWhitespace => ' '+this+' ';
+}
+
 double discountedCalculate(double price, int? rate) {
   if (rate == null) {
     return price;
@@ -35,4 +39,11 @@ double safeArea(
 
 String getPrice(double price) {
   return ' ${price.toStringAsFixed(2)} ₺ ';
+}
+
+double rankRound(double number) {
+  if (number % number.floor() < 0.5) {
+    return number.floorToDouble();
+  }
+  return number.floorToDouble() + 0.5;
 }

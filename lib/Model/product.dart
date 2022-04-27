@@ -8,7 +8,7 @@ class Product {
   late String? model;
   late String? category;
   late double? rank;
-  late int? rankCount;
+  late int? purchasesCount;
   late int? commentCount;
   late double? price;
   late int? discountRate;
@@ -28,7 +28,7 @@ class Product {
     this.category,
     this.photosUrl,
     this.rank,
-    this.rankCount,
+    this.purchasesCount,
     this.commentCount,
     this.price,
     this.discountRate,
