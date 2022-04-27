@@ -153,21 +153,30 @@ class _HomePageState extends State<HomePage>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxHeight: 20),
-                    child: FittedBox(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          const FaIcon(FontAwesomeIcons.locationDot),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: BouncingWidget(
-                              onPressed: () => toggleDropMenu(),
+                  child: BouncingWidget(
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 5.0),
+                          child: FaIcon(
+                            FontAwesomeIcons.locationDot,
+                            size: 20,
+                          ),
+                        ),
+                        Expanded(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxHeight: 20),
+                            child: FittedBox(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 Faker.instance.locale.address.cityName![Random()
                                         .nextInt(Faker.instance.locale.address
                                             .cityName!.length)] +
+                                    ', ' +
+                                    Faker.instance.locale.address.country![
+                                        Random().nextInt(Faker.instance.locale
+                                            .address.country!.length)] +
                                     '',
                                 style: Theme.of(context)
                                     .textTheme
@@ -176,33 +185,44 @@ class _HomePageState extends State<HomePage>
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
+                const SizedBox(
+                  width: 10,
+                ),
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 20),
-                        child: FittedBox(
-                          alignment: Alignment.centerRight,
-                          fit: BoxFit.fitWidth,
-                          child: BouncingWidget(
-                            onPressed: () => toggleDropMenu(),
-                            child: Text(
-                              loginUser.name! + '',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(fontWeight: FontWeight.bold),
+                  child: BouncingWidget(
+                    onPressed: () => toggleDropMenu(),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxHeight: 20),
+                            child: FittedBox(
+                              alignment: Alignment.centerRight,
+                              fit: BoxFit.fitHeight,
+                              child: Text(
+                                loginUser.name! + '',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        const Padding(
+                          padding: EdgeInsets.only(left: 5.0),
+                          child: FaIcon(
+                            FontAwesomeIcons.solidUser,
+                            size: 20,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
