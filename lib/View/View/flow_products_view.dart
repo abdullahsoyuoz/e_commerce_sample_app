@@ -2,7 +2,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:marquee/marquee.dart';
@@ -200,26 +199,17 @@ class ProductViewBody extends StatefulWidget {
 class _ProductViewBodyState extends State<ProductViewBody>
     with TickerProviderStateMixin {
   late PageController _pageController;
-  // late AnimationController _heartAnimationController;
-  // late AnimationController _bookmarkAnimationController;
-  // late AnimationController _basketAnimationController;
+  late AnimationController? _heartAnimationController;
+  late AnimationController? _bookmarkAnimationController;
+  late AnimationController? _basketAnimationController;
   @override
   void initState() {
     super.initState();
-    // _heartAnimationController = AnimationController(
-    //     vsync: this, duration: const Duration(milliseconds: 500));
-    // _bookmarkAnimationController = AnimationController(
-    //     vsync: this, duration: const Duration(milliseconds: 500));
-    // _basketAnimationController = AnimationController(
-    //     vsync: this, duration: const Duration(milliseconds: 500));
     _pageController = PageController(initialPage: 0);
   }
 
   @override
   void dispose() {
-    // _heartAnimationController.dispose();
-    // _bookmarkAnimationController.dispose();
-    // _basketAnimationController.dispose();
     _pageController.dispose();
     super.dispose();
   }
@@ -526,18 +516,23 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: BouncingWidget(
                                   onPressed: () {
-                                    // if (!_bookmarkAnimationController.isAnimating) {
-                                    widget.data.isAddedBookmark =
-                                        !widget.data.isAddedBookmark;
-                                    // if (widget.data.isAddedBookmark) {
-                                    //   _bookmarkAnimationController
-                                    //       .forward()
-                                    //       .whenComplete(() {
-                                    //     _bookmarkAnimationController.reset();
-                                    //   });
-                                    // }
-                                    setState(() {});
-                                    // }
+                                    if (_bookmarkAnimationController != null) {
+                                      if (!widget.data.isAddedBookmark) {
+                                        if (!_bookmarkAnimationController!
+                                            .isAnimating) {
+                                          widget.data.isAddedBookmark = true;
+                                          _bookmarkAnimationController!
+                                              .forward()
+                                              .whenComplete(() {
+                                            setState(() {});
+                                            _bookmarkAnimationController!.reset();
+                                          });
+                                        }
+                                      } else if (widget.data.isAddedBookmark) {
+                                        widget.data.isAddedBookmark = false;
+                                        setState(() {});
+                                      }
+                                    }
                                   },
                                   child: Container(
                                       width: 40,
@@ -547,20 +542,20 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                               Theme.of(context).iconTheme.color,
                                           borderRadius: appRadius(context)),
                                       child: Center(
-                                        // child: Bounce(
-                                        // animate: false,
-                                        // manualTrigger: true,
-                                        // controller: (c) {
-                                        // _bookmarkAnimationController = c;
-                                        // },
-                                        child: FaIcon(
-                                          FontAwesomeIcons.solidBookmark,
-                                          color: widget.data.isAddedBookmark
-                                              ? AppColors.orange
-                                              : Theme.of(context)
-                                                  .backgroundColor,
+                                        child: Bounce(
+                                          child: FaIcon(
+                                            FontAwesomeIcons.solidBookmark,
+                                            color: widget.data.isAddedBookmark
+                                                ? AppColors.orange
+                                                : Theme.of(context)
+                                                    .backgroundColor,
+                                          ),
+                                          animate: false,
+                                          manualTrigger: true,
+                                          controller: (c) {
+                                            _bookmarkAnimationController = c;
+                                          },
                                         ),
-                                        // ),
                                       )),
                                 ),
                               ),
@@ -568,17 +563,23 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: BouncingWidget(
                                   onPressed: () {
-                                    // if (!_heartAnimationController.isAnimating) {
-                                    widget.data.isLiked = !widget.data.isLiked;
-                                    // if (widget.data.isLiked) {
-                                    //   _heartAnimationController
-                                    //       .forward()
-                                    //       .whenComplete(() {
-                                    //     _heartAnimationController.reset();
-                                    //   });
-                                    // }
-                                    setState(() {});
-                                    // }
+                                    if (_heartAnimationController != null) {
+                                      if (!widget.data.isLiked) {
+                                        if (!_heartAnimationController!
+                                            .isAnimating) {
+                                          widget.data.isLiked = true;
+                                          _heartAnimationController!
+                                              .forward()
+                                              .whenComplete(() {
+                                            setState(() {});
+                                            _heartAnimationController!.reset();
+                                          });
+                                        }
+                                      } else if (widget.data.isLiked) {
+                                        widget.data.isLiked = false;
+                                        setState(() {});
+                                      }
+                                    }
                                   },
                                   child: Container(
                                     width: 40,
@@ -588,19 +589,21 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                             Theme.of(context).iconTheme.color,
                                         borderRadius: appRadius(context)),
                                     child: Center(
-                                      // child: Pulse(
-                                      // animate: false,
-                                      // manualTrigger: true,
-                                      // controller: (c) {
-                                      //   _heartAnimationController = c;
-                                      // },
-                                      child: FaIcon(
-                                        FontAwesomeIcons.solidHeart,
-                                        color: widget.data.isLiked
-                                            ? AppColors.red
-                                            : Theme.of(context).backgroundColor,
+                                      child: Pulse(
+                                        key: UniqueKey(),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.solidHeart,
+                                          color: widget.data.isLiked
+                                              ? AppColors.red
+                                              : Theme.of(context)
+                                                  .backgroundColor,
+                                        ),
+                                        animate: false,
+                                        manualTrigger: true,
+                                        controller: (c) {
+                                          _heartAnimationController = c;
+                                        },
                                       ),
-                                      // ),
                                     ),
                                   ),
                                 ),
@@ -609,18 +612,23 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: BouncingWidget(
                                   onPressed: () {
-                                    // if (!_basketAnimationController.isAnimating) {
-                                    widget.data.isAddedCart =
-                                        !widget.data.isAddedCart;
-                                    // if (widget.data.isAddedCart) {
-                                    //   _basketAnimationController
-                                    //       .forward()
-                                    //       .whenComplete(() {
-                                    //     _basketAnimationController.reset();
-                                    //   });
-                                    // }
-                                    setState(() {});
-                                    // }
+                                    if (_basketAnimationController != null) {
+                                      if (!widget.data.isAddedCart) {
+                                        if (!_basketAnimationController!
+                                            .isAnimating) {
+                                          widget.data.isAddedCart = true;
+                                          _basketAnimationController!
+                                              .forward()
+                                              .whenComplete(() {
+                                            setState(() {});
+                                            _basketAnimationController!.reset();
+                                          });
+                                        }
+                                      } else if (widget.data.isAddedCart) {
+                                        widget.data.isAddedCart = false;
+                                        setState(() {});
+                                      }
+                                    }
                                   },
                                   child: Container(
                                     width: 40,
@@ -630,19 +638,20 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                             Theme.of(context).iconTheme.color,
                                         borderRadius: appRadius(context)),
                                     child: Center(
-                                      // child: Roulette(
-                                      // animate: false,
-                                      // manualTrigger: true,
-                                      // controller: (c) {
-                                      //   _basketAnimationController = c;
-                                      // },
-                                      child: FaIcon(
-                                        FontAwesomeIcons.bagShopping,
-                                        color: widget.data.isAddedCart
-                                            ? AppColors.turquaz.shade100
-                                            : Theme.of(context).backgroundColor,
+                                      child: Roulette(
+                                        child: FaIcon(
+                                          FontAwesomeIcons.bagShopping,
+                                          color: widget.data.isAddedCart
+                                              ? AppColors.turquaz.shade100
+                                              : Theme.of(context)
+                                                  .backgroundColor,
+                                        ),
+                                        animate: false,
+                                        manualTrigger: true,
+                                        controller: (c) {
+                                          _basketAnimationController = c;
+                                        },
                                       ),
-                                      // ),
                                     ),
                                   ),
                                 ),
