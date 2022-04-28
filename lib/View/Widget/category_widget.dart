@@ -15,36 +15,33 @@ class CategoryWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         vertical: 3,
       ),
-      child: ColoredBox(
-        color: Theme.of(context).backgroundColor,
-        child: Row(
-          children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: Center(
-                child: FaIcon(
-                  data.icon,
-                  color: Provider.of<ThemeChanger>(context, listen: false)
-                          .isDark()
-                      ? data.color!.shade100
-                      : data.color!.shade300,
-                ),
+      child: Row(
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: Center(
+              child: FaIcon(
+                data.icon,
+                color: Provider.of<ThemeChanger>(context, listen: false)
+                        .isDark()
+                    ? data.color!.shade100
+                    : data.color!.shade300,
               ),
             ),
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  data.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17),
-                ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                data.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

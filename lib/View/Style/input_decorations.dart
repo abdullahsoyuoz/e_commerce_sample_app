@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 
 InputDecoration getAuthInputDecoration(String hint) {
   return InputDecoration(
@@ -20,15 +19,12 @@ InputDecoration getAuthInputDecoration(String hint) {
 InputDecoration getSearchInputDecoration(BuildContext context, String hint) {
   return InputDecoration(
     hintText: hint,
-    hintStyle: TextStyle(
-      color: AppColors.grey.shade300,
-      fontSize: 15,
+    enabledBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.transparent, width: 1),
     ),
-    enabledBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.white.withOpacity(0), width: 1),
-    ),
-    focusedBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.white, width: 2),
+    focusedBorder: UnderlineInputBorder(
+      borderSide:
+          BorderSide(color: Theme.of(context).iconTheme.color!, width: 2),
     ),
   );
 }

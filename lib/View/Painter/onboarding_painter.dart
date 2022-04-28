@@ -67,15 +67,15 @@ class OnboardingPainter extends CustomPainter {
   Color getColor(double value) {
     if (value <= 1) {
       return Color.lerp(
-          AppColors.purple.shade300, AppColors.green.shade300, animation.value)!;
+          AppColors.purple.shade500, AppColors.green.shade500, animation.value)!;
     }
     if (value <= 2) {
       return Color.lerp(
-          AppColors.green.shade300, AppColors.red.shade300, animation.value - 1)!;
+          AppColors.green.shade500, AppColors.red.shade500, animation.value - 1)!;
     }
     if (value <= 3) {
       return Color.lerp(
-          AppColors.red.shade300, AppColors.blue.shade300, animation.value - 2)!;
+          AppColors.red.shade500, AppColors.blue.shade500, animation.value - 2)!;
     }
     return Color.lerp(
         AppColors.grey, AppColors.grey, animation.value)!;

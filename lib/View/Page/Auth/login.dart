@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           width: context.width * 0.75,
                           height: context.width * 0.75,
                           decoration: BoxDecoration(
-                            color: AppColors.grey.shade400,
+                            color: AppColors.black.shade300
                           ),
                           child: Stack(
                             fit: StackFit.expand,

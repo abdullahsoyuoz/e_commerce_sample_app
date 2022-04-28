@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:sepet_demo/View/Style/themedata.dart';
+import 'package:sepet_demo/View/Style/Theme/dark.dart';
+import 'package:sepet_demo/View/Style/Theme/light.dart';
 
 class ThemeChanger with ChangeNotifier {
   // late bool _isDark;

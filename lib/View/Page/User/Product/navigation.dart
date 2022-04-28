@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
-import 'package:sepet_demo/View/Style/themedata.dart';
+import 'package:sepet_demo/View/Style/Theme/themedata.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -36,97 +35,46 @@ class _NavigationPageState extends State<NavigationPage>
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
           elevation: 0,
           toolbarHeight: 70,
           automaticallyImplyLeading: true,
           centerTitle: false,
           title: const Text('Navigasyon'),
-          bottom: TabBar(
-            tabs: [
-              Text(
-                'Kategori',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(fontSize: 14),
-              ),
-              Text(
-                'Yapılandırma',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(fontSize: 14),
-              ),
-              Text(
-                'Yardım',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-        body: SizedBox.expand(
-          child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              buildCategoriesBody(context),
-              buildConfigurationBody(),
-              buildHelpBody(context)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildConfigurationBody() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: context.width * 0.6,
-                minWidth: context.width * 0.6,
-              ),
-              child: const FittedBox(
-                  child: Text(
-                'TEMA',
-              ))),
-          FittedBox(
-            alignment: Alignment.center,
-            fit: BoxFit.fitWidth,
-            child: Row(
-              children: themeList
-                  .map(
-                    (e) => IconButton(
-                      onPressed: () {
-                        Provider.of<ThemeChanger>(context, listen: false)
-                            .setTheme(e);
-                      },
-                      icon: DecoratedBox(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: appShadow(context)),
-                        child: CircleAvatar(
-                          backgroundColor: e.appBarTheme.backgroundColor,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(30),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: FittedBox(
+              alignment: Alignment.center,
+              fit: BoxFit.fitWidth,
+              child: Row(
+                children: themeList
+                    .map(
+                      (e) => IconButton(
+                        onPressed: () {
+                          Provider.of<ThemeChanger>(context, listen: false)
+                              .setTheme(e);
+                        },
+                        icon: DecoratedBox(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              boxShadow: appShadow(context)),
+                          child: CircleAvatar(
+                            backgroundColor: e.appBarTheme.backgroundColor,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                  .toList(),
+                    )
+                    .toList(),
+              ),
+                      ),
             ),
-          ),
-        ],
+          )),
+      body: SizedBox.expand(
+        child: buildCategoriesBody(context)
       ),
     );
   }

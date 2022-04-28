@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/curves.dart';
 
 class RegisterPainter extends CustomPainter {
   RegisterPainter({required this.animation}):super(repaint: animation){
     brush = Paint()
-      ..color = Colors.black
+      ..color = AppColors.black.shade400
       ..style = PaintingStyle.fill;
 
     curvedAnimation = CurvedAnimation(

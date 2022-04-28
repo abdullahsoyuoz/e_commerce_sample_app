@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: AppColors.purple.shade200,
+      backgroundColor: AppColors.purple.shade500,
       body: SizedBox.expand(
         child: Stack(
           children: [
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
                 animationController.forward();
               },
               child: Center(
-                child: LogoWidget(color: AppColors.purple,),
+                child: LogoWidget(color: Colors.white),
               ),
             ),
             Align(

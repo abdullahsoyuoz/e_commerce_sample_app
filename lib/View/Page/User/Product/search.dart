@@ -47,7 +47,7 @@ class _SearchPageState extends State<SearchPage>
                 controller: _searchController,
                 focusNode: _searchNode,
                 cursorColor: Theme.of(context).iconTheme.color,
-                style: const TextStyle().copyWith(color: Colors.white),
+                style: TextStyle(color: Theme.of(context).iconTheme.color),
                 decoration: getSearchInputDecoration(context, 'aramaya başla')),
           ),
         ),

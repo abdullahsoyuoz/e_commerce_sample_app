@@ -126,7 +126,7 @@ class _RegisterPageState extends State<RegisterPage>
                         width: context.width * 0.75,
                         height: context.width * 0.75 * 1.5,
                         decoration: BoxDecoration(
-                          color: AppColors.grey.shade500,
+                          color: AppColors.black.shade300,
                         ),
                         child: Stack(
                           fit: StackFit.expand,
