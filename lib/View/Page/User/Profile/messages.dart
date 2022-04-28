@@ -23,6 +23,9 @@ class _MessagesPageState extends State<MessagesPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('MessagesPage'),
+      ),
       body: const Center(
         child: Text('MessagesPage'),
       ),

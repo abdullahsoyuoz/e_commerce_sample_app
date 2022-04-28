@@ -5,7 +5,7 @@ import 'package:faker_dart/faker_dart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/Order/basket.dart';
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage>
     return AppBar(
       toolbarHeight: 70,
       centerTitle: true,
-      elevation: 0,
+      elevation: 1,
       automaticallyImplyLeading: false,
       title: BouncingWidget(
         onPressed: () {
@@ -178,10 +178,7 @@ class _HomePageState extends State<HomePage>
                                         Random().nextInt(Faker.instance.locale
                                             .address.country!.length)] +
                                     '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .copyWith(fontWeight: FontWeight.bold),
+                                style: Theme.of(context).textTheme.bodyText2!,
                               ),
                             ),
                           ),
@@ -208,8 +205,7 @@ class _HomePageState extends State<HomePage>
                                 loginUser.name! + '',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .bodyText2!
-                                    .copyWith(fontWeight: FontWeight.bold),
+                                    .bodyText2!,
                               ),
                             ),
                           ),
@@ -231,17 +227,18 @@ class _HomePageState extends State<HomePage>
         ),
       ),
       leading: IconButton(
-        iconSize: 30,
-        icon: const FaIcon(
-          FontAwesomeIcons.bars,
-          size: 30,
-        ),
-        onPressed: () => Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => const NavigationPage(),
-            )),
-      ),
+          iconSize: 30,
+          icon: const FaIcon(
+            FontAwesomeIcons.bars,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const NavigationPage(),
+                ));
+          }),
       actions: [
         IconButton(
           iconSize: 30,

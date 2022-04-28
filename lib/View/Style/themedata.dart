@@ -3,76 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
-ThemeData appLightTheme = ThemeData.light().copyWith(
-  brightness: Brightness.light,
-  primaryColor: AppColors.purple,
-  colorScheme: ColorScheme.light(
-    primaryContainer: AppColors.grey.shade200,
-    secondaryContainer: AppColors.grey.shade300,
-  ),
-  scaffoldBackgroundColor: AppColors.grey.shade100,
-  backgroundColor: Colors.white,
-  hintColor: AppColors.grey.shade100,
-  highlightColor: Colors.transparent,
-  splashColor: AppColors.red,
-  splashFactory: InkRipple.splashFactory,
-  textTheme: GoogleFonts.workSansTextTheme().copyWith(
-    bodyText2: GoogleFonts.workSans(
-      fontSize: 14,
-      color: Colors.black,
-    ),
-    subtitle2: GoogleFonts.workSans(
-      fontSize: 14,
-      color: Colors.white,
-      height: 1.5,
-      backgroundColor: Colors.black,
-      wordSpacing: 1,
-    ),
-  ),
-  tabBarTheme: TabBarTheme(
-    indicatorSize: TabBarIndicatorSize.tab,
-    indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
-    labelColor: Colors.black,
-    labelPadding: const EdgeInsets.symmetric(vertical: 3),
-    unselectedLabelColor: Colors.black.withOpacity(.3),
-  ),
-  appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.grey.shade200,
-    systemOverlayStyle: SystemUiOverlayStyle.dark,
-    foregroundColor: Colors.black,
-    iconTheme: const IconThemeData(
-      color: Colors.black,
-    ),
-  ),
-  dividerColor: Colors.grey.shade300,
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.purple.shade200,
-    foregroundColor: Colors.white,
-    splashColor: AppColors.red,
-  ),
-  buttonTheme: ButtonThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
-        elevation: MaterialStateProperty.all(0),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-        backgroundColor: MaterialStateProperty.all(Colors.black),
-        splashFactory: InkRipple.splashFactory,
-        overlayColor: MaterialStateProperty.all(AppColors.red)),
-  ),
-  snackBarTheme: SnackBarThemeData(
-    backgroundColor: AppColors.red,
-  ),
-);
-
 ThemeData appDarkTheme = ThemeData.dark().copyWith(
   brightness: Brightness.dark,
   primaryColor: AppColors.orange,
   colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.grey.shade500,
     primaryContainer: AppColors.grey.shade400,
     secondaryContainer: AppColors.grey.shade300,
   ),
@@ -88,8 +23,8 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       color: Colors.white,
     ),
     subtitle2: GoogleFonts.workSans(
-      fontSize: 14,
       color: Colors.black,
+      fontSize: 14,
       height: 1.5,
       backgroundColor: Colors.white,
       wordSpacing: 1,
@@ -135,6 +70,228 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   ),
 );
 
+ThemeData appLightTheme = ThemeData.light().copyWith(
+  brightness: Brightness.light,
+  primaryColor: AppColors.purple,
+  colorScheme: ColorScheme.light(
+    background: AppColors.grey.shade100,
+    primaryContainer: AppColors.grey.shade200,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  scaffoldBackgroundColor: AppColors.grey.shade100,
+  backgroundColor: Colors.white,
+  hintColor: AppColors.grey.shade100,
+  highlightColor: Colors.transparent,
+  splashColor: AppColors.red,
+  splashFactory: InkRipple.splashFactory,
+  textTheme: GoogleFonts.workSansTextTheme().copyWith(
+    bodyText2: GoogleFonts.workSans(
+      fontSize: 14,
+      color: Colors.black,
+    ),
+    subtitle2: GoogleFonts.workSans(
+      fontSize: 14,
+      color: Colors.white,
+      height: 1.5,
+      backgroundColor: Colors.black,
+      wordSpacing: 1,
+    ),
+  ),
+  tabBarTheme: TabBarTheme(
+    indicatorSize: TabBarIndicatorSize.tab,
+    indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: AppColors.red.shade300, width: 4)),
+    labelColor: Colors.black,
+    labelPadding: const EdgeInsets.symmetric(vertical: 3),
+    unselectedLabelColor: Colors.black.withOpacity(.3),
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.grey.shade200,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
+    iconTheme: const IconThemeData(
+      color: Colors.black,
+    ),
+  ),
+  dividerColor: Colors.grey.shade400,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: AppColors.purple.shade200,
+    foregroundColor: Colors.white,
+    splashColor: AppColors.red,
+  ),
+  buttonTheme: ButtonThemeData(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
+        elevation: MaterialStateProperty.all(0),
+        foregroundColor: MaterialStateProperty.all(Colors.white),
+        backgroundColor: MaterialStateProperty.all(Colors.black),
+        splashFactory: InkRipple.splashFactory,
+        overlayColor: MaterialStateProperty.all(AppColors.red)),
+  ),
+  snackBarTheme: SnackBarThemeData(
+    backgroundColor: AppColors.red,
+  ),
+);
+
+ThemeData appOrangeTheme = appLightTheme.copyWith(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColors.orange.shade50,
+  colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.orange.shade50,
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.orange.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
+    iconTheme: const IconThemeData(
+      color: Colors.black,
+    ),
+  ),
+);
+
+ThemeData appYellowTheme = appLightTheme.copyWith(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColors.yellow.shade50,
+  colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.yellow.shade50,
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.yellow.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
+    iconTheme: const IconThemeData(
+      color: Colors.black,
+    ),
+  ),
+);
+
+ThemeData appGreenTheme = appLightTheme.copyWith(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColors.green.shade50,
+  colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.green.shade50,
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  textTheme: TextTheme(
+    bodyText2: GoogleFonts.workSans(
+      fontSize: 14,
+      color: Colors.white,
+    ),
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.green.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.white,
+    iconTheme: const IconThemeData(
+      color: Colors.white,
+    ),
+  ),
+);
+
+ThemeData appTurquazTheme = appLightTheme.copyWith(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColors.turquaz.shade50,
+  colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.turquaz.shade50,
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.turquaz.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
+    iconTheme: const IconThemeData(
+      color: Colors.black,
+    ),
+  ),
+);
+
+ThemeData appBlueTheme = appLightTheme.copyWith(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColors.blue.shade50,
+  colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.blue.shade50,
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  textTheme: TextTheme(
+    bodyText2: GoogleFonts.workSans(
+      fontSize: 14,
+      color: Colors.white,
+    ),
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.blue.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
+    iconTheme: const IconThemeData(
+      color: Colors.white,
+    ),
+  ),
+);
+
+ThemeData appPurpleTheme = appLightTheme.copyWith(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColors.purple.shade50,
+  colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.purple.shade50,
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  textTheme: TextTheme(
+    bodyText2: GoogleFonts.workSans(
+      fontSize: 14,
+      color: Colors.white,
+    ),
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.purple.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
+    iconTheme: const IconThemeData(
+      color: Colors.white,
+    ),
+  ),
+);
+
+ThemeData appRedTheme = appLightTheme.copyWith(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: AppColors.red.shade50,
+  colorScheme: const ColorScheme.dark().copyWith(
+    background: AppColors.red.shade50,
+    primaryContainer: AppColors.grey.shade400,
+    secondaryContainer: AppColors.grey.shade300,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: AppColors.red.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    foregroundColor: Colors.black,
+    iconTheme: const IconThemeData(
+      color: Colors.black,
+    ),
+  ),
+);
+
+List<ThemeData> themeList = [
+  appDarkTheme,
+  appLightTheme,
+  appOrangeTheme,
+  appYellowTheme,
+  appGreenTheme,
+  appTurquazTheme,
+  appBlueTheme,
+  appPurpleTheme,
+  appRedTheme,
+];
 /* GOOGLE FONTS
   workSans
   raleway

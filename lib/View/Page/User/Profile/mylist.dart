@@ -23,6 +23,9 @@ class _MyListPageState extends State<MyListPage> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('MyListPage'),
+      ),
       body: const Center(
         child: Text('MyListPage'),
       ),

@@ -11,8 +11,26 @@ extension GetSize on BuildContext {
 }
 
 extension AddWhitespace on String {
-  String get addWhitespace => ' '+this+' ';
+  String get addWhitespace => ' ' + this + ' ';
 }
+
+extension TwoDigit on double {
+  String get twoDigitForMoney => ' ' + toStringAsFixed(2) + ' ₺ ';
+}
+
+extension OneDigit on double {
+  String get oneDigitForRankString => toString()[0]+'.'+toString()[2];
+}
+
+extension RankRound on double {
+  double get rankRound => this == 5.0
+      ? 5.0
+      : this % floor() < 0.5
+          ? floorToDouble()
+          : floorToDouble() + 0.5;
+}
+
+// OFFSIDE
 
 double discountedCalculate(double price, int? rate) {
   if (rate == null) {
@@ -37,13 +55,4 @@ double safeArea(
 
 //
 
-String getPrice(double price) {
-  return ' ${price.toStringAsFixed(2)} ₺ ';
-}
 
-double rankRound(double number) {
-  if (number % number.floor() < 0.5) {
-    return number.floorToDouble();
-  }
-  return number.floorToDouble() + 0.5;
-}

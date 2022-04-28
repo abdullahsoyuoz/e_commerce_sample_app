@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/curves.dart';
 
 class RegisterPainter extends CustomPainter {

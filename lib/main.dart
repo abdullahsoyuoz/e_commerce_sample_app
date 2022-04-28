@@ -5,7 +5,6 @@ import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/Dummy/products.dart';
-import 'package:sepet_demo/View/Style/themedata.dart';
 // ignore: unused_import
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
 // ignore: unused_import
@@ -37,7 +36,7 @@ class AppStarter extends StatelessWidget {
         builder: (context, value, child) {
           return MaterialApp(
             title: 'Sepet',
-            theme: value.isDark ? appDarkTheme : appLightTheme,
+            theme: value.getTheme,
             themeMode: SchedulerBinding.instance!.window.platformBrightness ==
                     Brightness.light
                 ? ThemeMode.light

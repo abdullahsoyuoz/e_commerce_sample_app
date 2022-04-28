@@ -23,6 +23,9 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('ProfilePage'),
+      ),
       body: const Center(
         child: Text('ProfilePage'),
       ),

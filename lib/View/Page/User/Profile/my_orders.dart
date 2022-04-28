@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class NotifyPage extends StatefulWidget {
-  const NotifyPage({ Key? key }) : super(key: key);
+class MyOrdersPage extends StatefulWidget {
+  const MyOrdersPage({ Key? key }) : super(key: key);
 
   @override
-  _NotifyPageState createState() => _NotifyPageState();
+  _MyOrdersPageState createState() => _MyOrdersPageState();
 }
 
-class _NotifyPageState extends State<NotifyPage> with SingleTickerProviderStateMixin {
+class _MyOrdersPageState extends State<MyOrdersPage> with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -24,10 +24,10 @@ class _NotifyPageState extends State<NotifyPage> with SingleTickerProviderStateM
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('NotifyPage'),
+        title: const Text('MyOrdersPage'),
       ),
       body: const Center(
-        child: Text('NotifyPage'),
+        child: Text('MyOrdersPage'),
       ),
     );
   }

@@ -15,7 +15,7 @@ Future<void> generateProduct() async {
       final productCategory = faker.locale.commerce.productName.product![
           Random()
               .nextInt(faker.locale.commerce.productName.product!.length - 1)];
-      var count = 1000 + Random().nextInt(3000);
+      var count = 1000 + Random().nextInt(3000000);
       final data = Product(
         id: i,
         brand: brandList[Random().nextInt(brandList.length)],
@@ -32,9 +32,9 @@ Future<void> generateProduct() async {
         price: Random().nextDouble() * Random().nextInt(1000),
         discountRate: Random().nextBool() ? Random().nextInt(8) + 1 * 10 : null,
         publishedDate: faker.date.past(DateTime.now(), rangeInYears: 15),
-        rank: Random().nextDouble() + 4,
+        rank: Random().nextDouble() + (Random().nextInt(3) + 1),
         purchasesCount: count,
-        commentCount: count ~/ (Random().nextInt(4) + 1),
+        commentCount: count ~/ (Random().nextInt(10000) + 1),
         shop: shopList[Random().nextInt(shopList.length - 1)],
       );
       // print('product:: ' + data.toString());

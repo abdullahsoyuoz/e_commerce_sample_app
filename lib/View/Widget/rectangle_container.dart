@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 
 class RectangleContainer extends StatelessWidget {
-  Widget child;
-  RectangleContainer({Key? key, required this.child}) : super(key: key);
+  final Widget child;
+  const RectangleContainer({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class RectangleContainer extends StatelessWidget {
       height: 40,
       width: context.width * 0.6,
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Theme.of(context).colorScheme.background,
         borderRadius: appRadius(context),
         boxShadow: appShadow(context),
       ),

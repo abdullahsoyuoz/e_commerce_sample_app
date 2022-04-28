@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/View/Page/User/Profile/messages.dart';
+import 'package:sepet_demo/View/Page/User/Profile/my_orders.dart';
 import 'package:sepet_demo/View/Page/User/Profile/mylist.dart';
+import 'package:sepet_demo/View/Page/User/Profile/notify.dart';
 import 'package:sepet_demo/View/Page/User/Profile/profile.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 
@@ -53,15 +55,27 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
               ),
             ),
             IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.box,
+              icon: const Icon(
+                FontAwesomeIcons.box,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const MyOrdersPage(),
                 ),
-                onPressed: () {}),
+              ),
+            ),
             IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.solidHeart,
+              icon: const Icon(
+                FontAwesomeIcons.solidHeart,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const MyListPage(),
                 ),
-                onPressed: () {}),
+              ),
+            ),
             IconButton(
               icon: const Icon(
                 FontAwesomeIcons.solidBookmark,
@@ -88,8 +102,18 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
               icon: const Icon(
                 FontAwesomeIcons.solidBell,
               ),
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const NotifyPage(),
+                ),
+              ),
             ),
+            IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.powerOff,
+                ),
+                onPressed: () {}),
           ],
         ),
       ),

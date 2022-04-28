@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -101,31 +101,30 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
                             )),
                       ),
                       Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                              maxHeight: 40,
-                              minHeight: 40,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 7.0, vertical: 0),
-                              child: Center(
-                                child: Marquee(
-                                  text: widget.data.title!.toUpperCase(),
-                                  numberOfRounds: 1,
-                                  scrollAxis: Axis.horizontal,
-                                  fadingEdgeStartFraction: 0.03,
-                                  fadingEdgeEndFraction: 0.03,
-                                  showFadingOnlyWhenScrolling: true,
-                                  velocity: 30,
-                                  blankSpace: 100,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText2!
-                                      .copyWith(fontSize: 13),
-                                ),
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            maxHeight: 40,
+                            minHeight: 40,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 1.0, vertical: 0),
+                            child: Center(
+                              child: Marquee(
+                                text: widget.data.title!.toUpperCase(),
+                                numberOfRounds: 3,
+                                scrollAxis: Axis.horizontal,
+                                fadingEdgeStartFraction: 0.03,
+                                fadingEdgeEndFraction: 0.03,
+                                showFadingOnlyWhenScrolling: true,
+                                velocity: 30,
+                                blankSpace: context.width * 0.5,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600),
                               ),
                             ),
                           ),
@@ -216,6 +215,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<ThemeChanger>(context, listen: false).isDark();
     return Padding(
       key: UniqueKey(),
       padding:
@@ -249,7 +249,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                     )),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: const EdgeInsets.only(top: 5.0),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: SmoothPageIndicator(
@@ -266,12 +266,13 @@ class _ProductViewBodyState extends State<ProductViewBody>
           Expanded(
             child: SizedBox.expand(
               child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.only(top: 5.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -283,7 +284,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                   fontSize: 23, fontWeight: FontWeight.w600),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
+                          padding: const EdgeInsets.only(top: 5.0),
                           child: Text(
                             widget.data.description!,
                             style: Theme.of(context)
@@ -293,7 +294,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -303,7 +304,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                       padding:
                                           const EdgeInsets.only(right: 5.0),
                                       child: Text(
-                                        getPrice(widget.data.price!),
+                                        widget.data.price!.twoDigitForMoney,
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2!
@@ -317,8 +318,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                       ),
                                     ),
                               Text(
-                                getPrice(discountedCalculate(widget.data.price!,
-                                    widget.data.discountRate)),
+                                discountedCalculate(widget.data.price!,
+                                        widget.data.discountRate)
+                                    .twoDigitForMoney,
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle2!
@@ -330,7 +332,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 15),
+                          padding: const EdgeInsets.only(top: 10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -354,16 +356,16 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                           allowHalfRating: true,
                                           onRatingUpdate: (v) {},
                                           ignoreGestures: true,
+                                          unratedColor: isDark
+                                              ? AppColors.grey.shade300
+                                              : AppColors.grey.shade200,
                                           initialRating:
-                                              rankRound(widget.data.rank!),
+                                              widget.data.rank!.rankRound,
                                           itemSize: 20,
                                           itemBuilder: (context, index) {
                                             return FaIcon(
                                               FontAwesomeIcons.solidStar,
-                                              color: Provider.of<ThemeChanger>(
-                                                          context,
-                                                          listen: false)
-                                                      .isDark
+                                              color: isDark
                                                   ? AppColors.orange.shade100
                                                   : AppColors.orange.shade300,
                                             );
@@ -381,7 +383,8 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                               alignment: Alignment.centerLeft,
                                               child: Text(
                                                 widget.data.rank!
-                                                    .toStringAsFixed(1),
+                                                        .oneDigitForRankString +
+                                                    '',
                                               ),
                                             ),
                                           ),
@@ -408,80 +411,101 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 5.0),
-                                          child: ConstrainedBox(
-                                            constraints: const BoxConstraints(
-                                              minHeight: 20,
-                                              maxHeight: 20,
-                                              maxWidth: 20,
-                                              minWidth: 20,
-                                            ),
-                                            child: const FittedBox(
-                                              fit: BoxFit.fitHeight,
-                                              child: Center(
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.box,
+                                        Tooltip(
+                                          message:
+                                              'Ürünü kaç kişi değerlendirdi?',
+                                          triggerMode: TooltipTriggerMode.tap,
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 5.0, left: 5.0),
+                                                child: ConstrainedBox(
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                    minHeight: 20,
+                                                    maxHeight: 20,
+                                                    maxWidth: 20,
+                                                    minWidth: 20,
+                                                  ),
+                                                  child: const FittedBox(
+                                                    fit: BoxFit.fitHeight,
+                                                    child: Center(
+                                                      child: FaIcon(
+                                                        FontAwesomeIcons
+                                                            .solidCommentDots,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                        ConstrainedBox(
-                                          constraints: const BoxConstraints(
-                                            minHeight: 25,
-                                            maxHeight: 25,
-                                          ),
-                                          child: FittedBox(
-                                            fit: BoxFit.fitHeight,
-                                            child: Text(
-                                              NumberFormat.compact(
-                                                      locale: 'en_US')
-                                                  .format(widget
-                                                      .data.purchasesCount!),
-                                            ),
+                                              ConstrainedBox(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                  minHeight: 25,
+                                                  maxHeight: 25,
+                                                ),
+                                                child: FittedBox(
+                                                  fit: BoxFit.fitHeight,
+                                                  child: Text(
+                                                    NumberFormat.compact(
+                                                            locale: 'en_US')
+                                                        .format(widget.data
+                                                            .commentCount!),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(right: 5.0, left: 5.0),
-                                          child: ConstrainedBox(
-                                            constraints: const BoxConstraints(
-                                              minHeight: 20,
-                                              maxHeight: 20,
-                                              maxWidth: 20,
-                                              minWidth: 20,
-                                            ),
-                                            child: FittedBox(
-                                              fit: BoxFit.fitHeight,
-                                              child: Center(
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.solidComment,
-                                                  color: Provider.of<
-                                                                  ThemeChanger>(
-                                                              context,
-                                                              listen: false)
-                                                          .isDark
-                                                      ? AppColors.blue.shade100
-                                                      : AppColors.blue.shade200,
+                                              const EdgeInsets.only(left: 10.0),
+                                          child: Tooltip(
+                                            message:
+                                                'Ürünü kaç kişi satın aldı?',
+                                            triggerMode: TooltipTriggerMode.tap,
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 5.0),
+                                                  child: ConstrainedBox(
+                                                    constraints:
+                                                        const BoxConstraints(
+                                                      minHeight: 20,
+                                                      maxHeight: 20,
+                                                      maxWidth: 20,
+                                                      minWidth: 20,
+                                                    ),
+                                                    child: const FittedBox(
+                                                      fit: BoxFit.fitHeight,
+                                                      child: Center(
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons.box,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        ConstrainedBox(
-                                          constraints: const BoxConstraints(
-                                            minHeight: 25,
-                                            maxHeight: 25,
-                                          ),
-                                          child: FittedBox(
-                                            fit: BoxFit.fitHeight,
-                                            child: Text(
-                                              NumberFormat.compact(
-                                                      locale: 'en_US')
-                                                  .format(widget
-                                                      .data.commentCount!),
+                                                ConstrainedBox(
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                    minHeight: 25,
+                                                    maxHeight: 25,
+                                                  ),
+                                                  child: FittedBox(
+                                                    fit: BoxFit.fitHeight,
+                                                    child: Text(
+                                                      NumberFormat.compact(
+                                                              locale: 'en_US')
+                                                          .format(widget.data
+                                                              .purchasesCount!),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -495,219 +519,216 @@ class _ProductViewBodyState extends State<ProductViewBody>
                         ),
                       ],
                     ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: FittedBox(
-                                    child: Text(
-                                      'Ürün detayına git',
-                                      style: TextStyle(
-                                          color:
-                                              Theme.of(context).backgroundColor,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  style: ButtonStyle(
-                                    fixedSize: MaterialStateProperty.all(
-                                        const Size.fromHeight(40)),
-                                    shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                            borderRadius: appRadius(context))),
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Theme.of(context).iconTheme.color),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: FittedBox(
+                                  child: Text(
+                                    'Ürün detayına git',
+                                    style: TextStyle(
+                                        color:
+                                            Theme.of(context).backgroundColor,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5.0),
-                                child: BouncingWidget(
-                                  onPressed: () {},
-                                  child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          color:
-                                              Theme.of(context).iconTheme.color,
-                                          borderRadius: appRadius(context)),
-                                      child: Center(
-                                        child: FaIcon(
-                                          FontAwesomeIcons.shareNodes,
-                                          color:
-                                              Theme.of(context).backgroundColor,
-                                        ),
-                                      )),
+                                style: ButtonStyle(
+                                  fixedSize: MaterialStateProperty.all(
+                                      const Size.fromHeight(40)),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius: appRadius(context))),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Theme.of(context).iconTheme.color),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5.0),
-                                child: BouncingWidget(
-                                  onPressed: () {
-                                    if (_bookmarkAnimationController != null) {
-                                      setState(() {
-                                        widget.data.isAddedBookmark =
-                                            !widget.data.isAddedBookmark;
-                                        if (widget.data.isAddedBookmark) {
-                                          if (!_bookmarkAnimationController!
-                                              .isAnimating) {
-                                            WidgetsBinding.instance!
-                                                .addPostFrameCallback(
-                                                    (timeStamp) {
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: BouncingWidget(
+                                onPressed: () {},
+                                child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                        borderRadius: appRadius(context)),
+                                    child: Center(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.shareNodes,
+                                        color:
+                                            Theme.of(context).backgroundColor,
+                                      ),
+                                    )),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: BouncingWidget(
+                                onPressed: () {
+                                  if (_bookmarkAnimationController != null) {
+                                    setState(() {
+                                      widget.data.isAddedBookmark =
+                                          !widget.data.isAddedBookmark;
+                                      if (widget.data.isAddedBookmark) {
+                                        if (!_bookmarkAnimationController!
+                                            .isAnimating) {
+                                          WidgetsBinding.instance!
+                                              .addPostFrameCallback(
+                                                  (timeStamp) {
+                                            _bookmarkAnimationController!
+                                                .forward()
+                                                .whenComplete(() {
                                               _bookmarkAnimationController!
-                                                  .forward()
-                                                  .whenComplete(() {
-                                                _bookmarkAnimationController!
-                                                    .reset();
-                                              });
+                                                  .reset();
                                             });
-                                          }
+                                          });
                                         }
-                                      });
-                                    }
-                                  },
-                                  child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          color:
-                                              Theme.of(context).iconTheme.color,
-                                          borderRadius: appRadius(context)),
-                                      child: Center(
-                                        child: Bounce(
-                                          child: FaIcon(
-                                            FontAwesomeIcons.solidBookmark,
-                                            color: widget.data.isAddedBookmark
-                                                ? AppColors.orange
-                                                : Theme.of(context)
-                                                    .backgroundColor,
-                                          ),
-                                          animate: false,
-                                          manualTrigger: true,
-                                          controller: (c) {
-                                            _bookmarkAnimationController = c;
-                                          },
+                                      }
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                        borderRadius: appRadius(context)),
+                                    child: Center(
+                                      child: Bounce(
+                                        child: FaIcon(
+                                          FontAwesomeIcons.solidBookmark,
+                                          color: widget.data.isAddedBookmark
+                                              ? AppColors.orange
+                                              : Theme.of(context)
+                                                  .backgroundColor,
                                         ),
-                                      )),
-                                ),
+                                        animate: false,
+                                        manualTrigger: true,
+                                        controller: (c) {
+                                          _bookmarkAnimationController = c;
+                                        },
+                                      ),
+                                    )),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5.0),
-                                child: BouncingWidget(
-                                  onPressed: () {
-                                    if (_heartAnimationController != null) {
-                                      setState(() {
-                                        widget.data.isLiked =
-                                            !widget.data.isLiked;
-                                        if (widget.data.isLiked) {
-                                          if (!_heartAnimationController!
-                                              .isAnimating) {
-                                            WidgetsBinding.instance!
-                                                .addPostFrameCallback(
-                                                    (timeStamp) {
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: BouncingWidget(
+                                onPressed: () {
+                                  if (_heartAnimationController != null) {
+                                    setState(() {
+                                      widget.data.isLiked =
+                                          !widget.data.isLiked;
+                                      if (widget.data.isLiked) {
+                                        if (!_heartAnimationController!
+                                            .isAnimating) {
+                                          WidgetsBinding.instance!
+                                              .addPostFrameCallback(
+                                                  (timeStamp) {
+                                            _heartAnimationController!
+                                                .forward()
+                                                .whenComplete(() {
                                               _heartAnimationController!
-                                                  .forward()
-                                                  .whenComplete(() {
-                                                _heartAnimationController!
-                                                    .reset();
-                                              });
+                                                  .reset();
                                             });
-                                          }
+                                          });
                                         }
-                                      });
-                                    }
-                                  },
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        borderRadius: appRadius(context)),
-                                    child: Center(
-                                      child: Pulse(
-                                        key: UniqueKey(),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.solidHeart,
-                                          color: widget.data.isLiked
-                                              ? AppColors.red
-                                              : Theme.of(context)
-                                                  .backgroundColor,
-                                        ),
-                                        animate: false,
-                                        manualTrigger: true,
-                                        controller: (c) {
-                                          _heartAnimationController = c;
-                                        },
+                                      }
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).iconTheme.color,
+                                      borderRadius: appRadius(context)),
+                                  child: Center(
+                                    child: Pulse(
+                                      key: UniqueKey(),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.solidHeart,
+                                        color: widget.data.isLiked
+                                            ? AppColors.red
+                                            : Theme.of(context)
+                                                .backgroundColor,
                                       ),
+                                      animate: false,
+                                      manualTrigger: true,
+                                      controller: (c) {
+                                        _heartAnimationController = c;
+                                      },
                                     ),
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5.0),
-                                child: BouncingWidget(
-                                  onPressed: () {
-                                    if (_basketAnimationController != null) {
-                                      setState(() {
-                                        widget.data.isAddedCart =
-                                            !widget.data.isAddedCart;
-                                        if (widget.data.isAddedCart) {
-                                          if (!_basketAnimationController!
-                                              .isAnimating) {
-                                            WidgetsBinding.instance!
-                                                .addPostFrameCallback(
-                                                    (timeStamp) {
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: BouncingWidget(
+                                onPressed: () {
+                                  if (_basketAnimationController != null) {
+                                    setState(() {
+                                      widget.data.isAddedCart =
+                                          !widget.data.isAddedCart;
+                                      if (widget.data.isAddedCart) {
+                                        if (!_basketAnimationController!
+                                            .isAnimating) {
+                                          WidgetsBinding.instance!
+                                              .addPostFrameCallback(
+                                                  (timeStamp) {
+                                            _basketAnimationController!
+                                                .forward()
+                                                .whenComplete(() {
                                               _basketAnimationController!
-                                                  .forward()
-                                                  .whenComplete(() {
-                                                _basketAnimationController!
-                                                    .reset();
-                                              });
+                                                  .reset();
                                             });
-                                          }
+                                          });
                                         }
-                                      });
-                                    }
-                                  },
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        borderRadius: appRadius(context)),
-                                    child: Center(
-                                      child: Roulette(
-                                        child: FaIcon(
-                                          FontAwesomeIcons.bagShopping,
-                                          color: widget.data.isAddedCart
-                                              ? AppColors.blue.shade100
-                                              : Theme.of(context)
-                                                  .backgroundColor,
-                                        ),
-                                        animate: false,
-                                        manualTrigger: true,
-                                        controller: (c) {
-                                          _basketAnimationController = c;
-                                        },
+                                      }
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).iconTheme.color,
+                                      borderRadius: appRadius(context)),
+                                  child: Center(
+                                    child: Roulette(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.bagShopping,
+                                        color: widget.data.isAddedCart
+                                            ? AppColors.blue.shade100
+                                            : Theme.of(context)
+                                                .backgroundColor,
                                       ),
+                                      animate: false,
+                                      manualTrigger: true,
+                                      controller: (c) {
+                                        _basketAnimationController = c;
+                                      },
                                     ),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     )
                   ],
                 ),

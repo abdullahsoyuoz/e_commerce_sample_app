@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/View/flow_products_view.dart';
@@ -69,7 +69,7 @@ class _FlowListWidgetState extends State<FlowListWidget> {
                     Expanded(
                       child: Text(
                         widget.data.title!.toUpperCase().addWhitespace,
-                        style: Theme.of(context).textTheme.subtitle2!,
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w600),
                         maxLines: 3,
                       ),
                     ),

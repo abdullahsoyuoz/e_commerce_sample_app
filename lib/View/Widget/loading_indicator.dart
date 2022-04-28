@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
+import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
 Widget loadingIndicator(
@@ -15,6 +16,20 @@ Widget loadingIndicator(
         );
 }
 
-Widget errorIndicator(BuildContext context, Object object, StackTrace stackTrace) {
-  return const FaIcon(FontAwesomeIcons.triangleExclamation);
+Widget errorIndicator(
+    BuildContext context, Object object, StackTrace stackTrace) {
+  if (stackTrace == StackTrace.empty) {
+    return Center(
+      child: Lottie.asset(lottiePathError, height: 100),
+    );
+  }
+  // ignore: unnecessary_null_comparison
+  if (stackTrace == null) {
+    return Center(
+      child: Lottie.asset(lottiePathError, height: 100),
+    );
+  }
+  return Center(
+    child: Lottie.asset(lottiePathError, height: 100),
+  );
 }

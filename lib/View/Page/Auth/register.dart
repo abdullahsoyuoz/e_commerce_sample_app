@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regexpattern/regexpattern.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Painter/register_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';

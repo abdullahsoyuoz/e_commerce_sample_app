@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regexpattern/regexpattern.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
 import 'package:sepet_demo/View/Painter/login_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -363,7 +363,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 _animationController.animateTo(3).whenComplete(() {
                   Timer(const Duration(milliseconds: 300), () {
                     Navigator.push(
-                        context, customRouteBuilder(context, const HomePage()));
+                        context, fadeRouteBuilder(context, const HomePage()));
                   });
                 });
               } else {
@@ -371,10 +371,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     _animationController.animateBack(value.toDouble()));
               }
 
-              Timer(const Duration(milliseconds: 300), () {
-                Navigator.push(
-                    context, customRouteBuilder(context, const HomePage()));
-              });
+              Navigator.push(
+                  context, fadeRouteBuilder(context, const HomePage()));
             },
             child: SizedBox.expand(
               child: ColoredBox(

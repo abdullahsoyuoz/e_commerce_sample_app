@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/constant.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/Auth/onboaring.dart';
 import 'package:sepet_demo/View/Painter/splash_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen>
       const Duration(seconds: 3),
       () => Navigator.push(
         context,
-        customRouteBuilder(
+        fadeRouteBuilder(
           context,
           const OnboardPage(),
           barrierColor: AppColors.red,

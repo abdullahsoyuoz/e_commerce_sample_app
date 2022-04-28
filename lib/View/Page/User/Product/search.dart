@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sepet_demo/Controller/utility.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
-import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/rectangle_container.dart';
 
 class SearchPage extends StatefulWidget {

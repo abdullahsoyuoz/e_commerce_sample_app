@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: unused_import
 
-Route customRouteBuilder(
+import 'package:flutter/material.dart';
+import 'dart:math' as math;
+
+Route fadeRouteBuilder(
   BuildContext context,
   Widget routePage, {
   Color? barrierColor,
@@ -8,8 +11,7 @@ Route customRouteBuilder(
   Duration? reverseTransitionDuration,
 }) {
   return PageRouteBuilder(
-    transitionDuration:
-        transitionDuration ?? const Duration(milliseconds: 1000),
+    transitionDuration: transitionDuration ?? const Duration(milliseconds: 500),
     barrierColor: barrierColor ?? Colors.transparent,
     barrierDismissible: false,
     opaque: false,
@@ -23,48 +25,6 @@ Route customRouteBuilder(
         opacity: animation,
         child: child,
       );
-
-      // return ScaleTransition(
-      //   scale: animation,
-      //   alignment: Alignment.bottomCenter,
-      //   child: child,
-      // );
-
-      // return RotationTransition(
-      //   turns: animation,
-      //   child: child,
-      // );
-
-      // final Animation<Offset> offsetAnimation = Tween<Offset>(
-      //   begin: const Offset(0, -1),
-      //   end: Offset.zero,
-      // ).animate(CurvedAnimation(
-      //   parent: animation,
-      //   curve: Curves.easeOutCirc,
-      //   reverseCurve: Curves.easeInCirc,
-      // ));
-      // return SlideTransition(
-      //   position: offsetAnimation,
-      //   child: child,
-      // );
-
-      // final Animation<Offset> offsetAnimation = Tween<Offset>(
-      //   begin: const Offset(0.25, 0),
-      //   end: Offset.zero,
-      // ).animate(CurvedAnimation(
-      //   parent: animation,
-      //   curve: Curves.easeOutCirc,
-      //   reverseCurve: Curves.easeInCirc,
-      // ));
-      // return FadeTransition(
-      //   opacity: animation,
-      //   child: SlideTransition(
-      //     position: offsetAnimation,
-      //     child: child,
-      //   ),
-      // );
-
-      //
     },
   );
 }
@@ -77,8 +37,7 @@ Route leftSlideRouteBuilder(
   Duration? reverseTransitionDuration,
 }) {
   return PageRouteBuilder(
-    transitionDuration:
-        transitionDuration ?? const Duration(milliseconds: 300),
+    transitionDuration: transitionDuration ?? const Duration(milliseconds: 300),
     barrierColor: barrierColor ?? Colors.transparent,
     barrierDismissible: false,
     opaque: false,
@@ -102,24 +61,6 @@ Route leftSlideRouteBuilder(
         position: offsetAnimation,
         child: child,
       );
-
-      // final Animation<Offset> offsetAnimation = Tween<Offset>(
-      //   begin: const Offset(0.25, 0),
-      //   end: Offset.zero,
-      // ).animate(CurvedAnimation(
-      //   parent: animation,
-      //   curve: Curves.easeOutCirc,
-      //   reverseCurve: Curves.easeInCirc,
-      // ));
-      // return FadeTransition(
-      //   opacity: animation,
-      //   child: SlideTransition(
-      //     position: offsetAnimation,
-      //     child: child,
-      //   ),
-      // );
-
-      //
     },
   );
 }

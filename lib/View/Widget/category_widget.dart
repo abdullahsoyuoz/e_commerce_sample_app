@@ -16,7 +16,7 @@ class CategoryWidget extends StatelessWidget {
         vertical: 3,
       ),
       child: ColoredBox(
-        color: Theme.of(context).appBarTheme.backgroundColor!,
+        color: Theme.of(context).backgroundColor,
         child: Row(
           children: [
             AspectRatio(
@@ -25,7 +25,7 @@ class CategoryWidget extends StatelessWidget {
                 child: FaIcon(
                   data.icon,
                   color: Provider.of<ThemeChanger>(context, listen: false)
-                          .isDark
+                          .isDark()
                       ? data.color!.shade100
                       : data.color!.shade300,
                 ),
