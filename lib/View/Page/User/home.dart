@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -128,7 +129,7 @@ class _HomePageState extends State<HomePage>
                       const Padding(
                         padding: EdgeInsets.only(left: 3.0),
                         child: Icon(
-                          FontAwesomeIcons.magnifyingGlass,
+                          LineIcons.search,
                           size: 15,
                         ),
                       )

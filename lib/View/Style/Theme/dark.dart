@@ -37,7 +37,6 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   ),
   iconTheme: const IconThemeData(
     color: Colors.white,
-    size: 30
   ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,

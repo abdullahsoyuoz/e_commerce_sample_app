@@ -37,7 +37,7 @@ class BouncingWidget extends StatefulWidget {
     this.reverseDuration = const Duration(milliseconds: 300),
     this.curve = Curves.decelerate,
     this.reverseCurve = Curves.decelerate,
-    this.scaleFactor = 0.8,
+    this.scaleFactor = 0.75,
   })  : assert(
           scaleFactor >= 0.0 && scaleFactor <= 1.0,
           "The valid range of scaleFactor is from 0.0 to 1.0.",

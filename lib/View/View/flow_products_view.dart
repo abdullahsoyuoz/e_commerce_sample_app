@@ -1,9 +1,9 @@
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
@@ -11,6 +11,7 @@ import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/curves.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
@@ -79,96 +80,107 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
                     children: [
                       BouncingWidget(
                         onPressed: () => Navigator.pop(context),
-                        child: Container(
-                            width: 40,
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: appRadius(context),
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                maxHeight: 40,
-                                minHeight: 20,
-                              ),
-                              child: FittedBox(
-                                alignment: Alignment.center,
-                                child: FaIcon(
-                                  FontAwesomeIcons.chevronLeft,
-                                  color: Theme.of(context).backgroundColor,
-                                ),
-                              ),
-                            )),
-                      ),
-                      Expanded(
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            maxHeight: 40,
-                            minHeight: 40,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 1.0, vertical: 0),
-                            child: Center(
-                              child: Marquee(
-                                text: widget.data.title!.toUpperCase(),
-                                numberOfRounds: 3,
-                                scrollAxis: Axis.horizontal,
-                                fadingEdgeStartFraction: 0.03,
-                                fadingEdgeEndFraction: 0.03,
-                                showFadingOnlyWhenScrolling: true,
-                                velocity: 30,
-                                blankSpace: context.width * 0.5,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .copyWith(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600),
-                              ),
-                            ),
+                        child: const Center(
+                          child: FaIcon(
+                            LineIcons.arrowLeft,
                           ),
                         ),
                       ),
-                      BouncingWidget(
-                        onPressed: () {
-                          setState(() {
-                            hasSubscribe = !hasSubscribe;
-                            if (hasSubscribe) {
-                              _bellAnimationController
-                                  ?.forward()
-                                  .whenComplete(() {
-                                _bellAnimationController?.reset();
-                              });
-                            }
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: appRadius(context),
-                            color: hasSubscribe
-                                ? AppColors.red
-                                : Theme.of(context).iconTheme.color,
-                          ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
                           child: ConstrainedBox(
                             constraints: const BoxConstraints(
                               maxHeight: 40,
-                              minHeight: 20,
+                              minHeight: 40,
                             ),
-                            child: FittedBox(
-                              alignment: Alignment.center,
-                              child: Swing(
-                                child: Icon(
-                                  FontAwesomeIcons.solidBell,
-                                  color: Theme.of(context).backgroundColor,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Theme.of(context)
+                                              .iconTheme
+                                              .color!),
+                                      borderRadius: appRadius(context)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 10.0),
+                                    child: Center(
+                                      child: Marquee(
+                                        text: widget.data.title!.toUpperCase(),
+                                        numberOfRounds: 3,
+                                        scrollAxis: Axis.horizontal,
+                                        fadingEdgeStartFraction: 0.02,
+                                        fadingEdgeEndFraction: 0.03,
+                                        showFadingOnlyWhenScrolling: true,
+                                        velocity: 30,
+                                        decelerationDuration:
+                                            const Duration(seconds: 3),
+                                        startAfter: const Duration(seconds: 1),
+                                        startPadding: 20,
+                                        blankSpace: context.width * 0.5,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2!
+                                            .copyWith(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                animate: false,
-                                manualTrigger: true,
-                                controller: (va) {
-                                  _bellAnimationController = va;
-                                },
-                              ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: BouncingWidget(
+                                    onPressed: () {
+                                      setState(() {
+                                        hasSubscribe = !hasSubscribe;
+                                        if (hasSubscribe) {
+                                          _bellAnimationController
+                                              ?.forward()
+                                              .whenComplete(() {
+                                            _bellAnimationController?.reset();
+                                          });
+                                        }
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          borderRadius: appRadius(context),
+                                          color: hasSubscribe
+                                              ? AppColors.red
+                                              : Theme.of(context).iconTheme.color,
+                                        ),
+                                        child: ConstrainedBox(
+                                          constraints: const BoxConstraints(
+                                            maxHeight: 40,
+                                            minHeight: 40,
+                                          ),
+                                          child: FittedBox(
+                                            alignment: Alignment.center,
+                                            child: Swing(
+                                              child: Icon(
+                                                FontAwesomeIcons.solidBell,
+                                                color: Theme.of(context)
+                                                    .backgroundColor,
+                                              ),
+                                              animate: false,
+                                              manualTrigger: true,
+                                              controller: (va) {
+                                                _bellAnimationController = va;
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -204,7 +216,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0);
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.75);
   }
 
   @override
@@ -218,43 +230,44 @@ class _ProductViewBodyState extends State<ProductViewBody>
     bool isDark = Provider.of<ThemeChanger>(context, listen: false).isDark();
     return Padding(
       key: UniqueKey(),
-      padding:
-          const EdgeInsets.only(top: 110.0, bottom: 50, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 110.0, bottom: 50),
       child: Column(
         children: [
           Column(
             children: [
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: SizedBox(
-                      width: context.width,
-                      height: context.width * 0.5,
-                      child: PageView.builder(
-                        controller: _pageController,
-                        itemCount: widget.data.photosUrl!.length,
-                        itemBuilder: (context, index) {
-                          return Image.network(
+              Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: SizedBox(
+                    width: context.width,
+                    height: context.width * 0.5,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: widget.data.photosUrl!.length,
+                      itemBuilder: (context, index) {
+                        return ClipRect(
+                          child: Image.network(
                             widget.data.photosUrl![index],
                             fit: BoxFit.cover,
                             loadingBuilder: (context, child, loadingProgress) =>
                                 loadingIndicator(
                                     context, child, loadingProgress),
-                          );
-                        },
-                      ),
-                    )),
-              ),
+                          ),
+                        );
+                      },
+                    ),
+                  )),
               Padding(
-                padding: const EdgeInsets.only(top: 5.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: SmoothPageIndicator(
                     controller: _pageController,
                     count: widget.data.photosUrl!.length,
+                    onDotClicked: (index) => _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 700),
+                      curve: const SpringCurve(),
+                    ),
                     effect: SwapEffect(
                         activeDotColor: AppColors.red,
                         dotColor: Theme.of(context).iconTheme.color!),
@@ -266,7 +279,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
           Expanded(
             child: SizedBox.expand(
               child: Padding(
-                padding: const EdgeInsets.only(top: 5.0),
+                padding: const EdgeInsets.only(top: 5.0, left: 20, right: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,7 +297,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                   fontSize: 23, fontWeight: FontWeight.w600),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: Text(
                             widget.data.description!,
                             style: Theme.of(context)
@@ -311,7 +324,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                             .copyWith(
                                               fontSize: 19,
                                               backgroundColor:
-                                                  AppColors.red.shade300,
+                                                  AppColors.red.shade500,
                                               decoration:
                                                   TextDecoration.lineThrough,
                                             ),
@@ -357,8 +370,8 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                           onRatingUpdate: (v) {},
                                           ignoreGestures: true,
                                           unratedColor: isDark
-                                              ? AppColors.grey.shade300
-                                              : AppColors.grey.shade200,
+                                              ? AppColors.black.shade200
+                                              : AppColors.grey.shade300,
                                           initialRating:
                                               widget.data.rank!.rankRound,
                                           itemSize: 20,
@@ -366,8 +379,8 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                             return FaIcon(
                                               FontAwesomeIcons.solidStar,
                                               color: isDark
-                                                  ? AppColors.orange.shade100
-                                                  : AppColors.orange.shade300,
+                                                  ? AppColors.orange.shade500
+                                                  : AppColors.orange.shade500,
                                             );
                                           },
                                         ),
@@ -528,44 +541,44 @@ class _ProductViewBodyState extends State<ProductViewBody>
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: ElevatedButton(
+                              child: OutlinedButton(
                                 onPressed: () {},
                                 child: FittedBox(
                                   child: Text(
                                     'Ürün detayına git',
                                     style: TextStyle(
-                                        color:
-                                            Theme.of(context).backgroundColor,
-                                        fontWeight: FontWeight.bold),
+                                      color: Theme.of(context).iconTheme.color,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 style: ButtonStyle(
                                   fixedSize: MaterialStateProperty.all(
                                       const Size.fromHeight(40)),
                                   shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius: appRadius(context))),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Theme.of(context).iconTheme.color),
+                                    RoundedRectangleBorder(
+                                      borderRadius: appRadius(context),
+                                      side: BorderSide(
+                                          color: Theme.of(context)
+                                              .iconTheme
+                                              .color!,
+                                          width: 2),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
+                              padding: const EdgeInsets.only(left: 20.0),
                               child: BouncingWidget(
                                 onPressed: () {},
-                                child: Container(
+                                child: const SizedBox(
                                     width: 40,
                                     height: 40,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        borderRadius: appRadius(context)),
                                     child: Center(
                                       child: FaIcon(
-                                        FontAwesomeIcons.shareNodes,
-                                        color:
-                                            Theme.of(context).backgroundColor,
+                                        LineIcons.share,
+                                        size: 40,
                                       ),
                                     )),
                               ),
@@ -596,21 +609,19 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                     });
                                   }
                                 },
-                                child: Container(
+                                child: SizedBox(
                                     width: 40,
                                     height: 40,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        borderRadius: appRadius(context)),
                                     child: Center(
                                       child: Bounce(
                                         child: FaIcon(
-                                          FontAwesomeIcons.solidBookmark,
+                                          LineIcons.bookmark,
+                                          size: 40,
                                           color: widget.data.isAddedBookmark
-                                              ? AppColors.orange
+                                              ? AppColors.orange.shade500
                                               : Theme.of(context)
-                                                  .backgroundColor,
+                                                  .iconTheme
+                                                  .color,
                                         ),
                                         animate: false,
                                         manualTrigger: true,
@@ -647,22 +658,18 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                     });
                                   }
                                 },
-                                child: Container(
+                                child: SizedBox(
                                   width: 40,
                                   height: 40,
-                                  decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).iconTheme.color,
-                                      borderRadius: appRadius(context)),
                                   child: Center(
                                     child: Pulse(
                                       key: UniqueKey(),
                                       child: FaIcon(
-                                        FontAwesomeIcons.solidHeart,
+                                        LineIcons.heart,
+                                        size: 40,
                                         color: widget.data.isLiked
-                                            ? AppColors.red
-                                            : Theme.of(context)
-                                                .backgroundColor,
+                                            ? AppColors.red.shade400
+                                            : Theme.of(context).iconTheme.color,
                                       ),
                                       animate: false,
                                       manualTrigger: true,
@@ -700,21 +707,17 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                     });
                                   }
                                 },
-                                child: Container(
+                                child: SizedBox(
                                   width: 40,
                                   height: 40,
-                                  decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).iconTheme.color,
-                                      borderRadius: appRadius(context)),
                                   child: Center(
                                     child: Roulette(
                                       child: FaIcon(
-                                        FontAwesomeIcons.bagShopping,
+                                        LineIcons.shoppingBag,
+                                        size: 40,
                                         color: widget.data.isAddedCart
-                                            ? AppColors.blue.shade100
-                                            : Theme.of(context)
-                                                .backgroundColor,
+                                            ? AppColors.blue.shade200
+                                            : Theme.of(context).iconTheme.color,
                                       ),
                                       animate: false,
                                       manualTrigger: true,

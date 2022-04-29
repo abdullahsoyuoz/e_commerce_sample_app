@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
+import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
+import 'package:sepet_demo/View/Style/Theme/themedata.dart';
+import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
+import 'package:sepet_demo/View/Widget/sticky_header.dart';
+
+import '../../../Style/decorations.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -17,9 +24,7 @@ class _NavigationPageState extends State<NavigationPage>
 
   @override
   void initState() {
-    _scrollController = ScrollController(
-      initialScrollOffset: 300,
-    );
+    _scrollController = ScrollController();
     super.initState();
   }
 
@@ -33,47 +38,54 @@ class _NavigationPageState extends State<NavigationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       body: SizedBox.expand(
-          child: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          top: context.padding.top,
-          bottom: 120,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: context.width * 0.6,
-                minWidth: context.width * 0.6,
-              ),
-              child: const FittedBox(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'KATEGORILER',
-                  style: TextStyle(fontSize: 10),
+          child: CustomScrollView(
+        shrinkWrap: true,
+        slivers: [
+          SliverAppBar(
+            
+          ),
+          SliverGrid.count(
+            crossAxisCount: 2,
+            childAspectRatio: 1,
+            children: categoryList.map((e) => CategoryWidget(data: e)).toList(),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: FittedBox(
+                alignment: Alignment.center,
+                fit: BoxFit.fitWidth,
+                child: Row(
+                  children: themeList
+                      .map(
+                        (e) => IconButton(
+                          onPressed: () {
+                            Provider.of<ThemeChanger>(context, listen: false)
+                                .setTheme(e);
+                          },
+                          icon: DecoratedBox(
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: appShadow(context)),
+                            child: CircleAvatar(
+                              backgroundColor: e.appBarTheme.backgroundColor,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ),
-            buildCategoriesBody(context),
-          ],
-        ),
+          )
+        ],
       )),
     );
   }
-
-  Widget buildCategoriesBody(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      controller: _scrollController,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      itemCount: categoryList.length,
-      itemBuilder: (context, index) =>
-          CategoryWidget(data: categoryList[index]),
-    );
-  }
 }
+
 
 // Padding(
 //               padding: const EdgeInsets.symmetric(horizontal: 10.0),

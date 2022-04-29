@@ -33,7 +33,6 @@ ThemeData appTurquazTheme = ThemeData.light().copyWith(
   ),
   iconTheme: const IconThemeData(
     color: Colors.black,
-    size: 30
   ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
