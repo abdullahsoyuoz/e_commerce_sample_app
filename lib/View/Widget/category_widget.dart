@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/category.dart';
+import 'dart:ui' as ui;
 
 class CategoryWidget extends StatelessWidget {
   final Category data;
@@ -10,38 +9,77 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 3,
-      ),
-      child: Row(
-        children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: Center(
-              child: FaIcon(
-                data.icon,
-                color: Provider.of<ThemeChanger>(context, listen: false)
-                        .isDark()
-                    ? data.color!.shade100
-                    : data.color!.shade300,
-              ),
+    return SizedBox(
+      width: context.width,
+      height: 120,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 3,
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            ClipPath(
+              clipper: CustomCliper(),
+              child: SizedBox(
+                  width: context.width,
+                  height: 120,
+                  child: Image.network(
+                    data.imageUrl!,
+                    fit: BoxFit.cover,
+                  )),
             ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
+            Align(
+              alignment: Alignment.centerRight,
               child: Text(
                 data.title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17),
+                textAlign: TextAlign.end,
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle2!
+                    .copyWith(fontSize: 27),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+}
+
+class CustomCliper extends CustomClipper<Path> {
+  @override
+  getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width * 0.9, 0);
+    path.lineTo(size.width * 0.7, size.height);
+    path.lineTo(size.width * 0, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper oldClipper) => false;
+}
+
+class FadePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..shader = ui.Gradient.linear(
+        Offset(size.width * 0.5, size.height * 0.4),
+        Offset(size.width * 0.5, size.height),
+        [
+          Colors.white,
+          Colors.transparent,
+        ],
+      )
+      ..blendMode = BlendMode.dstATop;
+
+    canvas.drawPaint(paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

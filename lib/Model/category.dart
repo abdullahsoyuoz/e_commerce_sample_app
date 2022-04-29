@@ -11,6 +11,7 @@ class Category {
     this.icon,
     this.color,
     this.subCategory,
+    this.imageUrl,
   });
 
   late int categoryId; // nullable
@@ -20,12 +21,14 @@ class Category {
   late IconData? icon;
   late MaterialColor? color;
   late List<Category>? subCategory;
+  late String? imageUrl;
 
   factory Category.fromJson(Map<String, dynamic> item) {
     return Category(
       id: item["id"],
       categoryId: item["category_id"],
       title: item["title"],
+      imageUrl: item["imageUrl"]
     );
   }
 
@@ -33,9 +36,10 @@ class Category {
         "category_id": categoryId,
         "id": id,
         "title": title,
+        "imageUrl": imageUrl
       };
 
-      @override
+  @override
   String toString() {
     return title;
   }
@@ -68,7 +72,6 @@ IconData getIcon(int category, int index) {
   if (category == 4 && index == 3) return FontAwesomeIcons.cheese;
   return FontAwesomeIcons.question;
 }
-
 
 MaterialColor getCategoryColor(int category) {
   if (category == 0) return AppColors.turquaz;

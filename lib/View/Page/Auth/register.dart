@@ -357,7 +357,6 @@ class _RegisterPageState extends State<RegisterPage>
         Expanded(
           flex: 1,
           child: BouncingWidget(
-            scaleFactor: 3,
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 FocusScope.of(context).unfocus();

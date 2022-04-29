@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:faker_dart/faker_dart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
@@ -11,15 +10,9 @@ import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
-import 'package:sepet_demo/View/Page/User/Order/basket.dart';
 import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
-import 'package:sepet_demo/View/Style/decorations.dart';
-import 'package:sepet_demo/View/View/dropmenu_low.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
-import 'package:sepet_demo/View/Widget/drop_menu.dart';
-import 'package:sepet_demo/View/Widget/dynamic_button.dart';
 import 'package:sepet_demo/View/Widget/flow_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:sepet_demo/View/Widget/rectangle_container.dart';
@@ -92,8 +85,8 @@ class _HomePageState extends State<HomePage>
       child: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: 15,
-            sigmaY: 15,
+            sigmaX: 10,
+            sigmaY: 10,
           ),
           child: SizedBox(
             width: context.width,

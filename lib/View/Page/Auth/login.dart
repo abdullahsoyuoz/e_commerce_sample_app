@@ -356,7 +356,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         Expanded(
           flex: 1,
           child: BouncingWidget(
-            scaleFactor: 3,
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 FocusScope.of(context).unfocus();

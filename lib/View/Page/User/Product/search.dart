@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
-import 'package:sepet_demo/View/Widget/rectangle_container.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

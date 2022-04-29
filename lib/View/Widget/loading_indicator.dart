@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:sepet_demo/Controller/constant.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
 Widget loadingIndicator(
@@ -20,16 +20,16 @@ Widget errorIndicator(
     BuildContext context, Object object, StackTrace stackTrace) {
   if (stackTrace == StackTrace.empty) {
     return Center(
-      child: Lottie.asset(lottiePathError, height: 100),
+      child: LineIcon(LineIcons.exclamationCircle),
     );
   }
   // ignore: unnecessary_null_comparison
   if (stackTrace == null) {
     return Center(
-      child: Lottie.asset(lottiePathError, height: 100),
+      child: LineIcon(LineIcons.exclamationCircle),
     );
   }
   return Center(
-    child: Lottie.asset(lottiePathError, height: 100),
+    child: LineIcon(LineIcons.exclamationCircle),
   );
 }

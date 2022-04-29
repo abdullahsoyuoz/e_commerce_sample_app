@@ -1,39 +1,48 @@
-// ignore_for_file: unused_element
-
-library bouncing_widget;
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 class BouncingWidget extends StatefulWidget {
-  /// Child that will receive the bouncing animation
-  final Widget child;
+  /// Set it to `null` to disable `onTap`.
+  final VoidCallback? onPressed;
+  final void Function(TapUpDetails)? onTapUp;
+  final void Function(TapDownDetails)? onTapDown;
+  final VoidCallback? onTapCancel;
 
-  /// Callback on click event
-  final VoidCallback onPressed;
+  /// The reverse duration of the scaling animation when `onTapUp`.
+  final Duration? duration;
 
-  /// Scale factor
-  ///  < 0 => the bouncing will be reversed and widget will grow
-  ///    1 => default value
-  ///  > 1 => increase the bouncing effect
+  /// The duration of the scaling animation when `onTapDown`.
+  final Duration? reverseDuration;
+
+  /// The reverse curve of the scaling animation when `onTapUp`.
+  final Curve curve;
+
+  /// The curve of the scaling animation when `onTapDown`..
+  final Curve? reverseCurve;
+
+  /// The scale factor of the child widget. The valid range of `scaleFactor` is from `0.0` to `1.0`.
   final double scaleFactor;
 
-  /// Animation duration
-  final Duration duration;
+  final Widget child;
 
-  /// Whether the animation can revers or not
-  final bool stayOnBottom;
-
-  /// BouncingWidget constructor
   const BouncingWidget({
     Key? key,
-    required this.child,
     required this.onPressed,
-    this.scaleFactor = 1,
-    this.duration = const Duration(milliseconds: 200),
-    this.stayOnBottom = false,
-  }) : super(key: key);
+    required this.child,
+    this.onTapUp,
+    this.onTapDown,
+    this.onTapCancel,
+    this.duration = const Duration(milliseconds: 300),
+    this.reverseDuration = const Duration(milliseconds: 300),
+    this.curve = Curves.decelerate,
+    this.reverseCurve = Curves.decelerate,
+    this.scaleFactor = 0.8,
+  })  : assert(
+          scaleFactor >= 0.0 && scaleFactor <= 1.0,
+          "The valid range of scaleFactor is from 0.0 to 1.0.",
+        ),
+        super(key: key);
 
   @override
   _BouncingWidgetState createState() => _BouncingWidgetState();
@@ -41,159 +50,65 @@ class BouncingWidget extends StatefulWidget {
 
 class _BouncingWidgetState extends State<BouncingWidget>
     with SingleTickerProviderStateMixin {
-  //// Animation controller
-  late AnimationController _controller;
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: widget.duration,
+    reverseDuration: widget.reverseDuration,
+    value: 1.0,
+    upperBound: 1.0,
+    lowerBound: widget.scaleFactor,
+  );
 
-  /// View scale used in order to make the bouncing animation
-  late double _scale;
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: widget.curve,
+    reverseCurve: widget.reverseCurve,
+  );
 
-  /// Key of the given child used to get its size and position whenever we need
-  final GlobalKey _childKey = GlobalKey();
-
-  /// If the touch position is outside or not of the given child
-  bool _isOutside = false;
-
-  /// Simple getter on widget's child
-  Widget get child => widget.child;
-
-  /// Simple getter on widget's onPressed callback
-  VoidCallback get onPressed => widget.onPressed;
-
-  /// Simple getter on widget's scaleFactor
-  double get scaleFactor => widget.scaleFactor;
-
-  /// Simple getter on widget's animation duration
-  Duration get duration => widget.duration;
-
-  /// Simple getter on widget's stayOnBottom boolean
-  bool get _stayOnBottom => widget.stayOnBottom;
-
-  /// We instantiate the animation controller
-  /// The idea is to call setState() each time the controller's
-  /// value changes
-  @override
-  void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: duration,
-      lowerBound: 0.0,
-      upperBound: 0.1,
-    )..addListener(() {
-        setState(() {});
-      });
-
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(BouncingWidget oldWidget) {
-    if (oldWidget.stayOnBottom != _stayOnBottom) {
-      if (!_stayOnBottom) {
-        _reverseAnimation();
-      }
-    }
-    super.didUpdateWidget(oldWidget);
-  }
-
-  /// Dispose the animation controller
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
-  /// Each time the [_controller]'s value changes, build() will be called
-  /// We just have to calculate the appropriate scale from the controller value
-  /// and pass it to our Transform.scale widget
   @override
   Widget build(BuildContext context) {
-    _scale = 1 - (_controller.value * scaleFactor);
-    return GestureDetector(
-      onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
-      onLongPressEnd: (details) => _onLongPressEnd(details, context),
-      // onHorizontalDragEnd: _onDragEnd,
-      // onVerticalDragEnd: _onDragEnd,
-      // onHorizontalDragUpdate: (details) => _onDragUpdate(details, context),
-      // onVerticalDragUpdate: (details) => _onDragUpdate(details, context),
-      child: Transform.scale(
-        key: _childKey,
-        scale: _scale,
-        child: child,
-      ),
-    );
-  }
+    void onTap() {
+      if (widget.onPressed != null) {
+        Timer(widget.duration! * 1.5, () {
+          widget.onPressed!();
+        });
+      }
 
-  /// Simple method called when we need to notify the user of a press event
-  _triggerOnPressed() {
-    Timer(widget.duration, () => onPressed());
-  }
-
-  /// We start the animation
-  _onTapDown(TapDownDetails details) {
-    _controller.forward();
-  }
-
-  /// We reverse the animation and notify the user of a press event
-  _onTapUp(TapUpDetails details) {
-    if (!_stayOnBottom) {
-      Future.delayed(duration, () {
-        _reverseAnimation();
+      _controller.reverse().then((_) {
+        _controller.forward();
       });
     }
 
-    _triggerOnPressed();
-  }
-
-  /// Here we are listening on each change when drag event is triggered
-  /// We must keep the [_isOutside] value updated in order to use it later
-  _onDragUpdate(DragUpdateDetails details, BuildContext context) {
-    final Offset touchPosition = details.globalPosition;
-    _isOutside = _isOutsideChildBox(touchPosition);
-  }
-
-  /// When this callback is triggered, we reverse the animation
-  /// If the touch position is inside the children renderBox, we notify the user of a press event
-  _onLongPressEnd(LongPressEndDetails details, BuildContext context) {
-    final Offset touchPosition = details.globalPosition;
-
-    if (!_isOutsideChildBox(touchPosition)) {
-      _triggerOnPressed();
+    void onTapUp(TapUpDetails details) {
+      if (widget.onTapUp != null) widget.onTapUp!(details);
+      _controller.forward();
     }
 
-    _reverseAnimation();
-  }
-
-  /// When this callback is triggered, we reverse the animation
-  /// As we do not have position details, we use the [_isOutside] field to know
-  /// if we need to notify the user of a press event
-  _onDragEnd(DragEndDetails details) {
-    if (!_isOutside) {
-      _triggerOnPressed();
-    }
-    _reverseAnimation();
-  }
-
-  _reverseAnimation() {
-    if (mounted) {
+    void onTapDown(TapDownDetails details) {
+      if (widget.onTapDown != null) widget.onTapDown!(details);
       _controller.reverse();
     }
-  }
 
-  /// Method called when we need to now if a specific touch position is inside the given
-  /// child render box
-  bool _isOutsideChildBox(Offset touchPosition) {
-    final RenderBox? childRenderBox =
-        _childKey.currentContext?.findRenderObject() as RenderBox?;
-    if (childRenderBox == null) {
-      return true;
+    void onTapCancel() {
+      if (widget.onTapCancel != null) widget.onTapCancel!();
+      _controller.forward();
     }
-    final Size childSize = childRenderBox.size;
-    final Offset childPosition = childRenderBox.localToGlobal(Offset.zero);
 
-    return (touchPosition.dx < childPosition.dx ||
-        touchPosition.dx > childPosition.dx + childSize.width ||
-        touchPosition.dy < childPosition.dy ||
-        touchPosition.dy > childPosition.dy + childSize.height);
+    return GestureDetector(
+      onTapCancel: widget.onPressed != null ? onTapCancel : null,
+      onTapDown: widget.onPressed != null ? onTapDown : null,
+      onTapUp: widget.onPressed != null ? onTapUp : null,
+      onTap: widget.onPressed != null ? onTap : null,
+      child: ScaleTransition(
+        scale: _animation,
+        child: widget.child,
+      ),
+    );
   }
 }
