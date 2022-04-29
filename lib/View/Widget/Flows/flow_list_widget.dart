@@ -1,4 +1,3 @@
-// ignore_for_file: must_be_immutable
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -9,8 +8,8 @@ import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class FlowListWidget extends StatefulWidget {
-  FlowEntity data;
-  FlowListWidget({Key? key, required this.data}) : super(key: key);
+  final FlowEntity data;
+  const FlowListWidget({Key? key, required this.data}) : super(key: key);
 
   @override
   State<FlowListWidget> createState() => _FlowListWidgetState();

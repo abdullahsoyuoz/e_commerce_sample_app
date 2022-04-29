@@ -44,33 +44,36 @@ class _AuthMainPageState extends State<AuthMainPage>
               CustomPaint(
                 painter: AuthBackgroundPainter(animation: _animationController),
               ),
-              PageTransitionSwitcher(
-                transitionBuilder:
-                    (child, primaryAnimation, secondaryAnimation) {
-                  return SharedAxisTransition(
-                    animation: primaryAnimation,
-                    secondaryAnimation: secondaryAnimation,
-                    transitionType: SharedAxisTransitionType.scaled,
-                    fillColor: Colors.transparent,
-                    child: child,
-                  );
-                },
-                reverse: value,
-                child: value
-                    ? RegisterPage(
-                        key: const ValueKey('RegisterPage'),
-                        onRegisterPressed: () {
-                          showRegisterPage.value = false;
-                          _animationController.reverse();
-                        },
-                      )
-                    : LoginPage(
-                        key: const ValueKey('LoginPage'),
-                        onLoginPressed: () {
-                          showRegisterPage.value = true;
-                          _animationController.forward();
-                        },
-                      ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: PageTransitionSwitcher(
+                  transitionBuilder:
+                      (child, primaryAnimation, secondaryAnimation) {
+                    return SharedAxisTransition(
+                      animation: primaryAnimation,
+                      secondaryAnimation: secondaryAnimation,
+                      transitionType: SharedAxisTransitionType.scaled,
+                      fillColor: Colors.transparent,
+                      child: child,
+                    );
+                  },
+                  reverse: value,
+                  child: value
+                      ? RegisterPage(
+                          key: const ValueKey('RegisterPage'),
+                          onRegisterPressed: () {
+                            showRegisterPage.value = false;
+                            _animationController.reverse();
+                          },
+                        )
+                      : LoginPage(
+                          key: const ValueKey('LoginPage'),
+                          onLoginPressed: () {
+                            showRegisterPage.value = true;
+                            _animationController.forward();
+                          },
+                        ),
+                ),
               ),
             ],
           ),

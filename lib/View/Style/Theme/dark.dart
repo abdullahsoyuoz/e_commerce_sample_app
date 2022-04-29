@@ -8,8 +8,8 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   primaryColor: AppColors.orange,
   colorScheme: const ColorScheme.dark().copyWith(
     background: AppColors.black.shade300,
-    primaryContainer: AppColors.grey.shade400,
-    secondaryContainer: AppColors.grey.shade300,
+    primaryContainer: AppColors.black.shade200,
+    secondaryContainer: AppColors.black.shade100,
   ),
   scaffoldBackgroundColor: AppColors.black.shade400,
   backgroundColor: Colors.black,
@@ -35,6 +35,10 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       wordSpacing: 1,
     ),
   ),
+  iconTheme: const IconThemeData(
+    color: Colors.white,
+    size: 30
+  ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
     indicator: UnderlineTabIndicator(
@@ -47,12 +51,12 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
     backgroundColor: AppColors.black.shade500,
     systemOverlayStyle: SystemUiOverlayStyle.light,
     foregroundColor: Colors.white,
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.white,
     ),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.purple.shade200,
+    backgroundColor: AppColors.black.shade500,
     foregroundColor: Colors.white,
     splashColor: AppColors.red,
   ),

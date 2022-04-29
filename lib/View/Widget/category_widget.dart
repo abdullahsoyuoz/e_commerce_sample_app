@@ -4,10 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/category.dart';
 
-// ignore: must_be_immutable
 class CategoryWidget extends StatelessWidget {
-  Category data;
-  CategoryWidget({Key? key, required this.data}) : super(key: key);
+  final Category data;
+  const CategoryWidget({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

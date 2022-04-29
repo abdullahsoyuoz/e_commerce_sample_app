@@ -1,26 +1,24 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 
 class DynamicButton extends StatefulWidget {
-  Function()? onPressed;
-  Widget? child;
-  Size? size;
-  EdgeInsetsGeometry? childPadding;
-  Color? backgroundColor;
-  Color? pressedBackgroundColor;
-  Gradient? gradient;
-  Color? foregroundTextColor;
-  Color? pressedForegroundTextColor;
-  Color? splashColor;
-  Color? shadowColor;
-  Color? pressedShadowColor;
-  double? borderRadius;
-  double? elevation;
-  double? pressedElevation;
-  Duration? animationDuration;
-  BoxBorder? boxBorder;
-  DynamicButton({
+  final Function()? onPressed;
+  final Widget? child;
+  final Size? size;
+  final EdgeInsetsGeometry? childPadding;
+  final Color? backgroundColor;
+  final Color? pressedBackgroundColor;
+  final Gradient? gradient;
+  final Color? foregroundTextColor;
+  final Color? pressedForegroundTextColor;
+  final Color? splashColor;
+  final Color? shadowColor;
+  final Color? pressedShadowColor;
+  final double? borderRadius;
+  final double? elevation;
+  final double? pressedElevation;
+  final Duration? animationDuration;
+  final BoxBorder? boxBorder;
+  const DynamicButton({
     Key? key,
     this.onPressed,
     this.child = const SizedBox(),

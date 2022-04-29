@@ -1,13 +1,11 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'dart:math' as math;
 
 class LogoWidget extends StatelessWidget {
-  late double? size;
-  late Color? color;
-  LogoWidget({Key? key, this.size, this.color}) : super(key: key);
+  final double? size;
+  final Color? color;
+  const LogoWidget({Key? key, this.size, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

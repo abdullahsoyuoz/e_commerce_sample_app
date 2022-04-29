@@ -11,6 +11,17 @@ class AuthBackgroundPainter extends CustomPainter {
   }
 
   late final Animation<double> curvedAnimation;
+  final paint1 = Paint()
+    ..color = AppColors.black.shade300
+    ..style = PaintingStyle.fill;
+
+  final paint2 = Paint()
+    ..color = AppColors.black.shade400
+    ..style = PaintingStyle.fill;
+
+  final paint3 = Paint()
+    ..color = AppColors.black.shade500
+    ..style = PaintingStyle.fill;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -27,11 +38,7 @@ class AuthBackgroundPainter extends CustomPainter {
         lerpDouble(size.width * 0.5, 0, curvedAnimation.value)!, size.height);
     path.lineTo(0, size.height);
     path.close();
-    canvas.drawPath(
-        path,
-        Paint()
-          ..color = AppColors.black.shade200
-          ..style = PaintingStyle.fill);
+    canvas.drawPath(path, paint1);
   }
 
   void paintLevel2(Canvas canvas, Size size) {
@@ -45,11 +52,7 @@ class AuthBackgroundPainter extends CustomPainter {
     path.lineTo(
         lerpDouble(size.width * 0.5, 0, curvedAnimation.value)!, size.height);
     path.close();
-    canvas.drawPath(
-        path,
-        Paint()
-          ..color = AppColors.black.shade300
-          ..style = PaintingStyle.fill);
+    canvas.drawPath(path, paint2);
   }
 
   void paintLevel3(Canvas canvas, Size size) {
@@ -64,9 +67,7 @@ class AuthBackgroundPainter extends CustomPainter {
 
     canvas.drawPath(
       path,
-      Paint()
-        ..color = AppColors.black.shade400
-        ..style = PaintingStyle.fill,
+      paint3,
     );
   }
 

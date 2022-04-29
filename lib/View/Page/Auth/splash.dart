@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen>
                 animationController.reset();
                 animationController.forward();
               },
-              child: Center(
+              child: const Center(
                 child: LogoWidget(color: Colors.white),
               ),
             ),

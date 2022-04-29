@@ -31,6 +31,10 @@ ThemeData appOrangeTheme = ThemeData.light().copyWith(
       wordSpacing: 1,
     ),
   ),
+  iconTheme: const IconThemeData(
+    color: Colors.black,
+    size: 30
+  ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
     indicator: UnderlineTabIndicator(
@@ -49,9 +53,9 @@ ThemeData appOrangeTheme = ThemeData.light().copyWith(
   ),
   
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.purple.shade100,
-    foregroundColor: Colors.white,
-    splashColor: AppColors.red,
+    backgroundColor: AppColors.orange.shade200,
+    foregroundColor: Colors.black,
+    splashColor: AppColors.red.shade400,
   ),
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),

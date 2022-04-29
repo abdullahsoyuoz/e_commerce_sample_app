@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:faker_dart/faker_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,19 +5,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 
 List<Widget> onBoardList = [
-  OnboardWidget(
+  const OnboardWidget(
     icon: FontAwesomeIcons.palette,
     title: 'Modern',
     description:
         'Tamamen kullanıcı odaklı arayüz ile\nsizlerin alışverişinizi yaparken\nkeyif almanızı istiyoruz.',
   ),
-  OnboardWidget(
+  const OnboardWidget(
     icon: FontAwesomeIcons.solidBookmark,
     title: 'Adaptif',
     description:
         'Kullanıcı odaklı servislerimiz ile\ntam da aradığınızı bulmada\nsizlere zaman kazandırmak istiyoruz.',
   ),
-  OnboardWidget(
+  const OnboardWidget(
     icon: FontAwesomeIcons.icons,
     title: 'Eğlenceli',
     description:
@@ -33,10 +31,10 @@ List<Widget> onBoardList = [
 ];
 
 class OnboardWidget extends StatelessWidget {
-  IconData icon;
-  String title;
-  String description;
-  OnboardWidget(
+  final IconData icon;
+  final String title;
+  final String description;
+  const OnboardWidget(
       {Key? key,
       required this.icon,
       required this.title,

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -9,8 +9,8 @@ import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class FlowCampagneWidget extends StatelessWidget {
-  FlowEntity data;
-  FlowCampagneWidget({Key? key, required this.data}) : super(key: key);
+  final FlowEntity data;
+  const FlowCampagneWidget({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

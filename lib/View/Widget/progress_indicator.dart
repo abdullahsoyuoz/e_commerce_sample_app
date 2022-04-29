@@ -37,11 +37,10 @@ Future<void> showWaitDialog(BuildContext context,
 
 enum CustomProgressIndicatorType { bounce, angle, clock }
 
-// ignore: must_be_immutable
 class CustomProgressIndicator extends StatefulWidget {
-  String? title;
-  CustomProgressIndicatorType? type;
-  CustomProgressIndicator({Key? key, this.title, this.type}) : super(key: key);
+  final String? title;
+  final CustomProgressIndicatorType? type;
+  const CustomProgressIndicator({Key? key, this.title, this.type}) : super(key: key);
 
   @override
   _CustomProgressIndicatorState createState() =>

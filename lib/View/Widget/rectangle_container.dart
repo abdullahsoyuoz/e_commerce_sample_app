@@ -9,16 +9,20 @@ class RectangleContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: context.width * 0.6,
+      height: 30,
+      width: context.width,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.background.withOpacity(.5),
         borderRadius: appRadius(context),
-        boxShadow: appShadow(context),
+        border: Border.all(width: 1, color: Colors.black)
+        // boxShadow: appShadow(context),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      alignment: Alignment.centerLeft,
-      child: child,
+      alignment: Alignment.centerRight,
+      child: FittedBox(
+        alignment: Alignment.centerRight,
+        child: child,
+      ),
     );
   }
 }

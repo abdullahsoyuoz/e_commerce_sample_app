@@ -11,8 +11,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
     primaryContainer: AppColors.grey.shade200,
     secondaryContainer: AppColors.grey.shade300,
   ),
-  scaffoldBackgroundColor: AppColors.grey.shade100,
-  backgroundColor: Colors.white,
+  scaffoldBackgroundColor: Colors.white,
+  backgroundColor: AppColors.grey.shade100,
   hintColor: AppColors.black.shade100,
   highlightColor: Colors.transparent,
   splashColor: AppColors.red,
@@ -35,6 +35,10 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       wordSpacing: 1,
     ),
   ),
+  iconTheme: const IconThemeData(
+    color: Colors.black,
+    size: 30
+  ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
     indicator: UnderlineTabIndicator(
@@ -53,8 +57,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   ),
   
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.purple.shade200,
-    foregroundColor: Colors.white,
+    backgroundColor: AppColors.grey.shade200,
+    foregroundColor: Colors.black,
     splashColor: AppColors.red,
   ),
   buttonTheme: ButtonThemeData(

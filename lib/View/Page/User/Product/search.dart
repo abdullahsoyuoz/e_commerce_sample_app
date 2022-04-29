@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 import 'package:sepet_demo/View/Widget/rectangle_container.dart';
@@ -40,22 +41,22 @@ class _SearchPageState extends State<SearchPage>
       appBar: AppBar(
         toolbarHeight: 70,
         centerTitle: true,
-        title: RectangleContainer(
-          child: SizedBox(
-            width: context.width * 0.6,
-            child: TextField(
-                controller: _searchController,
-                focusNode: _searchNode,
-                cursorColor: Theme.of(context).iconTheme.color,
-                style: TextStyle(color: Theme.of(context).iconTheme.color),
-                decoration: getSearchInputDecoration(context, 'aramaya başla')),
+        automaticallyImplyLeading: false,
+        title: TextField(
+            controller: _searchController,
+            focusNode: _searchNode,
+            cursorColor: Theme.of(context).iconTheme.color,
+            style: TextStyle(color: Theme.of(context).iconTheme.color),
+            decoration: getSearchInputDecoration(context, 'aramaya başla')),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const FaIcon(LineIcons.arrowLeft),
           ),
-        ),
         actions: [
           IconButton(
             onPressed: () {},
             tooltip: 'Sonuçları sırala veya filtrele',
-            icon: const FaIcon(FontAwesomeIcons.sliders),
+            icon: const FaIcon(LineIcons.horizontalSliders),
           ),
         ],
       ),

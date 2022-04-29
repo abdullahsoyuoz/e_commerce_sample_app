@@ -3,33 +3,32 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
-// ignore: must_be_immutable
 class DropMenu extends StatefulWidget {
-  Widget? lowLayer;
+  final Widget? lowLayer;
 
-  Widget? highLayer;
+  final Widget? highLayer;
 
-  Widget? indicator;
-
-  /// call the widget's initState again so that the change can be applied.
-  double? lowLayerHeight;
+  final Widget? indicator;
 
   /// call the widget's initState again so that the change can be applied.
-  double? lowLayerBottomPadding;
+  final double? lowLayerHeight;
+
+  /// call the widget's initState again so that the change can be applied.
+  final double? lowLayerBottomPadding;
 
   /// The color of the underlying area, given the padding value.
-  Color? backgroundColor;
+  final Color? backgroundColor;
 
-  Color? dividerColor;
+  final Color? dividerColor;
 
   ///
   // Function(bool isOpen)? openCallback;
   final VoidCallback? onTabCallback;
 
-  late AnimationController animationController;
+  final AnimationController animationController;
 
-  BoxDecoration? decoration;
-  DropMenu({
+  final BoxDecoration? decoration;
+  const DropMenu({
     Key? key,
     this.highLayer,
     this.indicator,

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -17,8 +17,8 @@ import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FlowListProductsView extends StatefulWidget {
-  late FlowEntity data;
-  FlowListProductsView({Key? key, required this.data}) : super(key: key);
+  final FlowEntity data;
+  const FlowListProductsView({Key? key, required this.data}) : super(key: key);
 
   @override
   State<FlowListProductsView> createState() => _FlowListProductsViewState();
@@ -186,9 +186,9 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
 }
 
 class ProductViewBody extends StatefulWidget {
-  Product data;
-  int index;
-  ProductViewBody({Key? key, required this.data, required this.index})
+  final Product data;
+  final int index;
+  const ProductViewBody({Key? key, required this.data, required this.index})
       : super(key: key);
 
   @override
