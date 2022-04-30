@@ -38,14 +38,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           ClipRect(
             child: ImageFiltered(
                 imageFilter: ui.ImageFilter.blur(
-                  sigmaX: 5,
-                  sigmaY: 5,
+                  sigmaX: 15,
+                  sigmaY: 15,
                 ),
                 child: Image.network(
                   widget.data.imageUrl!,
                   fit: BoxFit.cover,
-                  color: Theme.of(context).iconTheme.color!.withOpacity(.25),
-                  colorBlendMode: BlendMode.darken,
+                  // color: Theme.of(context).iconTheme.color!.withOpacity(.25),
+                  // colorBlendMode: BlendMode.darken,
                 )),
           ),
           ClipRect(
@@ -65,7 +65,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                 widget.data.title,
                 textAlign: TextAlign.start,
                 style:
-                    Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 17),
+                    Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 13),
               ),
             ),
           ),

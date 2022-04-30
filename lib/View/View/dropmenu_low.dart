@@ -32,89 +32,91 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: Container(
-        decoration: BoxDecoration(
-            color: Theme.of(context).appBarTheme.backgroundColor,
-            boxShadow: appShadow(context)),
-        child: ListView(
-          shrinkWrap: true,
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          children: [
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.solidUser,
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const ProfilePage(),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.box,
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const MyOrdersPage(),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.solidHeart,
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const MyListPage(),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.solidBookmark,
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const MyListPage(),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.solidPaperPlane,
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const MessagesPage(),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.solidBell,
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const NotifyPage(),
-                ),
-              ),
-            ),
-            IconButton(
+    return Material(
+      child: SizedBox.expand(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Theme.of(context).appBarTheme.backgroundColor,
+              boxShadow: appShadow(context)),
+          child: ListView(
+            shrinkWrap: true,
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            children: [
+              IconButton(
                 icon: const Icon(
-                  FontAwesomeIcons.powerOff,
+                  FontAwesomeIcons.solidUser,
                 ),
-                onPressed: () {}),
-          ],
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const ProfilePage(),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.box,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const MyOrdersPage(),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.solidHeart,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const MyListPage(),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.solidBookmark,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const MyListPage(),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.solidPaperPlane,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const MessagesPage(),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  FontAwesomeIcons.solidBell,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const NotifyPage(),
+                  ),
+                ),
+              ),
+              IconButton(
+                  icon: const Icon(
+                    FontAwesomeIcons.powerOff,
+                  ),
+                  onPressed: () {}),
+            ],
+          ),
         ),
       ),
     );

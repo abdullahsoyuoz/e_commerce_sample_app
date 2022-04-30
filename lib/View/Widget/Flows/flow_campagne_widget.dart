@@ -32,6 +32,10 @@ class FlowCampagneWidget extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(padding: EdgeInsets.all(10), child: CircleAvatar(backgroundColor: data.color,),),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: ClipRRect(

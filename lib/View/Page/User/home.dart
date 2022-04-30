@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -13,7 +12,9 @@ import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
+import 'package:sepet_demo/View/View/dropmenu_low.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
+import 'package:sepet_demo/View/Widget/drop_menu.dart';
 import 'package:sepet_demo/View/Widget/flow_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:sepet_demo/View/Widget/rectangle_container.dart';
@@ -28,14 +29,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
+  late final AnimationController _animationController;
 
   @override
   void initState() {
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
     super.initState();
   }
 
   @override
   void dispose() {
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -58,16 +63,24 @@ class _HomePageState extends State<HomePage>
           child: Stack(
             fit: StackFit.expand,
             children: [
-              ListView.builder(
-                shrinkWrap: true,
-                padding:
-                    EdgeInsets.only(top: 70 + context.padding.top, bottom: 100),
-                physics: const BouncingScrollPhysics(),
-                itemCount: flowList.length,
-                itemExtent: context.width * 0.5,
-                itemBuilder: (context, index) {
-                  return FlowWidget(data: flowList[index]);
-                },
+              DropMenu(
+                animationController: _animationController,
+                lowLayer: const LowLayerWidget(),
+                indicator: const SizedBox(),
+                highLayer: ColoredBox(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(
+                        top: 70 + context.padding.top, bottom: 100),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: flowList.length,
+                    itemExtent: context.width * 0.5,
+                    itemBuilder: (context, index) {
+                      return FlowWidget(data: flowList[index]);
+                    },
+                  ),
+                ),
               ),
               Align(
                 alignment: Alignment.topCenter,
@@ -151,7 +164,9 @@ class _HomePageState extends State<HomePage>
               actions: [
                 IconButton(
                   iconSize: 50,
-                  onPressed: () {},
+                  onPressed: () {
+                    toggle();
+                  },
                   icon: AdvancedAvatar(
                     size: 50,
                     child: Image.network(
@@ -168,5 +183,16 @@ class _HomePageState extends State<HomePage>
         ),
       ),
     );
+  }
+
+  void toggle() {
+    if (!_animationController.isAnimating) {
+      if (_animationController.value == 0) {
+        _animationController.forward();
+      }
+      if (_animationController.value == 1) {
+        _animationController.reverse();
+      }
+    }
   }
 }

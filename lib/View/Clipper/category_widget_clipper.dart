@@ -5,8 +5,8 @@ class CategoryClipper extends CustomClipper<Path> {
   getClip(Size size) {
     final path = Path();
     path.moveTo(0, 0);
-    path.lineTo(0, size.height * 0.6);
-    path.lineTo(size.width, size.height * 0.8);
+    path.lineTo(0, size.height * 0);
+    path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
     path.close();
     return path;

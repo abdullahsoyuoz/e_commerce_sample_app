@@ -42,8 +42,8 @@ class AppStarter extends StatelessWidget {
                 ? ThemeMode.light
                 : ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            // home: const SplashScreen(),
-            home: const AuthMainPage(),
+            home: const SplashScreen(),
+            // home: const AuthMainPage(),
             // home: const HomePage(),
           );
         },
