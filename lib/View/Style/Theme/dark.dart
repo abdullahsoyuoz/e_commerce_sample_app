@@ -37,6 +37,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   ),
   iconTheme: const IconThemeData(
     color: Colors.white,
+    size: 30,
   ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
@@ -54,6 +55,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       color: Colors.white,
     ),
   ),
+  // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: AppColors.black.shade500,
     foregroundColor: Colors.white,
@@ -64,13 +66,29 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
-        elevation: MaterialStateProperty.all(0),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-        backgroundColor: MaterialStateProperty.all(Colors.black),
-        splashFactory: InkRipple.splashFactory,
-        overlayColor: MaterialStateProperty.all(AppColors.red)),
+      shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
+      elevation: MaterialStateProperty.all(0),
+      foregroundColor: MaterialStateProperty.all(Colors.white),
+      backgroundColor: MaterialStateProperty.all(Colors.black),
+      splashFactory: InkRipple.splashFactory,
+      overlayColor: MaterialStateProperty.all(AppColors.red),
+    ),
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+      ),
+      side: MaterialStateProperty.all(
+          const BorderSide(color: Colors.white, width: 1)),
+      elevation: MaterialStateProperty.all(0),
+      foregroundColor: MaterialStateProperty.all(Colors.white),
+      overlayColor: MaterialStateProperty.all(AppColors.red),
+      splashFactory: InkRipple.splashFactory,
+    ),
   ),
   snackBarTheme: SnackBarThemeData(
     backgroundColor: AppColors.red,

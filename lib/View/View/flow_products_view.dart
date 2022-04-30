@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,6 +11,7 @@ import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/Model/product.dart';
+import 'package:sepet_demo/View/Page/User/Product/product_detail.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/curves.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
@@ -145,35 +147,33 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
                                         }
                                       });
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: Container(
-                                        padding: const EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                          borderRadius: appRadius(context),
-                                          color: hasSubscribe
-                                              ? AppColors.red
-                                              : Theme.of(context).iconTheme.color,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(7),
+                                      decoration: BoxDecoration(
+                                        borderRadius: appRadius(context),
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                      ),
+                                      child: ConstrainedBox(
+                                        constraints: const BoxConstraints(
+                                          maxHeight: 40,
+                                          minHeight: 40,
                                         ),
-                                        child: ConstrainedBox(
-                                          constraints: const BoxConstraints(
-                                            maxHeight: 40,
-                                            minHeight: 40,
-                                          ),
-                                          child: FittedBox(
-                                            alignment: Alignment.center,
-                                            child: Swing(
-                                              child: Icon(
-                                                FontAwesomeIcons.solidBell,
-                                                color: Theme.of(context)
-                                                    .backgroundColor,
-                                              ),
-                                              animate: false,
-                                              manualTrigger: true,
-                                              controller: (va) {
-                                                _bellAnimationController = va;
-                                              },
+                                        child: FittedBox(
+                                          alignment: Alignment.center,
+                                          child: Swing(
+                                            child: Icon(
+                                              FontAwesomeIcons.solidBell,
+                                              color: hasSubscribe
+                                                  ? AppColors.red
+                                                  : Theme.of(context)
+                                                      .backgroundColor,
                                             ),
+                                            animate: false,
+                                            manualTrigger: true,
+                                            controller: (va) {
+                                              _bellAnimationController = va;
+                                            },
                                           ),
                                         ),
                                       ),
@@ -446,7 +446,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                     child: Center(
                                                       child: FaIcon(
                                                         FontAwesomeIcons
-                                                            .solidCommentDots,
+                                                            .solidComment,
                                                       ),
                                                     ),
                                                   ),
@@ -542,27 +542,17 @@ class _ProductViewBodyState extends State<ProductViewBody>
                           children: [
                             Expanded(
                               child: OutlinedButton(
-                                onPressed: () {},
-                                child: FittedBox(
-                                  child: Text(
-                                    'Ürün detayına git',
-                                    style: TextStyle(
-                                      color: Theme.of(context).iconTheme.color,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                style: ButtonStyle(
-                                  fixedSize: MaterialStateProperty.all(
-                                      const Size.fromHeight(40)),
-                                  shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: appRadius(context),
-                                      side: BorderSide(
-                                          color: Theme.of(context)
-                                              .iconTheme
-                                              .color!,
-                                          width: 2),
+                                onPressed: (){},
+                                child: BouncingWidget(
+                                  onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (context) => ProductDetailPage(data: widget.data),)),
+                                  child: FittedBox(
+                                    child: Text(
+                                      'Ürün detayına git',
+                                      style: TextStyle(
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -578,7 +568,6 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                     child: Center(
                                       child: FaIcon(
                                         LineIcons.share,
-                                        size: 40,
                                       ),
                                     )),
                               ),
@@ -615,8 +604,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                     child: Center(
                                       child: Bounce(
                                         child: FaIcon(
-                                          LineIcons.bookmark,
-                                          size: 40,
+                                          FontAwesomeIcons.solidBookmark,
                                           color: widget.data.isAddedBookmark
                                               ? AppColors.orange.shade500
                                               : Theme.of(context)
@@ -665,8 +653,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                     child: Pulse(
                                       key: UniqueKey(),
                                       child: FaIcon(
-                                        LineIcons.heart,
-                                        size: 40,
+                                        FontAwesomeIcons.solidHeart,
                                         color: widget.data.isLiked
                                             ? AppColors.red.shade400
                                             : Theme.of(context).iconTheme.color,
@@ -713,10 +700,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                   child: Center(
                                     child: Roulette(
                                       child: FaIcon(
-                                        LineIcons.shoppingBag,
-                                        size: 40,
+                                        FontAwesomeIcons.bagShopping,
                                         color: widget.data.isAddedCart
-                                            ? AppColors.blue.shade200
+                                            ? AppColors.blue.shade400
                                             : Theme.of(context).iconTheme.color,
                                       ),
                                       animate: false,

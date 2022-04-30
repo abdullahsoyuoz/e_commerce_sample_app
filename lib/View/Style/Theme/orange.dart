@@ -15,7 +15,7 @@ ThemeData appOrangeTheme = ThemeData.light().copyWith(
   backgroundColor: Colors.white,
   hintColor: AppColors.black.shade100,
   highlightColor: Colors.transparent,
-  splashColor: AppColors.red.shade400,
+  splashColor: AppColors.purple,
   splashFactory: InkRipple.splashFactory,
   dividerColor: AppColors.black.shade100,
   textTheme: GoogleFonts.workSansTextTheme().copyWith(
@@ -33,6 +33,7 @@ ThemeData appOrangeTheme = ThemeData.light().copyWith(
   ),
   iconTheme: const IconThemeData(
     color: Colors.black,
+    size: 30,
   ),
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
@@ -50,7 +51,7 @@ ThemeData appOrangeTheme = ThemeData.light().copyWith(
       color: Colors.black,
     ),
   ),
-  
+  // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: AppColors.orange.shade200,
     foregroundColor: Colors.black,
@@ -61,13 +62,29 @@ ThemeData appOrangeTheme = ThemeData.light().copyWith(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
-        elevation: MaterialStateProperty.all(0),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-        backgroundColor: MaterialStateProperty.all(Colors.black),
-        splashFactory: InkRipple.splashFactory,
-        overlayColor: MaterialStateProperty.all(AppColors.red)),
+      shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
+      elevation: MaterialStateProperty.all(0),
+      foregroundColor: MaterialStateProperty.all(Colors.white),
+      backgroundColor: MaterialStateProperty.all(Colors.black),
+      splashFactory: InkRipple.splashFactory,
+      overlayColor: MaterialStateProperty.all(AppColors.purple),
+    ),
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+      ),
+      side: MaterialStateProperty.all(
+          const BorderSide(color: Colors.black, width: 1)),
+      elevation: MaterialStateProperty.all(0),
+      foregroundColor: MaterialStateProperty.all(Colors.black),
+      overlayColor: MaterialStateProperty.all(AppColors.purple),
+      splashFactory: InkRipple.splashFactory,
+    ),
   ),
   snackBarTheme: SnackBarThemeData(
     backgroundColor: AppColors.red,

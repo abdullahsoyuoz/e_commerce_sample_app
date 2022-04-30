@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
+import 'package:sepet_demo/View/Painter/fade_painter.dart';
 import 'package:sepet_demo/View/Style/Theme/themedata.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
-import 'package:sepet_demo/View/Widget/sticky_header.dart';
 
 import '../../../Style/decorations.dart';
 
@@ -44,7 +45,39 @@ class _NavigationPageState extends State<NavigationPage>
         shrinkWrap: true,
         slivers: [
           SliverAppBar(
-            
+            collapsedHeight: 60,
+            pinned: true,
+            automaticallyImplyLeading: false,
+            title: const Text('NAVIGASYON'),
+            centerTitle: false,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(50),
+              child: SizedBox(
+                width: context.width,
+                height: 50,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: navigationMenu.length,
+                    itemBuilder: (context, index) {
+                      final data = navigationMenu[index];
+                      return BouncingWidget(
+                        scaleFactor: 0.5,
+                        onPressed: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Center(
+                              child: FittedBox(
+                            child: Text(
+                              data.toString(),
+                              style: const TextStyle(fontSize: 30),
+                            ),
+                          )),
+                        ),
+                      );
+                    }),
+              ),
+            ),
           ),
           SliverGrid.count(
             crossAxisCount: 2,

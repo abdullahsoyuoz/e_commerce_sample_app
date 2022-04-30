@@ -12,7 +12,7 @@ class RectangleContainer extends StatelessWidget {
       height: 30,
       width: context.width,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background.withOpacity(1),
+        color: Theme.of(context).colorScheme.background.withOpacity(0.75),
         borderRadius: appRadius(context),
         border: Border.all(width: 1, color: Colors.black)
         // boxShadow: appShadow(context),
