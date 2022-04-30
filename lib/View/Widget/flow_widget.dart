@@ -1,38 +1,138 @@
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Model/flow.dart';
-import 'package:sepet_demo/View/Widget/Flows/flow_campagne_widget.dart';
-import 'package:sepet_demo/View/Widget/Flows/flow_category_widget.dart';
-import 'package:sepet_demo/View/Widget/Flows/flow_discount_widget.dart';
-import 'package:sepet_demo/View/Widget/Flows/flow_list_widget.dart';
-import 'package:sepet_demo/View/Widget/Flows/flow_personal_widget.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:sepet_demo/Controller/extensions.dart';
+import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
+import 'package:sepet_demo/View/View/flow_products_view.dart';
+import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
+import 'package:sepet_demo/View/Widget/loading_indicator.dart';
+import 'dart:math' as math;
 
-class FlowWidget extends StatelessWidget {
+class FlowWidget extends StatefulWidget {
   final FlowEntity data;
   const FlowWidget({Key? key, required this.data}) : super(key: key);
 
   @override
+  State<FlowWidget> createState() => _FlowWidgetState();
+}
+
+class _FlowWidgetState extends State<FlowWidget>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _animationController;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _animationController.forward();
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    switch (data.type) {
-      // case FlowType.announcement:
-      //   return FlowAnnouncementWidget(
-      //     data: data,
-      //   );
-      case FlowType.personal:
-        // return const SizedBox();
-        return FlowPersonalWidget(data: data);
-      case FlowType.campagne:
-        // return const SizedBox();
-        return FlowCampagneWidget(data: data);
-      case FlowType.discount:
-        // return const SizedBox();
-        return FlowDiscountWidget(data: data);
-      case FlowType.category:
-        // return const SizedBox();
-        return FlowCategoryWidget(data: data);
-      case FlowType.list:
-        return FlowListWidget(data: data);
-      default:
-        return const SizedBox();
-    }
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return ScaleTransition(
+          scale: _animationController,
+          alignment: Alignment.bottomCenter,
+          child: child,
+        );
+      },
+      child: SizedBox(
+        width: context.width,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: CircleAvatar(
+                  backgroundColor: widget.data.color,
+                ),
+              ),
+            ),
+            BouncingWidget(
+              onPressed: () {
+                if (widget.data.targetProducts != null) {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => FlowListProductsView(
+                        data: widget.data,
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ClipRRect(
+                  borderRadius: appRadius(context),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        widget.data.imageUrl!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (c, o, s) =>
+                            errorIndicator(c, o, s ?? StackTrace.empty),
+                        loadingBuilder: (context, child, loadingProgress) =>
+                            loadingIndicator(context, child, loadingProgress),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          width: context.width,
+                          color: Theme.of(context).iconTheme.color,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: appPaddingForRadius(),
+                            vertical: 2,
+                          ),
+                          child: Text(
+                            widget.data.title!.toUpperCase(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(context).backgroundColor),
+                            maxLines: 3,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Tooltip(
+                  message: widget.data.typeString,
+                  triggerMode: TooltipTriggerMode.tap,
+                  child: CircleAvatar(
+                    backgroundColor: widget.data.color!.withOpacity(.5),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -34,7 +34,7 @@ class FlowCampagneWidget extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topLeft,
-              child: Padding(padding: EdgeInsets.all(10), child: CircleAvatar(backgroundColor: data.color,),),
+              child: Padding(padding: const EdgeInsets.all(10), child: CircleAvatar(backgroundColor: data.color,),),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),

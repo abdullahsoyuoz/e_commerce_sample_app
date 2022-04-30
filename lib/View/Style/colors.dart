@@ -76,7 +76,7 @@ class AppBaseColors {
   static Color purpleS1 = const Color(0xffE2CFF7);
   static Color purpleS2 = const Color(0xffCCB3E6);
   static Color purpleS3 = const Color(0xff764F9E);
-  static Color purpleS4 = const Color(0xff3B185F);
+  static Color purpleS4 = const Color(0xff59248F);
   static Color purpleS5 = const Color(0xff2A0944);
 
   static Color redLight = const Color(0xffFFE5E5);

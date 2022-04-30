@@ -35,22 +35,16 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         key: _widgetKey,
         fit: StackFit.expand,
         children: [
-          ClipRect(
-            child: ImageFiltered(
-                imageFilter: ui.ImageFilter.blur(
-                  sigmaX: 15,
-                  sigmaY: 15,
-                ),
-                child: Image.network(
-                  widget.data.imageUrl!,
-                  fit: BoxFit.cover,
-                  // color: Theme.of(context).iconTheme.color!.withOpacity(.25),
-                  // colorBlendMode: BlendMode.darken,
-                )),
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              widget.data.color!.shade400,
+              widget.data.color!.shade500,
+            ])),
           ),
           ClipRect(
             child: ClipPath(
-              clipper: CategoryClipper(),
+              clipper: CategoryBlurClipper(),
               child: Image.network(
                 widget.data.imageUrl!,
                 fit: BoxFit.cover,
@@ -60,12 +54,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 5.0),
+              padding: const EdgeInsets.all(3.0),
               child: Text(
                 widget.data.title,
                 textAlign: TextAlign.start,
-                style:
-                    Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 13),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle2!
+                    .copyWith(fontSize: 15),
               ),
             ),
           ),

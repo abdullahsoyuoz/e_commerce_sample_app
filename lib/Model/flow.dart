@@ -21,7 +21,7 @@ class FlowEntity {
   late String? description;
   late String? imageUrl;
   late IconData? icon;
-  late MaterialColor? color;
+  late Color? color;
   late FlowType? type;
   late String? typeString;
   late Product? targetProduct;
@@ -57,18 +57,18 @@ IconData getFlowIcon(FlowType type) {
   }
 }
 
-MaterialColor getFlowColor(FlowType type) {
+Color getFlowColor(FlowType type) {
   switch (type) {
     case FlowType.personal:
-      return AppColors.purple;
+      return AppColors.purple.shade400;
     case FlowType.campagne:
-      return AppColors.red;
+      return AppColors.red.shade500;
     case FlowType.discount:
-      return AppColors.orange;
+      return AppColors.orange.shade300;
     case FlowType.list:
-      return AppColors.blue;
+      return AppColors.blue.shade400;
     case FlowType.category:
-      return AppColors.yellow;
+      return AppColors.yellow.shade500;
     // case FlowType.announcement:
     //   return AppColors.turquaz;
     default:

@@ -65,8 +65,11 @@ class _HomePageState extends State<HomePage>
             children: [
               DropMenu(
                 animationController: _animationController,
-                lowLayer: const LowLayerWidget(),
                 indicator: const SizedBox(),
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                lowLayerBottomPadding: context.padding.bottom,
+                lowLayerHeight: 70,
+                lowLayer: const LowLayerWidget(),
                 highLayer: ColoredBox(
                   color: Theme.of(context).scaffoldBackgroundColor,
                   child: ListView.builder(
@@ -162,18 +165,21 @@ class _HomePageState extends State<HomePage>
                         ));
                   }),
               actions: [
-                IconButton(
-                  iconSize: 50,
-                  onPressed: () {
-                    toggle();
-                  },
-                  icon: AdvancedAvatar(
-                    size: 50,
-                    child: Image.network(
-                      loginUser.photoUrl!,
-                      loadingBuilder: loadingIndicator,
-                      width: 50,
-                      fit: BoxFit.cover,
+                Tooltip(
+                  message: 'Hızlı erişimler',
+                  child: IconButton(
+                    iconSize: 50,
+                    onPressed: () {
+                      toggle();
+                    },
+                    icon: AdvancedAvatar(
+                      size: 50,
+                      child: Image.network(
+                        loginUser.photoUrl!,
+                        loadingBuilder: loadingIndicator,
+                        width: 50,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

@@ -57,8 +57,8 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   ),
   // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.black.shade500,
-    foregroundColor: Colors.white,
+    backgroundColor: Colors.white,
+    foregroundColor: Colors.black,
     splashColor: AppColors.red,
   ),
   buttonTheme: ButtonThemeData(

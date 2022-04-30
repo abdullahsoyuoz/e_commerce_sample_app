@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/Profile/messages.dart';
 import 'package:sepet_demo/View/Page/User/Profile/my_orders.dart';
 import 'package:sepet_demo/View/Page/User/Profile/mylist.dart';
 import 'package:sepet_demo/View/Page/User/Profile/notify.dart';
 import 'package:sepet_demo/View/Page/User/Profile/profile.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
+import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class LowLayerWidget extends StatefulWidget {
   const LowLayerWidget({Key? key}) : super(key: key);
@@ -45,8 +48,15 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             children: [
               IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.solidUser,
+                iconSize: 50,
+                icon: AdvancedAvatar(
+                  size: 50,
+                  child: Image.network(
+                    loginUser.photoUrl!,
+                    loadingBuilder: loadingIndicator,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 onPressed: () => Navigator.push(
                   context,
@@ -55,66 +65,76 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                   ),
                 ),
               ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.box,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const MyOrdersPage(),
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.solidHeart,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const MyListPage(),
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.solidBookmark,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const MyListPage(),
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.solidPaperPlane,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const MessagesPage(),
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.solidBell,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const NotifyPage(),
-                  ),
-                ),
-              ),
-              IconButton(
+              Tooltip(
+                message: 'Siparişlerin',
+                child: IconButton(
                   icon: const Icon(
-                    FontAwesomeIcons.powerOff,
+                    FontAwesomeIcons.box,
                   ),
-                  onPressed: () {}),
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const MyOrdersPage(),
+                    ),
+                  ),
+                ),
+              ),
+              Tooltip(
+                message: 'Beğendiklerin',
+                child: IconButton(
+                  icon: const Icon(
+                    FontAwesomeIcons.solidHeart,
+                  ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const MyListPage(),
+                    ),
+                  ),
+                ),
+              ),
+              Tooltip(
+                message: 'Listelerin',
+                child: IconButton(
+                  icon: const Icon(
+                    FontAwesomeIcons.solidBookmark,
+                  ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const MyListPage(),
+                    ),
+                  ),
+                ),
+              ),
+              Tooltip(
+                message: 'Sorularının cevapları',
+                child: IconButton(
+                  icon: const Icon(
+                    FontAwesomeIcons.solidPaperPlane,
+                  ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const MessagesPage(),
+                    ),
+                  ),
+                ),
+              ),
+              Tooltip(
+                message: 'Bildirimler',
+                child: IconButton(
+                  icon: const Icon(
+                    FontAwesomeIcons.solidBell,
+                  ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const NotifyPage(),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

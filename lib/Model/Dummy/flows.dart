@@ -12,8 +12,8 @@ List<FlowEntity> flowList = [];
 Future<void> generateFlow() async {
   Faker faker = Faker.instance;
   for (var i = 0; i < 70; i++) {
-    // FlowType type = FlowType.values.elementAt(Random().nextInt(FlowType.values.length));
-    FlowType type = FlowType.values.elementAt(3);
+    FlowType type = FlowType.values.elementAt(Random().nextInt(FlowType.values.length));
+    // FlowType type = FlowType.values.elementAt(3);
     var assist = categoryList[Random().nextInt(categoryList.length)];
     var targetProduct = type == FlowType.list ? productList[Random().nextInt(productList.length - 1) + 1] : Random().nextBool() ? productList[Random().nextInt(productList.length)] : null;
     try {
