@@ -49,7 +49,7 @@ Future<Color?> colorPickerDialog(BuildContext context) async {
       'Renk tonu',
       style: Theme.of(context)
           .textTheme
-          .caption!,
+          .caption!.copyWith(color: Theme.of(context).iconTheme.color),
     ),
     padding: const EdgeInsets.all(5),
     actionButtons: const ColorPickerActionButtons(
@@ -62,8 +62,8 @@ Future<Color?> colorPickerDialog(BuildContext context) async {
         .textTheme
         .caption!
         .copyWith(color: Theme.of(context).iconTheme.color),
-    colorNameTextStyle: Theme.of(context).textTheme.caption,
-    colorCodeTextStyle: Theme.of(context).textTheme.caption,
+    colorNameTextStyle: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).iconTheme.color),
+    colorCodeTextStyle: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).iconTheme.color),
     pickersEnabled: const <ColorPickerType, bool>{
       ColorPickerType.both: false,
       ColorPickerType.primary: true,
@@ -77,6 +77,7 @@ Future<Color?> colorPickerDialog(BuildContext context) async {
         context,
         constraints:
             const BoxConstraints(minHeight: 460, minWidth: 300, maxWidth: 320),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor
       )
       .then((boole) {});
   return pickedColor;

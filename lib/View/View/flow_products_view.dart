@@ -595,14 +595,47 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                               const EdgeInsets.only(left: 5.0),
                                           child: BouncingWidget(
                                               onPressed: () {
-                                                showFlexibleBookmarkSheet(
-                                                        context)
-                                                    .whenComplete(() {
-                                                  Timer(
-                                                      const Duration(
-                                                          milliseconds: 600),
-                                                      () {
-                                                    if (_bookmarkAnimationController !=
+                                                if (!widget
+                                                    .data.isAddedBookmark) {
+                                                  showFlexibleBookmarkSheet(
+                                                          context)
+                                                      .whenComplete(() {
+                                                    Timer(
+                                                        const Duration(
+                                                            milliseconds: 600),
+                                                        () {
+                                                      if (_bookmarkAnimationController !=
+                                                          null) {
+                                                        setState(() {
+                                                          widget.data
+                                                                  .isAddedBookmark =
+                                                              !widget.data
+                                                                  .isAddedBookmark;
+                                                          if (widget.data
+                                                              .isAddedBookmark) {
+                                                            if (!_bookmarkAnimationController!
+                                                                .isAnimating) {
+                                                              WidgetsBinding
+                                                                  .instance!
+                                                                  .addPostFrameCallback(
+                                                                      (timeStamp) {
+                                                                _bookmarkAnimationController!
+                                                                    .forward()
+                                                                    .whenComplete(
+                                                                        () {
+                                                                  _bookmarkAnimationController!
+                                                                      .reset();
+                                                                });
+                                                              });
+                                                            }
+                                                          }
+                                                        });
+                                                      }
+                                                    });
+                                                  });
+                                                }
+                                                else{
+                                                  if (_bookmarkAnimationController !=
                                                         null) {
                                                       setState(() {
                                                         widget.data
@@ -629,8 +662,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                         }
                                                       });
                                                     }
-                                                  });
-                                                });
+                                                }
                                               },
                                               child: SizedBox(
                                                   width: 40,
