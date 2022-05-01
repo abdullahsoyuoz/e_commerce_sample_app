@@ -45,9 +45,9 @@ IconData getFlowIcon(FlowType type) {
     case FlowType.campagne:
       return FontAwesomeIcons.gift;
     case FlowType.discount:
-      return FontAwesomeIcons.tag;
+      return FontAwesomeIcons.tags;
     case FlowType.list:
-      return FontAwesomeIcons.bars;
+      return FontAwesomeIcons.listUl;
     case FlowType.category:
       return FontAwesomeIcons.layerGroup;
     // case FlowType.announcement:

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:indexed_list_view/indexed_list_view.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/constant.dart';
@@ -11,8 +11,6 @@ import 'package:sepet_demo/View/Painter/fade_painter.dart';
 import 'package:sepet_demo/View/Style/Theme/themedata.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
-
-import '../../../Style/decorations.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -52,7 +50,20 @@ class _NavigationPageState extends State<NavigationPage>
             collapsedHeight: 60,
             pinned: true,
             automaticallyImplyLeading: false,
-            title: const Text('NAVIGASYON'),
+            title: Row(
+              children: [
+                IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: LineIcon(LineIcons.arrowLeft)),
+                Text(
+                  'NAVIGASYON',
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                        fontSize: 27,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
+            ),
             centerTitle: false,
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(50),
@@ -104,95 +115,109 @@ class _NavigationPageState extends State<NavigationPage>
             ),
           ),
           currentPage == 0
-              ? SliverPadding(
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                    left: 5,
-                    right: 5,
-                    bottom: 200,
-                  ),
-                  sliver: SliverGrid.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1,
-                    // crossAxisSpacing: 5,
-                    // mainAxisSpacing: 5,
-                    children: categoryList
-                        .map((e) => CategoryWidget(data: e))
-                        .toList(),
-                  ),
-                )
+              ? buildCategories()
               : const SliverToBoxAdapter(child: SizedBox()),
           currentPage == 1
-              ? SliverPadding(
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                    left: 5,
-                    right: 5,
-                    bottom: 200,
-                  ),
-                  sliver: SliverGrid.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1,
-                    // crossAxisSpacing: 5,
-                    // mainAxisSpacing: 5,
-                    children: themeList.map((e) {
-                      return BouncingWidget(
-                          onPressed: () {
-                            Provider.of<ThemeChanger>(context, listen: false)
-                                .setTheme(e);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: e.appBarTheme.backgroundColor!,
-                            ),
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: FaIcon(
-                                      FontAwesomeIcons.palette,
-                                      color: e.iconTheme.color,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: FloatingActionButton(
-                                      mini: true,
-                                      backgroundColor: e
-                                          .floatingActionButtonTheme
-                                          .backgroundColor,
-                                      splashColor: e.floatingActionButtonTheme
-                                          .splashColor,
-                                      onPressed: () {},
-                                      child: const FaIcon(
-                                        FontAwesomeIcons.icons,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Center(
-                                  child: Text(
-                                    'Lorem ipsum',
-                                    style: TextStyle(
-                                        color: e.textTheme.bodyText2!.color),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ));
-                    }).toList(),
-                  ),
-                )
+              ? buildThemes(context)
               : const SliverToBoxAdapter(child: SizedBox()),
         ],
       )),
+    );
+  }
+
+  Widget buildThemes(BuildContext context) {
+    return SliverPadding(
+      padding: const EdgeInsets.only(
+        top: 5,
+        left: 5,
+        right: 5,
+        bottom: 200,
+      ),
+      sliver: SliverGrid.count(
+        crossAxisCount: 2,
+        childAspectRatio: 1,
+        // crossAxisSpacing: 5,
+        // mainAxisSpacing: 5,
+        children: themeList.map((e) {
+          return BouncingWidget(
+              onPressed: () {
+                Provider.of<ThemeChanger>(context, listen: false).setTheme(e);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: e.appBarTheme.backgroundColor!,
+                ),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          key: LabeledGlobalKey(e.hashCode.toString()),
+                          // color: e.floatingActionButtonTheme.backgroundColor,
+                          // splashColor: e.floatingActionButtonTheme.splashColor,
+                          style: ButtonStyle(
+                            fixedSize:
+                                MaterialStateProperty.all(const Size(40, 40)),
+                            maximumSize:
+                                MaterialStateProperty.all(const Size(40, 40)),
+                            minimumSize:
+                                MaterialStateProperty.all(const Size(40, 40)),
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                            shape: MaterialStateProperty.all(
+                                const StadiumBorder()),
+                            elevation: MaterialStateProperty.all(5),
+                            overlayColor: MaterialStateProperty.all(
+                                e.splashColor),
+                            backgroundColor: MaterialStateProperty.all(
+                                e.floatingActionButtonTheme.backgroundColor),
+                            foregroundColor: MaterialStateProperty.all(
+                                e.floatingActionButtonTheme.foregroundColor),
+                          ),
+                          onPressed: () {},
+                          child: const Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.icons,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        'Lorem ipsum',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: e.textTheme.bodyText2!.color,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ));
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget buildCategories() {
+    return SliverPadding(
+      padding: const EdgeInsets.only(
+        top: 5,
+        left: 5,
+        right: 5,
+        bottom: 200,
+      ),
+      sliver: SliverGrid.count(
+        crossAxisCount: 2,
+        childAspectRatio: 1,
+        // crossAxisSpacing: 5,
+        // mainAxisSpacing: 5,
+        children: categoryList.map((e) => CategoryWidget(data: e)).toList(),
+      ),
     );
   }
 }

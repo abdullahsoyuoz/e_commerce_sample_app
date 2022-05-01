@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 
 ThemeData appDarkTheme = ThemeData.dark().copyWith(
   brightness: Brightness.dark,
@@ -83,7 +84,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
         ),
       ),
       side: MaterialStateProperty.all(
-          const BorderSide(color: Colors.white, width: 1)),
+          BorderSide(color: Colors.white, width: lineThickness())),
       elevation: MaterialStateProperty.all(0),
       foregroundColor: MaterialStateProperty.all(Colors.white),
       overlayColor: MaterialStateProperty.all(AppColors.red),

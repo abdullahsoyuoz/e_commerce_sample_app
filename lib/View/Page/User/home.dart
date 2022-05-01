@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
+        vsync: this, duration: const Duration(milliseconds: 300),);
     super.initState();
   }
 
@@ -51,11 +51,10 @@ class _HomePageState extends State<HomePage>
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
         elevation: 5,
-        child: FaIcon(
+        child: const FaIcon(
           LineIcons.shoppingBasket,
-          color: Theme.of(context).iconTheme.color,
         ),
       ),
       body: Scaffold(

@@ -53,7 +53,7 @@ ThemeData appGreenTheme = ThemeData.light().copyWith(
   ),
   // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.green.shade200,
+    backgroundColor: AppColors.green.shade300,
     foregroundColor: Colors.black,
     splashColor: AppColors.turquaz.shade200,
   ),

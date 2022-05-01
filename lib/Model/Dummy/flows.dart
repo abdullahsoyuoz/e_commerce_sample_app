@@ -26,7 +26,7 @@ Future<void> generateFlow() async {
           imageUrl: getFlowImageUrl(type, assist),
           typeString: getTypeString(type),
           targetProduct: targetProduct,
-          targetProducts: type == FlowType.list ? productList.take(Random().nextInt(7) + 3).toList() : targetProduct == null ? null : Random().nextBool() ? productList.take(Random().nextInt(7) + 3).toList() : null,
+          targetProducts: productList.take(Random().nextInt(10) + 5).toList(),
           targetString: getEnglishTitle(assist.categoryId, assist.id));
 
       flowList.add(item);

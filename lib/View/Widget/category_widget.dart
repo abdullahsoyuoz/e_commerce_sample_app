@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/category.dart';
 import 'package:sepet_demo/View/Clipper/category_widget_clipper.dart';
-import 'dart:ui' as ui;
 
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 

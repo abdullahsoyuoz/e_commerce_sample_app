@@ -53,7 +53,7 @@ ThemeData appPurpleTheme = ThemeData.light().copyWith(
   ),
   // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.purple.shade200,
+    backgroundColor: AppColors.purple.shade300,
     foregroundColor: Colors.black,
     splashColor: AppColors.red,
   ),

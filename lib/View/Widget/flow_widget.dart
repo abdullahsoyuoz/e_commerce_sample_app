@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/View/flow_products_view.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
-import 'dart:math' as math;
 
 class FlowWidget extends StatefulWidget {
   final FlowEntity data;
@@ -24,7 +22,11 @@ class _FlowWidgetState extends State<FlowWidget>
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+      lowerBound: 0.3,
+      upperBound: 1,
+    );
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _animationController.forward();
     });
@@ -40,11 +42,13 @@ class _FlowWidgetState extends State<FlowWidget>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _animationController,
+      animation: CurvedAnimation(
+          parent: _animationController, curve: Curves.easeOutCirc),
       builder: (context, child) {
         return ScaleTransition(
           scale: _animationController,
           alignment: Alignment.bottomCenter,
+          filterQuality: FilterQuality.medium,
           child: child,
         );
       },

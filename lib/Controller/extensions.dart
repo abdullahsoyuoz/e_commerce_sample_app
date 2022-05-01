@@ -22,6 +22,10 @@ extension OneDigit on double {
   String get oneDigitForRankString => toString()[0]+'.'+toString()[2];
 }
 
+extension AddParanthesis on String {
+  String get addParanthesis => '('+toString()+')';
+}
+
 extension RankRound on double {
   double get rankRound => this == 5.0
       ? 5.0

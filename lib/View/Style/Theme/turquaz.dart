@@ -53,7 +53,7 @@ ThemeData appTurquazTheme = ThemeData.light().copyWith(
   ),
   // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.turquaz.shade200,
+    backgroundColor: AppColors.turquaz.shade300,
     foregroundColor: Colors.black,
     splashColor: AppColors.red,
   ),

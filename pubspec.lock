@@ -125,6 +125,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  flutter_iconpicker:
+    dependency: "direct main"
+    description:
+      name: flutter_iconpicker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.4+1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -132,20 +139,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  flutter_rating_bar:
-    dependency: "direct main"
-    description:
-      name: flutter_rating_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.0"
-  flutter_rating_stars:
-    dependency: "direct main"
-    description:
-      name: flutter_rating_stars
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3+4"
   flutter_test:
     dependency: "direct dev"
     description: flutter

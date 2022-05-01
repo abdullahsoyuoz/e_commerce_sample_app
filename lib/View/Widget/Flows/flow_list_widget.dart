@@ -6,7 +6,6 @@ import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/View/flow_products_view.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
-import 'dart:math' as math;
 
 class FlowListWidget extends StatefulWidget {
   final FlowEntity data;
