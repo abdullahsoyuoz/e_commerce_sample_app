@@ -26,8 +26,8 @@ extension AddParanthesis on String {
   String get addParanthesis => '('+toString()+')';
 }
 
-extension RankRound on double {
-  double get rankRound => this == 5.0
+extension RankRoundToHalf on double {
+  double get rankRoundToHalf => this == 5.0
       ? 5.0
       : this % floor() < 0.5
           ? floorToDouble()

@@ -30,7 +30,9 @@ class AppStarter extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ThemeChanger>(create: (context) => ThemeChanger(), )
+        ChangeNotifierProvider<ThemeChanger>(
+          create: (context) => ThemeChanger(),
+        )
       ],
       child: Consumer<ThemeChanger>(
         builder: (context, value, child) {

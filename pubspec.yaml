@@ -30,15 +30,16 @@ dependencies:
   animate_do: ^2.1.0
   animated_text_kit: ^4.2.1
   animations: ^2.0.2
+  bottom_sheet: ^3.0.0
   cupertino_icons: ^1.0.2
   faker_dart: ^0.1.4
+  flex_color_picker: ^2.5.0
   flutter:
     sdk: flutter
   flutter_advanced_avatar: ^1.1.0
   flutter_iconpicker: ^3.1.4+1
   font_awesome_flutter: ^10.1.0
   google_fonts: ^2.3.1
-  indexed_list_view: ^2.0.2
   intl: ^0.17.0
   line_icons: ^2.0.1
   marquee: ^2.2.1

@@ -1,13 +1,16 @@
-import 'dart:ui';
+import 'dart:async';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconpicker/controllers/icon_controller.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:marquee/marquee.dart';
+import 'package:sepet_demo/Controller/Picker/icon_picker.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/Dummy/mylists.dart';
 import 'package:sepet_demo/Model/flow.dart';
@@ -17,6 +20,7 @@ import 'package:sepet_demo/View/Clipper/star_rank_clipper.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/curves.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
+import 'package:sepet_demo/View/View/Sheets/bookmark_sheet.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -53,6 +57,7 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      resizeToAvoidBottomInset: false,
       body: SizedBox.expand(
         child: Stack(
           fit: StackFit.expand,
@@ -207,20 +212,26 @@ class ProductViewBody extends StatefulWidget {
 class _ProductViewBodyState extends State<ProductViewBody>
     with TickerProviderStateMixin {
   late PageController _pageController;
+  late ScrollController _scrollController;
   late AnimationController? _heartAnimationController;
   late AnimationController? _bookmarkAnimationController;
   late AnimationController? _basketAnimationController;
   late AnimationController _rankAnimationController;
+  late final IconController _iconController;
+  late Icon _icon;
+
   @override
   void initState() {
     _rankAnimationController = AnimationController(
       vsync: this,
       lowerBound: 0,
       upperBound: 1,
-      duration: const Duration(milliseconds: 1000) * widget.data.rank!,
+      duration: const Duration(milliseconds: 700) * widget.data.rank!,
     );
-    super.initState();
     _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
+    super.initState();
+    _iconController = IconController();
+    _scrollController = ScrollController();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _rankAnimationController.animateTo(widget.data.rank! / 5);
     });
@@ -229,6 +240,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
   @override
   void dispose() {
     _pageController.dispose();
+    _rankAnimationController.dispose();
+    _scrollController.dispose();
+    _iconController.dispose();
     super.dispose();
   }
 
@@ -365,202 +379,166 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Expanded(
-                                              child: FittedBox(
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    ClipPath(
-                                                      clipper: StarRankPainter(
-                                                        rank: widget.data.rank!,
-                                                        animationController:
-                                                            _rankAnimationController,
-                                                      ),
-                                                      child: Center(
-                                                        child: Row(
-                                                          children:
-                                                              List.generate(
-                                                            5,
-                                                            (index) => LineIcon(
-                                                              LineIcons.starAlt,
-                                                              size: 40,
-                                                              color: AppColors
-                                                                  .orange
-                                                                  .shade500,
+                                              child: ConstrainedBox(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                  maxHeight: 25,
+                                                  minHeight: 25,
+                                                ),
+                                                child: FittedBox(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      ClipPath(
+                                                        clipper:
+                                                            StarRankPainter(
+                                                          rank:
+                                                              widget.data.rank!,
+                                                          animationController:
+                                                              _rankAnimationController,
+                                                        ),
+                                                        child: Center(
+                                                          child: Row(
+                                                            children:
+                                                                List.generate(
+                                                              5,
+                                                              (index) =>
+                                                                  LineIcon(
+                                                                LineIcons
+                                                                    .starAlt,
+                                                                color: AppColors
+                                                                    .orange
+                                                                    .shade500,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                             Expanded(
                                               child: FittedBox(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Tooltip(
-                                                        message:
-                                                            'Ürünün ortalama puanı',
-                                                        triggerMode:
-                                                            TooltipTriggerMode
-                                                                .tap,
-                                                        child: Row(children: [
-                                                          Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          5.0),
-                                                              child:
-                                                                  ConstrainedBox(
-                                                                      constraints:
-                                                                          const BoxConstraints(
-                                                                        minHeight:
-                                                                            20,
-                                                                        maxHeight:
-                                                                            20,
-                                                                        maxWidth:
-                                                                            20,
-                                                                        minWidth:
-                                                                            20,
-                                                                      ),
+                                                child: ConstrainedBox(
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                    minHeight: 20,
+                                                    maxHeight: 20,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Tooltip(
+                                                          message:
+                                                              'Ürünün ortalama puanı',
+                                                          triggerMode:
+                                                              TooltipTriggerMode
+                                                                  .tap,
+                                                          child: Row(children: [
+                                                            Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            5.0),
+                                                                child: FittedBox(
+                                                                    fit: BoxFit
+                                                                        .fitHeight,
+                                                                    child: Center(
+                                                                        child: LineIcon(
+                                                                            LineIcons.star)))),
+                                                            FittedBox(
+                                                                fit: BoxFit
+                                                                    .fitHeight,
+                                                                child: Text(
+                                                                  widget
+                                                                      .data
+                                                                      .rank!
+                                                                      .oneDigitForRankString,
+                                                                  style: TextStyle(
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .textTheme
+                                                                          .bodyText2!
+                                                                          .color),
+                                                                )),
+                                                          ])),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 10.0),
+                                                        child: Tooltip(
+                                                            message:
+                                                                'Ürünü ${widget.data.commentCount} kişi değerlendirdi.',
+                                                            triggerMode:
+                                                                TooltipTriggerMode
+                                                                    .tap,
+                                                            child: Row(
+                                                                children: [
+                                                                  Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          right:
+                                                                              5.0),
                                                                       child: FittedBox(
                                                                           fit: BoxFit
                                                                               .fitHeight,
                                                                           child:
-                                                                              Center(child: LineIcon(LineIcons.star))))),
-                                                          ConstrainedBox(
-                                                              constraints:
-                                                                  const BoxConstraints(
-                                                                minHeight: 25,
-                                                                maxHeight: 25,
-                                                              ),
-                                                              child: FittedBox(
-                                                                  fit: BoxFit
-                                                                      .fitHeight,
-                                                                  child: Text(
-                                                                    widget
-                                                                        .data
-                                                                        .rank!
-                                                                        .oneDigitForRankString,
-                                                                    style: TextStyle(
-                                                                        color: Theme.of(context)
-                                                                            .textTheme
-                                                                            .bodyText2!
-                                                                            .color),
-                                                                  ))),
-                                                        ])),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10.0),
-                                                      child: Tooltip(
-                                                          message:
-                                                              'Ürünü kaç kişi değerlendirdi?',
-                                                          triggerMode:
-                                                              TooltipTriggerMode
-                                                                  .tap,
-                                                          child: Row(children: [
-                                                            Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            5.0),
-                                                                child:
-                                                                    ConstrainedBox(
-                                                                        constraints:
-                                                                            const BoxConstraints(
-                                                                          minHeight:
-                                                                              20,
-                                                                          maxHeight:
-                                                                              20,
-                                                                          maxWidth:
-                                                                              20,
-                                                                          minWidth:
-                                                                              20,
-                                                                        ),
-                                                                        child: FittedBox(
-                                                                            fit:
-                                                                                BoxFit.fitHeight,
-                                                                            child: Center(child: LineIcon(LineIcons.comment))))),
-                                                            ConstrainedBox(
-                                                                constraints:
-                                                                    const BoxConstraints(
-                                                                  minHeight: 25,
-                                                                  maxHeight: 25,
-                                                                ),
-                                                                child: FittedBox(
-                                                                    fit: BoxFit
-                                                                        .fitHeight,
-                                                                    child: Text(NumberFormat.compact(
-                                                                            locale:
-                                                                                'en_US')
-                                                                        .format(widget
-                                                                            .data
-                                                                            .commentCount!)))),
-                                                          ])),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10.0),
-                                                      child: Tooltip(
-                                                          message:
-                                                              'Ürünü kaç kişi satın aldı?',
-                                                          triggerMode:
-                                                              TooltipTriggerMode
-                                                                  .tap,
-                                                          child: Row(children: [
-                                                            Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            5.0),
-                                                                child:
-                                                                    ConstrainedBox(
-                                                                        constraints:
-                                                                            const BoxConstraints(
-                                                                          minHeight:
-                                                                              20,
-                                                                          maxHeight:
-                                                                              20,
-                                                                          maxWidth:
-                                                                              20,
-                                                                          minWidth:
-                                                                              20,
-                                                                        ),
-                                                                        child: FittedBox(
-                                                                            fit:
-                                                                                BoxFit.fitHeight,
-                                                                            child: Center(child: LineIcon(LineIcons.box))))),
-                                                            ConstrainedBox(
-                                                                constraints:
-                                                                    const BoxConstraints(
-                                                                  minHeight: 25,
-                                                                  maxHeight: 25,
-                                                                ),
-                                                                child: FittedBox(
-                                                                    fit: BoxFit
-                                                                        .fitHeight,
-                                                                    child: Text(NumberFormat.compact(
-                                                                            locale:
-                                                                                'en_US')
-                                                                        .format(widget
-                                                                            .data
-                                                                            .purchasesCount!)))),
-                                                          ])),
-                                                    ),
-                                                  ],
+                                                                              Center(child: LineIcon(LineIcons.comment)))),
+                                                                  FittedBox(
+                                                                      fit: BoxFit
+                                                                          .fitHeight,
+                                                                      child: Text(NumberFormat.compact(locale: 'en_US').format(widget
+                                                                          .data
+                                                                          .commentCount!))),
+                                                                ])),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 10.0),
+                                                        child: Tooltip(
+                                                            message:
+                                                                'Ürünü ${widget.data.purchasesCount} kişi satın aldı.',
+                                                            triggerMode:
+                                                                TooltipTriggerMode
+                                                                    .tap,
+                                                            child: Row(
+                                                                children: [
+                                                                  Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          right:
+                                                                              5.0),
+                                                                      child: FittedBox(
+                                                                          fit: BoxFit
+                                                                              .fitHeight,
+                                                                          child:
+                                                                              Center(child: LineIcon(LineIcons.box)))),
+                                                                  FittedBox(
+                                                                      fit: BoxFit
+                                                                          .fitHeight,
+                                                                      child: Text(NumberFormat.compact(locale: 'en_US').format(widget
+                                                                          .data
+                                                                          .purchasesCount!))),
+                                                                ])),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             )
@@ -617,32 +595,42 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                               const EdgeInsets.only(left: 5.0),
                                           child: BouncingWidget(
                                               onPressed: () {
-                                                showMyList();
-                                                // if (_bookmarkAnimationController !=
-                                                //     null) {
-                                                //   setState(() {
-                                                //     widget.data
-                                                //             .isAddedBookmark =
-                                                //         !widget.data
-                                                //             .isAddedBookmark;
-                                                //     if (widget
-                                                //         .data.isAddedBookmark) {
-                                                //       if (!_bookmarkAnimationController!
-                                                //           .isAnimating) {
-                                                //         WidgetsBinding.instance!
-                                                //             .addPostFrameCallback(
-                                                //                 (timeStamp) {
-                                                //           _bookmarkAnimationController!
-                                                //               .forward()
-                                                //               .whenComplete(() {
-                                                //             _bookmarkAnimationController!
-                                                //                 .reset();
-                                                //           });
-                                                //         });
-                                                //       }
-                                                //     }
-                                                //   });
-                                                // }
+                                                showFlexibleBookmarkSheet(
+                                                        context)
+                                                    .whenComplete(() {
+                                                  Timer(
+                                                      const Duration(
+                                                          milliseconds: 600),
+                                                      () {
+                                                    if (_bookmarkAnimationController !=
+                                                        null) {
+                                                      setState(() {
+                                                        widget.data
+                                                                .isAddedBookmark =
+                                                            !widget.data
+                                                                .isAddedBookmark;
+                                                        if (widget.data
+                                                            .isAddedBookmark) {
+                                                          if (!_bookmarkAnimationController!
+                                                              .isAnimating) {
+                                                            WidgetsBinding
+                                                                .instance!
+                                                                .addPostFrameCallback(
+                                                                    (timeStamp) {
+                                                              _bookmarkAnimationController!
+                                                                  .forward()
+                                                                  .whenComplete(
+                                                                      () {
+                                                                _bookmarkAnimationController!
+                                                                    .reset();
+                                                              });
+                                                            });
+                                                          }
+                                                        }
+                                                      });
+                                                    }
+                                                  });
+                                                });
                                               },
                                               child: SizedBox(
                                                   width: 40,
@@ -784,106 +772,151 @@ class _ProductViewBodyState extends State<ProductViewBody>
         ]));
   }
 
-  Future<void> showMyList() async {
+  Future<void> showMyListSheet() async {
     showCupertinoModalPopup(
         context: context,
         barrierColor: Colors.black.withOpacity(.75),
         barrierDismissible: true,
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
-            return BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 5,
-                sigmaY: 5,
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: Container(
-                  height: context.height * 0.7,
-                  width: context.width * 0.9,
-                  margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: appRadius(context),
-                  ),
-                  child: Column(children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Listlerim',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2!
-                              .copyWith(fontSize: 17),
-                        ),
-                        Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  showCupertinoModalPopup(
-                                      context: context,
-                                      builder: (context) {
-                                        return Material(
-                                          color: Colors.transparent,
-                                          child: Container(
-                                            height: context.height * 0.7,
-                                            width: context.width * 0.9,
-                                            margin: const EdgeInsets.all(20),
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor,
-                                              borderRadius:
-                                                  appRadius(context),
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                TextField(),
-                                                ElevatedButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            context),
-                                                    child: Text('Ekle'))
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                },
-                                icon: LineIcon(LineIcons.plus)),
-                            IconButton(
-                                onPressed: () => Navigator.pop(context),
-                                icon: LineIcon(LineIcons.times))
-                          ],
-                        )
-                      ],
-                    ),
-                    Expanded(
-                      child: ListView(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        physics: const BouncingScrollPhysics(),
-                        children: myLists
-                            .map(
-                              (e) => ListTile(
-                                leading: e.iconData != null
-                                    ? LineIcon(e.iconData!)
-                                    : const SizedBox(),
-                                trailing: Text(e.products!.length.toString()),
-                                title: Text(e.title!),
-                                onTap: () {},
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    )
-                  ]),
+            return Material(
+              shape: RoundedRectangleBorder(borderRadius: appRadius(context)),
+              // elevation: 0,
+              color: Colors.transparent,
+              child: Container(
+                height: context.height * 0.7,
+                width: context.width * 0.9,
+                margin: const EdgeInsets.all(20),
+                // padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: appRadius(context),
                 ),
+                child: Column(children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                          top:
+                              Radius.circular(appRadius(context).bottomLeft.x)),
+                      color: Theme.of(context)
+                          .appBarTheme
+                          .backgroundColor!
+                          .withOpacity(1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 30.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Listelerim',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(fontSize: 17),
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () => showNewListSheet(),
+                                  icon: LineIcon(LineIcons.plus)),
+                              IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: LineIcon(LineIcons.times))
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: myLists.length,
+                      itemBuilder: (context, index) {
+                        var e = myLists[index];
+                        return ListTile(
+                          leading: e.iconData != null
+                              ? LineIcon(e.iconData!)
+                              : const SizedBox(),
+                          trailing: Text(e.products!.length.toString()),
+                          title: Text(e.title!),
+                          onTap: () {},
+                        );
+                      },
+                      separatorBuilder: (context, index) => const Divider(),
+                    ),
+                  )
+                ]),
               ),
             );
           });
+        });
+  }
+
+  Future<void> showNewListSheet() async {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (context) {
+          return Material(
+            color: Colors.transparent,
+            child: Container(
+              height: context.height * 0.7,
+              width: context.width * 0.9,
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: appRadius(context),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                          top:
+                              Radius.circular(appRadius(context).bottomLeft.x)),
+                      color: Theme.of(context)
+                          .appBarTheme
+                          .backgroundColor!
+                          .withOpacity(1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 30.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Liste oluştur',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(fontSize: 17),
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: LineIcon(LineIcons.times))
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(hintText: 'Liste adı'),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        iconPicker(context);
+                      },
+                      icon: LineIcon(LineIcons.icons))
+                ],
+              ),
+            ),
+          );
         });
   }
 }
