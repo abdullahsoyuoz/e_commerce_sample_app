@@ -217,6 +217,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
   late AnimationController? _bookmarkAnimationController;
   late AnimationController? _basketAnimationController;
   late AnimationController _rankAnimationController;
+  late AnimationController _rankSolidAnimationController;
   late final IconController _iconController;
   late Icon _icon;
 
@@ -226,7 +227,13 @@ class _ProductViewBodyState extends State<ProductViewBody>
       vsync: this,
       lowerBound: 0,
       upperBound: 1,
-      duration: const Duration(milliseconds: 700) * widget.data.rank!,
+      duration: const Duration(milliseconds: 1000) * widget.data.rank!,
+    );
+    _rankSolidAnimationController = AnimationController(
+      vsync: this,
+      lowerBound: 0,
+      upperBound: 1,
+      duration: const Duration(milliseconds: 1000) * widget.data.rank!,
     );
     _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
     super.initState();
@@ -234,6 +241,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
     _scrollController = ScrollController();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _rankAnimationController.animateTo(widget.data.rank! / 5);
+      _rankSolidAnimationController.animateTo(1);
     });
   }
 
@@ -241,6 +249,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
   void dispose() {
     _pageController.dispose();
     _rankAnimationController.dispose();
+    _rankSolidAnimationController.dispose();
     _scrollController.dispose();
     _iconController.dispose();
     super.dispose();
@@ -259,6 +268,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
                 height: context.width * 0.8,
                 child: PageView.builder(
                   controller: _pageController,
+                  physics: const PageScrollPhysics(
+                    parent: BouncingScrollPhysics()
+                  ),
                   itemCount: widget.data.photosUrl!.length,
                   itemBuilder: (context, index) {
                     return Padding(
@@ -327,6 +339,201 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                     ),
                                   ),
                                   Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            FittedBox(
+                                              child: ConstrainedBox(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                  minHeight: 20,
+                                                  maxHeight: 20,
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Tooltip(
+                                                        message:
+                                                            'Ürünü ${widget.data.purchasesCount} kişi satın aldı.',
+                                                        triggerMode:
+                                                            TooltipTriggerMode
+                                                                .tap,
+                                                        child: Row(children: [
+                                                          FittedBox(
+                                                              fit: BoxFit
+                                                                  .fitHeight,
+                                                              child: Text(NumberFormat
+                                                                      .compact(
+                                                                          locale:
+                                                                              'en_US')
+                                                                  .format(widget
+                                                                      .data
+                                                                      .purchasesCount!))),
+                                                          Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left:
+                                                                          5.0),
+                                                              child: FittedBox(
+                                                                  fit: BoxFit
+                                                                      .fitHeight,
+                                                                  child: Center(
+                                                                      child: LineIcon(
+                                                                          LineIcons
+                                                                              .box)))),
+                                                        ])),
+                                                    const VerticalDivider(),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10.0),
+                                                      child: Tooltip(
+                                                          message:
+                                                              'Ürünü ${widget.data.commentCount} kişi değerlendirdi.',
+                                                          triggerMode:
+                                                              TooltipTriggerMode
+                                                                  .tap,
+                                                          child: Row(children: [
+                                                            FittedBox(
+                                                                fit: BoxFit
+                                                                    .fitHeight,
+                                                                child: Text(NumberFormat
+                                                                        .compact(
+                                                                            locale:
+                                                                                'en_US')
+                                                                    .format(widget
+                                                                        .data
+                                                                        .commentCount!))),
+                                                            Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            5.0),
+                                                                child: FittedBox(
+                                                                    fit: BoxFit
+                                                                        .fitHeight,
+                                                                    child: Center(
+                                                                        child: LineIcon(
+                                                                            LineIcons.comment)))),
+                                                          ])),
+                                                    ),
+                                                    const VerticalDivider(),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10.0),
+                                                      child: Tooltip(
+                                                          message:
+                                                              'Ürünün ortalama puanı',
+                                                          triggerMode:
+                                                              TooltipTriggerMode
+                                                                  .tap,
+                                                          child: Row(children: [
+                                                            FittedBox(
+                                                                fit: BoxFit
+                                                                    .fitHeight,
+                                                                child: Text(
+                                                                  widget
+                                                                      .data
+                                                                      .rank!
+                                                                      .oneDigitForRankString,
+                                                                  style: TextStyle(
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .textTheme
+                                                                          .bodyText2!
+                                                                          .color),
+                                                                )),
+                                                            Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            5.0),
+                                                                child:
+                                                                    FittedBox(
+                                                                  fit: BoxFit
+                                                                      .fitHeight,
+                                                                  child:
+                                                                      FittedBox(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .centerLeft,
+                                                                    child:
+                                                                        Stack(
+                                                                      children: [
+                                                                        Row(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.center,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          children: [
+                                                                            ClipPath(
+                                                                              clipper: StarRankPainter(
+                                                                                rank: widget.data.rank!,
+                                                                                animationController: _rankSolidAnimationController,
+                                                                              ),
+                                                                              child: Center(
+                                                                                child: Row(
+                                                                                  children: List.generate(
+                                                                                    5,
+                                                                                    (index) => LineIcon(
+                                                                                      LineIcons.starAlt,
+                                                                                      color: Theme.of(context).colorScheme.primaryContainer,
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        Row(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.center,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          children: [
+                                                                            ClipPath(
+                                                                              clipper: StarRankPainter(
+                                                                                rank: widget.data.rank!,
+                                                                                animationController: _rankAnimationController,
+                                                                              ),
+                                                                              child: Center(
+                                                                                child: Row(
+                                                                                  children: List.generate(
+                                                                                    5,
+                                                                                    (index) => LineIcon(
+                                                                                      LineIcons.starAlt,
+                                                                                      color: AppColors.orange.shade500,
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                )),
+                                                          ])),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ])),
+                                  Padding(
                                     padding: const EdgeInsets.only(top: 5.0),
                                     child: Row(
                                       mainAxisAlignment:
@@ -369,180 +576,6 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Expanded(
-                                              child: ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxHeight: 25,
-                                                  minHeight: 25,
-                                                ),
-                                                child: FittedBox(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      ClipPath(
-                                                        clipper:
-                                                            StarRankPainter(
-                                                          rank:
-                                                              widget.data.rank!,
-                                                          animationController:
-                                                              _rankAnimationController,
-                                                        ),
-                                                        child: Center(
-                                                          child: Row(
-                                                            children:
-                                                                List.generate(
-                                                              5,
-                                                              (index) =>
-                                                                  LineIcon(
-                                                                LineIcons
-                                                                    .starAlt,
-                                                                color: AppColors
-                                                                    .orange
-                                                                    .shade500,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: FittedBox(
-                                                child: ConstrainedBox(
-                                                  constraints:
-                                                      const BoxConstraints(
-                                                    minHeight: 20,
-                                                    maxHeight: 20,
-                                                  ),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Tooltip(
-                                                          message:
-                                                              'Ürünün ortalama puanı',
-                                                          triggerMode:
-                                                              TooltipTriggerMode
-                                                                  .tap,
-                                                          child: Row(children: [
-                                                            Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            5.0),
-                                                                child: FittedBox(
-                                                                    fit: BoxFit
-                                                                        .fitHeight,
-                                                                    child: Center(
-                                                                        child: LineIcon(
-                                                                            LineIcons.star)))),
-                                                            FittedBox(
-                                                                fit: BoxFit
-                                                                    .fitHeight,
-                                                                child: Text(
-                                                                  widget
-                                                                      .data
-                                                                      .rank!
-                                                                      .oneDigitForRankString,
-                                                                  style: TextStyle(
-                                                                      color: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .bodyText2!
-                                                                          .color),
-                                                                )),
-                                                          ])),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 10.0),
-                                                        child: Tooltip(
-                                                            message:
-                                                                'Ürünü ${widget.data.commentCount} kişi değerlendirdi.',
-                                                            triggerMode:
-                                                                TooltipTriggerMode
-                                                                    .tap,
-                                                            child: Row(
-                                                                children: [
-                                                                  Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          right:
-                                                                              5.0),
-                                                                      child: FittedBox(
-                                                                          fit: BoxFit
-                                                                              .fitHeight,
-                                                                          child:
-                                                                              Center(child: LineIcon(LineIcons.comment)))),
-                                                                  FittedBox(
-                                                                      fit: BoxFit
-                                                                          .fitHeight,
-                                                                      child: Text(NumberFormat.compact(locale: 'en_US').format(widget
-                                                                          .data
-                                                                          .commentCount!))),
-                                                                ])),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 10.0),
-                                                        child: Tooltip(
-                                                            message:
-                                                                'Ürünü ${widget.data.purchasesCount} kişi satın aldı.',
-                                                            triggerMode:
-                                                                TooltipTriggerMode
-                                                                    .tap,
-                                                            child: Row(
-                                                                children: [
-                                                                  Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          right:
-                                                                              5.0),
-                                                                      child: FittedBox(
-                                                                          fit: BoxFit
-                                                                              .fitHeight,
-                                                                          child:
-                                                                              Center(child: LineIcon(LineIcons.box)))),
-                                                                  FittedBox(
-                                                                      fit: BoxFit
-                                                                          .fitHeight,
-                                                                      child: Text(NumberFormat.compact(locale: 'en_US').format(widget
-                                                                          .data
-                                                                          .purchasesCount!))),
-                                                                ])),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            )
-                                          ]))
                                 ]),
                             Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -555,25 +588,22 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                       children: [
                                         Expanded(
                                           child: OutlinedButton(
-                                            onPressed: () {},
-                                            child: BouncingWidget(
-                                              onPressed: () => Navigator.push(
-                                                  context,
-                                                  CupertinoPageRoute(
-                                                    builder: (context) =>
-                                                        ProductDetailPage(
-                                                            data: widget.data),
-                                                  )),
-                                              child: FittedBox(
-                                                child: Text(
-                                                  'Ürün detayına git',
-                                                  style: TextStyle(
-                                                      color: Theme.of(context)
-                                                          .iconTheme
-                                                          .color,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
+                                            onPressed: () => Navigator.push(
+                                                context,
+                                                CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      ProductDetailPage(
+                                                          data: widget.data),
+                                                )),
+                                            child: FittedBox(
+                                              child: Text(
+                                                'Ürün detayına git',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .iconTheme
+                                                        .color,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                           ),
@@ -633,35 +663,34 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                       }
                                                     });
                                                   });
-                                                }
-                                                else{
+                                                } else {
                                                   if (_bookmarkAnimationController !=
-                                                        null) {
-                                                      setState(() {
-                                                        widget.data
-                                                                .isAddedBookmark =
-                                                            !widget.data
-                                                                .isAddedBookmark;
-                                                        if (widget.data
-                                                            .isAddedBookmark) {
-                                                          if (!_bookmarkAnimationController!
-                                                              .isAnimating) {
-                                                            WidgetsBinding
-                                                                .instance!
-                                                                .addPostFrameCallback(
-                                                                    (timeStamp) {
+                                                      null) {
+                                                    setState(() {
+                                                      widget.data
+                                                              .isAddedBookmark =
+                                                          !widget.data
+                                                              .isAddedBookmark;
+                                                      if (widget.data
+                                                          .isAddedBookmark) {
+                                                        if (!_bookmarkAnimationController!
+                                                            .isAnimating) {
+                                                          WidgetsBinding
+                                                              .instance!
+                                                              .addPostFrameCallback(
+                                                                  (timeStamp) {
+                                                            _bookmarkAnimationController!
+                                                                .forward()
+                                                                .whenComplete(
+                                                                    () {
                                                               _bookmarkAnimationController!
-                                                                  .forward()
-                                                                  .whenComplete(
-                                                                      () {
-                                                                _bookmarkAnimationController!
-                                                                    .reset();
-                                                              });
+                                                                  .reset();
                                                             });
-                                                          }
+                                                          });
                                                         }
-                                                      });
-                                                    }
+                                                      }
+                                                    });
+                                                  }
                                                 }
                                               },
                                               child: SizedBox(
