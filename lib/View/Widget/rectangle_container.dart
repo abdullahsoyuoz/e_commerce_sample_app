@@ -14,7 +14,7 @@ class RectangleContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background.withOpacity(0.75),
         borderRadius: appRadius(context),
-        border: Border.all(width: 1, color: Colors.black)
+        border: Border.all(width: 1, color: Theme.of(context).iconTheme.color!)
         // boxShadow: appShadow(context),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 15),

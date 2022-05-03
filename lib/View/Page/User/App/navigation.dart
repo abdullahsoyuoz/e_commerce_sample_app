@@ -23,17 +23,20 @@ class _NavigationPageState extends State<NavigationPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   late ScrollController _scrollController;
+  late PageController _pageController;
   int currentPage = 0;
 
   @override
   void initState() {
     _scrollController = ScrollController(initialScrollOffset: 100);
+    _pageController = PageController(viewportFraction: 0.3);
     super.initState();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -41,69 +44,92 @@ class _NavigationPageState extends State<NavigationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SizedBox.expand(
-          child: CustomScrollView(
-        shrinkWrap: true,
-        slivers: [
-          SliverAppBar(
-            collapsedHeight: 60,
-            pinned: true,
-            automaticallyImplyLeading: false,
-            title: Row(
-              children: [
-                IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: LineIcon(LineIcons.arrowLeft)),
-                Text(
-                  'NAVIGASYON',
-                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                        fontSize: 27,
-                        fontWeight: FontWeight.bold,
-                      ),
+          child: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          if (details.delta.dx > 0) {
+            _pageController.previousPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.ease);
+          }
+          if (details.delta.dx < 0) {
+            _pageController.nextPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.ease);
+          }
+        },
+        child: CustomScrollView(
+          shrinkWrap: true,
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Theme.of(context).backgroundColor,
+              collapsedHeight: 60,
+              pinned: true,
+              automaticallyImplyLeading: false,
+              title: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxHeight: 41,
+                  minHeight: 41,
                 ),
-              ],
-            ),
-            centerTitle: false,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(50),
-              child: SizedBox(
-                width: context.width,
-                height: 50,
-                child: CustomPaint(
-                  foregroundPainter: FadePainter(
-                    fadeColor: Theme.of(context).appBarTheme.backgroundColor!,
-                    context: context,
-                  ),
-                  child: ListView.builder(
-                      shrinkWrap: true,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: LineIcon(LineIcons.arrowLeft),
+                    ),
+                    Text(
+                      'NAVIGASYON',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 21,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              centerTitle: false,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(50),
+                child: SizedBox(
+                  width: context.width,
+                  height: 50,
+                  child: PageView.builder(
+                      controller: _pageController,
+                      pageSnapping: true,
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentPage = index;
+                        });
+                      },
+                      // shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      padding:
-                          EdgeInsets.only(right: context.width * 0.7, left: 10),
+                      // padding: EdgeInsets.only(right: context.width * 0.7, left: 10),
                       itemCount: navigationMenu.length,
                       itemBuilder: (context, index) {
                         final data = navigationMenu[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 2.0),
-                          child: SizedBox(
-                            width: context.width * 0.3,
-                            child: BouncingWidget(
-                              onPressed: () {
-                                setState(() {
-                                  currentPage = index;
-                                });
-                              },
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxHeight: 10, minHeight: 10),
-                                child: FittedBox(
-                                  alignment: Alignment.center,
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(
-                                    data.toString(),
-                                    textAlign: TextAlign.start,
-                                    style: const TextStyle(fontSize: 20),
-                                  ),
+                        return Center(
+                          child: BouncingWidget(
+                            onPressed: () {
+                              setState(() {
+                                currentPage = index;
+                                _pageController.animateToPage(index,
+                                    duration:
+                                        const Duration(milliseconds: 300),
+                                    curve: Curves.linear);
+                              });
+                            },
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                  maxHeight: 20, minHeight: 20),
+                              child: FittedBox(
+                                alignment: Alignment.center,
+                                fit: BoxFit.fitHeight,
+                                child: Text(
+                                  data.toString(),
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(fontSize: 20),
                                 ),
                               ),
                             ),
@@ -113,19 +139,19 @@ class _NavigationPageState extends State<NavigationPage>
                 ),
               ),
             ),
-          ),
-          currentPage == 0
-              ? buildCategories()
-              : const SliverToBoxAdapter(child: SizedBox()),
-          currentPage == 1
-              ? buildThemes(context)
-              : const SliverToBoxAdapter(child: SizedBox()),
-        ],
+            currentPage == 0
+                ? buildCategories()
+                : const SliverToBoxAdapter(child: SizedBox()),
+            currentPage == 1
+                ? buildSettings(context)
+                : const SliverToBoxAdapter(child: SizedBox()),
+          ],
+        ),
       )),
     );
   }
 
-  Widget buildThemes(BuildContext context) {
+  Widget buildSettings(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.only(
         top: 5,
@@ -169,8 +195,8 @@ class _NavigationPageState extends State<NavigationPage>
                             shape: MaterialStateProperty.all(
                                 const StadiumBorder()),
                             elevation: MaterialStateProperty.all(5),
-                            overlayColor: MaterialStateProperty.all(
-                                e.splashColor),
+                            overlayColor:
+                                MaterialStateProperty.all(e.splashColor),
                             backgroundColor: MaterialStateProperty.all(
                                 e.floatingActionButtonTheme.backgroundColor),
                             foregroundColor: MaterialStateProperty.all(

@@ -47,8 +47,8 @@ String getFlowImageUrl(FlowType type, cat.Category assist) {
       return faker.image.unsplash.image(keyword: getEnglishTitle(assist.categoryId, assist.id));
     case FlowType.list:
       return faker.image.unsplash.image(keyword: getEnglishTitle(assist.categoryId, assist.id));
-    case FlowType.category:
-      return faker.image.unsplash.image(keyword: getEnglishTitle(assist.categoryId, assist.id));
+    // case FlowType.category:
+    //   return faker.image.unsplash.image(keyword: getEnglishTitle(assist.categoryId, assist.id));
     // case FlowType.announcement:
     //   return faker.image.unsplash.image(keyword: 'bullhorn');
     default:
@@ -66,8 +66,8 @@ String getTypeString(FlowType type) {
       return 'indirimler';
     case FlowType.list:
       return 'listeler';
-    case FlowType.category:
-      return 'kategorik içerik';
+    // case FlowType.category:
+    //   return 'kategorik içerik';
     // case FlowType.announcement:
     //   return 'duyuru';
     default:
@@ -109,13 +109,13 @@ List<String> getFlowTitle(FlowType type, String assistText) {
       'bu ${summer[Random().nextInt(summer.length)]}ın en ${tamamlayici[Random().nextInt(tamamlayici.length)]}leri',
     ];
   }
-  if (type == FlowType.category) {
-    return [
-      '$assistText ürünlerinde bir göz at',
-      'son baktıkların $assistText kategorisine ait',
-      'ilgini çekebilecek $assistText ürünleri',
-    ];
-  }
+  // if (type == FlowType.category) {
+  //   return [
+  //     '$assistText ürünlerinde bir göz at',
+  //     'son baktıkların $assistText kategorisine ait',
+  //     'ilgini çekebilecek $assistText ürünleri',
+  //   ];
+  // }
   // if (type == FlowType.announcement) {
   //   return [
   //     'yeni güncelleme ile değişimler',

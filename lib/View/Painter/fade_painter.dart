@@ -35,3 +35,36 @@ class FadePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+
+class SymmetricFadePainter extends CustomPainter {
+  Color fadeColor;
+  BuildContext context;
+  SymmetricFadePainter({required this.fadeColor, required this.context});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Rect rect = Rect.fromPoints(Offset.zero, Offset(size.width, size.height));
+    LinearGradient lg = LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        stops: const [
+          0.1,
+          0.5,
+          0.9,
+        ],
+        colors: [
+          //create 2 white colors, one transparent
+          fadeColor.withOpacity(1),
+          Colors.transparent,
+          fadeColor.withOpacity(1),
+        ]);
+    Paint paint = Paint()
+      ..shader = lg.createShader(rect)
+      ..blendMode = Provider.of<ThemeChanger>(context, listen: false).isDark() ? BlendMode.darken : BlendMode.lighten
+      ;
+    canvas.drawRect(rect, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}

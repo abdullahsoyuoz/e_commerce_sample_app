@@ -34,7 +34,7 @@ enum FlowType {
   campagne,
   discount,
   list,
-  category,
+  // category,
   // announcement,
 }
 
@@ -48,8 +48,8 @@ IconData getFlowIcon(FlowType type) {
       return FontAwesomeIcons.tags;
     case FlowType.list:
       return FontAwesomeIcons.listUl;
-    case FlowType.category:
-      return FontAwesomeIcons.layerGroup;
+    // case FlowType.category:
+    //   return FontAwesomeIcons.layerGroup;
     // case FlowType.announcement:
     //   return FontAwesomeIcons.bullhorn;
     default:
@@ -67,8 +67,8 @@ Color getFlowColor(FlowType type) {
       return AppColors.orange.shade300;
     case FlowType.list:
       return AppColors.blue.shade400;
-    case FlowType.category:
-      return AppColors.yellow.shade500;
+    // case FlowType.category:
+    //   return AppColors.yellow.shade500;
     // case FlowType.announcement:
     //   return AppColors.turquaz;
     default:

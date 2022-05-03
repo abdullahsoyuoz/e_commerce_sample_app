@@ -10,6 +10,7 @@ import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
+import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
@@ -27,21 +28,77 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, RestorationMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   late final AnimationController _animationController;
+  late List<FlowEntity> flows = [];
+  late final PageController _pageController;
+  final RestorableInt currentFilter = RestorableInt(0);
 
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300),);
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _pageController = PageController(viewportFraction: 0.3);
+    flows = flowList;
+    _pageController.addListener(() {
+      setState(() {
+        if (currentFilter.value == 0) {
+          flows = flowList;
+        }
+        if (currentFilter.value == 1) {
+          flows = [];
+          for (var element in flowList) {
+            if (element.type == FlowType.personal) {
+              flows.add(element);
+            }
+          }
+        }
+        if (currentFilter.value == 2) {
+          flows = [];
+          for (var element in flowList) {
+            if (element.type == FlowType.campagne) {
+              flows.add(element);
+            }
+          }
+        }
+        if (currentFilter.value == 3) {
+          flows = [];
+          for (var element in flowList) {
+            if (element.type == FlowType.discount) {
+              flows.add(element);
+            }
+          }
+        }
+        if (currentFilter.value == 4) {
+          flows = [];
+          for (var element in flowList) {
+            if (element.type == FlowType.list) {
+              flows.add(element);
+            }
+          }
+        }
+      });
+    });
     super.initState();
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _pageController.dispose();
+    flows = [];
     super.dispose();
+  }
+
+  @override
+  String? get restorationId => 'flowPage';
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(currentFilter, 'currentFilter');
   }
 
   @override
@@ -51,7 +108,8 @@ class _HomePageState extends State<HomePage>
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+        backgroundColor:
+            Theme.of(context).floatingActionButtonTheme.backgroundColor,
         elevation: 5,
         child: const FaIcon(
           LineIcons.shoppingBasket,
@@ -71,16 +129,28 @@ class _HomePageState extends State<HomePage>
                 lowLayer: const LowLayerWidget(),
                 highLayer: ColoredBox(
                   color: Theme.of(context).scaffoldBackgroundColor,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.only(
-                        top: 70 + context.padding.top, bottom: 100),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: flowList.length,
-                    itemExtent: context.width * 0.5,
-                    itemBuilder: (context, index) {
-                      return FlowWidget(data: flowList[index]);
+                  child: GestureDetector(
+                    onHorizontalDragUpdate: (details) {
+                      if (details.delta.dx > 0) {
+                        _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+                      }
+                      if (details.delta.dx < 0) {
+                        _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+                      }
                     },
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.only(
+                        top: 120 + context.padding.top,
+                        bottom: 100,
+                      ),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: flows.length,
+                      itemExtent: context.width * 0.5,
+                      itemBuilder: (context, index) {
+                        return FlowWidget(data: flows[index]);
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -101,14 +171,14 @@ class _HomePageState extends State<HomePage>
       child: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: 10,
-            sigmaY: 10,
+            sigmaX: 5,
+            sigmaY: 5,
           ),
           child: SizedBox(
             width: context.width,
-            height: 70 + context.padding.top,
+            height: 120 + context.padding.top,
             child: AppBar(
-              toolbarHeight: 70,
+              toolbarHeight: 120,
               centerTitle: true,
               elevation: 0,
               backgroundColor: Colors.transparent,
@@ -183,6 +253,57 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
               ],
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(50),
+                child: SizedBox(
+                  width: context.width,
+                  height: 50,
+                  child: PageView.builder(
+                    controller: _pageController,
+                    pageSnapping: true,
+                    physics: const PageScrollPhysics(
+                        parent: BouncingScrollPhysics()),
+                    onPageChanged: (index) {
+                      setState(() {
+                        currentFilter.value = index;
+                      });
+                    },
+                    scrollDirection: Axis.horizontal,
+                    // padEnds: false,
+                    itemCount: flowFilter.length,
+                    itemBuilder: (context, index) {
+                      final data = flowFilter[index];
+                      return Center(
+                        child: BouncingWidget(
+                          onPressed: () {
+                            setState(() {
+                              currentFilter.value = index;
+                              _pageController.animateToPage(index,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.linear);
+                            });
+                          },
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxHeight: 20,
+                              minHeight: 20,
+                            ),
+                            child: FittedBox(
+                              alignment: Alignment.center,
+                              fit: BoxFit.fitHeight,
+                              child: Text(
+                                data.toString(),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
           ),
         ),

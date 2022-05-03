@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/Profile/messages.dart';
 import 'package:sepet_demo/View/Page/User/Profile/my_orders.dart';
@@ -45,8 +46,10 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
           child: ListView(
             shrinkWrap: true,
             controller: _scrollController,
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.only(left: 20, right: 100),
             children: [
               IconButton(
                 iconSize: 50,
@@ -70,7 +73,7 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 message: 'Siparişlerin',
                 child: IconButton(
                   icon: Icon(
-                    FontAwesomeIcons.box,
+                    LineIcons.archive,
                     color: AppColors.purple.shade400,
                   ),
                   onPressed: () => Navigator.push(
@@ -85,7 +88,7 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 message: 'Beğendiklerin',
                 child: IconButton(
                   icon: Icon(
-                    FontAwesomeIcons.solidHeart,
+                    LineIcons.heart,
                     color: AppColors.red.shade400,
                   ),
                   onPressed: () => Navigator.push(
@@ -100,7 +103,7 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 message: 'Listelerin',
                 child: IconButton(
                   icon: Icon(
-                    FontAwesomeIcons.solidBookmark,
+                    LineIcons.bookmark,
                     color: AppColors.orange.shade500,
                   ),
                   onPressed: () => Navigator.push(
@@ -115,7 +118,7 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 message: 'Satıcıya soruların',
                 child: IconButton(
                   icon: Icon(
-                    FontAwesomeIcons.solidPaperPlane,
+                    LineIcons.envelope,
                     color: AppColors.blue.shade400,
                   ),
                   onPressed: () => Navigator.push(
@@ -130,7 +133,7 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 message: 'Bildirimler',
                 child: IconButton(
                   icon: Icon(
-                    FontAwesomeIcons.solidBell,
+                    LineIcons.bell,
                     color: AppColors.red.shade300,
                   ),
                   onPressed: () => Navigator.push(

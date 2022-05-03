@@ -24,7 +24,7 @@ class _FlowWidgetState extends State<FlowWidget>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
-      lowerBound: 0.3,
+      lowerBound: 0.5,
       upperBound: 1,
     );
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
@@ -81,42 +81,48 @@ class _FlowWidgetState extends State<FlowWidget>
               },
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: ClipRRect(
-                  borderRadius: appRadius(context),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.network(
-                        widget.data.imageUrl!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (c, o, s) =>
-                            errorIndicator(c, o, s ?? StackTrace.empty),
-                        loadingBuilder: (context, child, loadingProgress) =>
-                            loadingIndicator(context, child, loadingProgress),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          width: context.width,
-                          color: Theme.of(context).iconTheme.color,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: appPaddingForRadius(),
-                            vertical: 2,
-                          ),
-                          child: Text(
-                            widget.data.title!.toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).backgroundColor),
-                            maxLines: 3,
-                            textAlign: TextAlign.center,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    boxShadow: appShadow(context),
+                    borderRadius: appRadius(context)
+                  ),
+                  child: ClipRRect(
+                    borderRadius: appRadius(context),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          widget.data.imageUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (c, o, s) =>
+                              errorIndicator(c, o, s ?? StackTrace.empty),
+                          loadingBuilder: (context, child, loadingProgress) =>
+                              loadingIndicator(context, child, loadingProgress),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            width: context.width,
+                            color: Theme.of(context).iconTheme.color,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: appPaddingForRadius(),
+                              vertical: 2,
+                            ),
+                            child: Text(
+                              widget.data.title!.toUpperCase(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: Theme.of(context).backgroundColor),
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
