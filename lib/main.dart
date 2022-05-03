@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
+import 'package:sepet_demo/Model/Dummy/mylists.dart';
 import 'package:sepet_demo/Model/Dummy/products.dart';
 // ignore: unused_import
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
@@ -11,6 +12,8 @@ import 'package:sepet_demo/View/Page/Auth/auth.dart';
 import 'package:sepet_demo/View/Page/Auth/splash.dart';
 // ignore: unused_import
 import 'package:sepet_demo/View/Page/User/home.dart';
+import 'package:sepet_demo/View/Style/Theme/dark.dart';
+import 'package:sepet_demo/View/Style/Theme/light.dart';
 
 void main() {
   generateShop().whenComplete(() {
@@ -32,13 +35,16 @@ class AppStarter extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ThemeChanger>(
           create: (context) => ThemeChanger(),
-        )
+        ),
+        ChangeNotifierProvider<MyListsProvider>(
+          create: (context) => MyListsProvider(),
+        ),
       ],
       child: Consumer<ThemeChanger>(
         builder: (context, value, child) {
           return MaterialApp(
             title: 'Sepet',
-            theme: value.getTheme,
+            theme: value.isDark() ? appDarkTheme : appLightTheme,
             themeMode: SchedulerBinding.instance!.window.platformBrightness ==
                     Brightness.light
                 ? ThemeMode.light

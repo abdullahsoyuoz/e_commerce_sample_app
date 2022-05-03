@@ -48,7 +48,7 @@ class _FlowWidgetState extends State<FlowWidget>
         return ScaleTransition(
           scale: _animationController,
           alignment: Alignment.bottomCenter,
-          filterQuality: FilterQuality.medium,
+          filterQuality: FilterQuality.low,
           child: child,
         );
       },

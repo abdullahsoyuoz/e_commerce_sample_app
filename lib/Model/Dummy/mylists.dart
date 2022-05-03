@@ -1,59 +1,73 @@
 import 'dart:math';
-
+import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/Model/Dummy/products.dart';
 import 'package:sepet_demo/Model/mylist.dart';
+import 'package:sepet_demo/Model/product.dart';
+import 'package:sepet_demo/View/Style/colors.dart';
 
-List<MyList> myLists = [
+List<MyList> myListsCache = [
   MyList(
     title: 'Beğendiklerim',
+    products: productList.take(Random().nextInt(1) + 1).toList(),
     iconData: LineIcons.heart,
-    products: productList.take(Random().nextInt(8)+1).toList()
+    color: AppColors.red.shade400,
+    isConst: true,
   ),
   MyList(
     title: 'Fiyat takip',
+    products: [],
     iconData: LineIcons.bell,
-    products: productList.take(Random().nextInt(8)+1).toList()
+    color: AppColors.turquaz.shade400,
+    isConst: true,
   ),
   MyList(
     title: 'Daha sonra',
+    products: [],
     iconData: LineIcons.shoppingBag,
-    products: productList.take(Random().nextInt(8)+1).toList()
+    color: AppColors.blue.shade400,
+    isConst: true,
   ),
   MyList(
     title: 'Saatler',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'Bilgisayar için ekipman',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'Bi bak!!',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'kitapp',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'Fenerbahçe atkıları',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'sss',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'pp',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'aaaaa',
-    products: productList.take(Random().nextInt(8)+1).toList()
-  ),
-  MyList(
-    title: 'qqq',
-    products: productList.take(Random().nextInt(8)+1).toList()
+    products: [],
+    iconData: Icons.watch,
+    color: AppColors.orange.shade400,
   ),
 ];
+
+class MyListsProvider with ChangeNotifier {
+  late List<MyList> myList;
+
+  MyListsProvider() {
+    myList = myListsCache;
+  }
+
+  List<MyList> getList() {
+    return myList;
+  }
+
+  Future<void> addList(MyList data) async {
+    myList.add(data);
+    notifyListeners();
+  }
+
+  Future<void> removeList(index) async {
+    myList.removeAt(index);
+    notifyListeners();
+  }
+
+  Future<void> addItem(Product data, int listIndex) async {
+    if (myList[listIndex].products != null) {
+      myList[listIndex].products!.add(data);
+    }
+    notifyListeners();
+  }
+
+  Future<void> removeItem(Product data, int listIndex) async {
+    myList[listIndex].products!.remove(data);
+    notifyListeners();
+  }
+}
+
+final MyListsProvider myListsProvider = MyListsProvider();

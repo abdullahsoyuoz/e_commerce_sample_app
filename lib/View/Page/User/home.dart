@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage>
         if (currentFilter.value == 2) {
           flows = [];
           for (var element in flowList) {
-            if (element.type == FlowType.campagne) {
+            if (element.type == FlowType.list) {
               flows.add(element);
             }
           }
@@ -75,10 +75,18 @@ class _HomePageState extends State<HomePage>
         if (currentFilter.value == 4) {
           flows = [];
           for (var element in flowList) {
-            if (element.type == FlowType.list) {
+            if (element.type == FlowType.campagne) {
               flows.add(element);
             }
           }
+        }
+        if (currentFilter.value == 5) {
+          flows = [];
+          // for (var element in flowList) {
+          //   if (element.type == FlowType.campagne) {
+          //     flows.add(element);
+          //   }
+          // }
         }
       });
     });
@@ -115,8 +123,7 @@ class _HomePageState extends State<HomePage>
           LineIcons.shoppingBasket,
         ),
       ),
-      body: Scaffold(
-        body: SizedBox.expand(
+      body: SizedBox.expand(
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -132,13 +139,16 @@ class _HomePageState extends State<HomePage>
                   child: GestureDetector(
                     onHorizontalDragUpdate: (details) {
                       if (details.delta.dx > 0) {
+                        if (_pageController.page == 0) {
+                          Navigator.push(context, CupertinoPageRoute(builder: (context) => const NavigationPage(),));
+                        }
                         _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
                       }
                       if (details.delta.dx < 0) {
                         _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
                       }
                     },
-                    child: ListView.builder(
+                    child: flows != null ? ListView.builder(
                       shrinkWrap: true,
                       padding: EdgeInsets.only(
                         top: 120 + context.padding.top,
@@ -150,7 +160,7 @@ class _HomePageState extends State<HomePage>
                       itemBuilder: (context, index) {
                         return FlowWidget(data: flows[index]);
                       },
-                    ),
+                    ) : const SizedBox(),
                   ),
                 ),
               ),
@@ -161,7 +171,6 @@ class _HomePageState extends State<HomePage>
             ],
           ),
         ),
-      ),
     );
   }
 
@@ -283,20 +292,35 @@ class _HomePageState extends State<HomePage>
                                   curve: Curves.linear);
                             });
                           },
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                              maxHeight: 20,
-                              minHeight: 20,
-                            ),
-                            child: FittedBox(
-                              alignment: Alignment.center,
-                              fit: BoxFit.fitHeight,
-                              child: Text(
-                                data.toString(),
-                                textAlign: TextAlign.start,
-                                style: const TextStyle(fontSize: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  maxHeight: 20,
+                                  minHeight: 20,
+                                ),
+                                child: FittedBox(
+                                  alignment: Alignment.center,
+                                  fit: BoxFit.fitHeight,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        data.toString(),
+                                        style: const TextStyle(fontSize: 20),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5.0),
+                                child: CircleAvatar(
+                                  radius: 5,
+                                  backgroundColor: getFilterIndicatorColor(index),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );

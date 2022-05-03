@@ -7,9 +7,7 @@ import 'package:flutter_iconpicker/controllers/icon_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:sepet_demo/Controller/Picker/icon_picker.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/Model/Dummy/mylists.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Page/User/Product/product_detail.dart';
 import 'package:sepet_demo/View/Clipper/star_rank_clipper.dart';
@@ -20,7 +18,6 @@ import 'package:sepet_demo/View/View/Sheets/bookmark_sheet.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 
 class ProductViewBody extends StatefulWidget {
   final Product data;
@@ -90,9 +87,8 @@ class _ProductViewBodyState extends State<ProductViewBody>
                 height: context.width * 0.8,
                 child: PageView.builder(
                   controller: _pageController,
-                  physics: const PageScrollPhysics(
-                    parent: BouncingScrollPhysics()
-                  ),
+                  physics:
+                      const PageScrollPhysics(parent: BouncingScrollPhysics()),
                   itemCount: widget.data.photosUrl!.length,
                   itemBuilder: (context, index) {
                     return Padding(
@@ -108,7 +104,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.only(top: 10.0, right: 5.0),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: SmoothPageIndicator(
@@ -447,10 +443,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                               const EdgeInsets.only(left: 5.0),
                                           child: BouncingWidget(
                                               onPressed: () {
-                                                if (!widget
-                                                    .data.isAddedBookmark) {
+                                                if (!widget.data.isAddedBookmark) {
                                                   showFlexibleBookmarkSheet(
-                                                          context)
+                                                          context, widget.data)
                                                       .whenComplete(() {
                                                     Timer(
                                                         const Duration(
@@ -653,153 +648,5 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                 ])
                           ]))))
         ]));
-  }
-
-  Future<void> showMyListSheet() async {
-    showCupertinoModalPopup(
-        context: context,
-        barrierColor: Colors.black.withOpacity(.75),
-        barrierDismissible: true,
-        builder: (context) {
-          return StatefulBuilder(builder: (context, setState) {
-            return Material(
-              shape: RoundedRectangleBorder(borderRadius: appRadius(context)),
-              // elevation: 0,
-              color: Colors.transparent,
-              child: Container(
-                height: context.height * 0.7,
-                width: context.width * 0.9,
-                margin: const EdgeInsets.all(20),
-                // padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: appRadius(context),
-                ),
-                child: Column(children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                          top:
-                              Radius.circular(appRadius(context).bottomLeft.x)),
-                      color: Theme.of(context)
-                          .appBarTheme
-                          .backgroundColor!
-                          .withOpacity(1),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Listelerim',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(fontSize: 17),
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () => showNewListSheet(),
-                                  icon: LineIcon(LineIcons.plus)),
-                              IconButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  icon: LineIcon(LineIcons.times))
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: myLists.length,
-                      itemBuilder: (context, index) {
-                        var e = myLists[index];
-                        return ListTile(
-                          leading: e.iconData != null
-                              ? LineIcon(e.iconData!)
-                              : const SizedBox(),
-                          trailing: Text(e.products!.length.toString()),
-                          title: Text(e.title!),
-                          onTap: () {},
-                        );
-                      },
-                      separatorBuilder: (context, index) => const Divider(),
-                    ),
-                  )
-                ]),
-              ),
-            );
-          });
-        });
-  }
-
-  Future<void> showNewListSheet() async {
-    showCupertinoModalPopup(
-        context: context,
-        builder: (context) {
-          return Material(
-            color: Colors.transparent,
-            child: Container(
-              height: context.height * 0.7,
-              width: context.width * 0.9,
-              margin: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: appRadius(context),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                          top:
-                              Radius.circular(appRadius(context).bottomLeft.x)),
-                      color: Theme.of(context)
-                          .appBarTheme
-                          .backgroundColor!
-                          .withOpacity(1),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Liste oluştur',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(fontSize: 17),
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  icon: LineIcon(LineIcons.times))
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  const TextField(
-                    decoration: InputDecoration(hintText: 'Liste adı'),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        iconPicker(context);
-                      },
-                      icon: LineIcon(LineIcons.icons))
-                ],
-              ),
-            ),
-          );
-        });
   }
 }

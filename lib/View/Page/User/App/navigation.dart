@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
@@ -7,7 +8,6 @@ import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
-import 'package:sepet_demo/View/Painter/fade_painter.dart';
 import 'package:sepet_demo/View/Style/Theme/themedata.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
@@ -115,8 +115,7 @@ class _NavigationPageState extends State<NavigationPage>
                               setState(() {
                                 currentPage = index;
                                 _pageController.animateToPage(index,
-                                    duration:
-                                        const Duration(milliseconds: 300),
+                                    duration: const Duration(milliseconds: 300),
                                     curve: Curves.linear);
                               });
                             },
@@ -153,80 +152,27 @@ class _NavigationPageState extends State<NavigationPage>
 
   Widget buildSettings(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.only(
-        top: 5,
-        left: 5,
-        right: 5,
-        bottom: 200,
-      ),
-      sliver: SliverGrid.count(
-        crossAxisCount: 2,
-        childAspectRatio: 1,
-        // crossAxisSpacing: 5,
-        // mainAxisSpacing: 5,
-        children: themeList.map((e) {
-          return BouncingWidget(
-              onPressed: () {
-                Provider.of<ThemeChanger>(context, listen: false).setTheme(e);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: e.appBarTheme.backgroundColor!,
-                ),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          key: LabeledGlobalKey(e.hashCode.toString()),
-                          // color: e.floatingActionButtonTheme.backgroundColor,
-                          // splashColor: e.floatingActionButtonTheme.splashColor,
-                          style: ButtonStyle(
-                            fixedSize:
-                                MaterialStateProperty.all(const Size(40, 40)),
-                            maximumSize:
-                                MaterialStateProperty.all(const Size(40, 40)),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(40, 40)),
-                            padding: MaterialStateProperty.all(EdgeInsets.zero),
-                            shape: MaterialStateProperty.all(
-                                const StadiumBorder()),
-                            elevation: MaterialStateProperty.all(5),
-                            overlayColor:
-                                MaterialStateProperty.all(e.splashColor),
-                            backgroundColor: MaterialStateProperty.all(
-                                e.floatingActionButtonTheme.backgroundColor),
-                            foregroundColor: MaterialStateProperty.all(
-                                e.floatingActionButtonTheme.foregroundColor),
-                          ),
-                          onPressed: () {},
-                          child: const Center(
-                            child: FaIcon(
-                              FontAwesomeIcons.icons,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'Lorem ipsum',
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: e.textTheme.bodyText2!.color,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ));
-        }).toList(),
-      ),
-    );
+        padding: const EdgeInsets.only(
+          top: 5,
+          left: 5,
+          right: 5,
+          bottom: 200,
+        ),
+        sliver: SliverToBoxAdapter(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('Karanlık Tema'),
+              CupertinoSwitch(
+                value:
+                    Provider.of<ThemeChanger>(context, listen: false).isDark(),
+                onChanged: (value) {
+                  Provider.of<ThemeChanger>(context, listen: false).setTheme(value);
+                },
+              ),
+            ],
+          ),
+        ));
   }
 
   Widget buildCategories() {
