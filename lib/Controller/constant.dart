@@ -1,6 +1,5 @@
 // IMAGE ASSET
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
 String logoSyz = 'assets/image/syz.png';
@@ -30,20 +29,20 @@ Map<int, String> flowFilter = {
   5: "Takip edilenler",
 };
 
-Color getFilterIndicatorColor(int index) {
+Color getFilterIndicatorColor(BuildContext context,int index) {
   switch (index) {
     case 0:
-      return AppColors.black.shade300;
+      return Theme.of(context).iconTheme.color!;
     case 1:
-      return AppColors.purple.shade400;
+      return AppColors.purple.shade300;
     case 2:
-      return AppColors.blue.shade400;
+      return AppColors.blue.shade300;
     case 3:
       return AppColors.orange.shade300;
     case 4:
-      return AppColors.red.shade500;
+      return AppColors.red.shade400;
     case 5:
-      return AppColors.green.shade500;
+      return AppColors.yellow.shade500;
     default:
       return AppColors.black;
   }

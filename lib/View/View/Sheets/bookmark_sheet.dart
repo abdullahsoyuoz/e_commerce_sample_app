@@ -6,6 +6,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/Picker/color_picker.dart';
 import 'package:sepet_demo/Controller/Picker/icon_picker.dart';
+import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Model/Dummy/mylists.dart';
 import 'package:sepet_demo/Model/mylist.dart';
 import 'package:sepet_demo/Model/product.dart';

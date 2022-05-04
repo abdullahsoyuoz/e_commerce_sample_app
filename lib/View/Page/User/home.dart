@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -6,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/Provider/flows_provider.dart';
 import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
-import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
@@ -31,73 +33,27 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, RestorationMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   late final AnimationController _animationController;
-  late List<FlowEntity> flows = [];
   late final PageController _pageController;
-  final RestorableInt currentFilter = RestorableInt(0);
+  final RestorableInt currentPage = RestorableInt(0);
 
   @override
   void initState() {
+    _pageController = PageController(viewportFraction: 0.3);
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    _pageController = PageController(viewportFraction: 0.3);
-    flows = flowList;
-    _pageController.addListener(() {
-      setState(() {
-        if (currentFilter.value == 0) {
-          flows = flowList;
-        }
-        if (currentFilter.value == 1) {
-          flows = [];
-          for (var element in flowList) {
-            if (element.type == FlowType.personal) {
-              flows.add(element);
-            }
-          }
-        }
-        if (currentFilter.value == 2) {
-          flows = [];
-          for (var element in flowList) {
-            if (element.type == FlowType.list) {
-              flows.add(element);
-            }
-          }
-        }
-        if (currentFilter.value == 3) {
-          flows = [];
-          for (var element in flowList) {
-            if (element.type == FlowType.discount) {
-              flows.add(element);
-            }
-          }
-        }
-        if (currentFilter.value == 4) {
-          flows = [];
-          for (var element in flowList) {
-            if (element.type == FlowType.campagne) {
-              flows.add(element);
-            }
-          }
-        }
-        if (currentFilter.value == 5) {
-          flows = [];
-          // for (var element in flowList) {
-          //   if (element.type == FlowType.campagne) {
-          //     flows.add(element);
-          //   }
-          // }
-        }
-      });
-    });
     super.initState();
+  }
+
+  void fetchFlow() {
+    Provider.of<FlowsProvider>(context, listen: false).fetchList();
   }
 
   @override
   void dispose() {
     _animationController.dispose();
     _pageController.dispose();
-    flows = [];
     super.dispose();
   }
 
@@ -106,7 +62,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(currentFilter, 'currentFilter');
+    registerForRestoration(currentPage, 'currentPage');
   }
 
   @override
@@ -124,53 +80,60 @@ class _HomePageState extends State<HomePage>
         ),
       ),
       body: SizedBox.expand(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              DropMenu(
-                animationController: _animationController,
-                indicator: const SizedBox(),
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                lowLayerBottomPadding: context.padding.bottom,
-                lowLayerHeight: 70,
-                lowLayer: const LowLayerWidget(),
-                highLayer: ColoredBox(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  child: GestureDetector(
-                    onHorizontalDragUpdate: (details) {
-                      if (details.delta.dx > 0) {
-                        if (_pageController.page == 0) {
-                          Navigator.push(context, CupertinoPageRoute(builder: (context) => const NavigationPage(),));
-                        }
-                        _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
-                      }
-                      if (details.delta.dx < 0) {
-                        _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
-                      }
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            DropMenu(
+              animationController: _animationController,
+              indicator: const SizedBox(),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              lowLayerBottomPadding: context.padding.bottom,
+              lowLayerHeight: 70,
+              lowLayer: const LowLayerWidget(),
+              highLayer: ColoredBox(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: GestureDetector(onHorizontalDragUpdate: (details) {
+                  if (details.delta.dx > 0) {
+                    if (currentPage.value == 0) {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const NavigationPage(),
+                          ));
+                    }
+                    _pageController.previousPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.ease);
+                  }
+                  if (details.delta.dx < 0) {
+                    _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.ease);
+                  }
+                }, child: Consumer<FlowsProvider>(builder: (context, value, _) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(
+                      top: 120 + context.padding.top,
+                      bottom: 100,
+                    ),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: value.getList().length,
+                    itemExtent: context.width * 0.5,
+                    itemBuilder: (context, index) {
+                      return FlowWidget(data: value.getList()[index]);
                     },
-                    child: flows != null ? ListView.builder(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.only(
-                        top: 120 + context.padding.top,
-                        bottom: 100,
-                      ),
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: flows.length,
-                      itemExtent: context.width * 0.5,
-                      itemBuilder: (context, index) {
-                        return FlowWidget(data: flows[index]);
-                      },
-                    ) : const SizedBox(),
-                  ),
-                ),
+                  );
+                })),
               ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: homeAppbar(),
-              ),
-            ],
-          ),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: homeAppbar(),
+            ),
+          ],
         ),
+      ),
     );
   }
 
@@ -248,7 +211,7 @@ class _HomePageState extends State<HomePage>
                   child: IconButton(
                     iconSize: 50,
                     onPressed: () {
-                      toggle();
+                      quickMenuToggle();
                     },
                     icon: AdvancedAvatar(
                       size: 50,
@@ -267,31 +230,21 @@ class _HomePageState extends State<HomePage>
                 child: SizedBox(
                   width: context.width,
                   height: 50,
-                  child: PageView.builder(
-                    controller: _pageController,
-                    pageSnapping: true,
-                    physics: const PageScrollPhysics(
-                        parent: BouncingScrollPhysics()),
-                    onPageChanged: (index) {
-                      setState(() {
-                        currentFilter.value = index;
-                      });
-                    },
-                    scrollDirection: Axis.horizontal,
-                    // padEnds: false,
-                    itemCount: flowFilter.length,
-                    itemBuilder: (context, index) {
-                      final data = flowFilter[index];
-                      return Center(
-                        child: BouncingWidget(
-                          onPressed: () {
-                            setState(() {
-                              currentFilter.value = index;
-                              _pageController.animateToPage(index,
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.linear);
-                            });
-                          },
+                  child: Consumer<FlowsProvider>(builder: (context, value, _) {
+                    return PageView.builder(
+                      controller: _pageController,
+                      pageSnapping: true,
+                      physics: const PageScrollPhysics(
+                          parent: BouncingScrollPhysics()),
+                      onPageChanged: (index) {
+                        currentPage.value = index;
+                        value.setFilterIndex(index);
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemCount: flowFilter.length,
+                      itemBuilder: (context, index) {
+                        final data = flowFilter[index];
+                        return Center(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -317,15 +270,17 @@ class _HomePageState extends State<HomePage>
                                 padding: const EdgeInsets.only(top: 5.0),
                                 child: CircleAvatar(
                                   radius: 5,
-                                  backgroundColor: getFilterIndicatorColor(index),
+                                  backgroundColor: index == currentPage.value
+                                      ? getFilterIndicatorColor(context, index)
+                                      : Theme.of(context).iconTheme.color,
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      );
-                    },
-                  ),
+                        );
+                      },
+                    );
+                  }),
                 ),
               ),
             ),
@@ -335,7 +290,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  void toggle() {
+  void quickMenuToggle() {
     if (!_animationController.isAnimating) {
       if (_animationController.value == 0) {
         _animationController.forward();

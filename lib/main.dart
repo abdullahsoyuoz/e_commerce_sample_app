@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/Provider/flows_provider.dart';
+import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
-import 'package:sepet_demo/Model/Dummy/mylists.dart';
 import 'package:sepet_demo/Model/Dummy/products.dart';
 // ignore: unused_import
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
@@ -38,6 +39,9 @@ class AppStarter extends StatelessWidget {
         ),
         ChangeNotifierProvider<MyListsProvider>(
           create: (context) => MyListsProvider(),
+        ),
+        ChangeNotifierProvider<FlowsProvider>(
+          create: (context) => FlowsProvider(),
         ),
       ],
       child: Consumer<ThemeChanger>(

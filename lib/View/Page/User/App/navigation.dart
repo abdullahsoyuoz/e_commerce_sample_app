@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +7,6 @@ import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
-import 'package:sepet_demo/View/Style/Theme/themedata.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
 
@@ -162,7 +160,7 @@ class _NavigationPageState extends State<NavigationPage>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Karanlık Tema'),
+              const Text('Karanlık Tema'),
               CupertinoSwitch(
                 value:
                     Provider.of<ThemeChanger>(context, listen: false).isDark(),

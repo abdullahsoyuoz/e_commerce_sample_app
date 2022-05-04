@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
@@ -34,28 +33,11 @@ enum FlowType {
   campagne,
   discount,
   list,
+  saved,
   // category,
   // announcement,
 }
 
-IconData getFlowIcon(FlowType type) {
-  switch (type) {
-    case FlowType.personal:
-      return FontAwesomeIcons.faceGrinStars;
-    case FlowType.campagne:
-      return FontAwesomeIcons.gift;
-    case FlowType.discount:
-      return FontAwesomeIcons.tags;
-    case FlowType.list:
-      return FontAwesomeIcons.listUl;
-    // case FlowType.category:
-    //   return FontAwesomeIcons.layerGroup;
-    // case FlowType.announcement:
-    //   return FontAwesomeIcons.bullhorn;
-    default:
-      return FontAwesomeIcons.question;
-  }
-}
 
 Color getFlowColor(FlowType type) {
   switch (type) {
@@ -67,6 +49,8 @@ Color getFlowColor(FlowType type) {
       return AppColors.orange.shade300;
     case FlowType.list:
       return AppColors.blue.shade400;
+    case FlowType.saved:
+      return AppColors.yellow.shade500;
     // case FlowType.category:
     //   return AppColors.yellow.shade500;
     // case FlowType.announcement:
