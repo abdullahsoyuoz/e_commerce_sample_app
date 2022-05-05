@@ -8,7 +8,6 @@ import 'package:sepet_demo/View/Page/User/Profile/my_orders.dart';
 import 'package:sepet_demo/View/Page/User/Profile/mylist.dart';
 import 'package:sepet_demo/View/Page/User/Profile/notify.dart';
 import 'package:sepet_demo/View/Page/User/Profile/profile.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
@@ -71,9 +70,9 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
               Tooltip(
                 message: 'Siparişlerin',
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     LineIcons.archive,
-                    color: AppColors.purple.shade400,
+                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -86,9 +85,9 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
               Tooltip(
                 message: 'Beğendiklerin',
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     LineIcons.heart,
-                    color: AppColors.red.shade400,
+                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -101,9 +100,9 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
               Tooltip(
                 message: 'Listelerin',
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     LineIcons.bookmark,
-                    color: AppColors.orange.shade500,
+                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -116,9 +115,9 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
               Tooltip(
                 message: 'Satıcıya soruların',
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     LineIcons.envelope,
-                    color: AppColors.blue.shade400,
+                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -131,9 +130,9 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
               Tooltip(
                 message: 'Bildirimler',
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     LineIcons.bell,
-                    color: AppColors.red.shade300,
+                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,

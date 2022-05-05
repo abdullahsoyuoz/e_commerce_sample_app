@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:marquee/marquee.dart';
+import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/Provider/flows_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -26,7 +28,6 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
   late AnimationController? _bellAnimationController;
 
   int pageIndex = 0;
-  bool hasSubscribe = false;
   @override
   void initState() {
     super.initState();
@@ -126,53 +127,56 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
                           ),
                         ),
                       ),
-                      BouncingWidget(
-                        onPressed: () {
-                          setState(() {
-                            hasSubscribe = !hasSubscribe;
-                            if (hasSubscribe) {
-                              _bellAnimationController
-                                  ?.forward()
-                                  .whenComplete(() {
-                                _bellAnimationController?.reset();
-                              });
-                            }
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(7),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: hasSubscribe
-                                    ? AppColors.red
-                                    : Theme.of(context).iconTheme.color!,
-                                width: lineThickness()),
-                            borderRadius: appRadius(context),
-                          ),
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                              maxHeight: 40,
-                              minHeight: 40,
-                            ),
-                            child: FittedBox(
-                              alignment: Alignment.center,
-                              child: Swing(
-                                child: LineIcon(
-                                  LineIcons.bell,
-                                  color: hasSubscribe
+                      Consumer<FlowsProvider>(builder: (context, provider, _) {
+                        return BouncingWidget(
+                          onPressed: () {
+                            provider
+                                .followedListToggleItem(widget.data)
+                                .then((check) {
+                              if (provider.isFollowed(widget.data)) {
+                                _bellAnimationController
+                                    ?.forward()
+                                    .whenComplete(() {
+                                  _bellAnimationController?.reset();
+                                });
+                              }
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(7),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: provider.isFollowed(widget.data)
                                       ? AppColors.red
-                                      : Theme.of(context).iconTheme.color,
+                                      : Theme.of(context).iconTheme.color!,
+                                  width: lineThickness()),
+                              borderRadius: appRadius(context),
+                            ),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                maxHeight: 40,
+                                minHeight: 40,
+                              ),
+                              child: FittedBox(
+                                alignment: Alignment.center,
+                                child: Swing(
+                                  child: LineIcon(
+                                    LineIcons.bell,
+                                    color: provider.isFollowed(widget.data)
+                                        ? AppColors.red
+                                        : Theme.of(context).iconTheme.color,
+                                  ),
+                                  animate: false,
+                                  manualTrigger: true,
+                                  controller: (va) {
+                                    _bellAnimationController = va;
+                                  },
                                 ),
-                                animate: false,
-                                manualTrigger: true,
-                                controller: (va) {
-                                  _bellAnimationController = va;
-                                },
                               ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                     ],
                   ),
                 ),
@@ -184,4 +188,3 @@ class _FlowListProductsViewState extends State<FlowListProductsView>
     );
   }
 }
-

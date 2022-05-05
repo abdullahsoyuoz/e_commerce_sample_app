@@ -89,9 +89,9 @@ List<String> getFlowTitle(FlowType type, String assistText) {
   }
   if (type == FlowType.personal) {
     return [
-      'son gezdiğin $assistText ürünlerine benzer',
+      'son gezdiğin ürünlere benzer',
       'son siparişine kombinler',
-      '$assistText\'lerden indirime düşenler',
+      'ilgilendiklerinden indirime düşenler',
     ];
   }
   if (type == FlowType.discount) {
@@ -103,7 +103,7 @@ List<String> getFlowTitle(FlowType type, String assistText) {
   }
   if (type == FlowType.list) {
     return [
-      '$assistText ürünlerinden sana özel seçimler',
+      'X influencer\'ın listesi',
       '${time[Random().nextInt(time.length)]} en ${tamamlayici[Random().nextInt(tamamlayici.length)]}ler',
       'bu ${summer[Random().nextInt(summer.length)]}ın en ${tamamlayici[Random().nextInt(tamamlayici.length)]}leri',
     ];

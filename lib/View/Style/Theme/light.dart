@@ -48,8 +48,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
     unselectedLabelColor: Colors.black.withOpacity(.3),
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.grey.shade200,
-    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    backgroundColor: AppColors.purple.shade400,
+    systemOverlayStyle: SystemUiOverlayStyle.light,
     foregroundColor: Colors.black,
     iconTheme: const IconThemeData(
       color: Colors.black,

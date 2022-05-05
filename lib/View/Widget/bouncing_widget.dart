@@ -33,11 +33,11 @@ class BouncingWidget extends StatefulWidget {
     this.onTapUp,
     this.onTapDown,
     this.onTapCancel,
-    this.duration = const Duration(milliseconds: 300),
-    this.reverseDuration = const Duration(milliseconds: 300),
+    this.duration = const Duration(milliseconds: 150),
+    this.reverseDuration = const Duration(milliseconds: 150),
     this.curve = Curves.decelerate,
     this.reverseCurve = Curves.decelerate,
-    this.scaleFactor = 0.75,
+    this.scaleFactor = 0.7,
   })  : assert(
           scaleFactor >= 0.0 && scaleFactor <= 1.0,
           "The valid range of scaleFactor is from 0.0 to 1.0.",
@@ -75,7 +75,7 @@ class _BouncingWidgetState extends State<BouncingWidget>
   Widget build(BuildContext context) {
     void onTap() {
       if (widget.onPressed != null) {
-        Timer(widget.duration! * 1.5, () {
+        Timer(widget.duration! * 2, () {
           widget.onPressed!();
         });
       }

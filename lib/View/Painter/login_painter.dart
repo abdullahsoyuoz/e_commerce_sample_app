@@ -5,7 +5,7 @@ import 'package:sepet_demo/View/Style/curves.dart';
 class LoginPainter extends CustomPainter {
   LoginPainter({required this.animation}) : super(repaint: animation) {
     brush = Paint()
-      ..color = AppColors.black.shade400
+      ..color = AppColors.purple.shade500
       ..style = PaintingStyle.fill;
 
     curvedAnimation = CurvedAnimation(

@@ -7,13 +7,13 @@ import 'package:sepet_demo/View/Style/curves.dart';
 class SplashPainter extends CustomPainter {
   SplashPainter({Animation<double>? animation}) : super(repaint: animation) {
     level1Paint = Paint()
-      ..color = AppColors.purple.shade200
-      ..style = PaintingStyle.fill;
-    level2Paint = Paint()
       ..color = AppColors.purple.shade300
       ..style = PaintingStyle.fill;
-    level3Paint = Paint()
+    level2Paint = Paint()
       ..color = AppColors.purple.shade400
+      ..style = PaintingStyle.fill;
+    level3Paint = Paint()
+      ..color = AppColors.purple.shade500
       ..style = PaintingStyle.fill;
     curvedAnimation = CurvedAnimation(
       parent: animation!,
@@ -29,10 +29,12 @@ class SplashPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    paintLevel3(canvas, size);
-    paintLevel2(canvas, size);
-    paintLevel1(canvas, size);
-    // paintVerticalPainter(canvas, size);
+    // paintLevel3(canvas, size);
+    // paintLevel2(canvas, size);
+    // paintLevel1(canvas, size);
+    paintCircleLevel3Painter(canvas, size);
+    paintCircleLevel2Painter(canvas, size);
+    paintCircleLevel1Painter(canvas, size);
   }
 
   void paintLevel1(Canvas canvas, Size size) {
@@ -99,13 +101,31 @@ class SplashPainter extends CustomPainter {
     canvas.drawPath(path, level3Paint);
   }
 
-  void paintVerticalPainter(Canvas canvas, Size size) {
+  void paintCircleLevel1Painter(Canvas canvas, Size size) {
     final path = Path();
     path.moveTo(0, 0);
     path.lineTo(size.width, 0);
     path.lineTo(size.width, lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
     path.lineTo(0,lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
-    canvas.drawPath(path, level3Paint);
+    canvas.drawCircle(Offset(size.width * 0.5, size.height * 0.5), lerpDouble(0, size.width * 0.45, curvedAnimation.value)!, level1Paint);
+  }
+
+  void paintCircleLevel2Painter(Canvas canvas, Size size) {
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width, 0);
+    path.lineTo(size.width, lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
+    path.lineTo(0,lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
+    canvas.drawCircle(Offset(size.width * 0.5, size.height * 0.5), lerpDouble(0, size.height * 0.45, curvedAnimation.value)!, level2Paint);
+  }
+
+  void paintCircleLevel3Painter(Canvas canvas, Size size) {
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width, 0);
+    path.lineTo(size.width, lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
+    path.lineTo(0,lerpDouble(0, size.height * 0.8, curvedAnimation.value)!);
+    canvas.drawCircle(Offset(size.width * 0.5, size.height * 0.5), lerpDouble(0, size.height, curvedAnimation.value)!, level3Paint);
   }
 
   @override

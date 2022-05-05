@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'dart:math' as math;
 
@@ -15,7 +16,7 @@ class LogoWidget extends StatelessWidget {
           fit: StackFit.loose,
           children: [
             Icon(
-              Icons.shopping_bag,
+              LineIcons.shoppingBag,
               color: color ?? Colors.white,
               size: size ?? context.width * 0.7,
             ),

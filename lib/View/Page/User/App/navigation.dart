@@ -191,32 +191,3 @@ class _NavigationPageState extends State<NavigationPage>
     );
   }
 }
-
-
-// Padding(
-//               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-//               child: FittedBox(
-//                 alignment: Alignment.center,
-//                 fit: BoxFit.fitWidth,
-//                 child: Row(
-//                   children: themeList
-//                       .map(
-//                         (e) => IconButton(
-//                           onPressed: () {
-//                             Provider.of<ThemeChanger>(context, listen: false)
-//                                 .setTheme(e);
-//                           },
-//                           icon: DecoratedBox(
-//                             decoration: BoxDecoration(
-//                                 shape: BoxShape.circle,
-//                                 boxShadow: appShadow(context)),
-//                             child: CircleAvatar(
-//                               backgroundColor: e.appBarTheme.backgroundColor,
-//                             ),
-//                           ),
-//                         ),
-//                       )
-//                       .toList(),
-//                 ),
-//               ),
-//             ),

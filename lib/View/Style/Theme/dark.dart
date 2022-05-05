@@ -16,7 +16,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   backgroundColor: Colors.black,
   hintColor: AppColors.black.shade100,
   highlightColor: Colors.transparent,
-  splashColor: AppColors.red,
+  splashColor: AppColors.black.shade100,
   splashFactory: InkRipple.splashFactory,
   dividerColor: AppColors.grey.shade200,
   inputDecorationTheme: const InputDecorationTheme(
@@ -49,7 +49,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
     unselectedLabelColor: Colors.white.withOpacity(.3),
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.black.shade500,
+    backgroundColor: AppColors.purple.shade500,
     systemOverlayStyle: SystemUiOverlayStyle.light,
     foregroundColor: Colors.white,
     iconTheme: const IconThemeData(
@@ -58,9 +58,9 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   ),
   // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Colors.white,
-    foregroundColor: Colors.black,
-    splashColor: AppColors.red,
+    backgroundColor: AppColors.purple.shade400,
+    foregroundColor: Colors.white,
+    splashColor: AppColors.black.shade100,
   ),
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
