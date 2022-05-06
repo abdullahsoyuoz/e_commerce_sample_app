@@ -15,6 +15,7 @@ import 'package:sepet_demo/View/Page/Auth/splash.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
 import 'package:sepet_demo/View/Style/Theme/dark.dart';
 import 'package:sepet_demo/View/Style/Theme/light.dart';
+import 'package:statusbarmanager/statusbarmanager.dart';
 
 void main() {
   generateShop().whenComplete(() {
@@ -24,12 +25,25 @@ void main() {
       });
     });
   });
-  runApp(const AppStarter());
+  runApp(StatusBarManager(
+    translucent: true,
+    child: const AppStarter(),
+    statusBarColor: Colors.transparent,
+  ));
 }
 
-class AppStarter extends StatelessWidget {
+class AppStarter extends StatefulWidget {
   const AppStarter({Key? key}) : super(key: key);
 
+  // void setStatus() async {
+  //   await StatusBarControl.setTranslucent(true);
+  // }
+
+  @override
+  State<AppStarter> createState() => _AppStarterState();
+}
+
+class _AppStarterState extends State<AppStarter> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -54,8 +68,8 @@ class AppStarter extends StatelessWidget {
                 ? ThemeMode.light
                 : ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            // home: const SplashScreen(),
-            home: const AuthMainPage(),
+            home: const SplashScreen(),
+            // home: const AuthMainPage(),
             // home: const HomePage(),
           );
         },

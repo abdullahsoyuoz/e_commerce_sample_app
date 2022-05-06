@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +10,7 @@ import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/category_widget.dart';
 
@@ -23,6 +27,8 @@ class _NavigationPageState extends State<NavigationPage>
   late ScrollController _scrollController;
   late PageController _pageController;
   int currentPage = 0;
+  // DUMMY
+  bool notify = true;
 
   @override
   void initState() {
@@ -42,109 +48,301 @@ class _NavigationPageState extends State<NavigationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
       body: SizedBox.expand(
-          child: GestureDetector(
-        onHorizontalDragUpdate: (details) {
-          if (details.delta.dx > 0) {
-            _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease);
-          }
-          if (details.delta.dx < 0) {
-            _pageController.nextPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease);
-          }
-        },
-        child: CustomScrollView(
-          shrinkWrap: true,
-          slivers: [
-            SliverAppBar(
-              backgroundColor: Theme.of(context).backgroundColor,
-              collapsedHeight: 60,
-              pinned: true,
-              automaticallyImplyLeading: false,
-              title: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxHeight: 41,
-                  minHeight: 41,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            ListView(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.only(top: 70 + context.padding.top, bottom: 100),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    'Kategoriler',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(fontSize: 27),
+                  ),
                 ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: LineIcon(LineIcons.arrowLeft),
-                    ),
-                    Text(
-                      'NAVIGASYON',
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                            fontSize: 21,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              centerTitle: false,
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(50),
-                child: SizedBox(
+                SizedBox(
                   width: context.width,
-                  height: 50,
-                  child: PageView.builder(
-                      controller: _pageController,
-                      pageSnapping: true,
-                      onPageChanged: (index) {
-                        setState(() {
-                          currentPage = index;
-                        });
-                      },
-                      // shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      // padding: EdgeInsets.only(right: context.width * 0.7, left: 10),
-                      itemCount: navigationMenu.length,
-                      itemBuilder: (context, index) {
-                        final data = navigationMenu[index];
-                        return Center(
-                          child: BouncingWidget(
-                            onPressed: () {
-                              setState(() {
-                                currentPage = index;
-                                _pageController.animateToPage(index,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.linear);
-                              });
-                            },
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  maxHeight: 20, minHeight: 20),
-                              child: FittedBox(
-                                alignment: Alignment.center,
-                                fit: BoxFit.fitHeight,
-                                child: Text(
-                                  data.toString(),
-                                  textAlign: TextAlign.start,
-                                  style: const TextStyle(fontSize: 20),
+                  height: context.width * 0.9,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 30),
+                    itemCount: categoryList.length,
+                    itemBuilder: (_, index) {
+                      final data = categoryList[index];
+                      return AspectRatio(
+                        aspectRatio: 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0, bottom: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontSize: 17),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: BouncingWidget(
+                                    onPressed: () {},
+                                    child: Card(
+                                      elevation: 10,
+                                      margin: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: appRadius(context)),
+                                      child: ClipRRect(
+                                        borderRadius: appRadius(context),
+                                        child: Image.network(
+                                          data.imageUrl!,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        );
-                      }),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    'Ayarlar',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(fontSize: 27),
+                  ),
+                ),
+                SizedBox(
+                  width: context.width,
+                  height: context.width * 0.7,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 30),
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Karanlık Tema',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontSize: 17),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: BouncingWidget(
+                                    onPressed: () {},
+                                    child: Card(
+                                      elevation: 10,
+                                      margin: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: appRadius(context)),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: ClipRRect(
+                                          borderRadius: appRadius(context),
+                                          child: CupertinoSwitch(
+                                            value: Provider.of<ThemeChanger>(
+                                                    context,
+                                                    listen: false)
+                                                .isDark(),
+                                            onChanged: (value) {
+                                              Provider.of<ThemeChanger>(context,
+                                                      listen: false)
+                                                  .setTheme(value);
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      AspectRatio(
+                        aspectRatio: 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Bildirimler',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontSize: 17),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: BouncingWidget(
+                                    onPressed: () {},
+                                    child: Card(
+                                      elevation: 10,
+                                      margin: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: appRadius(context)),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: ClipRRect(
+                                          borderRadius: appRadius(context),
+                                          child: CupertinoSwitch(
+                                            value: notify,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                notify = value;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      'Destek ve Bilgi',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2!
+                          .copyWith(fontSize: 27),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: context.width,
+                  height: context.width * 0.7,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 30),
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Bize ulaş',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontSize: 17),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: BouncingWidget(
+                                    onPressed: () {},
+                                    child: Card(
+                                      elevation: 10,
+                                      margin: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: appRadius(context)),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: ClipRRect(
+                                          borderRadius: appRadius(context),
+                                          child: LineIcon(LineIcons.headset, size: 60,)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      AspectRatio(
+                        aspectRatio: 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Kişisel verilerin korunması',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontSize: 17),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: BouncingWidget(
+                                    onPressed: () {},
+                                    child: Card(
+                                      elevation: 10,
+                                      margin: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: appRadius(context)),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: ClipRRect(
+                                          borderRadius: appRadius(context),
+                                          child: LineIcon(LineIcons.fileContract, size: 60,)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            currentPage == 0
-                ? buildCategories()
-                : const SliverToBoxAdapter(child: SizedBox()),
-            currentPage == 1
-                ? buildSettings(context)
-                : const SliverToBoxAdapter(child: SizedBox()),
+            Align(
+              alignment: Alignment.topCenter,
+              child: navAppBar(context),
+            )
           ],
         ),
-      )),
+      ),
     );
   }
 
@@ -165,7 +363,8 @@ class _NavigationPageState extends State<NavigationPage>
                 value:
                     Provider.of<ThemeChanger>(context, listen: false).isDark(),
                 onChanged: (value) {
-                  Provider.of<ThemeChanger>(context, listen: false).setTheme(value);
+                  Provider.of<ThemeChanger>(context, listen: false)
+                      .setTheme(value);
                 },
               ),
             ],
@@ -179,14 +378,55 @@ class _NavigationPageState extends State<NavigationPage>
         top: 5,
         left: 5,
         right: 5,
-        bottom: 200,
+        bottom: 100,
       ),
       sliver: SliverGrid.count(
-        crossAxisCount: 2,
-        childAspectRatio: 1,
+        crossAxisCount: 1,
+        childAspectRatio: 2,
         // crossAxisSpacing: 5,
         // mainAxisSpacing: 5,
         children: categoryList.map((e) => CategoryWidget(data: e)).toList(),
+      ),
+    );
+  }
+
+  PreferredSize navAppBar(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(70),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 3,
+            sigmaY: 3,
+          ),
+          child: SizedBox(
+            height: 70 + context.padding.top,
+            child: AppBar(
+              toolbarHeight: 70,
+              centerTitle: false,
+              elevation: 0,
+              backgroundColor: Theme.of(context)
+                  .appBarTheme
+                  .backgroundColor!
+                  .withOpacity(0.1),
+              automaticallyImplyLeading: false,
+              title: Row(
+                children: [
+                  IconButton(
+                    icon: FaIcon(
+                      LineIcons.arrowLeft,
+                      color: Theme.of(context).iconTheme.color!,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const Text('combin'),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

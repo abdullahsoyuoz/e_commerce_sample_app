@@ -4,7 +4,7 @@ import 'package:sepet_demo/View/Style/colors.dart';
 import 'dart:math' as math;
 
 class OnboardingPainter extends CustomPainter {
-  OnboardingPainter({required this.animation}) {
+  OnboardingPainter({required this.animation}) : super(repaint: animation) {
     level1Paint = Paint()
       ..color = AppColors.grey
       ..style = PaintingStyle.fill;

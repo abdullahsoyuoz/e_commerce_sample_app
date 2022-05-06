@@ -43,17 +43,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     _pageController = PageController(viewportFraction: 0.3);
     _listViewController = ScrollController();
-    _listViewController.addListener(() {
-      if (_listViewController.position.atEdge) {
-        // setState(() {
-          Provider.of<FlowsProvider>(context, listen: false).fetchData();
-        // });
-      }
-      // if (_listViewController.position.pixels ==
-      //     _listViewController.position.maxScrollExtent) {
-      //   Provider.of<FlowsProvider>(context, listen: false).fetchData();
-      // }
-    });
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -98,7 +87,7 @@ class _HomePageState extends State<HomePage>
             DropMenu(
               animationController: _animationController,
               indicator: const SizedBox(),
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               lowLayerBottomPadding: context.padding.bottom,
               lowLayerHeight: 70,
               lowLayer: const LowLayerWidget(),
@@ -120,7 +109,7 @@ class _HomePageState extends State<HomePage>
                     edgeOffset: context.padding.top + 120,
                     onRefresh: () async {
                       Provider.of<FlowsProvider>(context, listen: false)
-                          .fetchData();
+                          .filterList();
                     },
                     backgroundColor: Colors.white,
                     color: AppColors.purple,
@@ -160,8 +149,8 @@ class _HomePageState extends State<HomePage>
         return ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 5,
-              sigmaY: 5,
+              sigmaX: 3,
+              sigmaY: 3,
             ),
             child: SizedBox(
               width: context.width,
@@ -173,65 +162,71 @@ class _HomePageState extends State<HomePage>
                 backgroundColor: Theme.of(context)
                     .appBarTheme
                     .backgroundColor!
-                    .withOpacity(0.75),
+                    .withOpacity(0.8),
                 automaticallyImplyLeading: false,
-                title: provider.isLoading
-                    ? Lottie.asset(lottieSpinnerWhite, height: 120)
-                    : BouncingWidget(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => const SearchPage(),
-                              ));
-                        },
-                        child: SearchFrame(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              AbsorbPointer(
-                                absorbing: true,
-                                child: AnimatedTextKit(
-                                  repeatForever: true,
-                                  animatedTexts: searchHintList
-                                      .map(
-                                        (title) => TypewriterAnimatedText(title,
-                                            cursor: '|',
-                                            textAlign: TextAlign.end,
-                                            textStyle: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2!
-                                                .copyWith(color: Colors.white),
-                                            speed: const Duration(
-                                                milliseconds: 75)),
-                                      )
-                                      .toList(),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 3.0),
-                                child: Icon(
-                                  LineIcons.search,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                leading: IconButton(
-                    icon: const FaIcon(
-                      LineIcons.bars,
-                      color: Colors.white,
-                    ),
+                title: AnimatedCrossFade(
+                  firstChild: Lottie.asset(lottieSpinnerPurple, height: 120),
+                  secondChild: BouncingWidget(
                     onPressed: () {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const NavigationPage(),
+                            builder: (context) => const SearchPage(),
                           ));
-                    }),
+                    },
+                    child: SearchFrame(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          AbsorbPointer(
+                            absorbing: true,
+                            child: AnimatedTextKit(
+                              repeatForever: true,
+                              animatedTexts: searchHintList
+                                  .map(
+                                    (title) => TypewriterAnimatedText(title,
+                                        cursor: '|',
+                                        textAlign: TextAlign.end,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2!
+                                            .copyWith(color: Theme.of(context).iconTheme.color),
+                                        speed:
+                                            const Duration(milliseconds: 75)),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 3.0),
+                            child: Icon(
+                              LineIcons.search,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  crossFadeState: provider.isLoading
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  duration: const Duration(milliseconds: 250),
+                ),
+                leading: IconButton(
+                  icon: FaIcon(
+                    LineIcons.bars,
+                    color: Theme.of(context).iconTheme.color!,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const NavigationPage(),
+                        ));
+                  },
+                ),
                 actions: [
                   Tooltip(
                     message: 'Hızlı erişimler',
@@ -288,9 +283,9 @@ class _HomePageState extends State<HomePage>
                                       children: [
                                         Text(
                                           data.toString(),
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               fontSize: 20,
-                                              color: Colors.white),
+                                              color: Theme.of(context).iconTheme.color!,),
                                         ),
                                       ],
                                     ),
@@ -303,7 +298,7 @@ class _HomePageState extends State<HomePage>
                                     backgroundColor: index == currentPage.value
                                         ? getFilterIndicatorColor(
                                             context, index)
-                                        : Colors.white,
+                                        : Theme.of(context).iconTheme.color!,
                                   ),
                                 ),
                               ],

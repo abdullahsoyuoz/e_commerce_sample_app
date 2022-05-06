@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
@@ -275,7 +276,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               child: Row(
                 children: [
                   Icon(
-                    FontAwesomeIcons.at,
+                    LineIcons.at,
                     color: _emailFocus.hasFocus
                         ? Colors.white
                         : Colors.white.withOpacity(.5),
@@ -318,7 +319,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               child: Row(
                 children: [
                   Icon(
-                    FontAwesomeIcons.fingerprint,
+                    LineIcons.fingerprint,
                     color: _passwordFocus.hasFocus
                         ? Colors.white
                         : Colors.white.withOpacity(.5),

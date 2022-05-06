@@ -3,7 +3,7 @@ import 'package:sepet_demo/Model/flow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
-import 'package:sepet_demo/View/View/flow_products_view.dart';
+import 'package:sepet_demo/View/Page/User/Product/flow_products_list_page.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
@@ -27,9 +27,7 @@ class _FlowWidgetState extends State<FlowWidget>
       lowerBound: 0.5,
       upperBound: 1,
     );
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      _animationController.forward();
-    });
+
     super.initState();
   }
 
@@ -41,6 +39,9 @@ class _FlowWidgetState extends State<FlowWidget>
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _animationController.forward();
+    });
     return AnimatedBuilder(
       animation: CurvedAnimation(
           parent: _animationController, curve: Curves.easeOutCirc),
@@ -72,7 +73,7 @@ class _FlowWidgetState extends State<FlowWidget>
                   Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => FlowListProductsView(
+                      builder: (context) => FlowProductsListPage(
                         data: widget.data,
                       ),
                     ),

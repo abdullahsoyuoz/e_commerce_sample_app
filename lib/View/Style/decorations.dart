@@ -7,7 +7,7 @@ List<BoxShadow> appShadow(BuildContext context) =>
         ? []
         : [
             BoxShadow(
-              blurRadius: 5,
+              blurRadius: 10,
               spreadRadius: 0,
               color: Colors.black.withOpacity(
                 0.5,

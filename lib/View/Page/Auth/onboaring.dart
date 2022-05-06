@@ -29,9 +29,6 @@ class _OnboardPageState extends State<OnboardPage>
       upperBound: 3,
       lowerBound: 0,
     );
-    _animationController.addListener(() {
-      setState(() {});
-    });
   }
 
   @override

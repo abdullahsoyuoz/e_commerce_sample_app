@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Painter/register_painter.dart';
@@ -192,7 +193,7 @@ class _RegisterPageState extends State<RegisterPage>
               child: Row(
                 children: [
                   Icon(
-                    FontAwesomeIcons.solidUser,
+                    LineIcons.user,
                     color: _nameFocus.hasFocus
                         ? Colors.white
                         : Colors.white.withOpacity(.5),
@@ -235,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage>
               child: Row(
                 children: [
                   Icon(
-                    FontAwesomeIcons.mobileRetro,
+                    LineIcons.mobilePhone,
                     color: _phoneNumberFocus.hasFocus
                         ? Colors.white
                         : Colors.white.withOpacity(.5),
@@ -277,7 +278,7 @@ class _RegisterPageState extends State<RegisterPage>
               child: Row(
                 children: [
                   Icon(
-                    FontAwesomeIcons.at,
+                    LineIcons.at,
                     color: _emailFocus.hasFocus
                         ? Colors.white
                         : Colors.white.withOpacity(.5),
@@ -319,7 +320,7 @@ class _RegisterPageState extends State<RegisterPage>
               child: Row(
                 children: [
                   Icon(
-                    FontAwesomeIcons.fingerprint,
+                    LineIcons.fingerprint,
                     color: _passwordFocus.hasFocus
                         ? Colors.white
                         : Colors.white.withOpacity(.5),

@@ -12,15 +12,15 @@ class AuthBackgroundPainter extends CustomPainter {
 
   late final Animation<double> curvedAnimation;
   final paint1 = Paint()
-    ..color = AppColors.purple.shade300
-    ..style = PaintingStyle.fill;
-
-  final paint2 = Paint()
     ..color = AppColors.purple.shade400
     ..style = PaintingStyle.fill;
 
-  final paint3 = Paint()
+  final paint2 = Paint()
     ..color = AppColors.purple.shade500
+    ..style = PaintingStyle.fill;
+
+  final paint3 = Paint()
+    ..color = AppColors.purple.shade500.withOpacity(.5)
     ..style = PaintingStyle.fill;
 
   @override

@@ -14,20 +14,23 @@ class FlowsProvider with ChangeNotifier {
   late int _step = 0;
 
   FlowsProvider() {
-    fetchData();
+    filterList();
+    // fetchData();
   }
 
   void setFilterIndex(int index) {
     _currentFilter = index;
-    debugPrint(_currentFilter.toString());
     _flows = [];
     _count = 0;
     _step = 0;
-    fetchData();
+    // fetchData();
+    filterList();
     notifyListeners();
   }
 
-  void filterList() {
+  void filterList() async {
+    isLoading = true;
+    await Future.delayed(const Duration(seconds: 1));
     _flows = [];
     if (_currentFilter == 0) {
       flowList.shuffle();
@@ -64,6 +67,7 @@ class FlowsProvider with ChangeNotifier {
     if (_currentFilter == 5) {
       _flows = _followedFlows;
     }
+    isLoading = false;
     notifyListeners();
   }
 

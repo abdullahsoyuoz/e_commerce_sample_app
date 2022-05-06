@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class StarRankPainter extends CustomClipper<Path> {
-  double rank;
+  double? rank;
   StarRankPainter(
       {Key? key, required this.animationController, required this.rank})
       : super(reclip: animationController);

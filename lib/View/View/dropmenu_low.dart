@@ -72,7 +72,6 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 child: IconButton(
                   icon: const Icon(
                     LineIcons.archive,
-                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -87,7 +86,6 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 child: IconButton(
                   icon: const Icon(
                     LineIcons.heart,
-                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -102,7 +100,6 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 child: IconButton(
                   icon: const Icon(
                     LineIcons.bookmark,
-                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -117,7 +114,6 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 child: IconButton(
                   icon: const Icon(
                     LineIcons.envelope,
-                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,
@@ -132,7 +128,6 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 child: IconButton(
                   icon: const Icon(
                     LineIcons.bell,
-                    color: Colors.white,
                   ),
                   onPressed: () => Navigator.push(
                     context,

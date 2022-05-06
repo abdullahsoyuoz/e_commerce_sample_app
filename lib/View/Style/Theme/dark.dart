@@ -68,8 +68,8 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
-      elevation: MaterialStateProperty.all(0),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+      elevation: MaterialStateProperty.all(10),
       foregroundColor: MaterialStateProperty.all(Colors.white),
       backgroundColor: MaterialStateProperty.all(Colors.black),
       splashFactory: InkRipple.splashFactory,

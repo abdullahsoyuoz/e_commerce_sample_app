@@ -44,12 +44,12 @@ class _SearchPageState extends State<SearchPage>
             controller: _searchController,
             focusNode: _searchNode,
             cursorColor: Theme.of(context).iconTheme.color,
-            style: TextStyle(color: Theme.of(context).iconTheme.color),
+            style: const TextStyle(color: Colors.white),
             decoration: getSearchInputDecoration(context, 'aramaya başla')),
         leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const FaIcon(LineIcons.arrowLeft),
-          ),
+          onPressed: () => Navigator.pop(context),
+          icon: const FaIcon(LineIcons.arrowLeft),
+        ),
         actions: [
           IconButton(
             onPressed: () {},

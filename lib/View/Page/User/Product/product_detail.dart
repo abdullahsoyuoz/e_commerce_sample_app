@@ -30,8 +30,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
       appBar: AppBar(
         title: const Text('ProductDetailPage'),
       ),
-      body: const Center(
-        child: Text('ProductDetailPage'),
+      body: Center(
+        child: Text(widget.data.title!.toString()),
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:sepet_demo/View/Style/colors.dart';
 
 ThemeData appLightTheme = ThemeData.light().copyWith(
   brightness: Brightness.light,
-  primaryColor: AppColors.purple,
+  primaryColor: AppColors.purple.shade400,
   colorScheme: ColorScheme.light(
     background: AppColors.grey.shade100,
     primaryContainer: AppColors.grey.shade200,
@@ -15,7 +15,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   backgroundColor: AppColors.grey.shade100,
   hintColor: AppColors.black.shade100,
   highlightColor: Colors.transparent,
-  splashColor: AppColors.red,
+  splashColor: AppColors.purple.shade400,
   splashFactory: InkRipple.splashFactory,
   dividerColor: AppColors.black.shade100,
   inputDecorationTheme: const InputDecorationTheme(
@@ -48,8 +48,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
     unselectedLabelColor: Colors.black.withOpacity(.3),
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.purple.shade400,
-    systemOverlayStyle: SystemUiOverlayStyle.light,
+    backgroundColor: AppColors.grey.shade100,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
     foregroundColor: Colors.black,
     iconTheme: const IconThemeData(
       color: Colors.black,
@@ -59,7 +59,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: AppColors.grey.shade200,
     foregroundColor: Colors.black,
-    splashColor: AppColors.red,
+    splashColor: AppColors.purple.shade400,
   ),
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
@@ -67,12 +67,13 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
-      elevation: MaterialStateProperty.all(0),
-      foregroundColor: MaterialStateProperty.all(Colors.white),
-      backgroundColor: MaterialStateProperty.all(Colors.black),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+      elevation: MaterialStateProperty.all(10),
+      textStyle: MaterialStateProperty.all(const TextStyle()),
+      foregroundColor: MaterialStateProperty.all(Colors.black),
+      backgroundColor: MaterialStateProperty.all(Colors.white),
       splashFactory: InkRipple.splashFactory,
-      overlayColor: MaterialStateProperty.all(AppColors.red),
+      overlayColor: MaterialStateProperty.all(AppColors.purple.shade400),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
@@ -86,7 +87,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
           const BorderSide(color: Colors.black, width: 1)),
       elevation: MaterialStateProperty.all(0),
       foregroundColor: MaterialStateProperty.all(Colors.black),
-      overlayColor: MaterialStateProperty.all(AppColors.red),
+      overlayColor: MaterialStateProperty.all(AppColors.purple.shade400),
       splashFactory: InkRipple.splashFactory,
     ),
   ),
