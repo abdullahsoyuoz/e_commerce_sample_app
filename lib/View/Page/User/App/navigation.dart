@@ -72,7 +72,7 @@ class _NavigationPageState extends State<NavigationPage>
                         _buildCategories(),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
+                        padding: const EdgeInsets.only(top: 30.0),
                         child: _slideAnimate(
                           Direction.LEFT,
                           const TitleWidget(title: 'Ayarlar'),
@@ -83,7 +83,7 @@ class _NavigationPageState extends State<NavigationPage>
                         _buildSettings(),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
+                        padding: const EdgeInsets.only(top: 30.0),
                         child: _slideAnimate(
                           Direction.LEFT,
                           const TitleWidget(title: 'Destek ve Bilgi'),
