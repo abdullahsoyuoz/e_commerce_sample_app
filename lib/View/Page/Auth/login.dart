@@ -9,6 +9,7 @@ import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
 import 'package:sepet_demo/View/Painter/login_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 import 'package:sepet_demo/View/Style/route_builder.dart';
 import 'package:sepet_demo/View/Style/textstyle.dart';
@@ -99,21 +100,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           ))),
                   Padding(
                     padding: const EdgeInsets.only(top: 25.0),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.black, blurRadius: 5)
-                        ],
-                      ),
+                    child: Card(
+                      color: AppColors.black.shade500,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
+                        borderRadius: appRadius(),
+                        child: SizedBox(
                           width: context.width * 0.75,
                           height: context.width * 0.75,
-                          decoration: BoxDecoration(
-                            color: AppColors.black.shade300
-                          ),
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
@@ -174,8 +167,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                   onPressed: () {},
                                   icon: const Icon(FontAwesomeIcons.apple),
                                   iconSize: 45,
-                                  splashColor: AppColors.red,
-                                  highlightColor: Colors.transparent,
+                                  splashColor: AppColors.red.shade400,
                                   color: Colors.white,
                                 ),
                               ),
@@ -186,8 +178,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                   onPressed: () {},
                                   icon: const Icon(FontAwesomeIcons.google),
                                   iconSize: 45,
-                                  splashColor: AppColors.red,
-                                  highlightColor: Colors.transparent,
+                                  splashColor: AppColors.red.shade400,
                                   color: Colors.white,
                                 ),
                               ),

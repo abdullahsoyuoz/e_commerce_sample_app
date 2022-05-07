@@ -6,6 +6,7 @@ import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Painter/register_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 import 'package:sepet_demo/View/Style/textstyle.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
@@ -114,21 +115,13 @@ class _RegisterPageState extends State<RegisterPage>
                         ))),
                 Padding(
                   padding: const EdgeInsets.only(top: 25.0),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(color: Colors.black, blurRadius: 5)
-                      ],
-                    ),
+                  child: Card(
+                    color: AppColors.black.shade500,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
+                      borderRadius: appRadius(),
+                      child: SizedBox(
                         width: context.width * 0.75,
                         height: context.width * 0.75 * 1.5,
-                        decoration: BoxDecoration(
-                          color: AppColors.black.shade300,
-                        ),
                         child: Stack(
                           fit: StackFit.expand,
                           children: [

@@ -71,23 +71,25 @@ class _NavigationPageState extends State<NavigationPage>
                         Direction.RIGHT,
                         _buildCategories(),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: _slideAnimate(
-                          Direction.LEFT,
-                          const TitleWidget(title: 'Ayarlar'),
-                        ),
+                      const Divider(
+                        height: 50,
+                        thickness: 0.15,
+                      ),
+                      _slideAnimate(
+                        Direction.LEFT,
+                        const TitleWidget(title: 'Ayarlar'),
                       ),
                       _slideAnimate(
                         Direction.RIGHT,
                         _buildSettings(),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: _slideAnimate(
-                          Direction.LEFT,
-                          const TitleWidget(title: 'Destek ve Bilgi'),
-                        ),
+                      const Divider(
+                        height: 50,
+                        thickness: 0.15,
+                      ),
+                      _slideAnimate(
+                        Direction.LEFT,
+                        const TitleWidget(title: 'Destek ve Bilgi'),
                       ),
                       _slideAnimate(
                         Direction.RIGHT,
@@ -159,11 +161,11 @@ class _NavigationPageState extends State<NavigationPage>
   }
 
   Widget _buildCategories() {
-    return SizedBox(
-      width: context.width,
-      height: context.width * 0.75,
+    return AspectRatio(
+      aspectRatio: 1.5,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
         controller: _scrollController,
         padding: const EdgeInsets.only(left: 30),
         physics: const BouncingScrollPhysics(),
@@ -219,64 +221,67 @@ class _NavigationPageState extends State<NavigationPage>
   }
 
   Widget _buildSettings() {
-    return AspectRatio(
-      aspectRatio: 3,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.only(left: 30),
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 30.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: BouncingWidget(
-                    onPressed: () {
-                      Provider.of<ThemeChanger>(context, listen: false)
-                          .toggle();
-                    },
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Card(
-                        color: Theme.of(context).iconTheme.color,
-                        child: Center(
-                          child: LineIcon(
-                            Provider.of<ThemeChanger>(context, listen: false)
-                                    .isDark()
-                                ? LineIcons.sun
-                                : LineIcons.moon,
-                            color: Theme.of(context).scaffoldBackgroundColor,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: AspectRatio(
+        aspectRatio: 3,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.only(left: 30),
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: BouncingWidget(
+                      onPressed: () {
+                        Provider.of<ThemeChanger>(context, listen: false)
+                            .toggle();
+                      },
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Card(
+                          color: Theme.of(context).iconTheme.color,
+                          child: Center(
+                            child: LineIcon(
+                              Provider.of<ThemeChanger>(context, listen: false)
+                                      .isDark()
+                                  ? LineIcons.sun
+                                  : LineIcons.moon,
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text(
-                    'Tema',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2!
-                        .copyWith(fontSize: 17),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      'Tema',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2!
+                          .copyWith(fontSize: 17),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          buildSettingsItem(
-            'Bildirimler',
-            LineIcons.bell
-          ),
-          buildSettingsItem(
-            'Profili düzenle',
-            LineIcons.user
-          ),
-        ],
+            buildSettingsItem(
+              'Bildirimler',
+              LineIcons.bell
+            ),
+            buildSettingsItem(
+              'Profili düzenle',
+              LineIcons.user
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -332,24 +337,23 @@ class _NavigationPageState extends State<NavigationPage>
 
   Widget buildSupportItem(String title, IconData icon, {int? index}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
+      padding: const EdgeInsets.only(bottom: 10.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            flex: 2,
+            flex: 55,
             child: BouncingWidget(
               onPressed: () {},
               child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: LineIcon(icon),
-                ),
+                child: AspectRatio(
+                  aspectRatio: 3,
+                  child: LineIcon(icon)),
               ),
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 89,
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),
               child: Text(
