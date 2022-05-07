@@ -36,6 +36,12 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       wordSpacing: 1,
     ),
   ),
+  cardTheme: CardTheme(
+    color: AppColors.black.shade200,
+    elevation: 10,
+    margin: EdgeInsets.zero,
+    shape: RoundedRectangleBorder(borderRadius: appRadius()),
+  ),
   iconTheme: const IconThemeData(
     color: Colors.white,
     size: 30,
@@ -48,20 +54,20 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
     labelColor: Colors.white,
     unselectedLabelColor: Colors.white.withOpacity(.3),
   ),
-  appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.purple.shade500,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.black,
     systemOverlayStyle: SystemUiOverlayStyle.light,
     foregroundColor: Colors.white,
-    iconTheme: const IconThemeData(
+    iconTheme: IconThemeData(
       color: Colors.white,
     ),
   ),
   // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.purple.shade400,
-    foregroundColor: Colors.white,
-    splashColor: AppColors.black.shade100,
-  ),
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+      splashColor: AppColors.black.shade100,
+      elevation: 10),
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
   ),

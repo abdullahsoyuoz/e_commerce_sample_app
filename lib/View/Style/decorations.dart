@@ -15,7 +15,7 @@ List<BoxShadow> appShadow(BuildContext context) =>
             ),
           ];
 
-BorderRadius appRadius(BuildContext context) =>
+BorderRadius appRadius() =>
     BorderRadius.circular(appPaddingForRadius() * 2);
 
 double appPaddingForRadius() => 15;

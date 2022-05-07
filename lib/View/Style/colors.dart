@@ -17,7 +17,7 @@ class AppColors {
   static MaterialColor black = MaterialColor(0xff171717, _materialBlack);
   static MaterialColor orange = MaterialColor(0xffFFB433, _materialOrange);
   static MaterialColor yellow = MaterialColor(0xffFFFA2E, _materialYellow);
-  static MaterialColor green = MaterialColor(0xffAED969, _materialGreen);
+  static MaterialColor green = MaterialColor(0xff88C158, _materialGreen);
   static MaterialColor turquaz = MaterialColor(0xff6BB8D2, _materialTurquaz);
   static MaterialColor blue = MaterialColor(0xff3D7CBE, _materialBlue);
   static MaterialColor purple = MaterialColor(0xff764F9E, _materialPurple);

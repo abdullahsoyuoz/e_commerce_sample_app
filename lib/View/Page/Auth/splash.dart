@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/Controller/constant.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/Auth/onboaring.dart';
 import 'package:sepet_demo/View/Painter/splash_painter.dart';

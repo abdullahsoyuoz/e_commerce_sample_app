@@ -15,6 +15,7 @@ import 'package:sepet_demo/View/Page/Auth/splash.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
 import 'package:sepet_demo/View/Style/Theme/dark.dart';
 import 'package:sepet_demo/View/Style/Theme/light.dart';
+import 'package:sepet_demo/View/Style/scroll_behavior.dart';
 import 'package:statusbarmanager/statusbarmanager.dart';
 
 void main() {
@@ -25,11 +26,13 @@ void main() {
       });
     });
   });
-  runApp(StatusBarManager(
-    translucent: true,
-    child: const AppStarter(),
-    statusBarColor: Colors.transparent,
-  ));
+  runApp(
+    StatusBarManager(
+      translucent: true,
+      child: const AppStarter(),
+      statusBarColor: Colors.transparent,
+    ),
+  );
 }
 
 class AppStarter extends StatefulWidget {
@@ -68,8 +71,11 @@ class _AppStarterState extends State<AppStarter> {
                 ? ThemeMode.light
                 : ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
-            // home: const AuthMainPage(),
+            home: ScrollConfiguration(
+              behavior: WithoutGlowBehavior(),
+              // child: const SplashScreen(),
+              child: const AuthMainPage(),
+            ),
             // home: const HomePage(),
           );
         },

@@ -2,123 +2,81 @@
     {
         "category_id": 0,
         "id": 0,
-        "title": "Elektronik & Aksesuarlar",
-        "imageUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80",
-        "subs" : {
-        }
+        "title": "Elektronik & Aksesuarlar"
     },
     {
         "category_id": 0,
         "id": 1,
-        "title": "Oyun, Hobi ve Oyuncak",
-        "imageUrl": "https://images.unsplash.com/photo-1571716846252-df1324ce17bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Oyun, Hobi ve Oyuncak"
     },
     {
         "category_id": 0,
         "id": 2,
-        "title": "Kitap, Dergi, Film ve Müzik",
-        "imageUrl": "https://images.unsplash.com/photo-1515165616480-efd71925068f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Kitap, Dergi, Film ve Müzik"
     },
     {
         "category_id": 0,
         "id": 3,
-        "title": "Enstrüman, Fotoğrafçılık ve Sanat",
-        "imageUrl": "https://images.unsplash.com/photo-1499892298463-01d7f9832da5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Enstrüman, Fotoğrafçılık ve Sanat"
     },
     {
         "category_id": 1,
         "id": 0,
-        "title": "Sağlık, Kişisel Bakım ve Kozmetik",
-        "imageUrl": "https://images.unsplash.com/photo-1531895861208-8504b98fe814?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Sağlık, Kişisel Bakım ve Kozmetik"
     },
     {
         "category_id": 1,
         "id": 1,
-        "title": "Anne, Bebek ve Petshop",
-        "imageUrl": "https://images.unsplash.com/photo-1601758064955-a4a16da74a86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Anne, Bebek ve Petshop"
     },
     {
         "category_id": 1,
         "id": 2,
-        "title": "Spor ve Outdoor",
-        "imageUrl": "https://images.unsplash.com/photo-1608138404239-d2f557515ecb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Spor ve Outdoor"
     },
     {
         "category_id": 1,
         "id": 3,
-        "title": "Giyim & Aksesuarlar",
-        "imageUrl": "https://images.unsplash.com/photo-1580656940647-8854a00547f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Giyim & Aksesuarlar"
     },
     {
         "category_id": 2,
         "id": 0,
-        "title": "Ev ve Ofis",
-        "imageUrl": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Ev ve Ofis"
     },
     {
         "category_id": 2,
         "id": 1,
-        "title": "Dekorasyon",
-        "imageUrl": "https://images.unsplash.com/photo-1618220048045-10a6dbdf83e0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Dekorasyon"
     },
     {
         "category_id": 2,
         "id": 2,
-        "title": "Antika ve Koleksiyonlar",
-        "imageUrl": "https://images.unsplash.com/photo-1419640303358-44f0d27f48e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Antika ve Koleksiyonlar"
     },
     {
         "category_id": 2,
         "id": 3,
-        "title": "Temizlik Ürünleri",
-        "imageUrl": "https://images.unsplash.com/photo-1584792286782-a5dc95dc2250?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Temizlik Ürünleri"
     },
     {
         "category_id": 3,
         "id": 0,
-        "title": "Araç & Aksesuarlar",
-        "imageUrl": "https://images.unsplash.com/photo-1617286114183-3de6d981bcd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Araç & Aksesuarlar"
     },
     {
         "category_id": 3,
         "id": 1,
-        "title": "Bahçe ve Yapı malzemeleri",
-        "imageUrl": "https://images.unsplash.com/photo-1513467655676-561b7d489a88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Bahçe ve Yapı malzemeleri"
     },
     {
         "category_id": 3,
         "id": 2,
-        "title": "Tamirat ve Endüstriyel aletler",
-        "imageUrl": "https://images.unsplash.com/photo-1603227756386-6da8d06e2bb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Tamirat ve Endüstriyel aletler"
     },
     {
         "category_id": 3,
         "id": 3,
-        "title": "Kırtasiye",
-        "imageUrl": "https://images.unsplash.com/photo-1568871391149-449702439177?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        "category_id": 4,
-        "id": 0,
-        "title": "Manav ve Baharatlar",
-        "imageUrl": "https://images.unsplash.com/photo-1609126972335-5a5b18904b45?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        "category_id": 4,
-        "id": 1,
-        "title": "Şarküteri",
-        "imageUrl": "https://images.unsplash.com/photo-1511018953270-acf4f613483a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        "category_id": 4,
-        "id": 2,
-        "title": "Bakliyatlar",
-        "imageUrl": "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        "category_id": 4,
-        "id": 3,
-        "title": "Süt ürünleri",
-        "imageUrl": "https://images.unsplash.com/photo-1567513068697-fca8c2af4528?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+        "title": "Kırtasiye"
     }
 ]

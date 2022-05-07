@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields
+// ignore_for_file: prefer_final_fields, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';

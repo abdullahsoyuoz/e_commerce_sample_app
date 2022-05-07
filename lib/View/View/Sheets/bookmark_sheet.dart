@@ -4,8 +4,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:sepet_demo/Controller/Picker/color_picker.dart';
-import 'package:sepet_demo/Controller/Picker/icon_picker.dart';
 import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Model/Dummy/mylists.dart';
 import 'package:sepet_demo/Model/mylist.dart';
@@ -13,6 +11,8 @@ import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
+import 'package:sepet_demo/View/View/Picker/color_picker.dart';
+import 'package:sepet_demo/View/View/Picker/icon_picker.dart';
 
 Future<void> showFlexibleBookmarkSheet(
     BuildContext context, Product data) async {
@@ -59,7 +59,7 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: appRadius(context),
+          borderRadius: appRadius(),
         ),
         child: ListView(
           padding: EdgeInsets.zero,
@@ -223,7 +223,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: appRadius(context),
+            borderRadius: appRadius(),
           ),
           child: ListView(
             padding: EdgeInsets.zero,

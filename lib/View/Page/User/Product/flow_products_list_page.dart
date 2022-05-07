@@ -71,7 +71,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                             elevation: 10,
                             color: Theme.of(context).scaffoldBackgroundColor,
                             shape: RoundedRectangleBorder(
-                              borderRadius: appRadius(context),
+                              borderRadius: appRadius(),
                             ),
                             child: const Center(
                               child: FaIcon(
@@ -98,7 +98,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                                   color:
                                       Theme.of(context).scaffoldBackgroundColor,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: appRadius(context)),
+                                      borderRadius: appRadius()),
                                   child: Marquee(
                                     text: widget.data.title!.toUpperCase(),
                                     numberOfRounds: 3,
@@ -143,7 +143,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                           child: Material(
                             elevation: 10,
                             shape: RoundedRectangleBorder(
-                                borderRadius: appRadius(context)),
+                                borderRadius: appRadius()),
                             color: provider.isFollowed(widget.data)
                                 ? AppColors.red
                                 : Theme.of(context).scaffoldBackgroundColor,
@@ -200,7 +200,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                           child: Card(
                             elevation: 30,
                             shape: RoundedRectangleBorder(
-                                borderRadius: appRadius(context)),
+                                borderRadius: appRadius()),
                             child: ProductViewBody(
                                 data: widget.data.targetProducts![index],
                                 index: index),

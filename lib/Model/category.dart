@@ -76,19 +76,10 @@ IconData getIcon(int category, int index) {
 MaterialColor getCategoryColor(int category) {
   if (category == 0) return AppColors.turquaz;
   if (category == 1) return AppColors.red;
-  if (category == 2) return AppColors.blue;
+  if (category == 2) return AppColors.green;
   if (category == 3) return AppColors.orange;
-  if (category == 4) return AppColors.green;
+  // if (category == 4) return AppColors.green;
   return AppColors.grey;
-}
-
-MaterialColor getMaterialColor(int category) {
-  if (category == 0) return Colors.teal;
-  if (category == 1) return Colors.red;
-  if (category == 2) return Colors.blue;
-  if (category == 3) return Colors.orange;
-  if (category == 4) return Colors.green;
-  return Colors.grey;
 }
 
 String getCategoryTitle(int index) {

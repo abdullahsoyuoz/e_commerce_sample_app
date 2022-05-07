@@ -43,15 +43,22 @@ class _FlowWidgetState extends State<FlowWidget>
       _animationController.forward();
     });
     return AnimatedBuilder(
-      animation: CurvedAnimation(
-          parent: _animationController, curve: Curves.easeOutCirc),
+      animation: _animationController,
+      // animation: CurvedAnimation(
+      //     parent: _animationController, curve: Curves.easeOutCirc),
       builder: (context, child) {
-        return ScaleTransition(
-          scale: _animationController,
-          alignment: Alignment.bottomCenter,
-          filterQuality: FilterQuality.low,
+        return SlideTransition(
+          position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+              .animate(_animationController),
+              
           child: child,
         );
+        // return ScaleTransition(
+        //   scale: _animationController,
+        //   alignment: Alignment.bottomCenter,
+        //   filterQuality: FilterQuality.low,
+        //   child: child,
+        // );
       },
       child: SizedBox(
         width: context.width,
@@ -82,42 +89,47 @@ class _FlowWidgetState extends State<FlowWidget>
               },
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: ClipRRect(
-                  borderRadius: appRadius(context),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.network(
-                        widget.data.imageUrl!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (c, o, s) =>
-                            errorIndicator(c, o, s ?? StackTrace.empty),
-                        loadingBuilder: (context, child, loadingProgress) =>
-                            loadingIndicator(context, child, loadingProgress),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          width: context.width,
-                          color: Theme.of(context).iconTheme.color,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: appPaddingForRadius(),
-                            vertical: 2,
-                          ),
-                          child: Text(
-                            widget.data.title!.toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).backgroundColor),
-                            maxLines: 3,
-                            textAlign: TextAlign.center,
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(borderRadius: appRadius()),
+                  child: ClipRRect(
+                    borderRadius: appRadius(),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          widget.data.imageUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (c, o, s) =>
+                              errorIndicator(c, o, s ?? StackTrace.empty),
+                          loadingBuilder: (context, child, loadingProgress) =>
+                              loadingIndicator(context, child, loadingProgress),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            width: context.width,
+                            color: Theme.of(context).iconTheme.color,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: appPaddingForRadius(),
+                              vertical: 2,
+                            ),
+                            child: Text(
+                              widget.data.title!.toUpperCase(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: Theme.of(context).backgroundColor),
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

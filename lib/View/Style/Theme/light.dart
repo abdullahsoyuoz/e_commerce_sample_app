@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 
 ThemeData appLightTheme = ThemeData.light().copyWith(
   brightness: Brightness.light,
@@ -35,6 +36,12 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       wordSpacing: 1,
     ),
   ),
+  cardTheme: CardTheme(
+    color: Colors.white,
+    elevation: 10,
+    margin: EdgeInsets.zero,
+    shape: RoundedRectangleBorder(borderRadius: appRadius()),
+  ),
   iconTheme: const IconThemeData(
     color: Colors.black,
     size: 30,
@@ -47,19 +54,20 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
     labelPadding: const EdgeInsets.symmetric(vertical: 3),
     unselectedLabelColor: Colors.black.withOpacity(.3),
   ),
-  appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.grey.shade100,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.white,
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     foregroundColor: Colors.black,
-    iconTheme: const IconThemeData(
+    iconTheme: IconThemeData(
       color: Colors.black,
     ),
   ),
   // ---------------------------------------------------- BUTTON
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.grey.shade200,
-    foregroundColor: Colors.black,
-    splashColor: AppColors.purple.shade400,
+    backgroundColor: AppColors.purple.shade400,
+    foregroundColor: Colors.white,
+    splashColor: AppColors.red.shade400,
+    elevation: 10,
   ),
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),

@@ -13,7 +13,7 @@ class SearchFrame extends StatelessWidget {
       width: context.width,
       decoration: BoxDecoration(
         color: Theme.of(context).appBarTheme.backgroundColor!.withOpacity(1),
-        borderRadius: appRadius(context),
+        borderRadius: appRadius(),
         border: Border.all(width: 1, color: Theme.of(context).iconTheme.color!)
         // boxShadow: appShadow(context),
       ),

@@ -9,9 +9,12 @@ import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/Constant/flow_constants.dart';
+import 'package:sepet_demo/Controller/Constant/home_search_hints.dart';
+import 'package:sepet_demo/Controller/Constant/lottie_asset_constants.dart';
 import 'package:sepet_demo/Controller/Provider/flows_provider.dart';
-import 'package:sepet_demo/Controller/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
+import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
@@ -73,9 +76,7 @@ class _HomePageState extends State<HomePage>
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor:
-            Theme.of(context).floatingActionButtonTheme.backgroundColor,
-        elevation: 5,
+        tooltip: 'Sepetin',
         child: const FaIcon(
           LineIcons.shoppingBasket,
         ),
@@ -165,7 +166,7 @@ class _HomePageState extends State<HomePage>
                     .withOpacity(0.8),
                 automaticallyImplyLeading: false,
                 title: AnimatedCrossFade(
-                  firstChild: Lottie.asset(lottieSpinnerPurple, height: 120),
+                  firstChild: Lottie.asset(Provider.of<ThemeChanger>(context, listen: false).isDark() ? lottieSpinnerWhite : lottieSpinnerPurple, height: 120),
                   secondChild: BouncingWidget(
                     onPressed: () {
                       Navigator.push(
@@ -190,7 +191,10 @@ class _HomePageState extends State<HomePage>
                                         textStyle: Theme.of(context)
                                             .textTheme
                                             .bodyText2!
-                                            .copyWith(color: Theme.of(context).iconTheme.color),
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .iconTheme
+                                                    .color),
                                         speed:
                                             const Duration(milliseconds: 75)),
                                   )
@@ -284,8 +288,11 @@ class _HomePageState extends State<HomePage>
                                         Text(
                                           data.toString(),
                                           style: TextStyle(
-                                              fontSize: 20,
-                                              color: Theme.of(context).iconTheme.color!,),
+                                            fontSize: 20,
+                                            color: Theme.of(context)
+                                                .iconTheme
+                                                .color!,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -296,8 +303,7 @@ class _HomePageState extends State<HomePage>
                                   child: CircleAvatar(
                                     radius: 5,
                                     backgroundColor: index == currentPage.value
-                                        ? getFilterIndicatorColor(
-                                            context, index)
+                                        ? getFilterIndicatorColor(index)
                                         : Theme.of(context).iconTheme.color!,
                                   ),
                                 ),

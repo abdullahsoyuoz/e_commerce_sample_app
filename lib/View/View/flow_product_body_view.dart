@@ -56,7 +56,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
       _rankAnimationController.animateTo(widget.data.rank! / 5);
     });
     return ClipRRect(
-      borderRadius: appRadius(context),
+      borderRadius: appRadius(),
       child: Column(
         key: UniqueKey(),
         mainAxisAlignment: MainAxisAlignment.start,
