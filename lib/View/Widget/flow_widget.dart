@@ -24,7 +24,7 @@ class _FlowWidgetState extends State<FlowWidget>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
-      lowerBound: 0.5,
+      lowerBound: 0.75,
       upperBound: 1,
     );
 
@@ -50,7 +50,6 @@ class _FlowWidgetState extends State<FlowWidget>
         return SlideTransition(
           position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
               .animate(_animationController),
-              
           child: child,
         );
         // return ScaleTransition(
@@ -90,9 +89,6 @@ class _FlowWidgetState extends State<FlowWidget>
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Card(
-                  margin: EdgeInsets.zero,
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(borderRadius: appRadius()),
                   child: ClipRRect(
                     borderRadius: appRadius(),
                     child: Stack(

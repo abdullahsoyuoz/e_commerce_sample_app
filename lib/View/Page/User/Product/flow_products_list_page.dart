@@ -33,7 +33,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0, viewportFraction: 0.85);
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
   }
 
   @override
@@ -62,26 +62,25 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                     const PageScrollPhysics(parent: BouncingScrollPhysics()),
                 itemCount: widget.data.targetProducts!.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: BouncingWidget(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => ProductDetailPage(
-                                  data: widget.data.targetProducts![index]),
-                            ));
-                      },
-                      child: Center(
-                        child: AspectRatio(
-                          aspectRatio: 0.6,
+                  return BouncingWidget(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => ProductDetailPage(
+                                data: widget
+                                    .data.targetProducts![index]),
+                          ));
+                    },
+                    child: Center(
+                      child: AspectRatio(
+                        aspectRatio: 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Card(
-                            elevation: 30,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: appRadius()),
                             child: ProductViewBody(
-                                data: widget.data.targetProducts![index],
+                                data: widget
+                                    .data.targetProducts![index],
                                 index: index),
                           ),
                         ),

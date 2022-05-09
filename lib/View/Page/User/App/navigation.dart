@@ -32,7 +32,7 @@ class _NavigationPageState extends State<NavigationPage>
   void initState() {
     _scrollController = ScrollController();
     _openAnimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
+        vsync: this, duration: const Duration(milliseconds: 400));
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _openAnimationController.forward();
     });

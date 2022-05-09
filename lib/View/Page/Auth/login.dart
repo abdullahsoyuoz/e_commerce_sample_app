@@ -50,7 +50,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     _emailFocus = FocusNode();
     _passwordFocus = FocusNode();
     // LISTENERS
-    _animationController.addListener(() {});
     _emailController.addListener(() => _validation());
     _passwordController.addListener(() => _validation());
 

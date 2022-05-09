@@ -18,6 +18,7 @@ class Product {
   late bool isLiked;
   late bool isAddedBookmark;
   late bool isAddedCart;
+  late bool isNew;
 
   Product({
     this.id,
@@ -36,7 +37,8 @@ class Product {
     this.shop,
     this.isLiked = false,
     this.isAddedBookmark = false,
-    this.isAddedCart = false
+    this.isAddedCart = false,
+    this.isNew = false,
   });
 
   @override

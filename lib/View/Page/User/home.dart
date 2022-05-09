@@ -20,6 +20,7 @@ import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Order/basket.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/drop_menu.dart';
@@ -77,7 +78,11 @@ class _HomePageState extends State<HomePage>
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, CupertinoPageRoute(builder: (context) => const BasketPage(),));
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (context) => const BasketPage(),
+              ));
         },
         tooltip: 'Sepetin',
         child: const FaIcon(
@@ -98,12 +103,12 @@ class _HomePageState extends State<HomePage>
               highLayer: ColoredBox(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: GestureDetector(onHorizontalDragUpdate: (details) {
-                  if (details.delta.dx > 0) {
+                  if (details.delta.dx > 10) {
                     _pageController.previousPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.ease);
                   }
-                  if (details.delta.dx < 0) {
+                  if (details.delta.dx < 10) {
                     _pageController.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.ease);
@@ -129,7 +134,8 @@ class _HomePageState extends State<HomePage>
                       itemCount: value.getList().length,
                       itemExtent: context.width * 0.5,
                       itemBuilder: (context, index) {
-                        return FlowWidget(data: value.getList()[index]);
+                        final data = value.getList();
+                        return FlowWidget(data: data[index]);
                       },
                     ),
                   );
@@ -308,11 +314,15 @@ class _HomePageState extends State<HomePage>
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5.0),
-                                  child: CircleAvatar(
-                                    radius: 5,
-                                    backgroundColor: index == currentPage.value
-                                        ? getFilterIndicatorColor(index)
-                                        : Theme.of(context).iconTheme.color!,
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 500),
+                                    width: index == currentPage.value ? 10 : 0,
+                                    height: index == currentPage.value ? 10 : 0,
+                                    decoration: BoxDecoration(
+                                        color: index == currentPage.value
+                                            ? getFilterIndicatorColor(index)
+                                            : Colors.transparent,
+                                        borderRadius: appRadius()),
                                   ),
                                 ),
                               ],

@@ -60,7 +60,6 @@ class _RegisterPageState extends State<RegisterPage>
     _emailFocus = FocusNode();
     _passwordFocus = FocusNode();
     // LISTENERS
-    _animationController.addListener(() {});
     //
     _nameController.addListener(() => _validation());
     _phoneNumberController.addListener(() => _validation());

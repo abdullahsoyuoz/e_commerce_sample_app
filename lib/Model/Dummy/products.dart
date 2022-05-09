@@ -36,6 +36,7 @@ Future<void> generateProduct() async {
         purchasesCount: count,
         commentCount: count ~/ (Random().nextInt(10000) + 1),
         shop: shopList[Random().nextInt(shopList.length - 1)],
+        isNew: Random().nextBool() ? Random().nextBool() : false
       );
       // print('product:: ' + data.toString());
       productList.add(data);

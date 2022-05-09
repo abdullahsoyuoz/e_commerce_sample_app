@@ -62,16 +62,6 @@ class _DropMenuState extends State<DropMenu>
       end: -(widget.lowLayerHeight! + widget.lowLayerBottomPadding!),
     ).animate(_animationController);
     _scrollController = ScrollController();
-    // _animationController.addListener(() {
-    //   if (!_animationController.isAnimating &&
-    //       _animationController.value == 0) {
-    //     // widget.openCallback!(false);
-    //   }
-    //   if (!_animationController.isAnimating &&
-    //       _animationController.value == 1) {
-    //     // widget.openCallback!(true);
-    //   }
-    // });
   }
 
   @override
