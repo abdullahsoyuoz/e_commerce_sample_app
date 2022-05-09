@@ -24,17 +24,17 @@ class _NavigationPageState extends State<NavigationPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   late ScrollController _scrollController;
-  late final AnimationController _animationController;
+  late final AnimationController _openAnimationController;
   // DUMMY
   bool notify = true;
 
   @override
   void initState() {
     _scrollController = ScrollController();
-    _animationController = AnimationController(
+    _openAnimationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      _animationController.forward();
+      _openAnimationController.forward();
     });
     super.initState();
   }
@@ -42,14 +42,14 @@ class _NavigationPageState extends State<NavigationPage>
   @override
   void dispose() {
     _scrollController.dispose();
-    _animationController.dispose();
+    _openAnimationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: _animationController,
+        animation: _openAnimationController,
         builder: (context, _) {
           return Scaffold(
             key: _scaffoldKey,
@@ -383,10 +383,10 @@ class _NavigationPageState extends State<NavigationPage>
                           : const Offset(0, 0.75),
               end: Offset.zero)
           .animate(CurvedAnimation(
-              parent: _animationController, curve: Curves.ease)),
+              parent: _openAnimationController, curve: Curves.ease)),
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 300),
-        opacity: _animationController.value,
+        opacity: _openAnimationController.value,
         child: child,
       ),
     );

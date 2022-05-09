@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -5,7 +6,6 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
-import 'package:sepet_demo/Model/Dummy/mylists.dart';
 import 'package:sepet_demo/Model/mylist.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -17,11 +17,11 @@ import 'package:sepet_demo/View/View/Picker/icon_picker.dart';
 Future<void> showFlexibleBookmarkSheet(
     BuildContext context, Product data) async {
   showFlexibleBottomSheet<void>(
+    context: context,
     minHeight: 0,
     initHeight: 0.5,
     maxHeight: 1,
     anchors: [0, 0.5, 1],
-    context: context,
     isExpand: true,
     isSafeArea: true,
     keyboardBarrierColor: Colors.transparent,
@@ -53,6 +53,16 @@ class _BookmarkSheet extends StatefulWidget {
 }
 
 class _BookmarkSheetState extends State<_BookmarkSheet> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
@@ -105,64 +115,10 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
                 itemCount: value.getList().length,
                 itemBuilder: (context, index) {
                   final data = value.getList()[index];
-                  return Slidable(
-                    key: LabeledGlobalKey(data.products.hashCode.toString()),
-                    endActionPane: ActionPane(
-                      motion: const DrawerMotion(),
-                      children: [
-                        SlidableAction(
-                          onPressed: (context) {
-                            if (!data.isConst) {
-                              setState(() {
-                                myListsCache.removeAt(index);
-                              });
-                            }
-                          },
-                          autoClose: true,
-                          backgroundColor: AppColors.red,
-                          flex: 1,
-                          icon: LineIcons.trash,
-                          foregroundColor: Colors.white,
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        data.title! + ' (${data.products?.length ?? 0})',
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                      leading: data.iconData != null
-                          ? LineIcon(
-                              data.iconData!,
-                              color: data.color ??
-                                  Theme.of(context).iconTheme.color,
-                            )
-                          : const SizedBox(),
-                      trailing: IconButton(
-                        icon: LineIcon(
-                          LineIcons.bookmark,
-                          // ignore: iterable_contains_unrelated_type
-                          color: value.myList[index].products == null
-                              ? Theme.of(context).iconTheme.color
-                              : !value.myList[index].products!
-                                      .contains(widget.productData)
-                                  ? Theme.of(context).iconTheme.color
-                                  : AppColors.orange,
-                        ),
-                        onPressed: () {
-                          if (value.myList[index].products == null) {
-                            value.addItem(widget.productData, index);
-                          }
-                          if (value.myList[index].products!
-                              .contains(widget.productData)) {
-                            value.removeItem(widget.productData, index);
-                          } else {
-                            value.addItem(widget.productData, index);
-                          }
-                        },
-                      ),
-                    ),
-                  );
+                  return ListItem(
+                      data: data,
+                      index: index,
+                      productData: widget.productData);
                 },
                 separatorBuilder: (_, i) => const Divider(
                   thickness: 0.25,
@@ -174,6 +130,127 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
         ),
       ),
     );
+  }
+}
+
+class ListItem extends StatefulWidget {
+  final MyList data;
+  final int index;
+  final Product productData;
+  const ListItem({
+    Key? key,
+    required this.data,
+    required this.index,
+    required this.productData,
+  }) : super(key: key);
+
+  @override
+  State<ListItem> createState() => _ListItemState();
+}
+
+class _ListItemState extends State<ListItem>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _bookmarkAnimationController;
+
+  @override
+  void initState() {
+    _bookmarkAnimationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (!mounted) {
+      _bookmarkAnimationController.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<MyListsProvider>(builder: (context, provider, _) {
+      return Slidable(
+        key: LabeledGlobalKey(widget.data.products.hashCode.toString()),
+        endActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (context) {
+                if (!widget.data.isConst) {
+                  provider.removeList(widget.index);
+                }
+              },
+              autoClose: true,
+              backgroundColor: AppColors.red,
+              flex: 1,
+              icon: LineIcons.trash,
+              foregroundColor: Colors.white,
+            ),
+          ],
+        ),
+        child: ListTile(
+          title: Text(
+            widget.data.title! + ' (${widget.data.products?.length ?? 0})',
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
+          leading: widget.data.iconData != null
+              ? LineIcon(
+                  widget.data.iconData!,
+                  color: widget.data.color ?? Theme.of(context).iconTheme.color,
+                )
+              : const SizedBox(),
+          trailing: IconButton(
+            icon: Bounce(
+              manualTrigger: true,
+              animate: false,
+              key: LabeledGlobalKey(widget.data.hashCode.toString()),
+              from: 30,
+              controller: (p0) {
+                _bookmarkAnimationController = p0;
+              },
+              child: LineIcon(
+                LineIcons.bookmark,
+                // ignore: iterable_contains_unrelated_type
+                color: provider.myList[widget.index].products == null
+                    ? Theme.of(context).iconTheme.color
+                    : !provider.myList[widget.index].products!
+                            .contains(widget.productData)
+                        ? Theme.of(context).iconTheme.color
+                        : AppColors.orange,
+              ),
+            ),
+            onPressed: () {
+              if (provider.myList[widget.index].products == null) {
+                provider
+                    .addItem(widget.productData, widget.index)
+                    .whenComplete(() {
+                  WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                    _bookmarkAnimationController.forward().whenComplete(() {
+                      _bookmarkAnimationController.reset();
+                    });
+                  });
+                });
+              }
+              if (provider.myList[widget.index].products!
+                  .contains(widget.productData)) {
+                provider.removeItem(widget.productData, widget.index);
+              } else {
+                provider
+                    .addItem(widget.productData, widget.index)
+                    .whenComplete(() {
+                  WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                    _bookmarkAnimationController.forward().whenComplete(() {
+                      _bookmarkAnimationController.reset();
+                    });
+                  });
+                });
+              }
+            },
+          ),
+        ),
+      );
+    });
   }
 }
 

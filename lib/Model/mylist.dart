@@ -7,11 +7,13 @@ class MyList {
   IconData? iconData;
   Color? color;
   bool isConst;
+  bool isVisible;
   MyList({
     this.title,
     this.products,
     this.iconData,
     this.color,
     this.isConst = false,
+    this.isVisible = true,
   });
 }

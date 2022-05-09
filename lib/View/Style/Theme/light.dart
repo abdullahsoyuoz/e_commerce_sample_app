@@ -36,16 +36,20 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       wordSpacing: 1,
     ),
   ),
+  iconTheme: const IconThemeData(
+    color: Colors.black,
+    size: 30,
+  ),
+
+  // ------------------------------------------------------------------------------------------------ WIDGET ----------
+
   cardTheme: CardTheme(
     color: Colors.white,
     elevation: 10,
     margin: EdgeInsets.zero,
     shape: RoundedRectangleBorder(borderRadius: appRadius()),
   ),
-  iconTheme: const IconThemeData(
-    color: Colors.black,
-    size: 30,
-  ),
+
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
     indicator: UnderlineTabIndicator(
@@ -54,6 +58,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
     labelPadding: const EdgeInsets.symmetric(vertical: 3),
     unselectedLabelColor: Colors.black.withOpacity(.3),
   ),
+
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,
     systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -62,16 +67,28 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       color: Colors.black,
     ),
   ),
-  // ---------------------------------------------------- BUTTON
+
+  snackBarTheme: SnackBarThemeData(
+    backgroundColor: AppColors.purple.shade400,
+    actionTextColor: Colors.white,
+    contentTextStyle: const TextStyle(color: Colors.white),
+    behavior: SnackBarBehavior.floating,
+    shape: RoundedRectangleBorder(borderRadius: appRadius())
+  ),
+
+  // ------------------------------------------------------------------------------------------------ BUTTON ----------
+
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: AppColors.purple.shade400,
     foregroundColor: Colors.white,
     splashColor: AppColors.red.shade400,
     elevation: 10,
   ),
+
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
   ),
+
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all(
@@ -84,6 +101,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       overlayColor: MaterialStateProperty.all(AppColors.purple.shade400),
     ),
   ),
+
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all(
@@ -98,8 +116,5 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       overlayColor: MaterialStateProperty.all(AppColors.purple.shade400),
       splashFactory: InkRipple.splashFactory,
     ),
-  ),
-  snackBarTheme: SnackBarThemeData(
-    backgroundColor: AppColors.red,
   ),
 );

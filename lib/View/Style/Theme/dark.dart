@@ -36,16 +36,20 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       wordSpacing: 1,
     ),
   ),
+  iconTheme: const IconThemeData(
+    color: Colors.white,
+    size: 30,
+  ),
+
+  // ------------------------------------------------------------------------------------------------ WIDGET ----------
+
   cardTheme: CardTheme(
     color: AppColors.black.shade200,
     elevation: 10,
     margin: EdgeInsets.zero,
     shape: RoundedRectangleBorder(borderRadius: appRadius()),
   ),
-  iconTheme: const IconThemeData(
-    color: Colors.white,
-    size: 30,
-  ),
+
   tabBarTheme: TabBarTheme(
     indicatorSize: TabBarIndicatorSize.tab,
     indicator: UnderlineTabIndicator(
@@ -54,6 +58,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
     labelColor: Colors.white,
     unselectedLabelColor: Colors.white.withOpacity(.3),
   ),
+
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black,
     systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -62,7 +67,17 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       color: Colors.white,
     ),
   ),
-  // ---------------------------------------------------- BUTTON
+
+  snackBarTheme: SnackBarThemeData(
+    backgroundColor: Colors.black,
+    actionTextColor: Colors.white,
+    contentTextStyle: const TextStyle(color: Colors.white),
+    behavior: SnackBarBehavior.floating,
+    shape: RoundedRectangleBorder(borderRadius: appRadius()),
+  ),
+
+  // ------------------------------------------------------------------------------------------------ BUTTON ----------
+
   floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.black,
       foregroundColor: Colors.white,
@@ -71,6 +86,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
   ),
+
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all(
@@ -82,6 +98,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       overlayColor: MaterialStateProperty.all(AppColors.red),
     ),
   ),
+
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
       shape: MaterialStateProperty.all(
@@ -96,8 +113,5 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
       overlayColor: MaterialStateProperty.all(AppColors.red),
       splashFactory: InkRipple.splashFactory,
     ),
-  ),
-  snackBarTheme: SnackBarThemeData(
-    backgroundColor: AppColors.red,
   ),
 );

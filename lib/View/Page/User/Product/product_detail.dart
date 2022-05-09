@@ -27,9 +27,6 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: const Text('ProductDetailPage'),
-      ),
       body: Center(
         child: Text(widget.data.title!.toString()),
       ),

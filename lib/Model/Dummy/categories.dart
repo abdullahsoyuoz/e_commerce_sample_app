@@ -14,7 +14,6 @@ Future<void> fetchCategories() async {
       var catItem = Category.fromJson(item);
       catItem.icon = getIcon(catItem.categoryId, catItem.id);
       catItem.color = getCategoryColor(catItem.categoryId);
-      // debugPrint(catItem.imageUrl!.toString());
       categoryList.add(catItem);
     }
   } on Exception catch (e) {

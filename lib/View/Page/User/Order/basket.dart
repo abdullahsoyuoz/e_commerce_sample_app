@@ -23,6 +23,9 @@ class _BasketPageState extends State<BasketPage> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('BasketPage'),
+      ),
       body: const Center(
         child: Text('BasketPage'),
       ),

@@ -17,6 +17,7 @@ import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/App/navigation.dart';
+import 'package:sepet_demo/View/Page/User/Order/basket.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
@@ -75,7 +76,9 @@ class _HomePageState extends State<HomePage>
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, CupertinoPageRoute(builder: (context) => const BasketPage(),));
+        },
         tooltip: 'Sepetin',
         child: const FaIcon(
           LineIcons.shoppingBasket,
@@ -166,7 +169,16 @@ class _HomePageState extends State<HomePage>
                     .withOpacity(0.8),
                 automaticallyImplyLeading: false,
                 title: AnimatedCrossFade(
-                  firstChild: Lottie.asset(Provider.of<ThemeChanger>(context, listen: false).isDark() ? lottieSpinnerWhite : lottieSpinnerPurple, height: 120),
+                  duration: const Duration(milliseconds: 250),
+                  crossFadeState: provider.isLoading
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  firstChild: Lottie.asset(
+                    Provider.of<ThemeChanger>(context, listen: false).isDark()
+                        ? lottieSpinnerWhite
+                        : lottieSpinnerPurple,
+                    height: 120,
+                  ),
                   secondChild: BouncingWidget(
                     onPressed: () {
                       Navigator.push(
@@ -213,10 +225,6 @@ class _HomePageState extends State<HomePage>
                       ),
                     ),
                   ),
-                  crossFadeState: provider.isLoading
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
-                  duration: const Duration(milliseconds: 250),
                 ),
                 leading: IconButton(
                   icon: FaIcon(

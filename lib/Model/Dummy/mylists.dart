@@ -1,14 +1,12 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:sepet_demo/Model/Dummy/products.dart';
 import 'package:sepet_demo/Model/mylist.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
-List<MyList> myListsCache = [
+List<MyList> myListsTemplate = [
   MyList(
     title: 'Beğendiklerim',
-    products: productList.take(Random().nextInt(1) + 1).toList(),
+    products: [],
     iconData: LineIcons.heart,
     color: AppColors.red.shade400,
     isConst: true,
