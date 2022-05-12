@@ -81,7 +81,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                         !widget.data.isNew
                             ? const SizedBox()
                             : Align(
-                                alignment: Alignment.topRight,
+                                alignment: Alignment.topLeft,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: SlideInDown(
