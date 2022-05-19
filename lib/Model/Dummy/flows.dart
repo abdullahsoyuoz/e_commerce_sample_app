@@ -58,7 +58,7 @@ String getFlowImageUrl(FlowType type, cat.Category assist) {
 String getTypeString(FlowType type) {
   switch (type) {
     case FlowType.personal:
-      return 'kişisel içerikler';
+      return 'sana özel';
     case FlowType.campagne:
       return 'kampanyalar';
     case FlowType.discount:

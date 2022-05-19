@@ -47,17 +47,21 @@ class _FlowWidgetState extends State<FlowWidget>
       // animation: CurvedAnimation(
       //     parent: _animationController, curve: Curves.easeOutCirc),
       builder: (context, child) {
-        return SlideTransition(
-          position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
-              .animate(_animationController),
-          child: child,
-        );
+        // // SLIDE
+        // return SlideTransition(
+        //   position: Tween<Offset>(begin: const Offset(-0.25, 0), end: Offset.zero)
+        //       .animate(_animationController),
+        //   child: child,
+        // );
+        // // SCALE
         // return ScaleTransition(
-        //   scale: _animationController,
+        //   scale: Tween<double>(begin: 0.75, end: 1).animate(_animationController),
         //   alignment: Alignment.bottomCenter,
         //   filterQuality: FilterQuality.low,
         //   child: child,
         // );
+        // // NOT
+        return SizedBox(child: child);
       },
       child: SizedBox(
         width: context.width,
@@ -89,6 +93,7 @@ class _FlowWidgetState extends State<FlowWidget>
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Card(
+                  elevation: 0,
                   child: ClipRRect(
                     borderRadius: appRadius(),
                     child: Stack(

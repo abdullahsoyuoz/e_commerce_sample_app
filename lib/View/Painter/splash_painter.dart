@@ -7,13 +7,13 @@ import 'package:sepet_demo/View/Style/curves.dart';
 class SplashPainter extends CustomPainter {
   SplashPainter({Animation<double>? animation}) : super(repaint: animation) {
     level1Paint = Paint()
-      ..color = AppColors.purple.shade300
+      ..color = AppColors.purple.shade200
       ..style = PaintingStyle.fill;
     level2Paint = Paint()
-      ..color = AppColors.purple.shade400
+      ..color = AppColors.purple.shade300
       ..style = PaintingStyle.fill;
     level3Paint = Paint()
-      ..color = AppColors.purple.shade500
+      ..color = AppColors.black.shade300
       ..style = PaintingStyle.fill;
     curvedAnimation = CurvedAnimation(
       parent: animation!,

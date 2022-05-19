@@ -1,27 +1,32 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
 class AuthBackgroundPainter extends CustomPainter {
+  bool isDark;
   AuthBackgroundPainter({
     required Animation<double> animation,
+    required this.isDark,
   }) : super(repaint: animation) {
     curvedAnimation = CurvedAnimation(parent: animation, curve: Curves.ease);
+    paint1 = Paint()
+      ..color = isDark ? AppColors.black.shade100 : AppColors.grey.shade100
+      ..style = PaintingStyle.fill;
+    paint2 = Paint()
+      ..color = isDark ? AppColors.black.shade200 : AppColors.grey.shade200
+      ..style = PaintingStyle.fill;
+    paint3 = Paint()
+      ..color = isDark ? AppColors.black.shade300 : AppColors.grey.shade300
+      ..style = PaintingStyle.fill;
   }
 
   late final Animation<double> curvedAnimation;
-  final paint1 = Paint()
-    ..color = AppColors.purple.shade400
-    ..style = PaintingStyle.fill;
-
-  final paint2 = Paint()
-    ..color = AppColors.purple.shade500
-    ..style = PaintingStyle.fill;
-
-  final paint3 = Paint()
-    ..color = AppColors.purple.shade500.withOpacity(.5)
-    ..style = PaintingStyle.fill;
+  late final paint1;
+  late final paint2;
+  late final paint3;
 
   @override
   void paint(Canvas canvas, Size size) {

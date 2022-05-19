@@ -32,6 +32,7 @@ class FlowsProvider with ChangeNotifier {
     isLoading = true;
     await Future.delayed(const Duration(seconds: 1));
     _flows = [];
+    _followedFlows;
     if (_currentFilter == 0) {
       flowList.shuffle();
       _flows = flowList;

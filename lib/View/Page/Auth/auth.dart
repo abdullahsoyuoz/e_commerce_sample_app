@@ -1,5 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/View/Page/Auth/login.dart';
 import 'package:sepet_demo/View/Page/Auth/register.dart';
 import 'package:sepet_demo/View/Painter/auth_background_painter.dart';
@@ -38,44 +40,47 @@ class _AuthMainPageState extends State<AuthMainPage>
       valueListenable: showRegisterPage,
       builder: (context, value, child) {
         return SizedBox.expand(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              CustomPaint(
-                painter: AuthBackgroundPainter(animation: _animationController),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: PageTransitionSwitcher(
-                  transitionBuilder:
-                      (child, primaryAnimation, secondaryAnimation) {
-                    return SharedAxisTransition(
-                      animation: primaryAnimation,
-                      secondaryAnimation: secondaryAnimation,
-                      transitionType: SharedAxisTransitionType.scaled,
-                      fillColor: Colors.transparent,
-                      child: child,
-                    );
-                  },
-                  reverse: value,
-                  child: value
-                      ? RegisterPage(
-                          key: const ValueKey('RegisterPage'),
-                          onRegisterPressed: () {
-                            showRegisterPage.value = false;
-                            _animationController.reverse();
-                          },
-                        )
-                      : LoginPage(
-                          key: const ValueKey('LoginPage'),
-                          onLoginPressed: () {
-                            showRegisterPage.value = true;
-                            _animationController.forward();
-                          },
-                        ),
+          child: ColoredBox(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                CustomPaint(
+                  painter: AuthBackgroundPainter(animation: _animationController, isDark: Provider.of<ThemeChanger>(context, listen:  false).isDark()),
                 ),
-              ),
-            ],
+                Opacity(
+                  opacity: 0.95,
+                  child: PageTransitionSwitcher(
+                    transitionBuilder:
+                        (child, primaryAnimation, secondaryAnimation) {
+                      return SharedAxisTransition(
+                        animation: primaryAnimation,
+                        secondaryAnimation: secondaryAnimation,
+                        transitionType: SharedAxisTransitionType.horizontal,
+                        fillColor: Colors.transparent,
+                        child: child,
+                      );
+                    },
+                    reverse: value,
+                    child: value
+                        ? RegisterPage(
+                            key: const ValueKey('RegisterPage'),
+                            onRegisterPressed: () {
+                              showRegisterPage.value = false;
+                              _animationController.reverse();
+                            },
+                          )
+                        : LoginPage(
+                            key: const ValueKey('LoginPage'),
+                            onLoginPressed: () {
+                              showRegisterPage.value = true;
+                              _animationController.forward();
+                            },
+                          ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

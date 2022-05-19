@@ -89,7 +89,7 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2!
-                        .copyWith(fontSize: 17),
+                        .copyWith(fontSize: 17,),
                   ),
                   Row(
                     children: [

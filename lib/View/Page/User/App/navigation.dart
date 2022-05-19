@@ -131,25 +131,31 @@ class _NavigationPageState extends State<NavigationPage>
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: LineIcon(
-                      LineIcons.arrowLeft,
-                      color: Theme.of(context).iconTheme.color!,
+                  SizedBox(
+                    width: 60,
+                    child: IconButton(
+                      icon: LineIcon(
+                        LineIcons.arrowLeft,
+                        color: Theme.of(context).iconTheme.color!,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Text(
-                      'combin',
-                      textAlign: TextAlign.end,
-                      style: GoogleFonts.lato(fontSize: 30, height: 0.8),
+                      'COMBIN',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 30, height: 0.8, fontFamily: 'Futura'),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: LogoWidget(size: 50, color: Theme.of(context).iconTheme.color,),
+                  SizedBox(
+                    width: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: LogoWidget(size: 50, color: Theme.of(context).iconTheme.color,),
+                    ),
                   )
                 ],
               ),
@@ -337,23 +343,23 @@ class _NavigationPageState extends State<NavigationPage>
 
   Widget buildSupportItem(String title, IconData icon, {int? index}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.only(bottom: 20.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            flex: 55,
+            flex: 2,
             child: BouncingWidget(
               onPressed: () {},
               child: Card(
                 child: AspectRatio(
-                  aspectRatio: 3,
+                  aspectRatio: 1,
                   child: LineIcon(icon)),
               ),
             ),
           ),
           Expanded(
-            flex: 89,
+            flex: 10,
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),
               child: Text(

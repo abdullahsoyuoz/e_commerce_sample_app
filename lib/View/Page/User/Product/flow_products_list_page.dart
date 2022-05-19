@@ -173,7 +173,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                     provider.followedListToggleItem(widget.data).then((check) {
                       if (provider.isFollowed(widget.data)) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: AppColors.red.shade400,
+                          backgroundColor: AppColors.red.shade300,
                           content: const Text(
                             'Akış takibe alındı.',
                           ),

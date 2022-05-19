@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
           barrierColor: AppColors.red,
         ),
       ),
-    ).whenComplete((){});
+    );
   }
 
   @override
@@ -66,9 +66,11 @@ class _SplashScreenState extends State<SplashScreen>
                 animationController.reset();
                 animationController.forward();
               },
-              child: const Center(
-                child: LogoWidget(color: Colors.white),
-              ),
+              child: Center(
+                  child: LogoWidget(
+                color: Colors.white,
+                size: context.width * 0.5,
+              )),
             ),
             Align(
               alignment: Alignment.bottomCenter,

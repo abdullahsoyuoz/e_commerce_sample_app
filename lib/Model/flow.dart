@@ -42,15 +42,15 @@ enum FlowType {
 Color getFlowColor(FlowType type) {
   switch (type) {
     case FlowType.personal:
-      return AppColors.purple.shade400;
+      return AppColors.purple.shade300;
     case FlowType.campagne:
-      return AppColors.red.shade500;
+      return AppColors.red.shade300;
     case FlowType.discount:
       return AppColors.orange.shade300;
     case FlowType.list:
-      return AppColors.blue.shade400;
+      return AppColors.blue.shade300;
     case FlowType.saved:
-      return AppColors.yellow.shade500;
+      return AppColors.yellow.shade300;
     // case FlowType.category:
     //   return AppColors.yellow.shade500;
     // case FlowType.announcement:

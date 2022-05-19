@@ -8,28 +8,28 @@ List<MyList> myListsTemplate = [
     title: 'Beğendiklerim',
     products: [],
     iconData: LineIcons.heart,
-    color: AppColors.red.shade400,
+    color: AppColors.red.shade300,
     isConst: true,
   ),
   MyList(
     title: 'Fiyat takip',
     products: [],
     iconData: LineIcons.bell,
-    color: AppColors.turquaz.shade400,
+    color: AppColors.turquaz.shade300,
     isConst: true,
   ),
   MyList(
     title: 'Daha sonra',
     products: [],
     iconData: LineIcons.shoppingBag,
-    color: AppColors.blue.shade400,
+    color: AppColors.blue.shade300,
     isConst: true,
   ),
   MyList(
     title: 'Saatler',
     products: [],
     iconData: Icons.watch,
-    color: AppColors.orange.shade400,
+    color: AppColors.orange.shade300,
   ),
 ];
 

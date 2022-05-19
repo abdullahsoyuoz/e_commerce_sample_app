@@ -13,17 +13,17 @@ Map<int, String> flowFilter = {
 Color getFilterIndicatorColor(int index) {
   switch (index) {
     case 0:
-      return AppColors.turquaz;
+      return Colors.transparent;
     case 1:
-      return AppColors.purple.shade400;
+      return AppColors.purple.shade300;
     case 2:
-      return AppColors.blue.shade400;
+      return AppColors.blue.shade300;
     case 3:
-      return AppColors.orange.shade400;
+      return AppColors.orange.shade300;
     case 4:
-      return AppColors.red.shade400;
+      return AppColors.red.shade300;
     case 5:
-      return AppColors.green.shade400;
+      return AppColors.green.shade300;
     default:
       return AppColors.black;
   }

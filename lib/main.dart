@@ -73,8 +73,8 @@ class _AppStarterState extends State<AppStarter> {
             debugShowCheckedModeBanner: false,
             home: ScrollConfiguration(
               behavior: WithoutGlowBehavior(),
-              // child: const SplashScreen(),
-              child: const AuthMainPage(),
+              child: const SplashScreen(),
+              // child: const AuthMainPage(),
             ),
             // home: const HomePage(),
           );

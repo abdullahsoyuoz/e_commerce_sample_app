@@ -70,7 +70,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/image/
+    - assets/image/logo/
     - assets/image/categories/
+    - assets/image/flags/
     - assets/lottie/
     - assets/data/categories.json
     # - assets/font/KosanNonCommercial/
@@ -91,3 +93,41 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: Futura
+      fonts:
+        - asset: assets/fonts/Futura.ttc
+  # fonts:
+  #   - family: Futura
+  #     fonts:
+  #       - asset: assets/fonts/FuturaPTLight.otf
+  #         weight: 100
+  #         style: normal
+  #       - asset: assets/fonts/FuturaPTLightOblique.otf
+  #         weight: 100
+  #         style: italic
+  #       - asset: assets/fonts/FuturaPTBook.otf
+  #         weight: 300
+  #         style: normal
+  #       - asset: assets/fonts/FuturaPTBookOblique.otf
+  #         weight: 300
+  #         style: italic
+  #       - asset: assets/fonts/FuturaPTMedium.otf
+  #         weight: 500
+  #         style: normal
+  #       - asset: assets/fonts/FuturaPTMediumOblique.otf
+  #         weight: 500
+  #         style: italic
+  #       - asset: assets/fonts/FuturaPTDemi.otf
+  #         weight: 700
+  #         style: normal
+  #       - asset: assets/fonts/FuturaPTDemiOblique.otf
+  #         weight: 700
+  #         style: italic
+  #       - asset: assets/fonts/FuturaPTHeavy.otf
+  #         weight: 900
+  #         style: normal
+  #       - asset: assets/fonts/FuturaPTHeavyOblique.otf
+  #         weight: 900
+  #         style: italic

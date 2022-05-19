@@ -7,25 +7,25 @@ import 'package:sepet_demo/Controller/extensions.dart';
 List<Widget> onBoardList = [
   const OnboardWidget(
     icon: LineIcons.palette,
-    title: 'Modern?',
+    title: 'MODERN',
     description:
         'Sizler alışverişinizi yaparken\naynı zamanda keyif almanızı istiyoruz.',
   ),
   const OnboardWidget(
     icon: LineIcons.bookmark,
-    title: 'Adaptif?',
+    title: 'ADAPTİF',
     description:
         'Servislerimizle, tam da aradığınızı bulmada\nsizlere zaman kazandırmak istiyoruz.',
   ),
   const OnboardWidget(
     icon: LineIcons.gifts,
-    title: 'Eğlenceli?',
+    title: 'EĞLENCELİ',
     description:
-        'Sevdiklerinize tek tıkla hediye yollamak mı?\nPeki kombin yaparken kararsız kaldığında\nsana kombinler önerelim?\n\nVe çok daha fazlası...',
+        'Sevdiklerinize tek tıkla hediye yollamak mı?\nPeki kombin yapmanıza yardım etsek?\nVe çok daha fazlasıyla…',
   ),
   const OnboardWidget(
     icon: LineIcons.alternateShield,
-    title: 'Güvenli?',
+    title: 'GÜVENLİ',
     description: 'Merak etmeyin.\nYalnızca eğlenmenizi değil\naynı zamanda güvende kalmanızı istiyoruz.',
   ),
 ];
@@ -67,12 +67,12 @@ class OnboardWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   fit: BoxFit.fitHeight,
                   child: Text(
-                    title,
+                    title.toUpperCase(),
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.lexend(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 1,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -89,7 +89,7 @@ class OnboardWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.readexPro(
                     color: Colors.white,
-                    fontSize: 70,
+                    fontSize: 15,
                     fontWeight: FontWeight.w400,
                     wordSpacing: 5,
                     height: 1.4,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-InputDecoration getAuthInputDecoration(String hint) {
+InputDecoration getAuthInputDecoration(String hint, bool isDark) {
   return InputDecoration(
     hintText: hint,
     hintStyle: TextStyle(
-      color: Colors.white.withOpacity(.5),
+      color: isDark ? Colors.white.withOpacity(.5) : Colors.black.withOpacity(.5),
       fontSize: 15,
     ),
     enabledBorder: UnderlineInputBorder(

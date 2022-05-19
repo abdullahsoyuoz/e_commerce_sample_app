@@ -12,9 +12,9 @@ class SearchFrame extends StatelessWidget {
       height: 30,
       width: context.width,
       decoration: BoxDecoration(
-        color: Theme.of(context).appBarTheme.backgroundColor!.withOpacity(1),
+        color: Theme.of(context).appBarTheme.backgroundColor!.withOpacity(0.5),
         borderRadius: appRadius(),
-        border: Border.all(width: 1, color: Theme.of(context).iconTheme.color!)
+        border: Border.all(width: 2, color: Theme.of(context).iconTheme.color!)
         // boxShadow: appShadow(context),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 15),

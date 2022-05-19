@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
+import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
 import 'package:sepet_demo/View/Painter/login_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
-import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 import 'package:sepet_demo/View/Style/route_builder.dart';
 import 'package:sepet_demo/View/Style/textstyle.dart';
@@ -71,186 +72,148 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     return Form(
       key: _formKey,
       child: Scaffold(
-          key: _scaffoldKey,
-          backgroundColor: Colors.transparent,
-          body: SizedBox.expand(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                  vertical: context.padding.top * 1, horizontal: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: LogoWidget(size: context.width * 0.15),
-                  ),
-                  ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: context.width * 0.35,
-                        minWidth: context.width * 0.35,
-                      ),
-                      child: const FittedBox(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Giriş Yap',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(color: Colors.white, fontSize: 10),
-                          ))),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25.0),
-                    child: Card(
-                      color: AppColors.black.shade500,
-                      child: ClipRRect(
-                        borderRadius: appRadius(),
-                        child: SizedBox(
-                          width: context.width * 0.75,
-                          height: context.width * 0.75,
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              SizedBox.expand(
-                                child: CustomPaint(
-                                  painter: LoginPainter(
-                                    animation: _animationController,
-                                  ),
-                                ),
-                              ),
-                              buildInputs(context),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+        key: _scaffoldKey,
+        backgroundColor: Colors.transparent,
+        body: SizedBox.expand(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: context.width,
+                  height: 150,
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20, top: context.padding.top),
+                  color: AppColors.orange,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
                       children: [
-                        Center(
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth: context.width * 0.75,
-                              minWidth: context.width * 0.75,
-                              maxHeight: 20,
-                              minHeight: 20,
-                            ),
-                            child: const FittedBox(
-                              fit: BoxFit.fitHeight,
-                              child: Text(
-                                'veya',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  letterSpacing: 10,
-                                ),
-                              ),
-                            ),
-                          ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: LogoWidget(size: context.width * 0.15),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Expanded(
-                                  child: Divider(
-                                thickness: 0.5,
-                              )),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12.0),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(FontAwesomeIcons.apple),
-                                  iconSize: 45,
-                                  splashColor: AppColors.red.shade400,
-                                  color: Colors.white,
-                                ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: context.width * 0.35,
+                                minWidth: context.width * 0.35,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12.0),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(FontAwesomeIcons.google),
-                                  iconSize: 45,
-                                  splashColor: AppColors.red.shade400,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const Expanded(
-                                  child: Divider(
-                                thickness: 0.5,
-                              )),
-                            ],
-                          ),
+                              child: FittedBox(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'GİRİŞ YAP',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: AppColors.black.shade300,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500),
+                                  ))),
                         ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: context.width * 0.75,
-                          minWidth: context.width * 0.75,
-                          maxHeight: 20,
-                          minHeight: 20,
+                ),
+                SizedBox(
+                  width: context.width,
+                  height: 300,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      SizedBox.expand(
+                        child: CustomPaint(
+                          painter: LoginPainter(
+                            animation: _animationController,
+                          ),
                         ),
-                        child: FittedBox(
-                          child: BouncingWidget(
-                            onPressed: () {
-                              // widget.onLoginPressed.call();
-                            },
-                            child: const Text(
-                              'şifremi unuttum',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                letterSpacing: 10,
-                              ),
+                      ),
+                      buildInputs(context),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Divider(thickness: .1, height: 0,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(FontAwesomeIcons.apple),
+                              iconSize: 40,
+                              splashColor: AppColors.red.shade300,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(FontAwesomeIcons.google),
+                              iconSize: 40,
+                              splashColor: AppColors.red.shade300,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(thickness: .1, height: 0,),
+                  ],
+                ),
+                Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: BouncingWidget(
+                          onPressed: () {
+                            // widget.onLoginPressed.call();
+                          },
+                          child: const Text(
+                            'parolamı unuttum',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 5,
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: context.width * 0.75,
-                          minWidth: context.width * 0.75,
-                          maxHeight: 20,
-                          minHeight: 20,
-                        ),
-                        child: FittedBox(
-                          child: BouncingWidget(
-                            onPressed: () {
-                              widget.onLoginPressed.call();
-                            },
-                            child: const Text(
-                              'henüz bize katılmadın mı?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                letterSpacing: 10,
-                              ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: BouncingWidget(
+                          onPressed: () {
+                            widget.onLoginPressed.call();
+                          },
+                          child: const Text(
+                            'henüz bize katılmadın mı?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 5,
                             ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 
@@ -265,11 +228,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     LineIcons.at,
-                    color: _emailFocus.hasFocus
-                        ? Colors.white
-                        : Colors.white.withOpacity(.5),
                   ),
                   Expanded(
                     child: Padding(
@@ -278,7 +238,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         controller: _emailController,
                         focusNode: _emailFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('e-mail'),
+                        decoration: getAuthInputDecoration('e-mail adresiniz', Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -308,11 +268,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     LineIcons.fingerprint,
-                    color: _passwordFocus.hasFocus
-                        ? Colors.white
-                        : Colors.white.withOpacity(.5),
                   ),
                   Expanded(
                     child: Padding(
@@ -321,7 +278,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         controller: _passwordController,
                         focusNode: _passwordFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('parola'),
+                        decoration: getAuthInputDecoration('parolanız', Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         maxLines: 1,
@@ -360,25 +317,26 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 _validation().then((value) =>
                     _animationController.animateBack(value.toDouble()));
               }
-
-              Navigator.push(
-                  context, fadeRouteBuilder(context, const HomePage()));
+              Timer(const Duration(milliseconds: 1000), () {
+                Navigator.push(
+                    context, fadeRouteBuilder(context, const HomePage()));
+              });
             },
             child: SizedBox.expand(
               child: ColoredBox(
                 color: Colors.transparent,
                 child: Center(
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: context.width * 0.1,
-                      minWidth: context.width * 0.1,
+                    constraints: const BoxConstraints(
+                      maxHeight: 30,
+                      minHeight: 30,
                     ),
                     child: const FittedBox(
-                      child: Icon(
-                        FontAwesomeIcons.arrowRight,
-                        color: Colors.white,
-                      ),
-                    ),
+                        child: Text(
+                      'ONAYLA',
+                      style:
+                          TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+                    )),
                   ),
                 ),
               ),

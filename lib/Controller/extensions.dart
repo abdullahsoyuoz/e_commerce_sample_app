@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 extension ContextExtension on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
@@ -15,15 +16,15 @@ extension AddWhitespace on String {
 }
 
 extension TwoDigit on double {
-  String get twoDigitForMoney => ' ' + toStringAsFixed(2) + ' ₺ ';
+  String get twoDigitForMoney => ' ' + toStringAsFixed(2) + ' ' + NumberFormat.simpleCurrency(locale: 'TR').currencySymbol + ' ';
 }
 
 extension OneDigit on double {
-  String get oneDigitForRankString => toString()[0]+'.'+toString()[2];
+  String get oneDigitForRankString => toString()[0] + '.' + toString()[2];
 }
 
 extension AddParanthesis on String {
-  String get addParanthesis => '('+toString()+')';
+  String get addParanthesis => '(' + toString() + ')';
 }
 
 extension RankRoundToHalf on double {

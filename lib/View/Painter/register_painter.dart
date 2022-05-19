@@ -5,7 +5,7 @@ import 'package:sepet_demo/View/Style/curves.dart';
 class RegisterPainter extends CustomPainter {
   RegisterPainter({required this.animation}):super(repaint: animation){
     brush = Paint()
-      ..color = AppColors.black.shade300
+      ..color = AppColors.turquaz.shade100
       ..style = PaintingStyle.fill;
 
     curvedAnimation = CurvedAnimation(

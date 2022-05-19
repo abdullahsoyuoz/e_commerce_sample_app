@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 
@@ -12,7 +11,7 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
     primaryContainer: AppColors.black.shade200,
     secondaryContainer: AppColors.black.shade100,
   ),
-  scaffoldBackgroundColor: AppColors.black.shade400,
+  scaffoldBackgroundColor: AppColors.black.shade300,
   backgroundColor: Colors.black,
   hintColor: AppColors.black.shade100,
   highlightColor: Colors.transparent,
@@ -23,16 +22,20 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
     labelStyle: TextStyle(color: Colors.white),
     floatingLabelStyle: TextStyle(color: Colors.white),
   ),
-  textTheme: GoogleFonts.workSansTextTheme().copyWith(
-    bodyText2: GoogleFonts.workSans(
-      fontSize: 14,
+  textTheme: const TextTheme(
+    bodyText2: TextStyle(
+      fontFamily: 'Futura',
+      fontStyle: FontStyle.normal,
       color: Colors.white,
+      fontSize: 14,
     ),
-    subtitle2: GoogleFonts.workSans(
+    subtitle2: TextStyle(
       color: Colors.black,
+      fontFamily: 'Futura',
+      fontStyle: FontStyle.normal,
+      backgroundColor: Colors.white,
       fontSize: 14,
       height: 1.5,
-      backgroundColor: Colors.white,
       wordSpacing: 1,
     ),
   ),

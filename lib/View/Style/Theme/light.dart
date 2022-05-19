@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 
 ThemeData appLightTheme = ThemeData.light().copyWith(
   brightness: Brightness.light,
-  primaryColor: AppColors.purple.shade400,
+  primaryColor: AppColors.purple.shade300,
   colorScheme: ColorScheme.light(
     background: AppColors.grey.shade100,
     primaryContainer: AppColors.grey.shade200,
@@ -16,21 +15,25 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   backgroundColor: AppColors.grey.shade100,
   hintColor: AppColors.black.shade100,
   highlightColor: Colors.transparent,
-  splashColor: AppColors.purple.shade400,
+  splashColor: AppColors.purple.shade300,
   splashFactory: InkRipple.splashFactory,
   dividerColor: AppColors.black.shade100,
   inputDecorationTheme: const InputDecorationTheme(
     labelStyle: TextStyle(color: Colors.white),
     floatingLabelStyle: TextStyle(color: Colors.white),
   ),
-  textTheme: GoogleFonts.workSansTextTheme().copyWith(
-    bodyText2: GoogleFonts.workSans(
-      fontSize: 14,
+  textTheme: const TextTheme(
+    bodyText2: TextStyle(
+      fontFamily: 'Futura',
+      fontStyle: FontStyle.normal,
       color: Colors.black,
-    ),
-    subtitle2: GoogleFonts.workSans(
       fontSize: 14,
+    ),
+    subtitle2: TextStyle(
+      fontFamily: 'Futura',
+      fontStyle: FontStyle.normal,
       color: Colors.white,
+      fontSize: 14,
       height: 1.5,
       backgroundColor: Colors.black,
       wordSpacing: 1,
@@ -69,7 +72,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   ),
 
   snackBarTheme: SnackBarThemeData(
-    backgroundColor: AppColors.purple.shade400,
+    backgroundColor: AppColors.purple.shade300,
     actionTextColor: Colors.white,
     contentTextStyle: const TextStyle(color: Colors.white),
     behavior: SnackBarBehavior.floating,
@@ -79,9 +82,9 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   // ------------------------------------------------------------------------------------------------ BUTTON ----------
 
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.purple.shade400,
+    backgroundColor: AppColors.purple.shade300,
     foregroundColor: Colors.white,
-    splashColor: AppColors.red.shade400,
+    splashColor: AppColors.red.shade300,
     elevation: 10,
   ),
 
@@ -98,7 +101,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
       foregroundColor: MaterialStateProperty.all(Colors.black),
       backgroundColor: MaterialStateProperty.all(Colors.white),
       splashFactory: InkRipple.splashFactory,
-      overlayColor: MaterialStateProperty.all(AppColors.purple.shade400),
+      overlayColor: MaterialStateProperty.all(AppColors.purple.shade300),
     ),
   ),
 
@@ -113,7 +116,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
           const BorderSide(color: Colors.black, width: 1)),
       elevation: MaterialStateProperty.all(0),
       foregroundColor: MaterialStateProperty.all(Colors.black),
-      overlayColor: MaterialStateProperty.all(AppColors.purple.shade400),
+      overlayColor: MaterialStateProperty.all(AppColors.purple.shade300),
       splashFactory: InkRipple.splashFactory,
     ),
   ),

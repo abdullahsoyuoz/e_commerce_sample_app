@@ -36,8 +36,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-              widget.data.color!.shade400,
-              widget.data.color!.shade500,
+              widget.data.color!.shade300,
+              widget.data.color!.shade300,
             ])),
           ),
           ClipRect(

@@ -1,12 +1,10 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'dart:ui';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/Constant/flow_constants.dart';
@@ -20,12 +18,12 @@ import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Order/basket.dart';
 import 'package:sepet_demo/View/Page/User/Product/search.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
-import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/View/dropmenu_low.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/drop_menu.dart';
 import 'package:sepet_demo/View/Widget/flow_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
+import 'package:sepet_demo/View/Widget/logo.dart';
 import 'package:sepet_demo/View/Widget/search_frame.dart';
 import 'package:lottie/lottie.dart';
 
@@ -77,18 +75,20 @@ class _HomePageState extends State<HomePage>
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (context) => const BasketPage(),
-              ));
-        },
-        tooltip: 'Sepetin',
-        child: const FaIcon(
-          LineIcons.shoppingBasket,
-        ),
-      ),
+          onPressed: () {
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const BasketPage(),
+                ));
+          },
+          tooltip: 'Sepetin',
+          child: const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: LogoWidget(
+              color: Colors.white,
+            ),
+          )),
       body: SizedBox.expand(
         child: Stack(
           fit: StackFit.expand,
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage>
             DropMenu(
               animationController: _animationController,
               indicator: const SizedBox(),
-              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              backgroundColor: AppColors.purple.shade300,
               lowLayerBottomPadding: context.padding.bottom,
               lowLayerHeight: 70,
               lowLayer: const LowLayerWidget(),
@@ -135,6 +135,7 @@ class _HomePageState extends State<HomePage>
                       itemExtent: context.width * 0.5,
                       itemBuilder: (context, index) {
                         final data = value.getList();
+
                         return FlowWidget(data: data[index]);
                       },
                     ),
@@ -159,8 +160,8 @@ class _HomePageState extends State<HomePage>
         return ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 3,
-              sigmaY: 3,
+              sigmaX: 10,
+              sigmaY: 10,
             ),
             child: SizedBox(
               width: context.width,
@@ -172,83 +173,98 @@ class _HomePageState extends State<HomePage>
                 backgroundColor: Theme.of(context)
                     .appBarTheme
                     .backgroundColor!
-                    .withOpacity(0.8),
+                    .withOpacity(0.5),
                 automaticallyImplyLeading: false,
-                title: AnimatedCrossFade(
-                  duration: const Duration(milliseconds: 250),
-                  crossFadeState: provider.isLoading
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
-                  firstChild: Lottie.asset(
-                    Provider.of<ThemeChanger>(context, listen: false).isDark()
-                        ? lottieSpinnerWhite
-                        : lottieSpinnerPurple,
-                    height: 120,
-                  ),
-                  secondChild: BouncingWidget(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const SearchPage(),
-                          ));
-                    },
-                    child: SearchFrame(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          AbsorbPointer(
-                            absorbing: true,
-                            child: AnimatedTextKit(
-                              repeatForever: true,
-                              animatedTexts: searchHintList
-                                  .map(
-                                    (title) => TypewriterAnimatedText(title,
-                                        cursor: '|',
-                                        textAlign: TextAlign.end,
-                                        textStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .iconTheme
-                                                    .color),
-                                        speed:
-                                            const Duration(milliseconds: 75)),
-                                  )
-                                  .toList(),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 3.0),
-                            child: Icon(
-                              LineIcons.search,
-                              color: Colors.white,
-                              size: 15,
-                            ),
-                          )
-                        ],
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const NavigationPage(),
+                            ));
+                      },
+                      icon: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Theme.of(context).iconTheme.color!,
+                                width: 2),
+                            shape: BoxShape.circle),
                       ),
                     ),
-                  ),
-                ),
-                leading: IconButton(
-                  icon: FaIcon(
-                    LineIcons.bars,
-                    color: Theme.of(context).iconTheme.color!,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const NavigationPage(),
-                        ));
-                  },
-                ),
-                actions: [
-                  Tooltip(
-                    message: 'Hızlı erişimler',
-                    child: IconButton(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        child: AnimatedCrossFade(
+                          duration: const Duration(milliseconds: 250),
+                          crossFadeState: provider.isLoading
+                              ? CrossFadeState.showFirst
+                              : CrossFadeState.showSecond,
+                          firstChild: Lottie.asset(
+                            Provider.of<ThemeChanger>(context, listen: false)
+                                    .isDark()
+                                ? lottieSpinnerWhite
+                                : lottieSpinnerPurple,
+                            height: 120,
+                          ),
+                          secondChild: BouncingWidget(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => const SearchPage(),
+                                  ));
+                            },
+                            child: SearchFrame(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  AbsorbPointer(
+                                    absorbing: true,
+                                    child: AnimatedTextKit(
+                                      repeatForever: true,
+                                      animatedTexts: searchHintList
+                                          .map(
+                                            (title) => TypewriterAnimatedText(
+                                                title,
+                                                cursor: '|',
+                                                textAlign: TextAlign.end,
+                                                textStyle: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2!
+                                                    .copyWith(
+                                                        color: Theme.of(context)
+                                                            .iconTheme
+                                                            .color,
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.w100),
+                                                speed: const Duration(
+                                                    milliseconds: 75)),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 3.0),
+                                    child: Icon(
+                                      LineIcons.search,
+                                      color: Theme.of(context).iconTheme.color!,
+                                      size: 15,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
                       iconSize: 50,
                       onPressed: () {
                         quickMenuToggle();
@@ -263,8 +279,8 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(50),
                   child: SizedBox(
@@ -285,47 +301,47 @@ class _HomePageState extends State<HomePage>
                         itemCount: flowFilter.length,
                         itemBuilder: (context, index) {
                           final data = flowFilter[index];
-                          return Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                    maxHeight: 20,
-                                    minHeight: 20,
-                                  ),
-                                  child: FittedBox(
-                                    alignment: Alignment.center,
-                                    fit: BoxFit.fitHeight,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          data.toString(),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Theme.of(context)
-                                                .iconTheme
-                                                .color!,
-                                          ),
+                          return GestureDetector(
+                            onTap: () {
+                              _pageController.animateToPage(index,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.ease);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: AnimatedContainer(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      width: 2,
+                                      color: index == currentPage.value
+                                          ? getFilterIndicatorColor(index)
+                                          : Colors.transparent,
+                                    )),
+                                duration: const Duration(milliseconds: 300),
+                                child: Center(
+                                  child: ConstrainedBox(
+                                    constraints: const BoxConstraints(
+                                      maxHeight: 20,
+                                      minHeight: 20,
+                                    ),
+                                    child: FittedBox(
+                                      alignment: Alignment.center,
+                                      fit: BoxFit.fitHeight,
+                                      child: Text(
+                                        data.toString(),
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w100,
+                                          color: Theme.of(context)
+                                              .iconTheme
+                                              .color!,
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 5.0),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 500),
-                                    width: index == currentPage.value ? 10 : 0,
-                                    height: index == currentPage.value ? 10 : 0,
-                                    decoration: BoxDecoration(
-                                        color: index == currentPage.value
-                                            ? getFilterIndicatorColor(index)
-                                            : Colors.transparent,
-                                        borderRadius: appRadius()),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           );
                         },

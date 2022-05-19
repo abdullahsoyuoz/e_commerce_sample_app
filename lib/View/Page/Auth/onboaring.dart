@@ -25,7 +25,7 @@ class _OnboardPageState extends State<OnboardPage>
     _pageController = PageController(initialPage: 0);
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 500),
       upperBound: 3,
       lowerBound: 0,
     );
@@ -42,7 +42,7 @@ class _OnboardPageState extends State<OnboardPage>
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         body: SizedBox.expand(
           child: Stack(
             children: [

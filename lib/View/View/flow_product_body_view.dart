@@ -133,7 +133,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText2!
-                                              .copyWith(fontSize: 12),
+                                              .copyWith(fontSize: 12, fontStyle: FontStyle.normal),
                                         ),
                                       ),
                                       Padding(
@@ -305,7 +305,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                               LineIcons.starAlt,
                                                               color: AppColors
                                                                   .orange
-                                                                  .shade500,
+                                                                  .shade300,
                                                             ),
                                                           ),
                                                         ),
@@ -324,8 +324,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              CrossAxisAlignment.center,
                                           children: [
+                                            // const FaIcon(LineIcons.turkishLiraSign, size: 20,),
                                             widget.data.discountRate == null
                                                 ? const SizedBox()
                                                 : Padding(
@@ -342,7 +343,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                             fontSize: 17,
                                                             backgroundColor:
                                                                 AppColors
-                                                                    .red.shade500,
+                                                                    .red.shade300,
                                                             decoration:
                                                                 TextDecoration
                                                                     .lineThrough,
@@ -420,7 +421,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                     color: provider.containsItem(
                                                             widget.data)
                                                         ? AppColors
-                                                            .orange.shade500
+                                                            .orange.shade300
                                                         : Theme.of(context)
                                                             .iconTheme
                                                             .color,
@@ -453,7 +454,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                                         widget
                                                                             .data)
                                                                 ? AppColors
-                                                                    .red.shade400
+                                                                    .red.shade300
                                                                 : Theme.of(
                                                                         context)
                                                                     .iconTheme

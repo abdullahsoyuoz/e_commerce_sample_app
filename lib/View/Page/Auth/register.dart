@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
+import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/View/Painter/register_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
-import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 import 'package:sepet_demo/View/Style/textstyle.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
@@ -90,77 +90,73 @@ class _RegisterPageState extends State<RegisterPage>
         backgroundColor: Colors.transparent,
         body: SizedBox.expand(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-                vertical: context.padding.top * 1, horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: LogoWidget(size: context.width * 0.15),
-                ),
-                ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: context.width * 0.35,
-                      minWidth: context.width * 0.35,
-                    ),
-                    child: const FittedBox(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Bize Katıl',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        ))),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
-                  child: Card(
-                    color: AppColors.black.shade500,
-                    child: ClipRRect(
-                      borderRadius: appRadius(),
-                      child: SizedBox(
-                        width: context.width * 0.75,
-                        height: context.width * 0.75 * 1.5,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            SizedBox.expand(
-                              child: CustomPaint(
-                                painter: RegisterPainter(
-                                  animation: _animationController,
-                                ),
+                Container(
+                  width: context.width,
+                  height: 150,
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20, top: context.padding.top),
+                  color: AppColors.turquaz,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: LogoWidget(size: context.width * 0.15),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: context.width * 0.35,
+                                minWidth: context.width * 0.35,
                               ),
-                            ),
-                            buildInputs(context)
-                          ],
+                              child: const FittedBox(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'BİZE KATIL',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontSize: 10, fontWeight: FontWeight.w500),
+                                  ))),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: context.width,
+                  height: 500,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      SizedBox.expand(
+                        child: CustomPaint(
+                          painter: RegisterPainter(
+                            animation: _animationController,
+                          ),
                         ),
                       ),
-                    ),
+                      buildInputs(context)
+                    ],
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: Center(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: context.width * 0.75,
-                        minWidth: context.width * 0.75,
-                        maxHeight: 20,
-                        minHeight: 20,
-                      ),
-                      child: FittedBox(
-                        child: BouncingWidget(
-                          onPressed: () {
-                            widget.onRegisterPressed.call();
-                          },
-                          child: const Text(
-                            'giriş yapmak istiyorum',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              letterSpacing: 10,
-                            ),
-                          ),
+                    child: BouncingWidget(
+                      onPressed: () {
+                        widget.onRegisterPressed.call();
+                      },
+                      child: const Text(
+                        'giriş yapmak istiyorum',
+                        style: TextStyle(
+                          fontSize: 20,
+                          letterSpacing: 5,
                         ),
                       ),
                     ),
@@ -184,11 +180,8 @@ class _RegisterPageState extends State<RegisterPage>
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     LineIcons.user,
-                    color: _nameFocus.hasFocus
-                        ? Colors.white
-                        : Colors.white.withOpacity(.5),
                   ),
                   Expanded(
                     child: Padding(
@@ -197,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _nameController,
                         focusNode: _nameFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('isim'),
+                        decoration: getAuthInputDecoration('isminiz', Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -227,11 +220,8 @@ class _RegisterPageState extends State<RegisterPage>
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     LineIcons.mobilePhone,
-                    color: _phoneNumberFocus.hasFocus
-                        ? Colors.white
-                        : Colors.white.withOpacity(.5),
                   ),
                   Expanded(
                     child: Padding(
@@ -240,7 +230,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _phoneNumberController,
                         focusNode: _phoneNumberFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('iletişim numarası'),
+                        decoration: getAuthInputDecoration('iletişim numarasınız', Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.phone,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -269,11 +259,8 @@ class _RegisterPageState extends State<RegisterPage>
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     LineIcons.at,
-                    color: _emailFocus.hasFocus
-                        ? Colors.white
-                        : Colors.white.withOpacity(.5),
                   ),
                   Expanded(
                     child: Padding(
@@ -282,7 +269,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _emailController,
                         focusNode: _emailFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('e-mail'),
+                        decoration: getAuthInputDecoration('e-mail adresiniz', Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -311,11 +298,8 @@ class _RegisterPageState extends State<RegisterPage>
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     LineIcons.fingerprint,
-                    color: _passwordFocus.hasFocus
-                        ? Colors.white
-                        : Colors.white.withOpacity(.5),
                   ),
                   Expanded(
                     child: Padding(
@@ -324,7 +308,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _passwordController,
                         focusNode: _passwordFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('parola'),
+                        decoration: getAuthInputDecoration('parolanız', Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         maxLines: 1,
@@ -359,27 +343,27 @@ class _RegisterPageState extends State<RegisterPage>
                     _animationController.animateBack(value.toDouble()));
               }
             },
-            child: SizedBox.expand(
+           child: SizedBox.expand(
               child: ColoredBox(
                 color: Colors.transparent,
                 child: Center(
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: context.width * 0.1,
-                      minWidth: context.width * 0.1,
+                    constraints: const BoxConstraints(
+                      maxHeight: 30,
+                      minHeight: 30,
                     ),
                     child: const FittedBox(
-                      child: Icon(
-                        FontAwesomeIcons.arrowRight,
-                        color: Colors.white,
-                      ),
-                    ),
+                        child: Text(
+                      'KATIL',
+                      style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+                    )),
                   ),
                 ),
               ),
             ),
           ),
         ),
+        const Divider(thickness: .1, height: 0,),
       ],
     );
   }
