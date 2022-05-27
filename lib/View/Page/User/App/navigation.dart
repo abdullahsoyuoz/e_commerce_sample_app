@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +31,7 @@ class _NavigationPageState extends State<NavigationPage>
   void initState() {
     _scrollController = ScrollController();
     _openAnimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 400));
+        vsync: this, duration: const Duration(milliseconds: 450));
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _openAnimationController.forward();
     });
@@ -71,25 +70,23 @@ class _NavigationPageState extends State<NavigationPage>
                         Direction.RIGHT,
                         _buildCategories(),
                       ),
-                      const Divider(
-                        height: 50,
-                        thickness: 0.15,
-                      ),
-                      _slideAnimate(
-                        Direction.LEFT,
-                        const TitleWidget(title: 'Ayarlar'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 35.0),
+                        child: _slideAnimate(
+                          Direction.LEFT,
+                          const TitleWidget(title: 'Ayarlar'),
+                        ),
                       ),
                       _slideAnimate(
                         Direction.RIGHT,
                         _buildSettings(),
                       ),
-                      const Divider(
-                        height: 50,
-                        thickness: 0.15,
-                      ),
-                      _slideAnimate(
-                        Direction.LEFT,
-                        const TitleWidget(title: 'Destek ve Bilgi'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 35.0),
+                        child: _slideAnimate(
+                          Direction.LEFT,
+                          const TitleWidget(title: 'Destek ve Bilgi'),
+                        ),
                       ),
                       _slideAnimate(
                         Direction.RIGHT,
@@ -147,14 +144,18 @@ class _NavigationPageState extends State<NavigationPage>
                     child: Text(
                       'COMBIN',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 30, height: 0.8, fontFamily: 'Futura'),
+                      style: TextStyle(
+                          fontSize: 30, height: 0.8, fontFamily: 'Futura'),
                     ),
                   ),
                   SizedBox(
                     width: 60,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: LogoWidget(size: 50, color: Theme.of(context).iconTheme.color,),
+                      child: LogoWidget(
+                        size: 50,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                     ),
                   )
                 ],
@@ -217,7 +218,7 @@ class _NavigationPageState extends State<NavigationPage>
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!
-                    .copyWith(fontSize: 15),
+                    .copyWith(fontSize: 17),
               ),
             ),
           ],
@@ -252,13 +253,16 @@ class _NavigationPageState extends State<NavigationPage>
                         aspectRatio: 1,
                         child: Card(
                           color: Theme.of(context).iconTheme.color,
-                          child: Center(
-                            child: LineIcon(
-                              Provider.of<ThemeChanger>(context, listen: false)
-                                      .isDark()
-                                  ? LineIcons.sun
-                                  : LineIcons.moon,
-                              color: Theme.of(context).scaffoldBackgroundColor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(25.0),
+                            child: FittedBox(
+                              child: LineIcon(
+                                Provider.of<ThemeChanger>(context, listen: false)
+                                        .isDark()
+                                    ? LineIcons.sun
+                                    : LineIcons.moon,
+                                color: Theme.of(context).scaffoldBackgroundColor,
+                              ),
                             ),
                           ),
                         ),
@@ -272,20 +276,14 @@ class _NavigationPageState extends State<NavigationPage>
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!
-                          .copyWith(fontSize: 17),
+                          .copyWith(fontSize: 21),
                     ),
                   ),
                 ],
               ),
             ),
-            buildSettingsItem(
-              'Bildirimler',
-              LineIcons.bell
-            ),
-            buildSettingsItem(
-              'Profili düzenle',
-              LineIcons.user
-            ),
+            buildSettingsItem('Bildirimler', LineIcons.bell),
+            buildSettingsItem('Profili düzenle', LineIcons.user),
           ],
         ),
       ),
@@ -304,10 +302,10 @@ class _NavigationPageState extends State<NavigationPage>
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Card(
-                  child: Center(
-                    child: LineIcon(icon),
-                  )
-                ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: FittedBox(child: LineIcon(icon)),
+                    )),
               ),
             ),
           ),
@@ -316,7 +314,7 @@ class _NavigationPageState extends State<NavigationPage>
             child: Text(
               title,
               style:
-                  Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17),
+                  Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 21),
             ),
           ),
         ],
@@ -352,20 +350,18 @@ class _NavigationPageState extends State<NavigationPage>
             child: BouncingWidget(
               onPressed: () {},
               child: Card(
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: LineIcon(icon)),
+                child: AspectRatio(aspectRatio: 1, child: LineIcon(icon)),
               ),
             ),
           ),
           Expanded(
             flex: 10,
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 15.0),
               child: Text(
                 title,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      fontSize: 13,
+                      fontSize: 21,
                     ),
               ),
             ),
@@ -406,10 +402,15 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(20.0),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 25),
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+              fontSize: 45,
+              foreground: Paint()
+                ..style = PaintingStyle.fill
+                ..color = Theme.of(context).iconTheme.color!
+            ),
       ),
     );
   }

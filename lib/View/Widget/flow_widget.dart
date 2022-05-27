@@ -24,7 +24,7 @@ class _FlowWidgetState extends State<FlowWidget>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
-      lowerBound: 0.75,
+      lowerBound: 0.25,
       upperBound: 1,
     );
 
@@ -43,9 +43,9 @@ class _FlowWidgetState extends State<FlowWidget>
       _animationController.forward();
     });
     return AnimatedBuilder(
-      animation: _animationController,
-      // animation: CurvedAnimation(
-      //     parent: _animationController, curve: Curves.easeOutCirc),
+      // animation: _animationController,
+      animation: CurvedAnimation(
+          parent: _animationController, curve: Curves.easeOutCirc),
       builder: (context, child) {
         // // SLIDE
         // return SlideTransition(
@@ -54,14 +54,14 @@ class _FlowWidgetState extends State<FlowWidget>
         //   child: child,
         // );
         // // SCALE
-        // return ScaleTransition(
-        //   scale: Tween<double>(begin: 0.75, end: 1).animate(_animationController),
-        //   alignment: Alignment.bottomCenter,
-        //   filterQuality: FilterQuality.low,
-        //   child: child,
-        // );
+        return ScaleTransition(
+          scale: Tween<double>(begin: 0.75, end: 1).animate(_animationController),
+          alignment: Alignment.bottomCenter,
+          filterQuality: FilterQuality.low,
+          child: child,
+        );
         // // NOT
-        return SizedBox(child: child);
+        // return SizedBox(child: child);
       },
       child: SizedBox(
         width: context.width,

@@ -153,7 +153,7 @@ class FlowsProvider with ChangeNotifier {
     }
   }
 
-  List<FlowEntity> getList() => _flows;
+  Future<List<FlowEntity>> getList() async => await _flows;
 
   // FOLLOW
 

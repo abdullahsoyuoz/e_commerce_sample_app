@@ -5,6 +5,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/Constant/flow_constants.dart';
@@ -113,7 +114,8 @@ class _HomePageState extends State<HomePage>
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.ease);
                   }
-                }, child: Consumer<FlowsProvider>(builder: (context, value, _) {
+                }, child:
+                    Consumer<FlowsProvider>(builder: (context, provider, _) {
                   return RefreshIndicator(
                     edgeOffset: context.padding.top + 120,
                     onRefresh: () async {
@@ -123,22 +125,36 @@ class _HomePageState extends State<HomePage>
                     backgroundColor: Colors.white,
                     color: AppColors.purple,
                     displacement: 0,
-                    child: ListView.builder(
-                      controller: _listViewController,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.only(
-                        top: 120 + context.padding.top,
-                        bottom: 100,
-                      ),
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: value.getList().length,
-                      itemExtent: context.width * 0.5,
-                      itemBuilder: (context, index) {
-                        final data = value.getList();
-
-                        return FlowWidget(data: data[index]);
-                      },
-                    ),
+                    child: FutureBuilder<List>(
+                        future: provider.getList(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                            return const ColoredBox(
+                              color: Colors.transparent,
+                              child: SizedBox.expand(
+                                child: Center(
+                                    child:
+                                        FaIcon(FontAwesomeIcons.exclamation)),
+                              ),
+                            );
+                          } else {
+                            return ListView.builder(
+                              controller: _listViewController,
+                              shrinkWrap: true,
+                              padding: EdgeInsets.only(
+                                top: 120 + context.padding.top,
+                                bottom: 100,
+                              ),
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: snapshot.data!.length,
+                              itemExtent: context.width * 0.5,
+                              itemBuilder: (context, index) {
+                                debugPrint(snapshot.data.toString());
+                                return FlowWidget(data: snapshot.data![index]);
+                              },
+                            );
+                          }
+                        }),
                   );
                 })),
               ),
