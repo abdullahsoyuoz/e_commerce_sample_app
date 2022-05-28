@@ -17,7 +17,7 @@ import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 
 class FlowProductsListPage extends StatefulWidget {
   final FlowEntity data;
-  const FlowProductsListPage({Key? key, required this.data}) : super(key: key);
+  const FlowProductsListPage({Key key, this.data}) : super(key: key);
 
   @override
   State<FlowProductsListPage> createState() => _FlowProductsListPageState();
@@ -26,8 +26,8 @@ class FlowProductsListPage extends StatefulWidget {
 class _FlowProductsListPageState extends State<FlowProductsListPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  late PageController _pageController;
-  late AnimationController? _bellAnimationController;
+   PageController _pageController;
+   AnimationController _bellAnimationController;
 
   int pageIndex = 0;
   @override
@@ -60,7 +60,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                 pageSnapping: true,
                 physics:
                     const PageScrollPhysics(parent: BouncingScrollPhysics()),
-                itemCount: widget.data.targetProducts!.length,
+                itemCount: widget.data.targetProducts.length,
                 itemBuilder: (context, index) {
                   return BouncingWidget(
                     onPressed: () {
@@ -69,7 +69,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                           CupertinoPageRoute(
                             builder: (context) => ProductDetailPage(
                                 data: widget
-                                    .data.targetProducts![index]),
+                                    .data.targetProducts[index]),
                           ));
                     },
                     child: Center(
@@ -80,7 +80,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                           child: Card(
                             child: ProductViewBody(
                                 data: widget
-                                    .data.targetProducts![index],
+                                    .data.targetProducts[index],
                                 index: index),
                           ),
                         ),
@@ -144,7 +144,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                           shape:
                               RoundedRectangleBorder(borderRadius: appRadius()),
                           child: Marquee(
-                            text: widget.data.title!.toUpperCase(),
+                            text: widget.data.title.toUpperCase(),
                             numberOfRounds: 3,
                             scrollAxis: Axis.horizontal,
                             fadingEdgeStartFraction: 0.02,
@@ -157,7 +157,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                             blankSpace: context.width * 0.5,
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText2!
+                                .bodyText2
                                 .copyWith(
                                     fontSize: 13, fontWeight: FontWeight.w600),
                           ),
@@ -178,7 +178,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                             'Akış takibe alındı.',
                           ),
                         ));
-                        _bellAnimationController?.forward().whenComplete(() {
+                        _bellAnimationController.forward().whenComplete(() {
                           _bellAnimationController?.reset();
                         });
                       }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MessagesPage extends StatefulWidget {
-  const MessagesPage({ Key? key }) : super(key: key);
+  const MessagesPage({ Key key }) : super(key: key);
 
   @override
   _MessagesPageState createState() => _MessagesPageState();

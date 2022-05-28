@@ -3,8 +3,8 @@ import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
-Future<IconData?> iconPicker(BuildContext context) async {
-  IconData? _iconData;
+Future<IconData> iconPicker(BuildContext context) async {
+  IconData _iconData;
   await FlutterIconPicker.showIconPicker(
     context,
     iconPackModes: [
@@ -30,7 +30,7 @@ Future<IconData?> iconPicker(BuildContext context) async {
           padding: const EdgeInsets.only(left: 3.0),
           child: Text(
             'icon seçelim?',
-            style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).iconTheme.color),
+            style: Theme.of(context).textTheme.bodyText2.copyWith(color: Theme.of(context).iconTheme.color),
           ),
         )
       ],

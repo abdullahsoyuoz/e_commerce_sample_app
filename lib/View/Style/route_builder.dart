@@ -6,9 +6,9 @@ import 'dart:math' as math;
 Route fadeRouteBuilder(
   BuildContext context,
   Widget routePage, {
-  Color? barrierColor,
-  Duration? transitionDuration,
-  Duration? reverseTransitionDuration,
+  Color barrierColor,
+  Duration transitionDuration,
+  Duration reverseTransitionDuration,
 }) {
   return PageRouteBuilder(
     transitionDuration: transitionDuration ?? const Duration(milliseconds: 500),
@@ -32,9 +32,9 @@ Route fadeRouteBuilder(
 Route leftSlideRouteBuilder(
   BuildContext context,
   Widget routePage, {
-  Color? barrierColor,
-  Duration? transitionDuration,
-  Duration? reverseTransitionDuration,
+  Color barrierColor,
+  Duration transitionDuration,
+  Duration reverseTransitionDuration,
 }) {
   return PageRouteBuilder(
     transitionDuration: transitionDuration ?? const Duration(milliseconds: 300),

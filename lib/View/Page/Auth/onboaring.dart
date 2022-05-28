@@ -6,7 +6,7 @@ import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/View/onboard_views.dart';
 
 class OnboardPage extends StatefulWidget {
-  const OnboardPage({Key? key}) : super(key: key);
+  const OnboardPage({Key key}) : super(key: key);
 
   @override
   _OnboardPageState createState() => _OnboardPageState();
@@ -15,8 +15,8 @@ class OnboardPage extends StatefulWidget {
 class _OnboardPageState extends State<OnboardPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  late final AnimationController _animationController;
-  late PageController _pageController;
+   AnimationController _animationController;
+   PageController _pageController;
   int onboardIndex = 0;
 
   @override

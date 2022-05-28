@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 
 class BouncingWidget extends StatefulWidget {
   /// Set it to `null` to disable `onTap`.
-  final VoidCallback? onPressed;
-  final void Function(TapUpDetails)? onTapUp;
-  final void Function(TapDownDetails)? onTapDown;
-  final VoidCallback? onTapCancel;
+  final VoidCallback onPressed;
+  final void Function(TapUpDetails) onTapUp;
+  final void Function(TapDownDetails) onTapDown;
+  final VoidCallback onTapCancel;
 
   /// The reverse duration of the scaling animation when `onTapUp`.
-  final Duration? duration;
+  final Duration duration;
 
   /// The duration of the scaling animation when `onTapDown`.
-  final Duration? reverseDuration;
+  final Duration reverseDuration;
 
   /// The reverse curve of the scaling animation when `onTapUp`.
   final Curve curve;
 
   /// The curve of the scaling animation when `onTapDown`..
-  final Curve? reverseCurve;
+  final Curve reverseCurve;
 
   /// The scale factor of the child widget. The valid range of `scaleFactor` is from `0.0` to `1.0`.
   final double scaleFactor;
@@ -27,9 +27,9 @@ class BouncingWidget extends StatefulWidget {
   final Widget child;
 
   const BouncingWidget({
-    Key? key,
-    required this.onPressed,
-    required this.child,
+    Key key,
+    this.onPressed,
+    this.child,
     this.onTapUp,
     this.onTapDown,
     this.onTapCancel,
@@ -50,20 +50,20 @@ class BouncingWidget extends StatefulWidget {
 
 class _BouncingWidgetState extends State<BouncingWidget>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: widget.duration,
-    reverseDuration: widget.reverseDuration,
-    value: 1.0,
-    upperBound: 1.0,
-    lowerBound: widget.scaleFactor,
-  );
+  AnimationController _controller;
 
-  late final Animation<double> _animation = CurvedAnimation(
-    parent: _controller,
-    curve: widget.curve,
-    reverseCurve: widget.reverseCurve,
-  );
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+      reverseDuration: widget.reverseDuration,
+      value: 1.0,
+      upperBound: 1.0,
+      lowerBound: widget.scaleFactor,
+    );
+  }
 
   @override
   void dispose() {
@@ -75,8 +75,8 @@ class _BouncingWidgetState extends State<BouncingWidget>
   Widget build(BuildContext context) {
     void onTap() {
       if (widget.onPressed != null) {
-        Timer(widget.duration! * 2, () {
-          widget.onPressed!();
+        Timer(widget.duration * 2, () {
+          widget.onPressed();
         });
       }
 
@@ -86,17 +86,17 @@ class _BouncingWidgetState extends State<BouncingWidget>
     }
 
     void onTapUp(TapUpDetails details) {
-      if (widget.onTapUp != null) widget.onTapUp!(details);
+      if (widget.onTapUp != null) widget.onTapUp(details);
       _controller.forward();
     }
 
     void onTapDown(TapDownDetails details) {
-      if (widget.onTapDown != null) widget.onTapDown!(details);
+      if (widget.onTapDown != null) widget.onTapDown(details);
       _controller.reverse();
     }
 
     void onTapCancel() {
-      if (widget.onTapCancel != null) widget.onTapCancel!();
+      if (widget.onTapCancel != null) widget.onTapCancel();
       _controller.forward();
     }
 
@@ -106,7 +106,11 @@ class _BouncingWidgetState extends State<BouncingWidget>
       onTapUp: widget.onPressed != null ? onTapUp : null,
       onTap: widget.onPressed != null ? onTap : null,
       child: ScaleTransition(
-        scale: _animation,
+        scale: CurvedAnimation(
+          parent: _controller,
+          curve: widget.curve,
+          reverseCurve: widget.reverseCurve,
+        ),
         child: widget.child,
       ),
     );

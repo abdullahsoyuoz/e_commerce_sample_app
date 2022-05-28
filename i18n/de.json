@@ -1,0 +1,37 @@
+{
+    "helloWorld": "Hello World!",
+    "gettingStarted" : "Einstieg",
+    "chooseYourLanguage" : "Wähle deine Sprache",
+    "chooseYourTheme" : "Wählen Sie das Thema",
+    "dark" : "Dunkel",
+    "light" : "Licht",
+
+    "onboard1Title" : "Modern",
+    "onboard1Description" : "We also want you to enjoy\nwhile you are shopping",
+    "onboard2Title" : "Adaptive",
+    "onboard2Description" : "With our services, finding exactly what you are looking for\nwe want to save you time.",
+    "onboard3Title" : "Enjoyable",
+    "onboard3Description" : "Is it possible to send a gift to your loved ones?\nSo if we help you combine?\nAnd much more ...",
+    "onboard4Title" : "Trustworthy",
+    "onboard4Description" : "Do not worry.\nNot just having fun\nWe also want you to remain safe.",
+
+    "login" : "Login",
+    "register" : "Join us",
+
+    "yourEmail" : "your email adress",
+    "yourPassword" : "your password",
+    "yourName" : "your name",
+    "yourContactNumber" : "your contact number",
+
+    "submit" : "Submit",
+
+    "forgetPassword" : "I forgot my password",
+    "notYetRegister" : "Didn't you join us yet?",
+    "iWantLogin" : "I'd like to check in",
+
+    "searchOnProducts": "Search on products",
+    "searchOnCategories": "Search on categories",
+    "searchOnCampaigns": "Search on campaigns",
+    "searchOnBrands": "Search on brands",
+    "searchOnLists": "Search on lists"
+}

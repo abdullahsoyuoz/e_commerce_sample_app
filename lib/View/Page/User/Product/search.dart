@@ -4,7 +4,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({Key key}) : super(key: key);
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -13,15 +13,15 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  late TextEditingController _searchController;
-  late FocusNode _searchNode;
+  TextEditingController _searchController;
+   FocusNode _searchNode;
 
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
     _searchNode = FocusNode();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _searchNode.requestFocus();
     });
   }

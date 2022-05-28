@@ -16,16 +16,16 @@ class FlowEntity {
     this.targetString,
   });
 
-  late String? title;
-  late String? description;
-  late String? imageUrl;
-  late IconData? icon;
-  late Color? color;
-  late FlowType? type;
-  late String? typeString;
-  late Product? targetProduct;
-  late List<Product>? targetProducts;
-  late String? targetString;
+   String title;
+   String description;
+   String imageUrl;
+ IconData icon;
+   Color color;
+ FlowType type;
+   String typeString;
+   Product targetProduct;
+   List<Product> targetProducts;
+   String targetString;
 }
 
 enum FlowType {

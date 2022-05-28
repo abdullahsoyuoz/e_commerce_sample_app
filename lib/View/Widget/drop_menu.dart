@@ -4,32 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
 class DropMenu extends StatefulWidget {
-  final Widget? lowLayer;
+  final Widget lowLayer;
 
-  final Widget? highLayer;
+  final Widget highLayer;
 
-  final Widget? indicator;
-
-  /// call the widget's initState again so that the change can be applied.
-  final double? lowLayerHeight;
+  final Widget indicator;
 
   /// call the widget's initState again so that the change can be applied.
-  final double? lowLayerBottomPadding;
+  final double lowLayerHeight;
+
+  /// call the widget's initState again so that the change can be applied.
+  final double lowLayerBottomPadding;
 
   /// The color of the underlying area, given the padding value.
-  final Color? backgroundColor;
+  final Color backgroundColor;
 
-  final Color? dividerColor;
+  final Color dividerColor;
 
   ///
   // Function(bool isOpen)? openCallback;
-  final VoidCallback? onTabCallback;
+  final VoidCallback onTabCallback;
 
   final AnimationController animationController;
 
-  final BoxDecoration? decoration;
+  final BoxDecoration decoration;
   const DropMenu({
-    Key? key,
+    Key key,
     this.highLayer,
     this.indicator,
     this.lowLayer,
@@ -40,7 +40,7 @@ class DropMenu extends StatefulWidget {
     this.dividerColor = const Color(0xffeeeeee),
     // this.openCallback,
     this.onTabCallback,
-    required this.animationController,
+    this.animationController,
   }) : super(key: key);
 
   @override
@@ -49,9 +49,9 @@ class DropMenu extends StatefulWidget {
 
 class _DropMenuState extends State<DropMenu>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _animation;
-  late ScrollController _scrollController;
+   AnimationController _animationController;
+   Animation<double> _animation;
+   ScrollController _scrollController;
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _DropMenuState extends State<DropMenu>
     _animationController = widget.animationController;
     _animation = Tween<double>(
       begin: 0,
-      end: -(widget.lowLayerHeight! + widget.lowLayerBottomPadding!),
+      end: -(widget.lowLayerHeight + widget.lowLayerBottomPadding),
     ).animate(_animationController);
     _scrollController = ScrollController();
   }
@@ -76,7 +76,7 @@ class _DropMenuState extends State<DropMenu>
     return ConstrainedBox(
       constraints: const BoxConstraints.expand(),
       child: ColoredBox(
-        color: widget.backgroundColor!,
+        color: widget.backgroundColor,
         child: Stack(
           children: [
             _buildLowLayerWidget(context),
@@ -100,7 +100,7 @@ class _DropMenuState extends State<DropMenu>
           alignment: Alignment.bottomCenter,
           child: AnimatedBuilder(
             animation: _animation,
-            builder: (BuildContext context, Widget? child) {
+            builder: (BuildContext context, Widget child) {
               return Transform.translate(
                 offset: Offset(0, _animation.value),
                 child: GestureDetector(
@@ -171,20 +171,20 @@ class _DropMenuState extends State<DropMenu>
         alignment: Alignment.bottomCenter,
         child: AnimatedBuilder(
           animation: _animation,
-          builder: (BuildContext context, Widget? child) {
+          builder: (BuildContext context, Widget child) {
             return ConstrainedBox(
               constraints: BoxConstraints(
                 maxHeight: lerpDouble(
-                    widget.lowLayerHeight! + 0,
-                    widget.lowLayerHeight! + widget.lowLayerBottomPadding!,
-                    _animationController.value)!,
+                    widget.lowLayerHeight + 0,
+                    widget.lowLayerHeight + widget.lowLayerBottomPadding,
+                    _animationController.value),
                 maxWidth: MediaQuery.of(context).size.width,
               ),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxHeight: widget.lowLayerHeight!,
+                    maxHeight: widget.lowLayerHeight,
                     maxWidth: MediaQuery.of(context).size.width,
                   ),
                   child: child,
@@ -210,7 +210,7 @@ class _DropMenuState extends State<DropMenu>
           child: widget.highLayer ?? const SizedBox(),
         ),
       ),
-      builder: (BuildContext context, Widget? child) {
+      builder: (BuildContext context, Widget child) {
         return Transform.translate(
           offset: Offset(0, _animation.value),
           child: child,

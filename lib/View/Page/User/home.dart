@@ -8,12 +8,13 @@ import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/Constant/flow_constants.dart';
 import 'package:sepet_demo/Controller/Constant/home_search_hints.dart';
 import 'package:sepet_demo/Controller/Constant/lottie_asset_constants.dart';
 import 'package:sepet_demo/Controller/Provider/flows_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
+import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/Model/Dummy/user.dart';
 import 'package:sepet_demo/View/Page/User/App/navigation.dart';
 import 'package:sepet_demo/View/Page/User/Order/basket.dart';
@@ -29,7 +30,7 @@ import 'package:sepet_demo/View/Widget/search_frame.dart';
 import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -38,9 +39,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, RestorationMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  late final AnimationController _animationController;
-  late final PageController _pageController;
-  late final ScrollController _listViewController;
+   AnimationController _animationController;
+   PageController _pageController;
+   ScrollController _listViewController;
   final RestorableInt currentPage = RestorableInt(0);
 
   @override
@@ -63,10 +64,10 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  String? get restorationId => 'flowPage';
+  String get restorationId => 'flowPage';
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
     registerForRestoration(currentPage, 'currentPage');
   }
 
@@ -128,7 +129,7 @@ class _HomePageState extends State<HomePage>
                     child: FutureBuilder<List>(
                         future: provider.getList(),
                         builder: (context, snapshot) {
-                          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          if (!snapshot.hasData || snapshot.data.isEmpty) {
                             return const ColoredBox(
                               color: Colors.transparent,
                               child: SizedBox.expand(
@@ -146,11 +147,10 @@ class _HomePageState extends State<HomePage>
                                 bottom: 100,
                               ),
                               physics: const BouncingScrollPhysics(),
-                              itemCount: snapshot.data!.length,
+                              itemCount: snapshot.data.length,
                               itemExtent: context.width * 0.5,
                               itemBuilder: (context, index) {
-                                debugPrint(snapshot.data.toString());
-                                return FlowWidget(data: snapshot.data![index]);
+                                return FlowWidget(data: snapshot.data[index]);
                               },
                             );
                           }
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage>
                 elevation: 0,
                 backgroundColor: Theme.of(context)
                     .appBarTheme
-                    .backgroundColor!
+                    .backgroundColor
                     .withOpacity(0.5),
                 automaticallyImplyLeading: false,
                 title: Row(
@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage>
                         height: 30,
                         decoration: BoxDecoration(
                             border: Border.all(
-                                color: Theme.of(context).iconTheme.color!,
+                                color: Theme.of(context).iconTheme.color,
                                 width: 2),
                             shape: BoxShape.circle),
                       ),
@@ -246,12 +246,12 @@ class _HomePageState extends State<HomePage>
                                       animatedTexts: searchHintList
                                           .map(
                                             (title) => TypewriterAnimatedText(
-                                                title,
+                                              languageConverter(context, title),
                                                 cursor: '|',
                                                 textAlign: TextAlign.end,
                                                 textStyle: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText2!
+                                                    .bodyText2
                                                     .copyWith(
                                                         color: Theme.of(context)
                                                             .iconTheme
@@ -269,7 +269,7 @@ class _HomePageState extends State<HomePage>
                                     padding: const EdgeInsets.only(left: 3.0),
                                     child: Icon(
                                       LineIcons.search,
-                                      color: Theme.of(context).iconTheme.color!,
+                                      color: Theme.of(context).iconTheme.color,
                                       size: 15,
                                     ),
                                   )
@@ -288,7 +288,7 @@ class _HomePageState extends State<HomePage>
                       icon: AdvancedAvatar(
                         size: 50,
                         child: Image.network(
-                          loginUser.photoUrl!,
+                          loginUser.photoUrl,
                           loadingBuilder: loadingIndicator,
                           width: 50,
                           fit: BoxFit.cover,
@@ -351,7 +351,7 @@ class _HomePageState extends State<HomePage>
                                           fontWeight: FontWeight.w100,
                                           color: Theme.of(context)
                                               .iconTheme
-                                              .color!,
+                                              .color,
                                         ),
                                       ),
                                     ),

@@ -5,7 +5,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
+import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
 import 'package:sepet_demo/Model/category.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
@@ -13,7 +13,7 @@ import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 
 class NavigationPage extends StatefulWidget {
-  const NavigationPage({Key? key}) : super(key: key);
+  const NavigationPage({Key key}) : super(key: key);
 
   @override
   _NavigationPageState createState() => _NavigationPageState();
@@ -22,8 +22,8 @@ class NavigationPage extends StatefulWidget {
 class _NavigationPageState extends State<NavigationPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  late ScrollController _scrollController;
-  late final AnimationController _openAnimationController;
+  ScrollController _scrollController;
+  AnimationController _openAnimationController;
   // DUMMY
   bool notify = true;
 
@@ -32,7 +32,7 @@ class _NavigationPageState extends State<NavigationPage>
     _scrollController = ScrollController();
     _openAnimationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 450));
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _openAnimationController.forward();
     });
     super.initState();
@@ -122,7 +122,7 @@ class _NavigationPageState extends State<NavigationPage>
               elevation: 0,
               backgroundColor: Theme.of(context)
                   .appBarTheme
-                  .backgroundColor!
+                  .backgroundColor
                   .withOpacity(0.1),
               automaticallyImplyLeading: false,
               title: Row(
@@ -133,7 +133,7 @@ class _NavigationPageState extends State<NavigationPage>
                     child: IconButton(
                       icon: LineIcon(
                         LineIcons.arrowLeft,
-                        color: Theme.of(context).iconTheme.color!,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -217,7 +217,7 @@ class _NavigationPageState extends State<NavigationPage>
                 data.title,
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText2!
+                    .bodyText2
                     .copyWith(fontSize: 17),
               ),
             ),
@@ -275,7 +275,7 @@ class _NavigationPageState extends State<NavigationPage>
                       'Tema',
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText2!
+                          .bodyText2
                           .copyWith(fontSize: 21),
                     ),
                   ),
@@ -314,7 +314,7 @@ class _NavigationPageState extends State<NavigationPage>
             child: Text(
               title,
               style:
-                  Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 21),
+                  Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 21),
             ),
           ),
         ],
@@ -339,7 +339,7 @@ class _NavigationPageState extends State<NavigationPage>
     );
   }
 
-  Widget buildSupportItem(String title, IconData icon, {int? index}) {
+  Widget buildSupportItem(String title, IconData icon, {int index}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Row(
@@ -360,7 +360,7 @@ class _NavigationPageState extends State<NavigationPage>
               padding: const EdgeInsets.only(left: 15.0),
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                style: Theme.of(context).textTheme.bodyText2.copyWith(
                       fontSize: 21,
                     ),
               ),
@@ -397,7 +397,7 @@ class _NavigationPageState extends State<NavigationPage>
 
 class TitleWidget extends StatelessWidget {
   final String title;
-  const TitleWidget({Key? key, required this.title}) : super(key: key);
+  const TitleWidget({Key key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -405,11 +405,11 @@ class TitleWidget extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+        style: Theme.of(context).textTheme.bodyText2.copyWith(
               fontSize: 45,
               foreground: Paint()
                 ..style = PaintingStyle.fill
-                ..color = Theme.of(context).iconTheme.color!
+                ..color = Theme.of(context).iconTheme.color
             ),
       ),
     );

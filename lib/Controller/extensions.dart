@@ -37,7 +37,7 @@ extension RankRoundToHalf on double {
 
 // OFFSIDE
 
-double discountedCalculate(double price, int? rate) {
+double discountedCalculate(double price, int rate) {
   if (rate == null) {
     return price;
   } else {
@@ -49,8 +49,8 @@ double safeArea(
   BuildContext context, {
   double appBarHeight = 70,
   double extra = 0,
-  double? paddingBottom,
-  double? paddingTop,
+  double paddingBottom,
+  double paddingTop,
 }) =>
     (context.height -
         (paddingTop ?? context.padding.top) -

@@ -42,10 +42,10 @@ class _BookmarkSheet extends StatefulWidget {
   final Product productData;
 
   const _BookmarkSheet({
-    required this.scrollController,
-    required this.bottomSheetOffset,
-    Key? key,
-    required this.productData,
+    this.scrollController,
+     this.bottomSheetOffset,
+    Key key,
+     this.productData,
   }) : super(key: key);
 
   @override
@@ -88,7 +88,7 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
                     'Listelerin',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2!
+                        .bodyText2
                         .copyWith(fontSize: 17,),
                   ),
                   Row(
@@ -138,10 +138,10 @@ class ListItem extends StatefulWidget {
   final int index;
   final Product productData;
   const ListItem({
-    Key? key,
-    required this.data,
-    required this.index,
-    required this.productData,
+    Key key,
+     this.data,
+     this.index,
+     this.productData,
   }) : super(key: key);
 
   @override
@@ -150,7 +150,7 @@ class ListItem extends StatefulWidget {
 
 class _ListItemState extends State<ListItem>
     with SingleTickerProviderStateMixin {
-  late AnimationController _bookmarkAnimationController;
+   AnimationController _bookmarkAnimationController;
 
   @override
   void initState() {
@@ -191,12 +191,12 @@ class _ListItemState extends State<ListItem>
         ),
         child: ListTile(
           title: Text(
-            widget.data.title! + ' (${widget.data.products?.length ?? 0})',
+            widget.data.title + ' (${widget.data.products?.length ?? 0})',
             style: Theme.of(context).textTheme.bodyText2,
           ),
           leading: widget.data.iconData != null
               ? LineIcon(
-                  widget.data.iconData!,
+                  widget.data.iconData,
                   color: widget.data.color ?? Theme.of(context).iconTheme.color,
                 )
               : const SizedBox(),
@@ -214,7 +214,7 @@ class _ListItemState extends State<ListItem>
                 // ignore: iterable_contains_unrelated_type
                 color: provider.myList[widget.index].products == null
                     ? Theme.of(context).iconTheme.color
-                    : !provider.myList[widget.index].products!
+                    : !provider.myList[widget.index].products
                             .contains(widget.productData)
                         ? Theme.of(context).iconTheme.color
                         : AppColors.orange,
@@ -225,21 +225,21 @@ class _ListItemState extends State<ListItem>
                 provider
                     .addItem(widget.productData, widget.index)
                     .whenComplete(() {
-                  WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                     _bookmarkAnimationController.forward().whenComplete(() {
                       _bookmarkAnimationController.reset();
                     });
                   });
                 });
               }
-              if (provider.myList[widget.index].products!
+              if (provider.myList[widget.index].products
                   .contains(widget.productData)) {
                 provider.removeItem(widget.productData, widget.index);
               } else {
                 provider
                     .addItem(widget.productData, widget.index)
                     .whenComplete(() {
-                  WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                     _bookmarkAnimationController.forward().whenComplete(() {
                       _bookmarkAnimationController.reset();
                     });
@@ -279,9 +279,9 @@ class _NewBookmarkSheet extends StatefulWidget {
   final double bottomSheetOffset;
 
   const _NewBookmarkSheet({
-    required this.scrollController,
-    required this.bottomSheetOffset,
-    Key? key,
+     this.scrollController,
+     this.bottomSheetOffset,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -290,8 +290,8 @@ class _NewBookmarkSheet extends StatefulWidget {
 
 class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
   final TextEditingController _title = TextEditingController();
-  IconData? pickedIconData;
-  Color? pickedColor;
+  IconData pickedIconData;
+  Color pickedColor;
 
   @override
   Widget build(BuildContext context) {
@@ -319,7 +319,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                       'Yeni liste oluştur',
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText2!
+                          .bodyText2
                           .copyWith(fontSize: 17),
                     ),
                     Row(
@@ -360,7 +360,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                             size: 40,
                           )
                         : LineIcon(
-                            pickedIconData!,
+                            pickedIconData,
                             size: 40,
                             color: pickedColor ??
                                 Theme.of(context).iconTheme.color,
@@ -399,7 +399,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                       OutlinedButton(
                           onPressed: () {
                             colorPickerDialog(context).then((color) {
-                              pickedColor = color!;
+                              pickedColor = color;
                             }).whenComplete(() {
                               setState(() {});
                             });

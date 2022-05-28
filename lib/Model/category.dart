@@ -4,9 +4,9 @@ import 'package:sepet_demo/View/Style/colors.dart';
 
 class Category {
   Category({
-    required this.categoryId,
-    required this.id,
-    required this.title,
+     this.categoryId,
+     this.id,
+     this.title,
     this.description,
     this.icon,
     this.color,
@@ -14,14 +14,14 @@ class Category {
     this.imageUrl,
   });
 
-  late int categoryId; // nullable
-  late int id;
-  late String title;
-  late String? description;
-  late IconData? icon;
-  late MaterialColor? color;
-  late List<Category>? subCategory;
-  late String? imageUrl;
+   int categoryId; // nullable
+   int id;
+   String title;
+   String description;
+ IconData icon;
+   MaterialColor color;
+ List<Category> subCategory;
+   String imageUrl;
 
   factory Category.fromJson(Map<String, dynamic> item) {
     return Category(

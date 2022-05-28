@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/View/Page/Auth/onboaring.dart';
+import 'package:sepet_demo/View/Page/Auth/getting_started.dart';
 import 'package:sepet_demo/View/Painter/splash_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/route_builder.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -17,7 +17,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  late AnimationController animationController;
+   AnimationController animationController;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
         context,
         fadeRouteBuilder(
           context,
-          const OnboardPage(),
+          const GettingStarted(),
           barrierColor: AppColors.red,
         ),
       ),

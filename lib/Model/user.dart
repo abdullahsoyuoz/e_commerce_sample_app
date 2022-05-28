@@ -1,8 +1,8 @@
 class User {
-  late int? id; // nullable
-  late String? name;
-  late String? surname;
-  late String? photoUrl;
+ int id; // nullable
+   String name;
+   String surname;
+   String photoUrl;
 
   User({
     this.id,

@@ -3,7 +3,7 @@ import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/curves.dart';
 
 class LoginPainter extends CustomPainter {
-  LoginPainter({required this.animation}) : super(repaint: animation) {
+  LoginPainter({this.animation}) : super(repaint: animation) {
     brush = Paint()
       ..color = AppColors.orange.shade100
       ..style = PaintingStyle.fill;
@@ -14,9 +14,9 @@ class LoginPainter extends CustomPainter {
     );
   }
 
-  late Paint brush;
-  late final Animation<double> curvedAnimation;
-  late AnimationController animation;
+  Paint brush;
+  Animation<double> curvedAnimation;
+  AnimationController animation;
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:provider/provider.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
+import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 
 class FadePainter extends CustomPainter {
   Color fadeColor;
   BuildContext context;
-  FadePainter({required this.fadeColor, required this.context});
+  FadePainter({this.fadeColor, this.context});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -39,7 +39,7 @@ class FadePainter extends CustomPainter {
 class SymmetricFadePainter extends CustomPainter {
   Color fadeColor;
   BuildContext context;
-  SymmetricFadePainter({required this.fadeColor, required this.context});
+  SymmetricFadePainter({this.fadeColor, this.context});
 
   @override
   void paint(Canvas canvas, Size size) {

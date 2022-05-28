@@ -9,7 +9,7 @@ import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class FlowWidget extends StatefulWidget {
   final FlowEntity data;
-  const FlowWidget({Key? key, required this.data}) : super(key: key);
+  const FlowWidget({Key key, this.data}) : super(key: key);
 
   @override
   State<FlowWidget> createState() => _FlowWidgetState();
@@ -17,7 +17,7 @@ class FlowWidget extends StatefulWidget {
 
 class _FlowWidgetState extends State<FlowWidget>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _animationController;
+   AnimationController _animationController;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _FlowWidgetState extends State<FlowWidget>
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _animationController.forward();
     });
     return AnimatedBuilder(
@@ -100,7 +100,7 @@ class _FlowWidgetState extends State<FlowWidget>
                       fit: StackFit.expand,
                       children: [
                         Image.network(
-                          widget.data.imageUrl!,
+                          widget.data.imageUrl,
                           fit: BoxFit.cover,
                           errorBuilder: (c, o, s) =>
                               errorIndicator(c, o, s ?? StackTrace.empty),
@@ -117,10 +117,10 @@ class _FlowWidgetState extends State<FlowWidget>
                               vertical: 2,
                             ),
                             child: Text(
-                              widget.data.title!.toUpperCase(),
+                              widget.data.title.toUpperCase(),
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyText2!
+                                  .bodyText2
                                   .copyWith(
                                       fontWeight: FontWeight.w600,
                                       color: Theme.of(context).backgroundColor),
@@ -143,7 +143,7 @@ class _FlowWidgetState extends State<FlowWidget>
                   message: widget.data.typeString,
                   triggerMode: TooltipTriggerMode.tap,
                   child: CircleAvatar(
-                    backgroundColor: widget.data.color!.withOpacity(.5),
+                    backgroundColor: widget.data.color.withOpacity(.5),
                   ),
                 ),
               ),

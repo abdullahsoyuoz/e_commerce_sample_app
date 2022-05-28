@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 
 List<Widget> onBoardList = [
   const OnboardWidget(
     icon: LineIcons.palette,
-    title: 'MODERN',
-    description:
-        'Sizler alışverişinizi yaparken\naynı zamanda keyif almanızı istiyoruz.',
+    title: 'onboard1Title',
+    description: 'onboard1Description',
   ),
   const OnboardWidget(
     icon: LineIcons.bookmark,
-    title: 'ADAPTİF',
-    description:
-        'Servislerimizle, tam da aradığınızı bulmada\nsizlere zaman kazandırmak istiyoruz.',
+    title: 'onboard2Title',
+    description: 'onboard2Description',
   ),
   const OnboardWidget(
     icon: LineIcons.gifts,
-    title: 'EĞLENCELİ',
-    description:
-        'Sevdiklerinize tek tıkla hediye yollamak mı?\nPeki kombin yapmanıza yardım etsek?\nVe çok daha fazlasıyla…',
+    title: 'onboard3Title',
+    description: 'onboard3Description',
   ),
   const OnboardWidget(
     icon: LineIcons.alternateShield,
-    title: 'GÜVENLİ',
-    description: 'Merak etmeyin.\nYalnızca eğlenmenizi değil\naynı zamanda güvende kalmanızı istiyoruz.',
+    title: 'onboard4Title',
+    description: 'onboard4Description',
   ),
 ];
 
@@ -34,11 +31,7 @@ class OnboardWidget extends StatelessWidget {
   final IconData icon;
   final String title;
   final String description;
-  const OnboardWidget(
-      {Key? key,
-      required this.icon,
-      required this.title,
-      required this.description})
+  const OnboardWidget({Key key, this.icon, this.title, this.description})
       : super(key: key);
 
   @override
@@ -67,7 +60,7 @@ class OnboardWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   fit: BoxFit.fitHeight,
                   child: Text(
-                    title.toUpperCase(),
+                    languageConverter(context, title).toUpperCase(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.white,
@@ -85,9 +78,9 @@ class OnboardWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 50.0),
               child: FittedBox(
                 child: Text(
-                  description,
+                  languageConverter(context, description).toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.readexPro(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w400,

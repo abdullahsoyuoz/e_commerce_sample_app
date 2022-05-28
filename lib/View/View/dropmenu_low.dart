@@ -12,14 +12,14 @@ import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class LowLayerWidget extends StatefulWidget {
-  const LowLayerWidget({Key? key}) : super(key: key);
+  const LowLayerWidget({Key key}) : super(key: key);
 
   @override
   State<LowLayerWidget> createState() => _LowLayerWidgetState();
 }
 
 class _LowLayerWidgetState extends State<LowLayerWidget> {
-  late final ScrollController _scrollController;
+  ScrollController _scrollController;
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _LowLayerWidgetState extends State<LowLayerWidget> {
                 icon: AdvancedAvatar(
                   size: 50,
                   child: Image.network(
-                    loginUser.photoUrl!,
+                    loginUser.photoUrl,
                     loadingBuilder: loadingIndicator,
                     width: 50,
                     fit: BoxFit.cover,

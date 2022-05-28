@@ -1,0 +1,37 @@
+{
+    "helloWorld" : "Merhaba Dünya!",
+    "gettingStarted" : "Başlarken",
+    "chooseYourLanguage" : "Dilini Seç",
+    "chooseYourTheme" : "Temanı Seç",
+    "dark" : "Karanlık",
+    "light" : "Aydınlık",
+
+    "onboard1Title" : "Modern",
+    "onboard1Description" : "Sizler alışverişinizi yaparken\naynı zamanda keyif almanızı istiyoruz.",
+    "onboard2Title" : "Adaptif",
+    "onboard2Description" : "Servislerimizle, tam da aradığınızı bulmada\nsizlere zaman kazandırmak istiyoruz.",
+    "onboard3Title" : "Eğlenceli",
+    "onboard3Description" : "Sevdiklerinize tek tıkla hediye yollamak mı?\nPeki kombin yapmanıza yardım etsek?\nVe çok daha fazlasıyla …",
+    "onboard4Title" : "Güvenli",
+    "onboard4Description" : "Merak etmeyin.\nYalnızca eğlenmenizi değil\naynı zamanda güvende kalmanızı istiyoruz.",
+
+    "login" : "Giriş Yap",
+    "register" : "Bize Katıl",
+
+    "yourEmail" : "e-mail adresiniz",
+    "yourPassword" : "parolanız",
+    "yourName" : "isminiz",
+    "yourContactNumber" : "iletişim numaranız",
+
+    "submit" : "Onayla",
+
+    "forgetPassword" : "Parolamı unuttum",
+    "notYetRegister" : "Henüz bize katılmadın mı?",
+    "iWantLogin" : "Giriş yapmak istiyorum",
+
+    "searchOnProducts" : "Ürünlerde ara",
+    "searchOnCategories" : "Kategorilerde ara",
+    "searchOnCampaigns" : "Kampanyalarda ara",
+    "searchOnBrands" : "Markalarda ara",
+    "searchOnLists" : "Listelerde ara"
+}

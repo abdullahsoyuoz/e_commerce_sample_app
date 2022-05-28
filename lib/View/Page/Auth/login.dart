@@ -7,7 +7,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
+import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
 import 'package:sepet_demo/View/Painter/login_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -19,7 +19,7 @@ import 'package:sepet_demo/View/Widget/logo.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback onLoginPressed;
-  const LoginPage({Key? key, required this.onLoginPressed}) : super(key: key);
+  const LoginPage({Key key, this.onLoginPressed}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -28,13 +28,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late AnimationController _animationController;
+   AnimationController _animationController;
 
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
+   TextEditingController _emailController;
+   TextEditingController _passwordController;
 
-  late final FocusNode _emailFocus;
-  late final FocusNode _passwordFocus;
+   FocusNode _emailFocus;
+   FocusNode _passwordFocus;
 
   @override
   void initState() {
@@ -247,7 +247,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string!.isEmail()) {
+                          if (!string.isEmail()) {
                             return 'e-mail adresiniz doğrulanamadı.';
                           }
                           return null;
@@ -288,7 +288,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string!.isPasswordEasy()) {
+                          if (!string.isPasswordEasy()) {
                             return 'parolanız doğrulanamadı.';
                           }
                           return null;
@@ -305,7 +305,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
           flex: 1,
           child: BouncingWidget(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
+              if (_formKey.currentState.validate()) {
                 FocusScope.of(context).unfocus();
                 _animationController.animateTo(3).whenComplete(() {
                   Timer(const Duration(milliseconds: 300), () {

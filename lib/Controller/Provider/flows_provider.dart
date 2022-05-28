@@ -5,13 +5,13 @@ import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/flow.dart';
 
 class FlowsProvider with ChangeNotifier {
-  late List<FlowEntity> _flows = [];
-  late List<FlowEntity> _followedFlows = [];
-  late int _currentFilter = 0;
-  late bool isLoading = false;
-  late bool isAllLoaded = false;
-  late int _count = 0;
-  late int _step = 0;
+  List<FlowEntity> _flows = [];
+  List<FlowEntity> _followedFlows = [];
+  int _currentFilter = 0;
+  bool isLoading = false;
+  bool isAllLoaded = false;
+  int _count = 0;
+  int _step = 0;
 
   FlowsProvider() {
     filterList();
@@ -153,7 +153,7 @@ class FlowsProvider with ChangeNotifier {
     }
   }
 
-  Future<List<FlowEntity>> getList() async => await _flows;
+  Future<List<FlowEntity>> getList() async => _flows;
 
   // FOLLOW
 

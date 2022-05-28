@@ -24,7 +24,7 @@ InputDecoration getSearchInputDecoration(BuildContext context, String hint) {
     ),
     focusedBorder: UnderlineInputBorder(
       borderSide:
-          BorderSide(color: Theme.of(context).iconTheme.color!, width: 2),
+          BorderSide(color: Theme.of(context).iconTheme.color, width: 2),
     ),
   );
 }

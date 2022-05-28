@@ -3,7 +3,7 @@ import 'package:sepet_demo/Model/product.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Product data;
-  const ProductDetailPage({Key? key, required this.data}) : super(key: key);
+  const ProductDetailPage({Key key, this.data}) : super(key: key);
 
   @override
   _ProductDetailPageState createState() => _ProductDetailPageState();
@@ -28,7 +28,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
     return Scaffold(
       key: _scaffoldKey,
       body: Center(
-        child: Text(widget.data.title!.toString()),
+        child: Text(widget.data.title.toString()),
       ),
     );
   }

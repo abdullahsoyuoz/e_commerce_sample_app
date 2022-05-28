@@ -1,12 +1,12 @@
 class Shop {
-  late int? id; // nullable
-  late String? name;
-  late String? logoUrl;
-  late String? email;
-  late String? websiteUrl;
-  late String? city;
-  late String? country;
-  late String? contactNumber;
+   int id; // nullable
+   String name;
+   String logoUrl;
+   String email;
+   String websiteUrl;
+   String city;
+ String country;
+   String contactNumber;
 
   Shop({
     this.id,

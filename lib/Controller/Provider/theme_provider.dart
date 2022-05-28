@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class ThemeChanger with ChangeNotifier {
-  late bool _isDark;
+   bool _isDark;
 
   ThemeChanger() {
     _isDark =
-        SchedulerBinding.instance!.window.platformBrightness == Brightness.dark
+        SchedulerBinding.instance.window.platformBrightness == Brightness.dark
             ? true
             : false;
   }

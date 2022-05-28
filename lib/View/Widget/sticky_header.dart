@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 
 class StickyHeader extends SliverPersistentHeaderDelegate {
-  String? title;
+  String title;
   StickyHeader({this.title});
 
   @override

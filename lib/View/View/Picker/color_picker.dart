@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
-Future<Color?> colorPickerDialog(BuildContext context) async {
-  late Color pickedColor;
+Future<Color> colorPickerDialog(BuildContext context) async {
+  Color pickedColor;
   await ColorPicker(
     // Use the dialogPickerColor as start color.
     color: Theme.of(context).scaffoldBackgroundColor,
@@ -40,7 +40,7 @@ Future<Color?> colorPickerDialog(BuildContext context) async {
             padding: const EdgeInsets.only(left: 3.0),
             child: Text(
               've bir de renk?',
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).iconTheme.color),
+              style: Theme.of(context).textTheme.bodyText2.copyWith(color: Theme.of(context).iconTheme.color),
             ),
           )
       ],),
@@ -49,7 +49,7 @@ Future<Color?> colorPickerDialog(BuildContext context) async {
       'Renk tonu',
       style: Theme.of(context)
           .textTheme
-          .caption!.copyWith(color: Theme.of(context).iconTheme.color),
+          .caption.copyWith(color: Theme.of(context).iconTheme.color),
     ),
     padding: const EdgeInsets.all(5),
     actionButtons: const ColorPickerActionButtons(
@@ -60,10 +60,10 @@ Future<Color?> colorPickerDialog(BuildContext context) async {
     ),
     materialNameTextStyle: Theme.of(context)
         .textTheme
-        .caption!
+        .caption
         .copyWith(color: Theme.of(context).iconTheme.color),
-    colorNameTextStyle: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).iconTheme.color),
-    colorCodeTextStyle: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).iconTheme.color),
+    colorNameTextStyle: Theme.of(context).textTheme.caption.copyWith(color: Theme.of(context).iconTheme.color),
+    colorCodeTextStyle: Theme.of(context).textTheme.caption.copyWith(color: Theme.of(context).iconTheme.color),
     pickersEnabled: const <ColorPickerType, bool>{
       ColorPickerType.both: false,
       ColorPickerType.primary: true,

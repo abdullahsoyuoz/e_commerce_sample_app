@@ -4,7 +4,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
+import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/View/Painter/register_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
@@ -14,7 +14,7 @@ import 'package:sepet_demo/View/Widget/logo.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback onRegisterPressed;
-  const RegisterPage({Key? key, required this.onRegisterPressed})
+  const RegisterPage({Key key, this.onRegisterPressed})
       : super(key: key);
 
   @override
@@ -26,18 +26,18 @@ class _RegisterPageState extends State<RegisterPage>
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late AnimationController _animationController;
+  AnimationController _animationController;
   double lastAnimationState = 0;
 
-  late final TextEditingController _nameController;
-  late final TextEditingController _phoneNumberController;
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
+   TextEditingController _nameController;
+   TextEditingController _phoneNumberController;
+   TextEditingController _emailController;
+   TextEditingController _passwordController;
 
-  late final FocusNode _nameFocus;
-  late final FocusNode _phoneNumberFocus;
-  late final FocusNode _emailFocus;
-  late final FocusNode _passwordFocus;
+   FocusNode _nameFocus;
+   FocusNode _phoneNumberFocus;
+   FocusNode _emailFocus;
+   FocusNode _passwordFocus;
 
   @override
   void initState() {
@@ -199,7 +199,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (string!.length < 3) {
+                          if (string.length < 3) {
                             return 'isim en az üç haneden oluşmalı.';
                           } else {
                             return null;
@@ -239,7 +239,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         validator: (string) {
-                          if (string!.length != 11) {
+                          if (string.length != 11) {
                             return 'iletişim numarası 11 hane olmalı.';
                           }
                           return null;
@@ -278,7 +278,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string!.isEmail()) {
+                          if (!string.isEmail()) {
                             return 'e-mail adresi doğrulanamadı.';
                           }
                           return null;
@@ -318,7 +318,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string!.isPasswordEasy()) {
+                          if (!string.isPasswordEasy()) {
                             return 'güçlü bir parola seçiniz.';
                           }
                           return null;
@@ -335,7 +335,7 @@ class _RegisterPageState extends State<RegisterPage>
           flex: 1,
           child: BouncingWidget(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
+              if (_formKey.currentState.validate()) {
                 FocusScope.of(context).unfocus();
                 _animationController.animateTo(5);
               } else {

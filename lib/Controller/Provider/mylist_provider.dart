@@ -4,7 +4,7 @@ import 'package:sepet_demo/Model/mylist.dart';
 import 'package:sepet_demo/Model/product.dart';
 
 class MyListsProvider with ChangeNotifier {
-  late List<MyList> myList;
+   List<MyList> myList;
   List<Product> orders = [];
 
   MyListsProvider() {
@@ -29,18 +29,18 @@ class MyListsProvider with ChangeNotifier {
 
   Future<void> addLike(Product data) async {
     if (myList[0].products != null) {
-      myList[0].products!.add(data);
+      myList[0].products.add(data);
     }
     notifyListeners();
   }
 
   Future<void> removeLike(Product data) async {
-    myList[0].products!.remove(data);
+    myList[0].products.remove(data);
     notifyListeners();
   }
 
   bool constainsLike(Product data) {
-    if (myList[0].products!.contains(data)) {
+    if (myList[0].products.contains(data)) {
       return true;
     }
     return false;
@@ -50,19 +50,19 @@ class MyListsProvider with ChangeNotifier {
 
   Future<void> addItem(Product data, int listIndex) async {
     if (myList[listIndex].products != null) {
-      myList[listIndex].products!.add(data);
+      myList[listIndex].products.add(data);
     }
     notifyListeners();
   }
 
   Future<void> removeItem(Product data, int listIndex) async {
-    myList[listIndex].products!.remove(data);
+    myList[listIndex].products.remove(data);
     notifyListeners();
   }
 
   bool containsItem(Product data) {
     for (var item in myList) {
-      if (item.products!.contains(data)) {
+      if (item.products.contains(data)) {
         return true;
       }
     }

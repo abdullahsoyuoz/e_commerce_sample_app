@@ -4,7 +4,7 @@ import 'package:sepet_demo/View/Style/decorations.dart';
 
 class SearchFrame extends StatelessWidget {
   final Widget child;
-  const SearchFrame({Key? key, required this.child}) : super(key: key);
+  const SearchFrame({Key key,  this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,9 @@ class SearchFrame extends StatelessWidget {
       height: 30,
       width: context.width,
       decoration: BoxDecoration(
-        color: Theme.of(context).appBarTheme.backgroundColor!.withOpacity(0.5),
+        color: Theme.of(context).appBarTheme.backgroundColor.withOpacity(0.5),
         borderRadius: appRadius(),
-        border: Border.all(width: 2, color: Theme.of(context).iconTheme.color!)
+        border: Border.all(width: 2, color: Theme.of(context).iconTheme.color)
         // boxShadow: appShadow(context),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 15),

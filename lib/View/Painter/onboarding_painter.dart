@@ -4,7 +4,7 @@ import 'package:sepet_demo/View/Style/colors.dart';
 import 'dart:math' as math;
 
 class OnboardingPainter extends CustomPainter {
-  OnboardingPainter({required this.animation}) : super(repaint: animation) {
+  OnboardingPainter({this.animation}) : super(repaint: animation) {
     level1Paint = Paint()
       ..color = AppColors.grey
       ..style = PaintingStyle.fill;
@@ -13,10 +13,10 @@ class OnboardingPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
   }
 
-  late Animation<double> animation;
-  late final Paint level1Paint;
-  late final Paint level2Paint;
-  late final Paint level3Paint;
+  Animation<double> animation;
+  Paint level1Paint;
+   Paint level2Paint;
+   Paint level3Paint;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -29,8 +29,8 @@ class OnboardingPainter extends CustomPainter {
     final path = Path();
     path.moveTo(0, 0);
     path.lineTo(
-        lerpDouble(size.width / 4, size.width, animation.value / 3)!, 0);
-    path.lineTo(lerpDouble(size.width / 4, size.width, animation.value / 3)!,
+        lerpDouble(size.width / 4, size.width, animation.value / 3), 0);
+    path.lineTo(lerpDouble(size.width / 4, size.width, animation.value / 3),
         size.height);
     path.lineTo(0, size.height);
     path.close();
@@ -67,18 +67,18 @@ class OnboardingPainter extends CustomPainter {
   Color getColor(double value) {
     if (value <= 1) {
       return Color.lerp(
-          AppColors.purple.shade300, AppColors.orange.shade300, animation.value)!;
+          AppColors.purple.shade300, AppColors.orange.shade300, animation.value);
     }
     if (value <= 2) {
       return Color.lerp(
-          AppColors.orange.shade300, AppColors.red.shade300, animation.value - 1)!;
+          AppColors.orange.shade300, AppColors.red.shade300, animation.value - 1);
     }
     if (value <= 3) {
       return Color.lerp(
-          AppColors.red.shade300, AppColors.blue.shade300, animation.value - 2)!;
+          AppColors.red.shade300, AppColors.blue.shade300, animation.value - 2);
     }
     return Color.lerp(
-        AppColors.grey.shade300, AppColors.grey.shade300, animation.value)!;
+        AppColors.grey.shade300, AppColors.grey.shade300, animation.value);
   }
 
   @override

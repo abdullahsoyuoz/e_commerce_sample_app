@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BasketPage extends StatefulWidget {
-  const BasketPage({ Key? key }) : super(key: key);
+  const BasketPage({ Key key }) : super(key: key);
 
   @override
   _BasketPageState createState() => _BasketPageState();

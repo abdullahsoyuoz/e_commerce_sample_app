@@ -1,24 +1,24 @@
 import 'package:sepet_demo/Model/shop.dart';
 
 class Product {
-  late int? id;
-  late String? title;
-  late String? description;
-  late String? brand;
-  late String? model;
-  late String? category;
-  late double? rank;
-  late int? purchasesCount;
-  late int? commentCount;
-  late double? price;
-  late int? discountRate;
-  late DateTime? publishedDate;
-  late List<String>? photosUrl;
-  late Shop? shop;
-  late bool isLiked;
-  late bool isAddedBookmark;
-  late bool isAddedCart;
-  late bool isNew;
+   int id;
+   String title;
+   String description;
+   String brand;
+   String model;
+   String category;
+   double rank;
+   int purchasesCount;
+   int commentCount;
+   double price;
+   int discountRate;
+   DateTime publishedDate;
+   List<String> photosUrl;
+   Shop shop;
+   bool isLiked;
+   bool isAddedBookmark;
+   bool isAddedCart;
+   bool isNew;
 
   Product({
     this.id,

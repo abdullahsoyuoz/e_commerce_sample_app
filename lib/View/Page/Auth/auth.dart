@@ -1,13 +1,11 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sepet_demo/Controller/theme_helper.dart';
 import 'package:sepet_demo/View/Page/Auth/login.dart';
 import 'package:sepet_demo/View/Page/Auth/register.dart';
 import 'package:sepet_demo/View/Painter/auth_background_painter.dart';
 
 class AuthMainPage extends StatefulWidget {
-  const AuthMainPage({Key? key}) : super(key: key);
+  const AuthMainPage({Key key}) : super(key: key);
 
   @override
   _AuthMainPageState createState() => _AuthMainPageState();
@@ -15,7 +13,7 @@ class AuthMainPage extends StatefulWidget {
 
 class _AuthMainPageState extends State<AuthMainPage>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _animationController;
+  AnimationController _animationController;
   ValueNotifier<bool> showRegisterPage = ValueNotifier<bool>(false);
 
   @override
@@ -46,7 +44,7 @@ class _AuthMainPageState extends State<AuthMainPage>
               fit: StackFit.expand,
               children: [
                 CustomPaint(
-                  painter: AuthBackgroundPainter(animation: _animationController, isDark: Provider.of<ThemeChanger>(context, listen:  false).isDark()),
+                  painter: AuthBackgroundPainter(animation: _animationController, context: context),
                 ),
                 Opacity(
                   opacity: 0.95,
