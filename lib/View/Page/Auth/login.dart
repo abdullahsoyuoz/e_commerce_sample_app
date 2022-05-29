@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:regexpattern/regexpattern.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/View/Page/User/home.dart';
@@ -28,13 +29,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-   AnimationController _animationController;
+  AnimationController _animationController;
 
-   TextEditingController _emailController;
-   TextEditingController _passwordController;
+  TextEditingController _emailController;
+  TextEditingController _passwordController;
 
-   FocusNode _emailFocus;
-   FocusNode _passwordFocus;
+  FocusNode _emailFocus;
+  FocusNode _passwordFocus;
 
   @override
   void initState() {
@@ -102,16 +103,15 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 maxWidth: context.width * 0.35,
                                 minWidth: context.width * 0.35,
                               ),
-                              child: FittedBox(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'GİRİŞ YAP',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: AppColors.black.shade300,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w500),
-                                  ))),
+                              child: Text(
+                                languageConverter(context, 'login')
+                                    .toUpperCase(),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: AppColors.black.shade300,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w500),
+                              )),
                         ),
                       ],
                     ),
@@ -137,7 +137,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Divider(thickness: .1, height: 0,),
+                    const Divider(
+                      thickness: .1,
+                      height: 0,
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
                       child: Row(
@@ -167,7 +170,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    const Divider(thickness: .1, height: 0,),
+                    const Divider(
+                      thickness: .1,
+                      height: 0,
+                    ),
                   ],
                 ),
                 Center(
@@ -180,10 +186,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           onPressed: () {
                             // widget.onLoginPressed.call();
                           },
-                          child: const Text(
-                            'parolamı unuttum',
+                          child: Text(
+                            languageConverter(context, 'forgetPassword'),
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               letterSpacing: 5,
                             ),
@@ -196,10 +202,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           onPressed: () {
                             widget.onLoginPressed.call();
                           },
-                          child: const Text(
-                            'henüz bize katılmadın mı?',
+                          child: Text(
+                            languageConverter(context, 'notYetRegister'),
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               letterSpacing: 5,
                             ),
@@ -238,7 +244,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         controller: _emailController,
                         focusNode: _emailFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('e-mail adresiniz', Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(
+                            languageConverter(context, 'yourEmail'),
+                            Provider.of<ThemeChanger>(context, listen: false)
+                                .isDark()),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -248,7 +257,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ],
                         validator: (string) {
                           if (!string.isEmail()) {
-                            return 'e-mail adresiniz doğrulanamadı.';
+                            return languageConverter(context, 'yourEmailValidation');
                           }
                           return null;
                         },
@@ -278,7 +287,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         controller: _passwordController,
                         focusNode: _passwordFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('parolanız', Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(
+                            languageConverter(context, 'yourPassword'),
+                            Provider.of<ThemeChanger>(context, listen: false)
+                                .isDark()),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         maxLines: 1,
@@ -289,7 +301,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ],
                         validator: (string) {
                           if (!string.isPasswordEasy()) {
-                            return 'parolanız doğrulanamadı.';
+                            return languageConverter(context, 'yourPasswordValidation');
                           }
                           return null;
                         },
@@ -331,11 +343,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       maxHeight: 30,
                       minHeight: 30,
                     ),
-                    child: const FittedBox(
+                    child: FittedBox(
                         child: Text(
-                      'ONAYLA',
-                      style:
-                          TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+                      languageConverter(context, 'submit').toUpperCase(),
+                      style: const TextStyle(
+                          fontSize: 21, fontWeight: FontWeight.w500),
                     )),
                   ),
                 ),

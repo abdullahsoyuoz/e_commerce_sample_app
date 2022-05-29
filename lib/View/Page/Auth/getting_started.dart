@@ -7,6 +7,7 @@ import 'package:sepet_demo/Controller/Constant/languages.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/Auth/onboaring.dart';
+import 'package:sepet_demo/View/Painter/getting_started.dart';
 import 'package:sepet_demo/View/Style/Theme/themedata.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
@@ -37,166 +38,223 @@ class _GettingStartedState extends State<GettingStarted>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: SizedBox.expand(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: context.padding.top),
-          physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics()),
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                  alignment: Alignment.topCenter,
-                  child: LogoWidget(
-                    size: context.width * 0.2,
-                  )),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 30,
-                  left: 20.0,
-                  right: 20.0,
-                ),
-                child: Text(
-                  languageConverter(context, "gettingStarted"),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
-                child: Text(
-                  languageConverter(context, 'chooseYourLanguage'),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 90,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 20),
-                  itemCount: languageList.length,
-                  itemBuilder: (context, index) {
-                    final data = languageList[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 25.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          BouncingWidget(
-                            duration: const Duration(milliseconds: 300),
-                            onPressed: () {
-                              SharedPreferences.getInstance().then((value) {
-                                value.setString(
-                                    "lang", data.locale.languageCode);
-                                AppLocalizations.of(context).load();
-                                setState(() {});
-                              });
-                            },
-                            child: Image.asset(
-                              data.icon,
-                              width: 50,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Text(
-                              data.title,
-                              style: const TextStyle(fontSize: 10),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-                child: Text(
-                  languageConverter(context, 'chooseYourTheme'),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 90,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 20),
-                  itemCount: themeList.length,
-                  itemBuilder: (context, index) {
-                    final data = themeList[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 25.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          BouncingWidget(
-                              duration: const Duration(milliseconds: 300),
-                              onPressed: () {
-                                Provider.of<ThemeChanger>(context,
-                                        listen: false)
-                                    .setTheme(data.brightness == Brightness.dark
-                                        ? true
-                                        : false);
-                              },
-                              child: Card(
-                                elevation: 0,
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                        color: data.scaffoldBackgroundColor,
-                                        border: Border.all(
-                                            color: Theme.of(context)
-                                                .iconTheme
-                                                .color,
-                                            width: 2),
-                                        shape: BoxShape.circle),
-                                  ),
-                                ),
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Text(
-                              data.brightness == Brightness.dark
-                                  ? languageConverter(context, "dark")
-                                  : languageConverter(context, "light"),
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              IconButton(
-                key: LabeledGlobalKey('submitButton'),
-                onPressed: () {
-                  Navigator.push(context, CupertinoPageRoute(builder: (context) => const OnboardPage(),));
-                },
-                icon: const Icon(FontAwesomeIcons.chevronRight)
-              )
-            ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          CustomPaint(
+            painter: GettingStartedPainter(context),
           ),
-        ),
+          SizedBox.expand(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      SingleChildScrollView(
+                        padding: EdgeInsets.symmetric(
+                            vertical: context.padding.top * 1.5),
+                        physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics()),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      languageConverter(
+                                          context, "gettingStarted"),
+                                      style: const TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  LogoWidget(
+                                    size: context.width * 0.15,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 20.0,
+                                top: 50,
+                                bottom: 20,
+                              ),
+                              child: Text(
+                                languageConverter(
+                                    context, 'chooseYourLanguage'),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 90,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                padding: const EdgeInsets.only(left: 20),
+                                physics: const AlwaysScrollableScrollPhysics(
+                                    parent: BouncingScrollPhysics()),
+                                itemCount: languageList.length,
+                                itemBuilder: (context, index) {
+                                  final data = languageList[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 25.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        BouncingWidget(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          onPressed: () {
+                                            SharedPreferences.getInstance()
+                                                .then((value) {
+                                              value.setString("lang",
+                                                  data.locale.languageCode);
+                                              AppLocalizations.of(context)
+                                                  .load();
+                                              setState(() {});
+                                            });
+                                          },
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: Image.asset(data.icon),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5.0),
+                                          child: Text(
+                                            data.title,
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 20.0,
+                                top: 30,
+                                bottom: 20,
+                              ),
+                              child: Text(
+                                languageConverter(context, 'chooseYourTheme'),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 90,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                padding: const EdgeInsets.only(left: 20),
+                                physics: const AlwaysScrollableScrollPhysics(
+                                    parent: BouncingScrollPhysics()),
+                                itemCount: themeList.length,
+                                itemBuilder: (context, index) {
+                                  final data = themeList[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 25.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        BouncingWidget(
+                                            duration: const Duration(
+                                                milliseconds: 300),
+                                            onPressed: () {
+                                              Provider.of<ThemeChanger>(context,
+                                                      listen: false)
+                                                  .setTheme(data.brightness ==
+                                                          Brightness.dark
+                                                      ? true
+                                                      : false);
+                                            },
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                    color: data
+                                                        .scaffoldBackgroundColor,
+                                                    border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .iconTheme
+                                                            .color,
+                                                        width: 2),
+                                                    shape: BoxShape.circle),
+                                              ),
+                                            )),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5.0),
+                                          child: Text(
+                                            data.brightness == Brightness.dark
+                                                ? languageConverter(
+                                                    context, "dark")
+                                                : languageConverter(
+                                                    context, "light"),
+                                            textAlign: TextAlign.center,
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 50.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 30.0, top: 30),
+                      child: BouncingWidget(
+                        key: LabeledGlobalKey('submitButton'),
+                        duration: const Duration(milliseconds: 300),
+                        child: Text(languageConverter(context, 'next'), style: TextStyle(color: Theme.of(context).iconTheme.color, fontSize: 19),),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => const OnboardPage(),
+                              ));
+                        },
+                        // icon: const Icon(FontAwesomeIcons.chevronRight),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

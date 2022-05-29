@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:regexpattern/regexpattern.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/View/Painter/register_painter.dart';
@@ -115,14 +116,12 @@ class _RegisterPageState extends State<RegisterPage>
                                 maxWidth: context.width * 0.35,
                                 minWidth: context.width * 0.35,
                               ),
-                              child: const FittedBox(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'BİZE KATIL',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontSize: 10, fontWeight: FontWeight.w500),
-                                  ))),
+                              child: Text(
+                                languageConverter(context, 'register').toUpperCase(),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.w500),
+                              )),
                         ),
                       ],
                     ),
@@ -152,9 +151,9 @@ class _RegisterPageState extends State<RegisterPage>
                       onPressed: () {
                         widget.onRegisterPressed.call();
                       },
-                      child: const Text(
-                        'giriş yapmak istiyorum',
-                        style: TextStyle(
+                      child: Text(
+                        languageConverter(context, 'iWantLogin'),
+                        style: const TextStyle(
                           fontSize: 20,
                           letterSpacing: 5,
                         ),
@@ -190,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _nameController,
                         focusNode: _nameFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('isminiz', Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourName'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -200,7 +199,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ],
                         validator: (string) {
                           if (string.length < 3) {
-                            return 'isim en az üç haneden oluşmalı.';
+                            return languageConverter(context, 'yourEmailValidation');
                           } else {
                             return null;
                           }
@@ -230,7 +229,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _phoneNumberController,
                         focusNode: _phoneNumberFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('iletişim numarasınız', Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourContactNumber'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.phone,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -240,7 +239,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ],
                         validator: (string) {
                           if (string.length != 11) {
-                            return 'iletişim numarası 11 hane olmalı.';
+                            return languageConverter(context, 'yourContactNumberValidation');
                           }
                           return null;
                         },
@@ -269,7 +268,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _emailController,
                         focusNode: _emailFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('e-mail adresiniz', Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourEmail'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -279,7 +278,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ],
                         validator: (string) {
                           if (!string.isEmail()) {
-                            return 'e-mail adresi doğrulanamadı.';
+                            return languageConverter(context, 'yourEmailValidation');
                           }
                           return null;
                         },
@@ -308,7 +307,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _passwordController,
                         focusNode: _passwordFocus,
                         style: textfieldstyle,
-                        decoration: getAuthInputDecoration('parolanız', Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourPassword'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         maxLines: 1,
@@ -319,7 +318,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ],
                         validator: (string) {
                           if (!string.isPasswordEasy()) {
-                            return 'güçlü bir parola seçiniz.';
+                            return languageConverter(context, 'yourPasswordValidation');
                           }
                           return null;
                         },
@@ -352,10 +351,10 @@ class _RegisterPageState extends State<RegisterPage>
                       maxHeight: 30,
                       minHeight: 30,
                     ),
-                    child: const FittedBox(
+                    child:  FittedBox(
                         child: Text(
-                      'KATIL',
-                      style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+                      languageConverter(context, 'submit').toUpperCase(),
+                      style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
                     )),
                   ),
                 ),

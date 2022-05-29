@@ -17,21 +17,34 @@
 
     "login" : "Giriş Yap",
     "register" : "Bize Katıl",
-
-    "yourEmail" : "e-mail adresiniz",
-    "yourPassword" : "parolanız",
-    "yourName" : "isminiz",
-    "yourContactNumber" : "iletişim numaranız",
-
+    
     "submit" : "Onayla",
-
+    "cancel" : "İptal",
+    "next" : "İlerle",
+    
     "forgetPassword" : "Parolamı unuttum",
     "notYetRegister" : "Henüz bize katılmadın mı?",
     "iWantLogin" : "Giriş yapmak istiyorum",
+    
+    "yourEmail" : "e-mail adresiniz",
+    "yourEmailValidation" : "e-mail adresinizin formatı doğrulanamadı.",
+    "yourPassword" : "parolanız",
+    "yourPasswordValidation" : "parolanızın kriterlerimizle eşleşmiyor.",
+    "yourName" : "isminiz",
+    "yourNameValidation" : "isminiz en az üç karakterden oluşmalı.",
+    "yourContactNumber" : "iletişim numaranız",
+    "yourContactNumberValidation" : "iletişim numaranızın formatı doğrulanamadı.",
 
     "searchOnProducts" : "Ürünlerde ara",
     "searchOnCategories" : "Kategorilerde ara",
     "searchOnCampaigns" : "Kampanyalarda ara",
     "searchOnBrands" : "Markalarda ara",
-    "searchOnLists" : "Listelerde ara"
+    "searchOnLists" : "Listelerde ara",
+
+    "flowMixed" : "Karışık",
+    "flowSpecial4You" : "Sana Özel",
+    "flowList" : "Listeler",
+    "flowDiscounts" : "İndirimler",
+    "flowCampaigns" : "Kampanyalar",
+    "flowFollows" : "Takip'lerim"
 }

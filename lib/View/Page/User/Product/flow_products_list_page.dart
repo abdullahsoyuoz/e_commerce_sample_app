@@ -26,8 +26,8 @@ class FlowProductsListPage extends StatefulWidget {
 class _FlowProductsListPageState extends State<FlowProductsListPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-   PageController _pageController;
-   AnimationController _bellAnimationController;
+  PageController _pageController;
+  AnimationController _bellAnimationController;
 
   int pageIndex = 0;
   @override
@@ -68,8 +68,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                           context,
                           CupertinoPageRoute(
                             builder: (context) => ProductDetailPage(
-                                data: widget
-                                    .data.targetProducts[index]),
+                                data: widget.data.targetProducts[index]),
                           ));
                     },
                     child: Center(
@@ -79,8 +78,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Card(
                             child: ProductViewBody(
-                                data: widget
-                                    .data.targetProducts[index],
+                                data: widget.data.targetProducts[index],
                                 index: index),
                           ),
                         ),
@@ -113,109 +111,125 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                 onPressed: () => Navigator.pop(context),
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: Material(
-                    elevation: 10,
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: appRadius(),
-                    ),
-                    child: const Center(
-                      child: FaIcon(
-                        LineIcons.arrowLeft,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Theme.of(context).iconTheme.color, width: 2),
+                        shape: BoxShape.circle),
+                    child: Material(
+                      elevation: 0,
+                      color: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: appRadius(),
+                      ),
+                      child: const Center(
+                        child: FaIcon(
+                          LineIcons.arrowLeft,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
               Expanded(
-                child: BouncingWidget(
-                  onPressed: () {},
-                  child: AbsorbPointer(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxHeight: 40,
-                          minHeight: 40,
-                        ),
-                        child: Material(
-                          elevation: 10,
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          shape:
-                              RoundedRectangleBorder(borderRadius: appRadius()),
-                          child: Marquee(
-                            text: widget.data.title.toUpperCase(),
-                            numberOfRounds: 3,
-                            scrollAxis: Axis.horizontal,
-                            fadingEdgeStartFraction: 0.02,
-                            fadingEdgeEndFraction: 0.03,
-                            showFadingOnlyWhenScrolling: true,
-                            velocity: 30,
-                            decelerationDuration: const Duration(seconds: 3),
-                            startAfter: const Duration(seconds: 1),
-                            startPadding: 20,
-                            blankSpace: context.width * 0.5,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                .copyWith(
-                                    fontSize: 13, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Consumer<FlowsProvider>(builder: (context, provider, _) {
-                return BouncingWidget(
-                  onPressed: () {
-                    provider.followedListToggleItem(widget.data).then((check) {
-                      if (provider.isFollowed(widget.data)) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: AppColors.red.shade300,
-                          content: const Text(
-                            'Akış takibe alındı.',
-                          ),
-                        ));
-                        _bellAnimationController.forward().whenComplete(() {
-                          _bellAnimationController?.reset();
+                child: Consumer<FlowsProvider>(builder: (context, provider, _) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: BouncingWidget(
+                      onPressed: () {
+                        provider
+                            .followedListToggleItem(widget.data)
+                            .then((check) {
+                          if (provider.isFollowed(widget.data)) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: AppColors.red.shade300,
+                              content: const Text(
+                                'Akış takibe alındı.',
+                              ),
+                            ));
+                            _bellAnimationController.forward().whenComplete(() {
+                              _bellAnimationController?.reset();
+                            });
+                          }
                         });
-                      }
-                    });
-                  },
-                  child: Material(
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(borderRadius: appRadius()),
-                    color: provider.isFollowed(widget.data)
-                        ? AppColors.red
-                        : Theme.of(context).scaffoldBackgroundColor,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxHeight: 40,
-                        minHeight: 40,
-                      ),
-                      child: FittedBox(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.all(7),
-                          child: Swing(
-                            child: LineIcon(
-                              LineIcons.bell,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                            animate: false,
-                            manualTrigger: true,
-                            controller: (va) {
-                              _bellAnimationController = va;
-                            },
+                      },
+                      child: AbsorbPointer(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Theme.of(context).iconTheme.color,
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    maxHeight: 40,
+                                    minHeight: 40,
+                                  ),
+                                  child: Material(
+                                    elevation: 0,
+                                    color: Colors.transparent,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: appRadius()),
+                                    child: Marquee(
+                                      text: widget.data.title.toUpperCase(),
+                                      numberOfRounds: 3,
+                                      scrollAxis: Axis.horizontal,
+                                      fadingEdgeStartFraction: 0.02,
+                                      fadingEdgeEndFraction: 0.03,
+                                      showFadingOnlyWhenScrolling: true,
+                                      velocity: 30,
+                                      decelerationDuration:
+                                          const Duration(seconds: 3),
+                                      startAfter: const Duration(seconds: 1),
+                                      startPadding: 20,
+                                      blankSpace: context.width * 0.5,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2
+                                          .copyWith(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxHeight: 40,
+                                    minHeight: 40,
+                                    maxWidth: 40,
+                                    minWidth: 40),
+                                child: FittedBox(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(7),
+                                    child: Swing(
+                                      child: LineIcon(
+                                        LineIcons.bell,
+                                        color: provider.isFollowed(widget.data)
+                                            ? AppColors.red
+                                            : Theme.of(context).iconTheme.color,
+                                      ),
+                                      animate: false,
+                                      manualTrigger: true,
+                                      controller: (va) {
+                                        _bellAnimationController = va;
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ],
           ),
         ),

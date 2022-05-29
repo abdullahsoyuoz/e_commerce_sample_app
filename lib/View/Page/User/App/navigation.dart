@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/Constant/constant.dart';
+import 'package:sepet_demo/Controller/Constant/languages.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/Model/Dummy/categories.dart';
@@ -11,6 +13,7 @@ import 'package:sepet_demo/Model/category.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key key}) : super(key: key);
@@ -91,6 +94,66 @@ class _NavigationPageState extends State<NavigationPage>
                       _slideAnimate(
                         Direction.RIGHT,
                         _buildSupport(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 35.0),
+                        child: _slideAnimate(
+                          Direction.LEFT,
+                          const TitleWidget(title: 'Uygulama Dili'),
+                        ),
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        itemCount: languageList.length,
+                        itemBuilder: (context, index) {
+                          final data = languageList[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 20.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: BouncingWidget(
+                                    duration: const Duration(milliseconds: 300),
+                                    onPressed: () {
+                                      SharedPreferences.getInstance()
+                                          .then((value) {
+                                        value.setString(
+                                            "lang", data.locale.languageCode);
+                                        AppLocalizations.of(context).load();
+                                        setState(() {});
+                                      });
+                                    },
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: Image.asset(data.icon),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 10,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: Text(
+                                      data.title,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2
+                                          .copyWith(
+                                            fontSize: 21,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -257,11 +320,13 @@ class _NavigationPageState extends State<NavigationPage>
                             padding: const EdgeInsets.all(25.0),
                             child: FittedBox(
                               child: LineIcon(
-                                Provider.of<ThemeChanger>(context, listen: false)
+                                Provider.of<ThemeChanger>(context,
+                                            listen: false)
                                         .isDark()
                                     ? LineIcons.sun
                                     : LineIcons.moon,
-                                color: Theme.of(context).scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                               ),
                             ),
                           ),
@@ -303,9 +368,9 @@ class _NavigationPageState extends State<NavigationPage>
                 aspectRatio: 1,
                 child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: FittedBox(child: LineIcon(icon)),
-                    )),
+                  padding: const EdgeInsets.all(25.0),
+                  child: FittedBox(child: LineIcon(icon)),
+                )),
               ),
             ),
           ),
@@ -406,11 +471,10 @@ class TitleWidget extends StatelessWidget {
       child: Text(
         title,
         style: Theme.of(context).textTheme.bodyText2.copyWith(
-              fontSize: 45,
-              foreground: Paint()
-                ..style = PaintingStyle.fill
-                ..color = Theme.of(context).iconTheme.color
-            ),
+            fontSize: 45,
+            foreground: Paint()
+              ..style = PaintingStyle.fill
+              ..color = Theme.of(context).iconTheme.color),
       ),
     );
   }

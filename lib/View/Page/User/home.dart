@@ -331,7 +331,7 @@ class _HomePageState extends State<HomePage>
                                     border: Border.all(
                                       width: 2,
                                       color: index == currentPage.value
-                                          ? getFilterIndicatorColor(index)
+                                          ? getFilterIndicatorColor(index, context)
                                           : Colors.transparent,
                                     )),
                                 duration: const Duration(milliseconds: 300),
@@ -345,7 +345,7 @@ class _HomePageState extends State<HomePage>
                                       alignment: Alignment.center,
                                       fit: BoxFit.fitHeight,
                                       child: Text(
-                                        data.toString(),
+                                        languageConverter(context, data.toString()),
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w100,
