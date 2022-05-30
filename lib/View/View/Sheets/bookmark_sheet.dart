@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Model/mylist.dart';
 import 'package:sepet_demo/Model/product.dart';
@@ -85,7 +86,7 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Listelerin',
+                    languageConverter(context, "myList"),
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2
@@ -191,7 +192,7 @@ class _ListItemState extends State<ListItem>
         ),
         child: ListTile(
           title: Text(
-            widget.data.title + ' (${widget.data.products?.length ?? 0})',
+            widget.data.isConst ? languageConverter(context, widget.data.title) + ' (${widget.data.products.length ?? 0})' : widget.data.title + ' (${widget.data.products.length ?? 0})',
             style: Theme.of(context).textTheme.bodyText2,
           ),
           leading: widget.data.iconData != null
@@ -316,7 +317,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Yeni liste oluştur',
+                      languageConverter(context, "newList"),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2
@@ -373,7 +374,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                           style: TextStyle(
                               color: Theme.of(context).iconTheme.color),
                           decoration: getSearchInputDecoration(
-                              context, 'listenin ismi ?'),
+                              context, languageConverter(context, "listName")),
                         ),
                       ),
                     ),
@@ -395,16 +396,19 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                               setState(() {});
                             });
                           },
-                          child: const Text('listene ikon seçebilirsin')),
-                      OutlinedButton(
-                          onPressed: () {
-                            colorPickerDialog(context).then((color) {
-                              pickedColor = color;
-                            }).whenComplete(() {
-                              setState(() {});
-                            });
-                          },
-                          child: const Text('listene renk\'te seçebilirsin'))
+                          child: Text(languageConverter(context, "listIcon"))),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: OutlinedButton(
+                            onPressed: () {
+                              colorPickerDialog(context).then((color) {
+                                pickedColor = color;
+                              }).whenComplete(() {
+                                setState(() {});
+                              });
+                            },
+                            child: Text(languageConverter(context, "listColor"))),
+                      )
                     ],
                   )),
             ],

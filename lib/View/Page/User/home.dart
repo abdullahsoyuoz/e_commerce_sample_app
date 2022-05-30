@@ -26,7 +26,6 @@ import 'package:sepet_demo/View/Widget/drop_menu.dart';
 import 'package:sepet_demo/View/Widget/flow_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
-import 'package:sepet_demo/View/Widget/search_frame.dart';
 import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,9 +38,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, RestorationMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-   AnimationController _animationController;
-   PageController _pageController;
-   ScrollController _listViewController;
+  AnimationController _animationController;
+  PageController _pageController;
+  ScrollController _listViewController;
   final RestorableInt currentPage = RestorableInt(0);
 
   @override
@@ -84,7 +83,7 @@ class _HomePageState extends State<HomePage>
                   builder: (context) => const BasketPage(),
                 ));
           },
-          tooltip: 'Sepetin',
+          tooltip: languageConverter(context, "yourBasket"),
           child: const Padding(
             padding: EdgeInsets.all(10.0),
             child: LogoWidget(
@@ -98,65 +97,77 @@ class _HomePageState extends State<HomePage>
             DropMenu(
               animationController: _animationController,
               indicator: const SizedBox(),
-              backgroundColor: AppColors.purple.shade300,
+              backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
               lowLayerBottomPadding: context.padding.bottom,
               lowLayerHeight: 70,
               lowLayer: const LowLayerWidget(),
               highLayer: ColoredBox(
                 color: Theme.of(context).scaffoldBackgroundColor,
-                child: GestureDetector(onHorizontalDragUpdate: (details) {
-                  if (details.delta.dx > 10) {
-                    _pageController.previousPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.ease);
-                  }
-                  if (details.delta.dx < 10) {
-                    _pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.ease);
-                  }
-                }, child:
-                    Consumer<FlowsProvider>(builder: (context, provider, _) {
-                  return RefreshIndicator(
-                    edgeOffset: context.padding.top + 120,
-                    onRefresh: () async {
-                      Provider.of<FlowsProvider>(context, listen: false)
-                          .filterList();
-                    },
-                    backgroundColor: Colors.white,
-                    color: AppColors.purple,
-                    displacement: 0,
-                    child: FutureBuilder<List>(
-                        future: provider.getList(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData || snapshot.data.isEmpty) {
-                            return const ColoredBox(
-                              color: Colors.transparent,
-                              child: SizedBox.expand(
-                                child: Center(
-                                    child:
-                                        FaIcon(FontAwesomeIcons.exclamation)),
-                              ),
-                            );
-                          } else {
-                            return ListView.builder(
-                              controller: _listViewController,
-                              shrinkWrap: true,
-                              padding: EdgeInsets.only(
-                                top: 120 + context.padding.top,
-                                bottom: 100,
-                              ),
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: snapshot.data.length,
-                              itemExtent: context.width * 0.5,
-                              itemBuilder: (context, index) {
-                                return FlowWidget(data: snapshot.data[index]);
-                              },
-                            );
-                          }
-                        }),
-                  );
-                })),
+                child: GestureDetector(
+                  onHorizontalDragUpdate: (details) {
+                    if (details.delta.dx > 10) {
+                      _pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.ease);
+                    }
+                    if (details.delta.dx < 10) {
+                      _pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.ease);
+                    }
+                  },
+                  child:
+                      Consumer<FlowsProvider>(builder: (context, provider, _) {
+                    return RefreshIndicator(
+                      edgeOffset: context.padding.top + 120,
+                      onRefresh: () async {
+                        Provider.of<FlowsProvider>(context, listen: false)
+                            .filterList();
+                      },
+                      backgroundColor: Colors.white,
+                      color: AppColors.purple,
+                      displacement: 0,
+                      child: FutureBuilder<List>(
+                          future: provider.getList(),
+                          builder: (context, snapshot) {
+                            if (provider.isLoading) {
+                              return ColoredBox(
+                                color: Colors.transparent,
+                                child: SizedBox.expand(
+                                  child: Center(
+                                      child: Lottie.asset(lottieWaiting)),
+                                ),
+                              );
+                            }
+                            if (!snapshot.hasData || snapshot.data.isEmpty) {
+                              return ColoredBox(
+                                color: Colors.transparent,
+                                child: SizedBox.expand(
+                                  child: Center(
+                                      child: Lottie.asset(lottieNotFound)),
+                                ),
+                              );
+                            } 
+                            else {
+                              return ListView.builder(
+                                controller: _listViewController,
+                                shrinkWrap: true,
+                                padding: EdgeInsets.only(
+                                  top: 120 + context.padding.top,
+                                  bottom: 100,
+                                ),
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: snapshot.data.length,
+                                itemExtent: context.width * 0.5,
+                                itemBuilder: (context, index) {
+                                  return FlowWidget(data: snapshot.data[index]);
+                                },
+                              );
+                            }
+                          }),
+                    );
+                  }),
+                ),
               ),
             ),
             Align(
@@ -195,26 +206,17 @@ class _HomePageState extends State<HomePage>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => const NavigationPage(),
-                            ));
-                      },
-                      icon: Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Theme.of(context).iconTheme.color,
-                                width: 2),
-                            shape: BoxShape.circle),
-                      ),
-                    ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => const NavigationPage(),
+                              ));
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.layerGroup)),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: AnimatedCrossFade(
                           duration: const Duration(milliseconds: 250),
                           crossFadeState: provider.isLoading
@@ -235,45 +237,58 @@ class _HomePageState extends State<HomePage>
                                     builder: (context) => const SearchPage(),
                                   ));
                             },
-                            child: SearchFrame(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  AbsorbPointer(
-                                    absorbing: true,
-                                    child: AnimatedTextKit(
-                                      repeatForever: true,
-                                      animatedTexts: searchHintList
-                                          .map(
-                                            (title) => TypewriterAnimatedText(
-                                              languageConverter(context, title),
-                                                cursor: '|',
-                                                textAlign: TextAlign.end,
-                                                textStyle: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText2
-                                                    .copyWith(
-                                                        color: Theme.of(context)
-                                                            .iconTheme
-                                                            .color,
-                                                        fontSize: 17,
-                                                        fontWeight:
-                                                            FontWeight.w100),
-                                                speed: const Duration(
-                                                    milliseconds: 75)),
-                                          )
-                                          .toList(),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20.0),
+                              child: SizedBox(
+                                height: 50,
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        AbsorbPointer(
+                                          absorbing: true,
+                                          child: AnimatedTextKit(
+                                            repeatForever: true,
+                                            animatedTexts: searchHintList
+                                                .map(
+                                                  (title) =>
+                                                      TypewriterAnimatedText(
+                                                          languageConverter(
+                                                              context, title),
+                                                          cursor: '|',
+                                                          textAlign: TextAlign
+                                                              .end,
+                                                          textStyle: Theme
+                                                                  .of(context)
+                                                              .textTheme
+                                                              .bodyText2
+                                                              .copyWith(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .iconTheme
+                                                                      .color,
+                                                                  fontSize: 17,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w100),
+                                                          speed: const Duration(
+                                                              milliseconds: 75)),
+                                                )
+                                                .toList(),
+                                          ),
+                                        ),
+                                        Icon(
+                                          LineIcons.search,
+                                          color:
+                                              Theme.of(context).iconTheme.color,
+                                          size: 25,
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 3.0),
-                                    child: Icon(
-                                      LineIcons.search,
-                                      color: Theme.of(context).iconTheme.color,
-                                      size: 15,
-                                    ),
-                                  )
-                                ],
+                                ),
                               ),
                             ),
                           ),
@@ -331,7 +346,8 @@ class _HomePageState extends State<HomePage>
                                     border: Border.all(
                                       width: 2,
                                       color: index == currentPage.value
-                                          ? getFilterIndicatorColor(index, context)
+                                          ? getFilterIndicatorColor(
+                                              index, context)
                                           : Colors.transparent,
                                     )),
                                 duration: const Duration(milliseconds: 300),
@@ -341,17 +357,21 @@ class _HomePageState extends State<HomePage>
                                       maxHeight: 20,
                                       minHeight: 20,
                                     ),
-                                    child: FittedBox(
-                                      alignment: Alignment.center,
-                                      fit: BoxFit.fitHeight,
-                                      child: Text(
-                                        languageConverter(context, data.toString()),
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w100,
-                                          color: Theme.of(context)
-                                              .iconTheme
-                                              .color,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5.0),
+                                      child: FittedBox(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          languageConverter(
+                                              context, data.toString()),
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w100,
+                                            color: Theme.of(context)
+                                                .iconTheme
+                                                .color,
+                                          ),
                                         ),
                                       ),
                                     ),

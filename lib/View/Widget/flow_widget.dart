@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -140,7 +141,7 @@ class _FlowWidgetState extends State<FlowWidget>
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Tooltip(
-                  message: widget.data.typeString,
+                  message: languageConverter(context, widget.data.typeString),
                   triggerMode: TooltipTriggerMode.tap,
                   child: CircleAvatar(
                     backgroundColor: widget.data.color.withOpacity(.5),

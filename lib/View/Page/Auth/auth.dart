@@ -38,47 +38,44 @@ class _AuthMainPageState extends State<AuthMainPage>
       valueListenable: showRegisterPage,
       builder: (context, value, child) {
         return SizedBox.expand(
-          child: ColoredBox(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                CustomPaint(
-                  painter: AuthBackgroundPainter(animation: _animationController, context: context),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              CustomPaint(
+                painter: AuthBackgroundPainter(animation: _animationController, context: context),
+              ),
+              Opacity(
+                opacity: 0.95,
+                child: PageTransitionSwitcher(
+                  transitionBuilder:
+                      (child, primaryAnimation, secondaryAnimation) {
+                    return SharedAxisTransition(
+                      animation: primaryAnimation,
+                      secondaryAnimation: secondaryAnimation,
+                      transitionType: SharedAxisTransitionType.horizontal,
+                      fillColor: Colors.transparent,
+                      child: child,
+                    );
+                  },
+                  reverse: value,
+                  child: value
+                      ? RegisterPage(
+                          key: const ValueKey('RegisterPage'),
+                          onRegisterPressed: () {
+                            showRegisterPage.value = false;
+                            _animationController.reverse();
+                          },
+                        )
+                      : LoginPage(
+                          key: const ValueKey('LoginPage'),
+                          onLoginPressed: () {
+                            showRegisterPage.value = true;
+                            _animationController.forward();
+                          },
+                        ),
                 ),
-                Opacity(
-                  opacity: 0.95,
-                  child: PageTransitionSwitcher(
-                    transitionBuilder:
-                        (child, primaryAnimation, secondaryAnimation) {
-                      return SharedAxisTransition(
-                        animation: primaryAnimation,
-                        secondaryAnimation: secondaryAnimation,
-                        transitionType: SharedAxisTransitionType.horizontal,
-                        fillColor: Colors.transparent,
-                        child: child,
-                      );
-                    },
-                    reverse: value,
-                    child: value
-                        ? RegisterPage(
-                            key: const ValueKey('RegisterPage'),
-                            onRegisterPressed: () {
-                              showRegisterPage.value = false;
-                              _animationController.reverse();
-                            },
-                          )
-                        : LoginPage(
-                            key: const ValueKey('LoginPage'),
-                            onLoginPressed: () {
-                              showRegisterPage.value = true;
-                              _animationController.forward();
-                            },
-                          ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/Constant/constant.dart';
@@ -67,7 +68,7 @@ class _NavigationPageState extends State<NavigationPage>
                     children: [
                       _slideAnimate(
                         Direction.LEFT,
-                        const TitleWidget(title: 'Kategoriler'),
+                        TitleWidget(title: languageConverter(context, "categories")),
                       ),
                       _slideAnimate(
                         Direction.RIGHT,
@@ -77,7 +78,7 @@ class _NavigationPageState extends State<NavigationPage>
                         padding: const EdgeInsets.only(top: 35.0),
                         child: _slideAnimate(
                           Direction.LEFT,
-                          const TitleWidget(title: 'Ayarlar'),
+                          TitleWidget(title: languageConverter(context, "settings")),
                         ),
                       ),
                       _slideAnimate(
@@ -88,7 +89,7 @@ class _NavigationPageState extends State<NavigationPage>
                         padding: const EdgeInsets.only(top: 35.0),
                         child: _slideAnimate(
                           Direction.LEFT,
-                          const TitleWidget(title: 'Destek ve Bilgi'),
+                          TitleWidget(title: languageConverter(context, "support")),
                         ),
                       ),
                       _slideAnimate(
@@ -99,62 +100,10 @@ class _NavigationPageState extends State<NavigationPage>
                         padding: const EdgeInsets.only(top: 35.0),
                         child: _slideAnimate(
                           Direction.LEFT,
-                          const TitleWidget(title: 'Uygulama Dili'),
+                          TitleWidget(title: languageConverter(context, "applicationLanguage")),
                         ),
                       ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        itemCount: languageList.length,
-                        itemBuilder: (context, index) {
-                          final data = languageList[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 20.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: BouncingWidget(
-                                    duration: const Duration(milliseconds: 300),
-                                    onPressed: () {
-                                      SharedPreferences.getInstance()
-                                          .then((value) {
-                                        value.setString(
-                                            "lang", data.locale.languageCode);
-                                        AppLocalizations.of(context).load();
-                                        setState(() {});
-                                      });
-                                    },
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: Image.asset(data.icon),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 10,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: Text(
-                                      data.title,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText2
-                                          .copyWith(
-                                            fontSize: 21,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                      _slideAnimate(Direction.DOWN, _buildLangList()),
                     ],
                   ),
                   Align(
@@ -166,6 +115,57 @@ class _NavigationPageState extends State<NavigationPage>
             ),
           );
         });
+  }
+
+  Widget _buildLangList() {
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      itemCount: languageList.length,
+      itemBuilder: (context, index) {
+        final data = languageList[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 2,
+                child: BouncingWidget(
+                  duration: const Duration(milliseconds: 300),
+                  onPressed: () {
+                    SharedPreferences.getInstance().then((value) {
+                      value.setString("lang", data.locale.languageCode);
+                      AppLocalizations.of(context).load();
+                      setState(() {});
+                    });
+                  },
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Image.asset(data.icon),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 10,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    data.title,
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          fontSize: 21,
+                        ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _navAppBar() {
@@ -191,36 +191,50 @@ class _NavigationPageState extends State<NavigationPage>
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 60,
-                    child: IconButton(
-                      icon: LineIcon(
-                        LineIcons.arrowLeft,
-                        color: Theme.of(context).iconTheme.color,
+                  IconButton(
+                    icon: LineIcon(
+                      LineIcons.arrowLeft,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Expanded(
+                    child: Card(
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            Expanded(
+                              child: Text(
+                                'COMBIN',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 30, fontFamily: 'Futura'),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child: LogoWidget(
+                                size: 30,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
                     ),
                   ),
-                  const Expanded(
-                    child: Text(
-                      'COMBIN',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 30, height: 0.8, fontFamily: 'Futura'),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 60,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: LogoWidget(
-                        size: 50,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                    ),
-                  )
+                  // SizedBox(
+                  //   width: 60,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     child: LogoWidget(
+                  //       size: 50,
+                  //       color: Theme.of(context).iconTheme.color,
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),
@@ -232,7 +246,7 @@ class _NavigationPageState extends State<NavigationPage>
 
   Widget _buildCategories() {
     return AspectRatio(
-      aspectRatio: 1.5,
+      aspectRatio: 1.6,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
@@ -250,7 +264,7 @@ class _NavigationPageState extends State<NavigationPage>
 
   Widget buildCategoryItem(Category data) {
     return AspectRatio(
-      aspectRatio: 0.6,
+      aspectRatio: 0.625,
       child: Padding(
         padding: const EdgeInsets.only(right: 20.0),
         child: Column(
@@ -269,15 +283,27 @@ class _NavigationPageState extends State<NavigationPage>
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: Divider(
                 color: data.color,
                 thickness: 1,
+                height: 0,
               ),
             ),
             Flexible(
-              child: Text(
-                data.title,
+              child: Marquee(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                numberOfRounds: 1,
+                scrollAxis: Axis.horizontal,
+                fadingEdgeStartFraction: 0.05,
+                fadingEdgeEndFraction: 0.1,
+                showFadingOnlyWhenScrolling: true,
+                velocity: 30,
+                decelerationDuration: const Duration(seconds: 3),
+                startAfter: const Duration(seconds: 1),
+                startPadding: 0.1,
+                blankSpace: context.width * 0.2,
+                text: languageConverter(context, data.title),
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -337,7 +363,7 @@ class _NavigationPageState extends State<NavigationPage>
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Text(
-                      'Tema',
+                      languageConverter(context, "theme"),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2
@@ -347,8 +373,8 @@ class _NavigationPageState extends State<NavigationPage>
                 ],
               ),
             ),
-            buildSettingsItem('Bildirimler', LineIcons.bell),
-            buildSettingsItem('Profili düzenle', LineIcons.user),
+            buildSettingsItem(languageConverter(context, "notify"), LineIcons.bell),
+            buildSettingsItem(languageConverter(context, "editProfile"), LineIcons.user),
           ],
         ),
       ),
@@ -394,12 +420,12 @@ class _NavigationPageState extends State<NavigationPage>
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 30),
       children: [
-        buildSupportItem('Bize ulaşın', LineIcons.headset),
-        buildSupportItem('Sipariş yardım', LineIcons.truckLoading),
-        buildSupportItem('Değerlendirmelerim', LineIcons.certificate),
-        buildSupportItem('Geri Bildirim', LineIcons.grinningFace),
-        buildSupportItem('Kişisel verilerin korunması', LineIcons.fileContract),
-        buildSupportItem('Hakkımızda', LineIcons.identificationBadge),
+        buildSupportItem(languageConverter(context, "contactUs"), LineIcons.headset),
+        buildSupportItem(languageConverter(context, "orderHelp"), LineIcons.truckLoading),
+        buildSupportItem(languageConverter(context, "myReviews"), LineIcons.certificate),
+        buildSupportItem(languageConverter(context, "feedback"), LineIcons.grinningFace),
+        buildSupportItem(languageConverter(context, "protectPersonalData"), LineIcons.fileContract),
+        buildSupportItem(languageConverter(context, "aboutUs"), LineIcons.identificationBadge),
       ],
     );
   }
@@ -439,21 +465,21 @@ class _NavigationPageState extends State<NavigationPage>
   //
 
   Widget _slideAnimate(Direction direction, Widget child) {
-    return SlideTransition(
-      position: Tween<Offset>(
-              begin: direction == Direction.LEFT
-                  ? const Offset(-0.75, 0)
-                  : direction == Direction.RIGHT
-                      ? const Offset(0.75, 0)
-                      : direction == Direction.UP
-                          ? const Offset(0, -0.75)
-                          : const Offset(0, 0.75),
-              end: Offset.zero)
-          .animate(CurvedAnimation(
-              parent: _openAnimationController, curve: Curves.ease)),
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 300),
-        opacity: _openAnimationController.value,
+    return AnimatedOpacity(
+      opacity: _openAnimationController.value,
+      duration: const Duration(milliseconds: 300),
+      child: SlideTransition(
+        position: Tween<Offset>(
+                begin: direction == Direction.LEFT
+                    ? const Offset(-0.75, 0)
+                    : direction == Direction.RIGHT
+                        ? const Offset(0.75, 0)
+                        : direction == Direction.UP
+                            ? const Offset(0, -0.75)
+                            : const Offset(0, 0.75),
+                end: Offset.zero)
+            .animate(CurvedAnimation(
+                parent: _openAnimationController, curve: Curves.ease)),
         child: child,
       ),
     );
@@ -471,7 +497,7 @@ class TitleWidget extends StatelessWidget {
       child: Text(
         title,
         style: Theme.of(context).textTheme.bodyText2.copyWith(
-            fontSize: 45,
+            fontSize: 35,
             foreground: Paint()
               ..style = PaintingStyle.fill
               ..color = Theme.of(context).iconTheme.color),

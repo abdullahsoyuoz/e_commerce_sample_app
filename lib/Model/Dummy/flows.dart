@@ -58,19 +58,19 @@ String getFlowImageUrl(FlowType type, cat.Category assist) {
 String getTypeString(FlowType type) {
   switch (type) {
     case FlowType.personal:
-      return 'sana özel';
+      return 'flowSpecial4You';
     case FlowType.campagne:
-      return 'kampanyalar';
+      return 'flowCampaigns';
     case FlowType.discount:
-      return 'indirimler';
+      return 'flowDiscounts';
     case FlowType.list:
-      return 'listeler';
+      return 'flowList';
     // case FlowType.category:
     //   return 'kategorik içerik';
     // case FlowType.announcement:
     //   return 'duyuru';
     default:
-      return 'not found';
+      return 'notFound';
   }
 }
 

@@ -94,14 +94,14 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       children: [
                         Align(
                           alignment: Alignment.topRight,
-                          child: LogoWidget(size: context.width * 0.15),
+                          child: LogoWidget(size: context.width * 0.15, color: AppColors.black.shade300),
                         ),
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: ConstrainedBox(
                               constraints: BoxConstraints(
-                                maxWidth: context.width * 0.35,
-                                minWidth: context.width * 0.35,
+                                maxWidth: context.width * 0.5,
+                                minWidth: context.width * 0.5,
                               ),
                               child: Text(
                                 languageConverter(context, 'login')
@@ -243,7 +243,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       child: TextFormField(
                         controller: _emailController,
                         focusNode: _emailFocus,
-                        style: textfieldstyle,
+                        style: textfieldstyle(context),
                         decoration: getAuthInputDecoration(
                             languageConverter(context, 'yourEmail'),
                             Provider.of<ThemeChanger>(context, listen: false)
@@ -286,7 +286,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       child: TextFormField(
                         controller: _passwordController,
                         focusNode: _passwordFocus,
-                        style: textfieldstyle,
+                        style: textfieldstyle(context),
                         decoration: getAuthInputDecoration(
                             languageConverter(context, 'yourPassword'),
                             Provider.of<ThemeChanger>(context, listen: false)

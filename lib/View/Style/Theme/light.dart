@@ -8,14 +8,15 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   primaryColor: AppColors.purple.shade300,
   colorScheme: ColorScheme.light(
     background: AppColors.grey.shade100,
-    primaryContainer: AppColors.grey.shade200,
-    secondaryContainer: AppColors.grey.shade300,
+    primaryContainer: AppColors.grey.shade100,
+    secondaryContainer: AppColors.grey.shade200,
+    tertiaryContainer: AppColors.grey.shade300,
   ),
   scaffoldBackgroundColor: Colors.white,
   backgroundColor: AppColors.grey.shade100,
   hintColor: AppColors.black.shade100,
   highlightColor: Colors.transparent,
-  splashColor: AppColors.purple.shade300,
+  splashColor: AppColors.purple.shade200,
   splashFactory: InkRipple.splashFactory,
   dividerColor: AppColors.black.shade100,
   inputDecorationTheme: const InputDecorationTheme(
@@ -47,8 +48,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   // ------------------------------------------------------------------------------------------------ WIDGET ----------
 
   cardTheme: CardTheme(
-    color: Colors.white,
-    elevation: 10,
+    color: AppColors.grey.shade100,
+    elevation: 3,
     margin: EdgeInsets.zero,
     shape: RoundedRectangleBorder(borderRadius: appRadius()),
   ),
@@ -84,7 +85,7 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: AppColors.purple.shade300,
     foregroundColor: Colors.white,
-    splashColor: AppColors.red.shade300,
+    splashColor: AppColors.purple.shade200,
     elevation: 10,
   ),
 

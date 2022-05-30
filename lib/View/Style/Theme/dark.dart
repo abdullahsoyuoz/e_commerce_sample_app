@@ -8,8 +8,9 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   primaryColor: AppColors.orange,
   colorScheme: const ColorScheme.dark().copyWith(
     background: AppColors.black.shade300,
-    primaryContainer: AppColors.black.shade200,
-    secondaryContainer: AppColors.black.shade100,
+    primaryContainer: AppColors.black.shade100,
+    secondaryContainer: AppColors.black.shade200,
+    tertiaryContainer: AppColors.black.shade300
   ),
   scaffoldBackgroundColor: AppColors.black.shade300,
   backgroundColor: Colors.black,

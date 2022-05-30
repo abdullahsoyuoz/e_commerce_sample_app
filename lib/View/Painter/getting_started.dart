@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
 
 class GettingStartedPainter extends CustomPainter {
   BuildContext context;
@@ -8,7 +7,7 @@ class GettingStartedPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Theme.of(context).colorScheme.primaryContainer;
+      ..color = Theme.of(context).colorScheme.tertiaryContainer;
     Path path = Path();
     path.moveTo(size.width, 0);
     path.lineTo(size.width * 0.5, 0);

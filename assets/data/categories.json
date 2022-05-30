@@ -2,81 +2,81 @@
     {
         "category_id": 0,
         "id": 0,
-        "title": "Elektronik & Aksesuarlar"
+        "title": "categoryelectronic"
     },
     {
         "category_id": 0,
         "id": 1,
-        "title": "Oyun, Hobi ve Oyuncak"
+        "title": "categorygame"
     },
     {
         "category_id": 0,
         "id": 2,
-        "title": "Kitap, Dergi, Film ve Müzik"
+        "title": "categorybook"
     },
     {
         "category_id": 0,
         "id": 3,
-        "title": "Enstrüman, Fotoğrafçılık ve Sanat"
+        "title": "categoryinstrument"
     },
     {
         "category_id": 1,
         "id": 0,
-        "title": "Sağlık, Kişisel Bakım ve Kozmetik"
+        "title": "categoryhealt"
     },
     {
         "category_id": 1,
         "id": 1,
-        "title": "Anne, Bebek ve Petshop"
+        "title": "categorybaby"
     },
     {
         "category_id": 1,
         "id": 2,
-        "title": "Spor ve Outdoor"
+        "title": "categorysport"
     },
     {
         "category_id": 1,
         "id": 3,
-        "title": "Giyim & Aksesuarlar"
+        "title": "categoryclothes"
     },
     {
         "category_id": 2,
         "id": 0,
-        "title": "Ev ve Ofis"
+        "title": "categoryhome"
     },
     {
         "category_id": 2,
         "id": 1,
-        "title": "Dekorasyon"
+        "title": "categorydecoration"
     },
     {
         "category_id": 2,
         "id": 2,
-        "title": "Antika ve Koleksiyonlar"
+        "title": "categoryantique"
     },
     {
         "category_id": 2,
         "id": 3,
-        "title": "Temizlik Ürünleri"
+        "title": "categorycleaning"
     },
     {
         "category_id": 3,
         "id": 0,
-        "title": "Araç & Aksesuarlar"
+        "title": "categoryautomobile"
     },
     {
         "category_id": 3,
         "id": 1,
-        "title": "Bahçe ve Yapı malzemeleri"
+        "title": "categorygarden"
     },
     {
         "category_id": 3,
         "id": 2,
-        "title": "Tamirat ve Endüstriyel aletler"
+        "title": "categoryfixing"
     },
     {
         "category_id": 3,
         "id": 3,
-        "title": "Kırtasiye"
+        "title": "categorystationary"
     }
 ]

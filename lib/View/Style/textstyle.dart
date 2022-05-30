@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-TextStyle textfieldstyle = const TextStyle(
-  color: Colors.black,
-  fontSize: 15,
-);
+TextStyle textfieldstyle(BuildContext context) => Theme.of(context).textTheme.bodyText2;
 
 TextStyle getNoenStyle(BuildContext context, MaterialColor color) => TextStyle(
       color: Colors.white,

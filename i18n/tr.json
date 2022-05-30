@@ -1,11 +1,19 @@
 {
-    "helloWorld" : "Merhaba Dünya!",
+    "_GENERAL_" : "------------------------------------------------------------------------------------------------------------------------",
+    "dark" : "Karanlık",
+    "light" : "Aydınlık",
+    "submit" : "Onayla",
+    "cancel" : "İptal",
+    "select" : "Seç",
+    "next" : "İlerle",
+    "notFound" : "Bulunamadı.",
+    
+    "_GETTINGSTARTED_" : "------------------------------------------------------------------------------------------------------------------------",
     "gettingStarted" : "Başlarken",
     "chooseYourLanguage" : "Dilini Seç",
     "chooseYourTheme" : "Temanı Seç",
-    "dark" : "Karanlık",
-    "light" : "Aydınlık",
-
+    
+    "_ONBOARD_" : "------------------------------------------------------------------------------------------------------------------------",
     "onboard1Title" : "Modern",
     "onboard1Description" : "Sizler alışverişinizi yaparken\naynı zamanda keyif almanızı istiyoruz.",
     "onboard2Title" : "Adaptif",
@@ -14,14 +22,10 @@
     "onboard3Description" : "Sevdiklerinize tek tıkla hediye yollamak mı?\nPeki kombin yapmanıza yardım etsek?\nVe çok daha fazlasıyla …",
     "onboard4Title" : "Güvenli",
     "onboard4Description" : "Merak etmeyin.\nYalnızca eğlenmenizi değil\naynı zamanda güvende kalmanızı istiyoruz.",
-
+    
+    "_AUTH_" : "------------------------------------------------------------------------------------------------------------------------",
     "login" : "Giriş Yap",
     "register" : "Bize Katıl",
-    
-    "submit" : "Onayla",
-    "cancel" : "İptal",
-    "next" : "İlerle",
-    
     "forgetPassword" : "Parolamı unuttum",
     "notYetRegister" : "Henüz bize katılmadın mı?",
     "iWantLogin" : "Giriş yapmak istiyorum",
@@ -34,17 +38,83 @@
     "yourNameValidation" : "isminiz en az üç karakterden oluşmalı.",
     "yourContactNumber" : "iletişim numaranız",
     "yourContactNumberValidation" : "iletişim numaranızın formatı doğrulanamadı.",
-
+    
+    "_HOME_" : "------------------------------------------------------------------------------------------------------------------------",
     "searchOnProducts" : "Ürünlerde ara",
     "searchOnCategories" : "Kategorilerde ara",
     "searchOnCampaigns" : "Kampanyalarda ara",
     "searchOnBrands" : "Markalarda ara",
     "searchOnLists" : "Listelerde ara",
-
+    
     "flowMixed" : "Karışık",
     "flowSpecial4You" : "Sana Özel",
     "flowList" : "Listeler",
     "flowDiscounts" : "İndirimler",
     "flowCampaigns" : "Kampanyalar",
-    "flowFollows" : "Takip'lerim"
+    "flowFollows" : "Takip'lerim",
+    
+    "_PRODUCTVIEWBODY_" : "------------------------------------------------------------------------------------------------------------------------",
+    "goProduct" : "Ürüne git",
+    
+    "_CATEGORIES_" : "------------------------------------------------------------------------------------------------------------------------",
+    "categoryelectronic" : "Elektronik & Aksesuarlar",
+    "categorygame" : "Oyun, Hobi ve Oyuncak",
+    "categorybook" : "Kitap, Dergi, Film ve Müzik",
+    "categoryinstrument" : "Enstrüman, Fotoğrafçılık ve Sanat",
+
+    "categoryhealt" : "Sağlık, Kişisel Bakım ve Kozmetik",
+    "categorybaby" : "Anne, Bebek ve Petshop",
+    "categorysport" : "Spor ve Outdoor",
+    "categoryclothes" : "Giyim & Aksesuarlar",
+
+    "categoryhome" : "Ev ve Ofis",
+    "categorydecoration" : "Dekorasyon",
+    "categoryantique" : "Antika ve Koleksiyonlar",
+    "categorycleaning" : "Temizlik Ürünleri",
+
+    "categoryautomobile" : "Araç & Aksesuarlar",
+    "categorygarden" : "Bahçe ve Yapı malzemeleri",
+    "categoryfixing" : "Tamirat ve Endüstriyel aletler",
+    "categorystationary" : "Kırtasiye",
+
+    "_SETTINGS_" : "------------------------------------------------------------------------------------------------------------------------",
+    "categories" : "Kategoriler",
+    "settings" : "Ayarlar",
+    "support" : "Destek & Bilgi",
+    "applicationLanguage" : "Uygulama Dili",
+    "theme" : "Tema",
+    "notify" : "Bildirimler",
+    "editProfile" : "Profili düzenle",
+    "contactUs" : "Bize ulaşın",
+    "orderHelp" : "Sipariş yardım",
+    "myReviews" : "Değerlendirmelerim",
+    "feedback" : "Geri Bildirim",
+    "protectPersonalData" : "Kişisel verilerin korunması",
+    "aboutUs" : "Hakkımızda",
+
+    "_SHEETS_" : "------------------------------------------------------------------------------------------------------------------------",
+    "myList" : "Listelerim",
+    "myLiked" : "Beğendiklerim",
+    "myTracking" : "Fiyat Takiplerim",
+    "myLater" : "Daha Sonra",
+
+    "newList" : "Yeni liste oluştur",
+    "listName" : "Listenin ismi?",
+    "listIcon" : "Listene ikon seç",
+    "listColor" : "Listene renk seç",
+    
+    "iconSheetTitle" : "Listene bir ikon seç",
+    "searchIcon" : "İkon ara",
+
+    "colorSheetTitle" : "Listene bir renk seç",
+    "colorTone": "Renk Tonu",
+    
+    "_TOOLTIPMESSAGES_" : "------------------------------------------------------------------------------------------------------------------------",
+    "yourBasket": "Sepetin",
+    "buyCount" : "Ürünü kaç kişi satın aldı?",
+    "reviewsCount" : "Ürünü kaç kişi değerlendirdi?",
+    "averagePoint" : "Ürünün ortalama puanı.",
+    "new" : "yeni",
+       
+    "_END_" : "------------------------------------------------------------------------------------------------------------------------"
 }

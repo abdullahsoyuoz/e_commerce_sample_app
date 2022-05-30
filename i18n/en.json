@@ -1,32 +1,35 @@
 {
-    "helloWorld": "Hello World!",
+    "_GENERAL_" : "------------------------------------------------------------------------------------------------------------------------",
+    "dark" : "Dark",
+    "light" : "Light",
+    "submit" : "Approve",
+    "cancel" : "Cancel",
+    "next" : "Next",
+    "select" : "Select",
+    "notFound" : "Not Found.",
 
+    "_GETTINGSTARTED_" : "------------------------------------------------------------------------------------------------------------------------",
     "gettingStarted" : "Getting Started",
     "chooseYourLanguage" : "Choose your language",
     "chooseYourTheme" : "Choose the theme",
-    "dark" : "Dark",
-    "light" : "Light",
 
+    "_ONBOARD_" : "------------------------------------------------------------------------------------------------------------------------",
     "onboard1Title" : "Modern",
     "onboard1Description" : "We also want you to enjoy\nwhile you are shopping",
     "onboard2Title" : "Adaptive",
-    "onboard2Description" : "With our services, finding exactly what you are looking for\nwe want to save you time.",
+    "onboard2Description" : "With our services,\nfinding exactly what you are looking for\nwe want to save you time.",
     "onboard3Title" : "Enjoyable",
     "onboard3Description" : "Is it possible to send a gift to your loved ones?\nSo if we help you combine?\nAnd much more ...",
     "onboard4Title" : "Trustworthy",
     "onboard4Description" : "Do not worry.\nNot just having fun\nWe also want you to remain safe.",
 
+    "_AUTH_" : "------------------------------------------------------------------------------------------------------------------------",
     "login" : "Login",
     "register" : "Join us",
-    
-    "submit" : "Approve",
-    "cancel" : "Cancel",
-    "next" : "Next",
-    
     "forgetPassword" : "I forgot my password",
     "notYetRegister" : "Didn't you join us yet?",
     "iWantLogin" : "I'd like to login",
-    
+
     "yourEmail" : "your e-mail adress",
     "yourEmailValidation" : "the format of your e-mail address could not be verified.",
     "yourPassword" : "your password",
@@ -36,6 +39,7 @@
     "yourContactNumber" : "your contact number",
     "yourContactNumberValidation" : "The format of your contact number could not be verified.",
     
+    "_HOME_" : "------------------------------------------------------------------------------------------------------------------------",
     "searchOnProducts": "Search on products",
     "searchOnCategories": "Search on categories",
     "searchOnCampaigns": "Search on campaigns",
@@ -47,5 +51,70 @@
     "flowList" : "Lists",
     "flowDiscounts" : "Discounts",
     "flowCampaigns" : "Campaigns",
-    "flowFollows" : "My follow's"
+    "flowFollows" : "My follow's",
+
+    "_PRODUCTVIEWBODY_" : "------------------------------------------------------------------------------------------------------------------------",
+    "goProduct" : "Go to the product",
+    
+    "_CATEGORIES_" : "------------------------------------------------------------------------------------------------------------------------",
+    "categoryelectronic" : "Electronics & Accessories",
+    "categorygame" : "Game, Hobby and Toy",
+    "categorybook" : "Books, Magazines, Film and Music",
+    "categoryinstrument" : "Instrument, photography and art",
+
+    "categoryhealt" : "Health, Personal Care and Cosmetics",
+    "categorybaby" : "Mother, Baby and Petshop",
+    "categorysport" : "Sports and Outdoor",
+    "categoryclothes" : "Clothing & Accessories",
+
+    "categoryhome" : "Home and office",
+    "categorydecoration" : "Decoration",
+    "categoryantique" : "Antiques and collections",
+    "categorycleaning" : "Cleaning products",
+
+    "categoryautomobile" : "Vehicles & accessories",
+    "categorygarden" : "Garden and Building Materials",
+    "categoryfixing" : "Repair and Industrial Equipment",
+    "categorystationary" : "Stationary",
+
+    "_SETTINGS_" : "------------------------------------------------------------------------------------------------------------------------",
+    "categories" : "Categories",
+    "settings" : "Settings",
+    "support" : "Support & Information",
+    "applicationLanguage" : "Application language",
+    "theme" : "Theme",
+    "notify" : "Notifications",
+    "editProfile" : "Edit your profile",
+    "contactUs" : "Contact us",
+    "orderHelp" : "Order help",
+    "myReviews" : "My evaluations",
+    "feedback" : "Feedback",
+    "protectPersonalData" : "Protection of Personal Data",
+    "aboutUs" : "About us",
+
+    "_SHEETS_" : "------------------------------------------------------------------------------------------------------------------------",
+    "myList" : "My lists",
+    "myLiked" : "My like's",
+    "myTracking" : "My price follow -up",
+    "myLater" : "Later on",
+
+    "newList" : "Create a new list",
+    "listName" : "The name of the list?",
+    "listIcon" : "Choose icon to the list",
+    "listColor" : "Choose color to the list",
+    
+    "iconSheetTitle" : "Choose an icon on the list",
+    "searchIcon" : "search icon",
+
+    "colorSheetTitle" : "Choose a color on the list",
+    "colorTone": "Color tone",
+
+    "_TOOLTIPMESSAGES_" : "------------------------------------------------------------------------------------------------------------------------",
+    "yourBasket": "Your Basket",
+    "buyCount" : "How many people bought the product?",
+    "reviewsCount" : "How many people review the product?",
+    "averagePoint" : "The average score of the product.",
+    "new" : "new",
+       
+    "_END_" : "------------------------------------------------------------------------------------------------------------------------"
 }

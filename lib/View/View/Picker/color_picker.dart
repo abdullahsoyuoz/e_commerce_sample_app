@@ -4,6 +4,7 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 
 Future<Color> colorPickerDialog(BuildContext context) async {
   Color pickedColor;
@@ -39,22 +40,22 @@ Future<Color> colorPickerDialog(BuildContext context) async {
         Padding(
             padding: const EdgeInsets.only(left: 3.0),
             child: Text(
-              've bir de renk?',
+              languageConverter(context, "colorSheetTitle"),
               style: Theme.of(context).textTheme.bodyText2.copyWith(color: Theme.of(context).iconTheme.color),
             ),
           )
       ],),
     ),
     subheading: Text(
-      'Renk tonu',
+      languageConverter(context, "colorTone"),
       style: Theme.of(context)
           .textTheme
           .caption.copyWith(color: Theme.of(context).iconTheme.color),
     ),
     padding: const EdgeInsets.all(5),
-    actionButtons: const ColorPickerActionButtons(
-      dialogCancelButtonLabel: 'İptal',
-      dialogOkButtonLabel: 'Seç',
+    actionButtons: ColorPickerActionButtons(
+      dialogCancelButtonLabel: languageConverter(context, "cancel"),
+      dialogOkButtonLabel: languageConverter(context, "select"),
       dialogOkButtonType: ColorPickerActionButtonType.outlined,
       dialogCancelButtonType: ColorPickerActionButtonType.outlined,
     ),

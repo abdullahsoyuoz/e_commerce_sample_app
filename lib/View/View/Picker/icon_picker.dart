@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:sepet_demo/Controller/AppLocalizations.dart';
 
 Future<IconData> iconPicker(BuildContext context) async {
   IconData _iconData;
@@ -19,9 +20,9 @@ Future<IconData> iconPicker(BuildContext context) async {
         onPressed: () {
           Navigator.pop(context);
         },
-        child: const Text('İptal')),
+        child: Text(languageConverter(context, "cancel"))),
     showTooltips: true,
-    searchHintText: 'Icon ara',
+    searchHintText: languageConverter(context, "searchIcon"),
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     title: Row(
       children: [
@@ -29,7 +30,7 @@ Future<IconData> iconPicker(BuildContext context) async {
         Padding(
           padding: const EdgeInsets.only(left: 3.0),
           child: Text(
-            'icon seçelim?',
+            languageConverter(context, "iconSheetTitle"),
             style: Theme.of(context).textTheme.bodyText2.copyWith(color: Theme.of(context).iconTheme.color),
           ),
         )

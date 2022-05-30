@@ -5,24 +5,24 @@ import 'package:sepet_demo/View/Style/colors.dart';
 
 List<MyList> myListsTemplate = [
   MyList(
-    title: 'Beğendiklerim',
+    title: 'myLiked',
     products: [],
     iconData: LineIcons.heart,
-    color: AppColors.red.shade300,
+    color: AppColors.red.shade200,
     isConst: true,
   ),
   MyList(
-    title: 'Fiyat takip',
+    title: 'myTracking',
     products: [],
     iconData: LineIcons.bell,
-    color: AppColors.turquaz.shade300,
+    color: AppColors.orange.shade200,
     isConst: true,
   ),
   MyList(
-    title: 'Daha sonra',
+    title: 'myLater',
     products: [],
     iconData: LineIcons.shoppingBag,
-    color: AppColors.blue.shade300,
+    color: AppColors.blue.shade200,
     isConst: true,
   ),
   MyList(

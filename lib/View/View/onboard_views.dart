@@ -55,10 +55,9 @@ class OnboardWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 50, minHeight: 50),
+                constraints: const BoxConstraints(maxHeight: 40, minHeight: 40),
                 child: FittedBox(
                   alignment: Alignment.center,
-                  fit: BoxFit.fitHeight,
                   child: Text(
                     languageConverter(context, title).toUpperCase(),
                     textAlign: TextAlign.center,

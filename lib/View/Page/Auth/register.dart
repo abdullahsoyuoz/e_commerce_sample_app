@@ -113,8 +113,8 @@ class _RegisterPageState extends State<RegisterPage>
                           alignment: Alignment.bottomLeft,
                           child: ConstrainedBox(
                               constraints: BoxConstraints(
-                                maxWidth: context.width * 0.35,
-                                minWidth: context.width * 0.35,
+                                maxWidth: context.width * 0.5,
+                                minWidth: context.width * 0.5,
                               ),
                               child: Text(
                                 languageConverter(context, 'register').toUpperCase(),
@@ -188,7 +188,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _nameController,
                         focusNode: _nameFocus,
-                        style: textfieldstyle,
+                        style: textfieldstyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourName'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         maxLines: 1,
@@ -228,7 +228,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _phoneNumberController,
                         focusNode: _phoneNumberFocus,
-                        style: textfieldstyle,
+                        style: textfieldstyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourContactNumber'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.phone,
                         maxLines: 1,
@@ -267,7 +267,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _emailController,
                         focusNode: _emailFocus,
-                        style: textfieldstyle,
+                        style: textfieldstyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourEmail'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
@@ -306,7 +306,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _passwordController,
                         focusNode: _passwordFocus,
-                        style: textfieldstyle,
+                        style: textfieldstyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourPassword'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         obscureText: true,

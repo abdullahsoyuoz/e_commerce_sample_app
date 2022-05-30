@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/Constant/languages.dart';
@@ -38,6 +37,7 @@ class _GettingStartedState extends State<GettingStarted>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -89,7 +89,6 @@ class _GettingStartedState extends State<GettingStarted>
                               child: Text(
                                 languageConverter(
                                     context, 'chooseYourLanguage'),
-                                textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 35,
                                   fontWeight: FontWeight.bold,
@@ -154,7 +153,6 @@ class _GettingStartedState extends State<GettingStarted>
                               ),
                               child: Text(
                                 languageConverter(context, 'chooseYourTheme'),
-                                textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 35,
                                   fontWeight: FontWeight.bold,
