@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage>
                                 builder: (context) => const NavigationPage(),
                               ));
                         },
-                        icon: const FaIcon(FontAwesomeIcons.layerGroup)),
+                        icon: const FaIcon(FontAwesomeIcons.circle)),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),

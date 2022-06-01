@@ -5,6 +5,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
+import 'package:sepet_demo/Controller/Constant/app_menu_constants.dart';
 import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/Constant/languages.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -14,6 +15,7 @@ import 'package:sepet_demo/Model/category.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
+import 'package:sepet_demo/View/Widget/menu_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -60,51 +62,38 @@ class _NavigationPageState extends State<NavigationPage>
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  ListView(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsets.only(
-                        top: 70 + context.padding.top, bottom: 100),
-                    children: [
-                      _slideAnimate(
-                        Direction.LEFT,
-                        TitleWidget(title: languageConverter(context, "categories")),
-                      ),
-                      _slideAnimate(
-                        Direction.RIGHT,
+                  _slideAnimate(
+                    Direction.DOWN,
+                    ListView(
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.only(
+                          top: 70 + context.padding.top, bottom: 100),
+                      children: [
+                        TitleWidget(
+                            title: languageConverter(context, "categories")),
                         _buildCategories(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35.0),
-                        child: _slideAnimate(
-                          Direction.LEFT,
-                          TitleWidget(title: languageConverter(context, "settings")),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 35.0),
+                          child: TitleWidget(
+                              title: languageConverter(context, "settings")),
                         ),
-                      ),
-                      _slideAnimate(
-                        Direction.RIGHT,
                         _buildSettings(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35.0),
-                        child: _slideAnimate(
-                          Direction.LEFT,
-                          TitleWidget(title: languageConverter(context, "support")),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 35.0),
+                          child: TitleWidget(
+                              title: languageConverter(context, "support")),
                         ),
-                      ),
-                      _slideAnimate(
-                        Direction.RIGHT,
                         _buildSupport(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35.0),
-                        child: _slideAnimate(
-                          Direction.LEFT,
-                          TitleWidget(title: languageConverter(context, "applicationLanguage")),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 35.0),
+                          child: TitleWidget(
+                              title: languageConverter(
+                                  context, "applicationLanguage")),
                         ),
-                      ),
-                      _slideAnimate(Direction.DOWN, _buildLangList()),
-                    ],
+                        _buildLangList(),
+                      ],
+                    ),
                   ),
                   Align(
                     alignment: Alignment.topCenter,
@@ -115,57 +104,6 @@ class _NavigationPageState extends State<NavigationPage>
             ),
           );
         });
-  }
-
-  Widget _buildLangList() {
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      itemCount: languageList.length,
-      itemBuilder: (context, index) {
-        final data = languageList[index];
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 20.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 2,
-                child: BouncingWidget(
-                  duration: const Duration(milliseconds: 300),
-                  onPressed: () {
-                    SharedPreferences.getInstance().then((value) {
-                      value.setString("lang", data.locale.languageCode);
-                      AppLocalizations.of(context).load();
-                      setState(() {});
-                    });
-                  },
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Image.asset(data.icon),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 10,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Text(
-                    data.title,
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(
-                          fontSize: 21,
-                        ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 
   Widget _navAppBar() {
@@ -293,7 +231,7 @@ class _NavigationPageState extends State<NavigationPage>
             Flexible(
               child: Marquee(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                numberOfRounds: 1,
+                numberOfRounds: 2,
                 scrollAxis: Axis.horizontal,
                 fadingEdgeStartFraction: 0.05,
                 fadingEdgeEndFraction: 0.1,
@@ -317,148 +255,82 @@ class _NavigationPageState extends State<NavigationPage>
   }
 
   Widget _buildSettings() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
-      child: AspectRatio(
-        aspectRatio: 3,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(left: 30),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 30.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: BouncingWidget(
-                      onPressed: () {
-                        Provider.of<ThemeChanger>(context, listen: false)
-                            .toggle();
-                      },
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Card(
-                          color: Theme.of(context).iconTheme.color,
-                          child: Padding(
-                            padding: const EdgeInsets.all(25.0),
-                            child: FittedBox(
-                              child: LineIcon(
-                                Provider.of<ThemeChanger>(context,
-                                            listen: false)
-                                        .isDark()
-                                    ? LineIcons.sun
-                                    : LineIcons.moon,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      languageConverter(context, "theme"),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          .copyWith(fontSize: 21),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            buildSettingsItem(languageConverter(context, "notify"), LineIcons.bell),
-            buildSettingsItem(languageConverter(context, "editProfile"), LineIcons.user),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Padding buildSettingsItem(String title, IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 30.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: BouncingWidget(
-              onPressed: () {},
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Card(
-                    child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: FittedBox(child: LineIcon(icon)),
-                )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Text(
-              title,
-              style:
-                  Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 21),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSupport() {
-    return ListView(
+    return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      children: [
-        buildSupportItem(languageConverter(context, "contactUs"), LineIcons.headset),
-        buildSupportItem(languageConverter(context, "orderHelp"), LineIcons.truckLoading),
-        buildSupportItem(languageConverter(context, "myReviews"), LineIcons.certificate),
-        buildSupportItem(languageConverter(context, "feedback"), LineIcons.grinningFace),
-        buildSupportItem(languageConverter(context, "protectPersonalData"), LineIcons.fileContract),
-        buildSupportItem(languageConverter(context, "aboutUs"), LineIcons.identificationBadge),
-      ],
+      itemCount: settingsMenuItems.length,
+      itemBuilder: (context, index) {
+        final data = settingsMenuItems[index];
+        return MenuItem(data: data);
+      },
     );
   }
 
-  Widget buildSupportItem(String title, IconData icon, {int index}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 2,
-            child: BouncingWidget(
-              onPressed: () {},
-              child: Card(
-                child: AspectRatio(aspectRatio: 1, child: LineIcon(icon)),
+  Widget _buildSupport() {
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      itemCount: supportMenuItems.length,
+      itemBuilder: (c, i) {
+        final data = supportMenuItems[i];
+        return MenuItem(data: data);
+      },
+    );
+  }
+
+  Widget _buildLangList() {
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      itemCount: languageList.length,
+      itemBuilder: (context, index) {
+        final data = languageList[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 2,
+                child: BouncingWidget(
+                  duration: const Duration(milliseconds: 300),
+                  onPressed: () {
+                    SharedPreferences.getInstance().then((value) {
+                      value.setString("lang", data.locale.languageCode);
+                      AppLocalizations.of(context).load();
+                      setState(() {});
+                    });
+                  },
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Image.asset(data.icon),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 10,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
-                      fontSize: 21,
-                    ),
+              Expanded(
+                flex: 10,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    data.title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .copyWith(fontSize: 21),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -467,7 +339,7 @@ class _NavigationPageState extends State<NavigationPage>
   Widget _slideAnimate(Direction direction, Widget child) {
     return AnimatedOpacity(
       opacity: _openAnimationController.value,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 450),
       child: SlideTransition(
         position: Tween<Offset>(
                 begin: direction == Direction.LEFT

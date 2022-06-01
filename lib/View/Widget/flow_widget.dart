@@ -25,7 +25,7 @@ class _FlowWidgetState extends State<FlowWidget>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
-      lowerBound: 0.25,
+      lowerBound: 0,
       upperBound: 1,
     );
 
