@@ -27,6 +27,7 @@ import 'package:sepet_demo/View/Widget/flow_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 import 'package:lottie/lottie.dart';
+import 'package:swipe/swipe.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -103,21 +104,19 @@ class _HomePageState extends State<HomePage>
               lowLayer: const LowLayerWidget(),
               highLayer: ColoredBox(
                 color: Theme.of(context).scaffoldBackgroundColor,
-                child: GestureDetector(
-                  onHorizontalDragUpdate: (details) {
-                    if (details.delta.dx > 10) {
-                      _pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.ease);
-                    }
-                    if (details.delta.dx < 10) {
-                      _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.ease);
-                    }
+                child: Swipe(
+                  onSwipeRight: () {
+                    _pageController.previousPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.ease);
                   },
-                  child:
-                      Consumer<FlowsProvider>(builder: (context, provider, _) {
+                  onSwipeLeft: (){
+                    _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease);
+                  },
+                  child: Consumer<FlowsProvider>(
+                      builder: (context, provider, _) {
                     return RefreshIndicator(
                       edgeOffset: context.padding.top + 120,
                       onRefresh: () async {
@@ -147,8 +146,7 @@ class _HomePageState extends State<HomePage>
                                       child: Lottie.asset(lottieNotFound)),
                                 ),
                               );
-                            } 
-                            else {
+                            } else {
                               return ListView.builder(
                                 controller: _listViewController,
                                 shrinkWrap: true,
@@ -160,7 +158,8 @@ class _HomePageState extends State<HomePage>
                                 itemCount: snapshot.data.length,
                                 itemExtent: context.width * 0.5,
                                 itemBuilder: (context, index) {
-                                  return FlowWidget(data: snapshot.data[index]);
+                                  return FlowWidget(
+                                      data: snapshot.data[index]);
                                 },
                               );
                             }
@@ -238,7 +237,8 @@ class _HomePageState extends State<HomePage>
                                   ));
                             },
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
                               child: SizedBox(
                                 height: 50,
                                 child: Card(
@@ -253,28 +253,26 @@ class _HomePageState extends State<HomePage>
                                             repeatForever: true,
                                             animatedTexts: searchHintList
                                                 .map(
-                                                  (title) =>
-                                                      TypewriterAnimatedText(
-                                                          languageConverter(
-                                                              context, title),
-                                                          cursor: '|',
-                                                          textAlign: TextAlign
-                                                              .end,
-                                                          textStyle: Theme
-                                                                  .of(context)
-                                                              .textTheme
-                                                              .bodyText2
-                                                              .copyWith(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .iconTheme
-                                                                      .color,
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w100),
-                                                          speed: const Duration(
-                                                              milliseconds: 75)),
+                                                  (title) => TypewriterAnimatedText(
+                                                      languageConverter(
+                                                          context, title),
+                                                      cursor: '|',
+                                                      textAlign: TextAlign.end,
+                                                      textStyle: Theme.of(
+                                                              context)
+                                                          .textTheme
+                                                          .bodyText2
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .iconTheme
+                                                                  .color,
+                                                              fontSize: 17,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w100),
+                                                      speed: const Duration(
+                                                          milliseconds: 75)),
                                                 )
                                                 .toList(),
                                           ),
