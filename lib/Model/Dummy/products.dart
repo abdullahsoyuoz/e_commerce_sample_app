@@ -3,6 +3,7 @@ import 'package:faker_dart/faker_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/Model/shop.dart';
+import 'package:sepet_demo/View/Style/colors.dart';
 
 List<Product> productList = [];
 List<Shop> shopList = [];
@@ -12,10 +13,10 @@ Future<void> generateProduct() async {
   try {
     final faker = Faker.instance;
     for (var i = 0; i < 50; i++) {
-      final productCategory = faker.locale.commerce.productName.product[
-          Random()
-              .nextInt(faker.locale.commerce.productName.product.length - 1)];
+      final productCategory = faker.locale.commerce.productName.product[Random()
+          .nextInt(faker.locale.commerce.productName.product.length - 1)];
       var count = 1000 + Random().nextInt(3000000);
+      colorOptionsConst.shuffle();
       final data = Product(
         id: i,
         brand: brandList[Random().nextInt(brandList.length)],
@@ -36,7 +37,11 @@ Future<void> generateProduct() async {
         purchasesCount: count,
         commentCount: count ~/ (Random().nextInt(10000) + 1),
         shop: shopList[Random().nextInt(shopList.length - 1)],
-        isNew: Random().nextBool() ? Random().nextBool() : false
+        isNew: Random().nextBool() ? Random().nextBool() : false,
+
+        // colorOptions: colorOptionsConst.take(Random().nextInt(4) + 1),
+        // modelDate: faker.date.past(DateTime.now(), rangeInYears: 15),
+        // sizeOptions: bodySize
       );
       // print('product:: ' + data.toString());
       productList.add(data);
@@ -94,3 +99,16 @@ List<String> picturegenerator(String title) {
     Faker.instance.image.unsplash.image(keyword: title, w: 800, h: 600),
   ];
 }
+
+Map<int, String> bodySize = {0 : "XS", 1 : "S", 2 : "M", 3 : "L", 4 : "XL", 5 : "XXL", 6 : "XXXL"};
+
+List<Color> colorOptionsConst = [
+  AppColors.red,
+  AppColors.yellow,
+  AppColors.green,
+  AppColors.blue,
+  AppColors.purple,
+  AppColors.turquaz,
+  AppColors.black.shade300,
+  AppColors.grey.shade100,
+];

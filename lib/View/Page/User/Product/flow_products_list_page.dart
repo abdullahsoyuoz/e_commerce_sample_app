@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:marquee/marquee.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/Provider/flows_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -13,6 +14,7 @@ import 'package:sepet_demo/Model/flow.dart';
 import 'package:sepet_demo/View/Page/User/Product/product_detail.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
+import 'package:sepet_demo/View/Style/palette_generator.dart';
 import 'package:sepet_demo/View/View/flow_product_body_view.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 
@@ -63,14 +65,21 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                     const PageScrollPhysics(parent: BouncingScrollPhysics()),
                 itemCount: widget.data.targetProducts.length,
                 itemBuilder: (context, index) {
+                  final data = widget.data.targetProducts[index];
                   return BouncingWidget(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => ProductDetailPage(
-                                data: widget.data.targetProducts[index]),
-                          ));
+                      PaletteGenerator _palette;
+                      generatePalette(data.photosUrl[0]).then((value) {
+                        _palette = value;
+                      }).whenComplete(() {
+                        Navigator.push(context,
+                            CupertinoPageRoute(builder: (context) {
+                          return ProductDetailPage(
+                            data: data,
+                            palette: _palette,
+                          );
+                        }));
+                      });
                     },
                     child: Center(
                       child: AspectRatio(
@@ -78,9 +87,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Card(
-                            child: ProductViewBody(
-                                data: widget.data.targetProducts[index],
-                                index: index),
+                            child: ProductViewBody(data: data, index: index),
                           ),
                         ),
                       ),
@@ -182,14 +189,13 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                                               const Duration(seconds: 1),
                                           startPadding: 20,
                                           blankSpace: context.width * 0.5,
-                                          text:widget.data.title.toUpperCase(),
+                                          text: widget.data.title.toUpperCase(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText2
                                               .copyWith(
                                                   fontSize: 13,
-                                                  fontWeight:
-                                                      FontWeight.w600),
+                                                  fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     ),
@@ -207,12 +213,12 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                                         child: Swing(
                                           child: LineIcon(
                                             LineIcons.bell,
-                                            color: provider
-                                                    .isFollowed(widget.data)
-                                                ? AppColors.red
-                                                : Theme.of(context)
-                                                    .iconTheme
-                                                    .color,
+                                            color:
+                                                provider.isFollowed(widget.data)
+                                                    ? AppColors.red
+                                                    : Theme.of(context)
+                                                        .iconTheme
+                                                        .color,
                                           ),
                                           animate: false,
                                           manualTrigger: true,

@@ -48,19 +48,19 @@ class _FlowWidgetState extends State<FlowWidget>
       animation: CurvedAnimation(
           parent: _animationController, curve: Curves.easeOutCirc),
       builder: (context, child) {
-        // // SLIDE
-        // return SlideTransition(
-        //   position: Tween<Offset>(begin: const Offset(-0.25, 0), end: Offset.zero)
-        //       .animate(_animationController),
-        //   child: child,
-        // );
-        // // SCALE
-        return ScaleTransition(
-          scale: Tween<double>(begin: 0.75, end: 1).animate(_animationController),
-          alignment: Alignment.bottomCenter,
-          filterQuality: FilterQuality.low,
+        // SLIDE
+        return SlideTransition(
+          position: Tween<Offset>(begin: const Offset(-0.25, 0), end: Offset.zero)
+              .animate(_animationController),
           child: child,
         );
+        // // // SCALE
+        // return ScaleTransition(
+        //   scale: Tween<double>(begin: 0.75, end: 1).animate(_animationController),
+        //   alignment: Alignment.bottomCenter,
+        //   filterQuality: FilterQuality.low,
+        //   child: child,
+        // );
         // // NOT
         // return SizedBox(child: child);
       },

@@ -1,24 +1,29 @@
+import 'package:flutter/material.dart';
 import 'package:sepet_demo/Model/shop.dart';
 
 class Product {
-   int id;
-   String title;
-   String description;
-   String brand;
-   String model;
-   String category;
-   double rank;
-   int purchasesCount;
-   int commentCount;
-   double price;
-   int discountRate;
-   DateTime publishedDate;
-   List<String> photosUrl;
-   Shop shop;
-   bool isLiked;
-   bool isAddedBookmark;
-   bool isAddedCart;
-   bool isNew;
+  int id;
+  String title;
+  String description;
+  String brand;
+  String model;
+  String category;
+  double rank;
+  int purchasesCount;
+  int commentCount;
+  double price;
+  int discountRate;
+  DateTime publishedDate;
+  List<String> photosUrl;
+  Shop shop;
+  bool isLiked;
+  bool isAddedBookmark;
+  bool isAddedCart;
+  bool isNew;
+
+  List<Color> colorOptions;
+  Map<int, String> sizeOptions;
+  DateTime modelDate;
 
   Product({
     this.id,
@@ -39,6 +44,10 @@ class Product {
     this.isAddedBookmark = false,
     this.isAddedCart = false,
     this.isNew = false,
+
+    this.colorOptions,
+    this.modelDate,
+    this.sizeOptions,
   });
 
   @override
