@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,7 @@ class StackedCarousel extends StatefulWidget {
   IndexedWidgetBuilder itemBuilder;
 
   StackedCarousel({
+    Key key,
     @required this.itemCount,
     @required this.itemBuilder,
     this.itemAspectRatio = 4 / 5,
@@ -24,10 +27,10 @@ class StackedCarousel extends StatefulWidget {
     this.verticalScrolling = false,
     this.onPageChanged,
     this.pageControllerCallback,
-  })  : 
-        assert(itemAspectRatio >= 0.45),
+  })  : assert(itemAspectRatio >= 0.45),
         assert(itemCount != null && itemCount > 0),
-        assert(itemBuilder != null);
+        assert(itemBuilder != null),
+        super(key: key);
   @override
   StackedCarouselState createState() => StackedCarouselState();
 }
@@ -55,7 +58,7 @@ class StackedCarouselState extends State<StackedCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
@@ -105,16 +108,17 @@ class CustomWidget extends StatefulWidget {
   double itemAspectRatio;
 
   CustomWidget(
-    this.currentPageIndex,
-    this.itemCount,
-    this.itemBuilder,
-    this.reverse,
-    this.padding,
-    this.incrementalVerticalPadding,
-    this.aspectRatio,
-    this.itemAspectRatio,
-    this.verticalScrolling,
-  );
+      this.currentPageIndex,
+      this.itemCount,
+      this.itemBuilder,
+      this.reverse,
+      this.padding,
+      this.incrementalVerticalPadding,
+      this.aspectRatio,
+      this.itemAspectRatio,
+      this.verticalScrolling,
+      {Key key})
+      : super(key: key);
   @override
   _CustomWidgetState createState() => _CustomWidgetState();
 }
@@ -175,7 +179,6 @@ class _CustomWidgetState extends State<CustomWidget> {
                       child: widget.itemBuilder(context, index),
                     ),
                   );
-            ;
 
             stackWidgets.add(card);
           }

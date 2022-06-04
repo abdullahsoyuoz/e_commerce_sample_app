@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Model/shop.dart';
 
@@ -49,6 +51,33 @@ class Product {
     this.modelDate,
     this.sizeOptions,
   });
+
+  factory Product.fromJson(Map<String, dynamic> item) {
+    return Product(
+      id: item["id"],
+      title: item["title"],
+      description: item["description"],
+      brand: item["brand"],
+      model: item["model"],
+      category: item["category"],
+      rank: item["rank"],
+      purchasesCount: item["purchasesCount"],
+      commentCount: item["commentCount"],
+      price: item["price"],
+      discountRate: item["discountRate"],
+      publishedDate: DateTime.parse(item["publishedDate"]),
+      photosUrl: List.from(jsonDecode('assets/data/fakeProduct.json')["photosUrl"]),
+      shop: item["shop"],
+      modelDate: DateTime.parse(item["modelDate"]),
+    );
+  }
+
+  Map<String, dynamic> toMap() => {
+        // "category_id": categoryId,
+        // "id": id,
+        // "title": title,
+        // "imageUrl": imageUrl
+      };
 
   @override
   String toString() {

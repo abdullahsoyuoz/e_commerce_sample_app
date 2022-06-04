@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-extension AppColorScheme on ColorScheme {
-  Color get success => AppColors.green;
-  Color get info => AppColors.blue;
-  Color get warning => AppColors.orange;
-  Color get danger => AppColors.red;
-  Color get main => AppColors.purple;
-  Color get backgroundPrimary => Colors.white;
-  Color get backgroundSecondary => Colors.grey.shade100;
-  Color get foregroundPrimary => Colors.black;
-  Color get foregroundSecondary => AppColors.grey.shade300;
-}
+// extension AppColorScheme on ColorScheme {
+//   Color get success => AppColors.green;
+//   Color get info => AppColors.blue;
+//   Color get warning => AppColors.orange;
+//   Color get danger => AppColors.red;
+//   Color get main => AppColors.purple;
+//   Color get backgroundPrimary => Colors.white;
+//   Color get backgroundSecondary => Colors.grey.shade100;
+//   Color get foregroundPrimary => Colors.black;
+//   Color get foregroundSecondary => AppColors.grey.shade300;
+// }
 
 class AppColors {
   static MaterialColor grey = MaterialColor(0xffE6E6E6, _materialGrey);

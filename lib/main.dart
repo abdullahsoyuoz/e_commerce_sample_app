@@ -27,12 +27,16 @@ Future run() async {
   {
     generateShop().whenComplete(() {
       fetchCategories().whenComplete(() {
-        generateProduct().whenComplete(() {
-          generateFlow().whenComplete(() async {
-            await SystemChrome.setPreferredOrientations(
-                [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+        // fetchProduct().whenComplete(() {
+          generateProduct().whenComplete(() {
+            generateFlow().whenComplete(() async {
+              await SystemChrome.setPreferredOrientations([
+                DeviceOrientation.portraitUp,
+                DeviceOrientation.portraitDown
+              ]);
+            });
           });
-        });
+        // });
       });
     });
     runApp(

@@ -1,18 +1,37 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:faker_dart/faker_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/Model/shop.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
+Product productItem;
 List<Product> productList = [];
 List<Shop> shopList = [];
 List<String> brandList = [];
+
+Future<void> fetchProduct() async {
+  try {
+    var jsonText = await rootBundle.loadString('assets/data/fakeProduct.json');
+    var data = await jsonDecode(jsonText);
+    for (var item in data) {
+      item.toString();
+      productItem = Product.fromJson(item);
+      // categoryList.add(catItem);
+    }
+  } on Exception catch (e) {
+    debugPrint('product fetching error: ' + e.toString());
+  }
+}
 
 Future<void> generateProduct() async {
   try {
     final faker = Faker.instance;
     for (var i = 0; i < 50; i++) {
+      // productList.add(productItem);
+
       final productCategory = faker.locale.commerce.productName.product[Random()
           .nextInt(faker.locale.commerce.productName.product.length - 1)];
       var count = 1000 + Random().nextInt(3000000);
@@ -100,7 +119,15 @@ List<String> picturegenerator(String title) {
   ];
 }
 
-Map<int, String> bodySize = {0 : "XS", 1 : "S", 2 : "M", 3 : "L", 4 : "XL", 5 : "XXL", 6 : "XXXL"};
+Map<int, String> bodySize = {
+  0: "XS",
+  1: "S",
+  2: "M",
+  3: "L",
+  4: "XL",
+  5: "XXL",
+  6: "XXXL"
+};
 
 List<Color> colorOptionsConst = [
   AppColors.red,

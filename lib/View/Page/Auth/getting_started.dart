@@ -6,7 +6,7 @@ import 'package:sepet_demo/Controller/Constant/languages.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/Auth/onboaring.dart';
-import 'package:sepet_demo/View/Painter/getting_started.dart';
+import 'package:sepet_demo/View/Painter/vertical_half_painter.dart';
 import 'package:sepet_demo/View/Style/Theme/themedata.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
@@ -42,7 +42,9 @@ class _GettingStartedState extends State<GettingStarted>
         fit: StackFit.expand,
         children: [
           CustomPaint(
-            painter: GettingStartedPainter(context),
+            painter: HalfPainter(
+              rightColor: Theme.of(context).colorScheme.tertiaryContainer,
+            ),
           ),
           SizedBox.expand(
             child: Column(

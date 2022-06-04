@@ -11,6 +11,8 @@ ThemeData appLightTheme = ThemeData.light().copyWith(
     primaryContainer: AppColors.grey.shade100,
     secondaryContainer: AppColors.grey.shade200,
     tertiaryContainer: AppColors.grey.shade300,
+    error: AppColors.red.shade300,
+    outline: AppColors.blue.shade300,
   ),
   scaffoldBackgroundColor: Colors.white,
   backgroundColor: AppColors.grey.shade100,

@@ -10,7 +10,9 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
     background: AppColors.black.shade300,
     primaryContainer: AppColors.black.shade100,
     secondaryContainer: AppColors.black.shade200,
-    tertiaryContainer: AppColors.black.shade300
+    tertiaryContainer: AppColors.black.shade300,
+    error: AppColors.red.shade200,
+    outline: AppColors.blue.shade100,
   ),
   scaffoldBackgroundColor: AppColors.black.shade300,
   backgroundColor: Colors.black,
@@ -48,8 +50,9 @@ ThemeData appDarkTheme = ThemeData.dark().copyWith(
   // ------------------------------------------------------------------------------------------------ WIDGET ----------
 
   cardTheme: CardTheme(
-    color: AppColors.black.shade200,
+    color: AppColors.black.shade100,
     elevation: 10,
+    shadowColor: Colors.black,
     margin: EdgeInsets.zero,
     shape: RoundedRectangleBorder(borderRadius: appRadius()),
   ),
