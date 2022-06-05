@@ -17,7 +17,7 @@ class Product {
   int discountRate;
   DateTime publishedDate;
   List<String> photosUrl;
-  Shop shop;
+  String shop;
   bool isLiked;
   bool isAddedBookmark;
   bool isAddedCart;
@@ -26,6 +26,7 @@ class Product {
   List<Color> colorOptions;
   Map<int, String> sizeOptions;
   DateTime modelDate;
+  String productWebUrl;
 
   Product({
     this.id,
@@ -46,10 +47,10 @@ class Product {
     this.isAddedBookmark = false,
     this.isAddedCart = false,
     this.isNew = false,
-
     this.colorOptions,
     this.modelDate,
     this.sizeOptions,
+    this.productWebUrl,
   });
 
   factory Product.fromJson(Map<String, dynamic> item) {
@@ -66,9 +67,10 @@ class Product {
       price: item["price"],
       discountRate: item["discountRate"],
       publishedDate: DateTime.parse(item["publishedDate"]),
-      photosUrl: List.from(jsonDecode('assets/data/fakeProduct.json')["photosUrl"]),
+      photosUrl: List.castFrom(item["photosUrl"]),
       shop: item["shop"],
       modelDate: DateTime.parse(item["modelDate"]),
+      productWebUrl: item["productWebUrl"]
     );
   }
 

@@ -27,7 +27,7 @@ Future run() async {
   {
     generateShop().whenComplete(() {
       fetchCategories().whenComplete(() {
-        // fetchProduct().whenComplete(() {
+        fetchProduct().whenComplete(() {
           generateProduct().whenComplete(() {
             generateFlow().whenComplete(() async {
               await SystemChrome.setPreferredOrientations([
@@ -36,7 +36,7 @@ Future run() async {
               ]);
             });
           });
-        // });
+        });
       });
     });
     runApp(

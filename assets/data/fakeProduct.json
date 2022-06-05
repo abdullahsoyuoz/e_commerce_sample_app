@@ -1,0 +1,112 @@
+[
+    {
+        "id": 0,
+        "title": "Macbook Pro",
+        "description": "Apple Macbook Pro 16-inc 2019 Touch-Bar",
+        "brand": "Apple",
+        "model": "Macbook",
+        "category": "elektronik",
+        "rank": 4.8,
+        "purchasesCount": 14356,
+        "commentCount": 13786,
+        "price": 43765.0,
+        "discountRate": 5,
+        "publishedDate": "2021-04-23T18:25:43.511Z",
+        "photosUrl": [
+            "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-spacegray-gallery1-202011?wid=2000&hei=1536&fmt=jpeg&qlt=95&.v=1632937794000",
+            "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-spacegray-gallery2-202011_GEO_US?wid=2000&hei=1536&fmt=jpeg&qlt=95&.v=1632941089000",
+            "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-spacegray-gallery3-202011?wid=2000&hei=1536&fmt=jpeg&qlt=95&.v=1603475918000",
+            "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-spacegray-gallery4-202011?wid=2000&hei=1536&fmt=jpeg&qlt=95&.v=1603475931000"
+        ],
+        "shop": "Özgür Bilişim",
+        "modelDate": "2019-07-23T18:25:43.511Z",
+        "productWebUrl" : "https://www.apple.com/tr/macbook-pro-14-and-16/specs/"
+    },
+    {
+        "id": 1,
+        "title": "Mac Studio",
+        "description": "Yeni Mac Studio Apple M1",
+        "brand": "Apple",
+        "model": "Mac",
+        "category": "elektronik",
+        "rank": 4.9,
+        "purchasesCount": 7812,
+        "commentCount": 6788,
+        "price": 35999.0,
+        "publishedDate": "2021-04-23T18:25:43.511Z",
+        "photosUrl": [
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mac-studio-202203-gallery-1?wid=4000&hei=3072&fmt=jpeg&qlt=95&.v=1644975834620",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mac-studio-202203-gallery-2?wid=4000&hei=3072&fmt=jpeg&qlt=95&.v=1644975841045",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mac-studio-202203-gallery-3?wid=4000&hei=3072&fmt=jpeg&qlt=95&.v=1644975841189",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mac-studio-202203-gallery-5?wid=4000&hei=3072&fmt=jpeg&qlt=95&.v=1646266687822"
+        ],
+        "shop": "Özgür Bilişim",
+        "modelDate": "2019-07-23T18:25:43.511Z",
+        "productWebUrl" : "https://www.apple.com/tr/mac-studio/specs/"
+    },
+    {
+        "id": 2,
+        "title": "iPad Air",
+        "description": "Yeni iPad Air",
+        "brand": "Apple",
+        "model": "iPad",
+        "category": "elektronik",
+        "rank": 4.9,
+        "purchasesCount": 7812,
+        "commentCount": 6788,
+        "price": 14500.0,
+        "publishedDate": "2021-04-23T18:25:43.511Z",
+        "photosUrl": [
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-air-select-wifi-spacegray-202203?wid=940&hei=1112&fmt=jpeg&qlt=95&.v=1645066742664",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-air-202203-gallery-5_GEO_TR?wid=2824&hei=2400&fmt=jpeg&qlt=95&.v=1645886221684",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-air-202203-gallery-4_GEO_TR?wid=2824&hei=2400&fmt=jpeg&qlt=95&.v=1645884570997",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-air-202203-gallery-2?wid=2824&hei=2400&fmt=jpeg&qlt=95&.v=1645071658500"
+        ],
+        "shop": "Özgür Bilişim",
+        "modelDate": "2019-07-23T18:25:43.511Z",
+        "productWebUrl" : "https://www.apple.com/tr/shop/buy-ipad/ipad-air"
+    },
+    {
+        "id": 3,
+        "title": "iPhone 13 Pro Max",
+        "description": "iPhone 13 Pro. Pro. Aktif.",
+        "brand": "Apple",
+        "model": "iPhone",
+        "category": "elektronik",
+        "rank": 4.9,
+        "purchasesCount": 7812,
+        "commentCount": 6788,
+        "price": 21812.0,
+        "publishedDate": "2021-04-23T18:25:43.511Z",
+        "photosUrl": [
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-green-select?wid=940&hei=1112&fmt=jpeg&qlt=95&.v=1644969385495",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-2022-gallery-1?wid=4056&hei=2400&fmt=jpeg&qlt=95&.v=1645123527658",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-2022-gallery-3?wid=2824&hei=2400&fmt=jpeg&qlt=95&.v=1645810647598",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-2022-gallery-4?wid=2824&hei=2400&fmt=jpeg&qlt=95&.v=1645123526015"
+        ],
+        "shop": "Özgür Bilişim",
+        "modelDate": "2019-07-23T18:25:43.511Z",
+        "productWebUrl":"https://www.apple.com/tr/iphone-13-pro/specs/"
+    },
+    {
+        "id": 4,
+        "title": "Apple Watch Series 7",
+        "description": "Tam ekran. Tam sizin tarzınız.",
+        "brand": "Apple",
+        "model": "Watch",
+        "category": "elektronik",
+        "rank": 4.9,
+        "purchasesCount": 7812,
+        "commentCount": 6788,
+        "price": 35999.0,
+        "publishedDate": "2021-04-23T18:25:43.511Z",
+        "photosUrl": [
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MKU83_VW_34FR+watch-41-alum-midnight-nc-7s_VW_34FR_WF_CO?wid=1400&hei=1400&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1632171038000%2C1631661171000",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MKU83_VW_PF+watch-41-alum-midnight-nc-7s_VW_PF_WF_CO?wid=1400&hei=1400&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1632171035000%2C1631661182000",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MKU83?wid=1400&hei=1400&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1630973105000"
+        ],
+        "shop": "Özgür Bilişim",
+        "modelDate": "2019-07-23T18:25:43.511Z",
+        "productWebUrl":"https://www.apple.com/tr/shop/buy-watch/apple-watch"
+    }
+]

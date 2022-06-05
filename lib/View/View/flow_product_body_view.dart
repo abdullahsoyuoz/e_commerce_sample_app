@@ -91,7 +91,8 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                       child: CircleAvatar(
                                         backgroundColor: AppColors.red,
                                         foregroundColor: Colors.white,
-                                        child: Text(languageConverter(context, "new")),
+                                        child: Text(
+                                            languageConverter(context, "new")),
                                       ),
                                     ),
                                   ),
@@ -235,7 +236,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                             left: 3.0),
                                                     child: Tooltip(
                                                         message:
-                                                            languageConverter(context, "averagePoint"),
+                                                            languageConverter(
+                                                                context,
+                                                                "averagePoint"),
                                                         triggerMode:
                                                             TooltipTriggerMode
                                                                 .tap,
@@ -329,22 +332,19 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                         CrossAxisAlignment.center,
                                     children: [
                                       Expanded(
-                                        child: ElevatedButton(
-                                          onPressed: () => Navigator.push(
-                                              context,
-                                              CupertinoPageRoute(
-                                                builder: (context) =>
-                                                    ProductDetailPage(
-                                                        data: widget.data),
-                                              )),
-                                          child: FittedBox(
-                                            child: Text(
-                                              languageConverter(context, "goProduct"),
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .iconTheme
-                                                      .color,
-                                                  fontWeight: FontWeight.bold),
+                                        child: AbsorbPointer(
+                                          child: ElevatedButton(
+                                            onPressed: () {},
+                                            child: FittedBox(
+                                              child: Text(
+                                                languageConverter(
+                                                    context, "goProduct"),
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .iconTheme
+                                                        .color,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -374,22 +374,20 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                 child: Center(
                                                     child: LineIcon(
                                                   LineIcons.bookmark,
-                                                  color:
-                                                      provider.containsItem(
-                                                              widget.data)
-                                                          ? AppColors
-                                                              .orange.shade300
-                                                          : Theme.of(context)
-                                                              .iconTheme
-                                                              .color,
+                                                  color: provider.containsItem(
+                                                          widget.data)
+                                                      ? AppColors
+                                                          .orange.shade300
+                                                      : Theme.of(context)
+                                                          .iconTheme
+                                                          .color,
                                                 )),
                                               ))),
                                       IconButton(
                                           onPressed: () {
-                                            if (provider.constainsLike(
-                                                widget.data)) {
-                                              provider
-                                                  .removeLike(widget.data);
+                                            if (provider
+                                                .constainsLike(widget.data)) {
+                                              provider.removeLike(widget.data);
                                             } else {
                                               provider.addLike(widget.data);
                                             }
@@ -404,12 +402,10 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                         LineIcons.heart,
                                                         color: provider
                                                                 .constainsLike(
-                                                                    widget
-                                                                        .data)
-                                                            ? AppColors.red
-                                                                .shade300
-                                                            : Theme.of(
-                                                                    context)
+                                                                    widget.data)
+                                                            ? AppColors
+                                                                .red.shade300
+                                                            : Theme.of(context)
                                                                 .iconTheme
                                                                 .color,
                                                       ),
@@ -418,8 +414,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                       controller: (c) {
                                                         if (provider
                                                             .constainsLike(
-                                                                widget
-                                                                    .data)) {
+                                                                widget.data)) {
                                                           c
                                                               .forward()
                                                               .whenComplete(
@@ -429,16 +424,14 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                       })))),
                                       IconButton(
                                           onPressed: () {
-                                            if (provider.containsOrder(
-                                                widget.data)) {
-                                              provider
-                                                  .removeOrder(widget.data);
+                                            if (provider
+                                                .containsOrder(widget.data)) {
+                                              provider.removeOrder(widget.data);
                                             } else {
                                               provider
                                                   .addOrder(widget.data)
                                                   .whenComplete(() {
-                                                ScaffoldMessenger.of(
-                                                        context)
+                                                ScaffoldMessenger.of(context)
                                                     .showSnackBar(SnackBar(
                                                   content: const Text(
                                                       'Sepete eklendi'),
@@ -448,9 +441,8 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                         Navigator.push(
                                                             context,
                                                             CupertinoPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      const BasketPage(),
+                                                              builder: (context) =>
+                                                                  const BasketPage(),
                                                             ));
                                                       }),
                                                 ));
@@ -466,15 +458,13 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                       animate: false,
                                                       manualTrigger: true,
                                                       child: LineIcon(
-                                                          LineIcons
-                                                              .shoppingBag,
+                                                          LineIcons.shoppingBag,
                                                           color: provider
                                                                   .containsOrder(
                                                                       widget
                                                                           .data)
                                                               ? AppColors
-                                                                  .blue
-                                                                  .shade200
+                                                                  .blue.shade200
                                                               : Theme.of(
                                                                       context)
                                                                   .iconTheme
@@ -482,8 +472,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                       controller: (c) {
                                                         if (provider
                                                             .containsOrder(
-                                                                widget
-                                                                    .data)) {
+                                                                widget.data)) {
                                                           c
                                                               .forward()
                                                               .whenComplete(

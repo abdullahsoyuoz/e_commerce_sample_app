@@ -58,9 +58,9 @@ class StackedCarouselState extends State<StackedCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
+    return SizedBox.expand(
       child: Stack(
+        fit: StackFit.expand,
         children: [
           CustomWidget(
             currentPageIndex,

@@ -17,8 +17,8 @@ Future<void> fetchProduct() async {
     var jsonText = await rootBundle.loadString('assets/data/fakeProduct.json');
     var data = await jsonDecode(jsonText);
     for (var item in data) {
-      item.toString();
       productItem = Product.fromJson(item);
+      productList.add(productItem);
       // categoryList.add(catItem);
     }
   } on Exception catch (e) {
@@ -30,40 +30,39 @@ Future<void> generateProduct() async {
   try {
     final faker = Faker.instance;
     for (var i = 0; i < 50; i++) {
-      // productList.add(productItem);
 
-      final productCategory = faker.locale.commerce.productName.product[Random()
-          .nextInt(faker.locale.commerce.productName.product.length - 1)];
-      var count = 1000 + Random().nextInt(3000000);
-      colorOptionsConst.shuffle();
-      final data = Product(
-        id: i,
-        brand: brandList[Random().nextInt(brandList.length)],
-        category: productCategory,
-        title: faker.locale.commerce.productName.adjective[Random()
-                .nextInt(faker.locale.commerce.productName.adjective.length)] +
-            ' ' +
-            productCategory,
-        photosUrl: picturegenerator(productCategory),
-        description: faker.locale.commerce.productDescription[Random()
-            .nextInt(faker.locale.commerce.productDescription.length - 1)],
-        model: faker.locale.commerce.productName.product[Random()
-            .nextInt(faker.locale.commerce.productName.product.length - 1)],
-        price: Random().nextDouble() * Random().nextInt(1000),
-        discountRate: Random().nextBool() ? Random().nextInt(8) + 1 * 10 : null,
-        publishedDate: faker.date.past(DateTime.now(), rangeInYears: 15),
-        rank: Random().nextDouble() + (Random().nextInt(3) + 1),
-        purchasesCount: count,
-        commentCount: count ~/ (Random().nextInt(10000) + 1),
-        shop: shopList[Random().nextInt(shopList.length - 1)],
-        isNew: Random().nextBool() ? Random().nextBool() : false,
+      // final productCategory = faker.locale.commerce.productName.product[Random()
+      //     .nextInt(faker.locale.commerce.productName.product.length - 1)];
+      // var count = 1000 + Random().nextInt(3000000);
+      // colorOptionsConst.shuffle();
+      // final data = Product(
+      //   id: i,
+      //   brand: brandList[Random().nextInt(brandList.length)],
+      //   category: productCategory,
+      //   title: faker.locale.commerce.productName.adjective[Random()
+      //           .nextInt(faker.locale.commerce.productName.adjective.length)] +
+      //       ' ' +
+      //       productCategory,
+      //   photosUrl: picturegenerator(productCategory),
+      //   description: faker.locale.commerce.productDescription[Random()
+      //       .nextInt(faker.locale.commerce.productDescription.length - 1)],
+      //   model: faker.locale.commerce.productName.product[Random()
+      //       .nextInt(faker.locale.commerce.productName.product.length - 1)],
+      //   price: Random().nextDouble() * Random().nextInt(1000),
+      //   discountRate: Random().nextBool() ? Random().nextInt(8) + 1 * 10 : null,
+      //   publishedDate: faker.date.past(DateTime.now(), rangeInYears: 15),
+      //   rank: Random().nextDouble() + (Random().nextInt(3) + 1),
+      //   purchasesCount: count,
+      //   commentCount: count ~/ (Random().nextInt(10000) + 1),
+      //   // shop: shopList[Random().nextInt(shopList.length - 1)],
+      //   isNew: Random().nextBool() ? Random().nextBool() : false,
 
-        // colorOptions: colorOptionsConst.take(Random().nextInt(4) + 1),
-        // modelDate: faker.date.past(DateTime.now(), rangeInYears: 15),
-        // sizeOptions: bodySize
-      );
+      //   // colorOptions: colorOptionsConst.take(Random().nextInt(4) + 1),
+      //   // modelDate: faker.date.past(DateTime.now(), rangeInYears: 15),
+      //   // sizeOptions: bodySize
+      // );
       // print('product:: ' + data.toString());
-      productList.add(data);
+      // productList.add(data);
     }
   } on Exception catch (e) {
     debugPrint(e.toString());
