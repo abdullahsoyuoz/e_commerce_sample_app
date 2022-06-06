@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +15,7 @@ import 'package:sepet_demo/Controller/AppLocalizations.dart';
 import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/product.dart';
+import 'package:sepet_demo/View/Clipper/star_rank_clipper.dart';
 import 'package:sepet_demo/View/Page/User/Order/basket.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/View/Sheets/bookmark_sheet.dart';
@@ -39,10 +42,20 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   PageController _pageController;
   PageController _customScrollViewController;
   bool showBackToTop = false;
+  AnimationController _rankAnimationController;
 
   @override
   void initState() {
+    _rankAnimationController = AnimationController(
+      vsync: this,
+      lowerBound: 0,
+      upperBound: 1,
+      duration: const Duration(milliseconds: 700) * widget.data.rank,
+    );
     _pageController = PageController();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _rankAnimationController.animateTo(widget.data.rank / 5);
+    });
     if (Platform.isAndroid) WebView.platform = AndroidWebView();
     _customScrollViewController = PageController()
       ..addListener(() {
@@ -61,6 +74,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   void dispose() {
     _pageController.dispose();
     _customScrollViewController.dispose();
+    _rankAnimationController.dispose();
     super.dispose();
   }
 
@@ -266,7 +280,91 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Tooltip(
+                    message: languageConverter(context, "averagePoint"),
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: SizedBox(
+                      width: context.width,
+                      height: 30,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.data.rank.oneDigitForRankString,
+                            style: TextStyle(
+                                fontSize: 20,
+                                // height: 30,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    .color),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Row(
+                                          children: List.generate(
+                                            5,
+                                            (index) => LineIcon(
+                                              LineIcons.starAlt,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primaryContainer,
+                                              size: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      ClipPath(
+                                        clipper: StarRankPainter(
+                                            rank: widget.data.rank,
+                                            animationController:
+                                                _rankAnimationController,
+                                            animate: true),
+                                        child: Center(
+                                          child: Row(
+                                            children: List.generate(
+                                              5,
+                                              (index) => LineIcon(
+                                                  LineIcons.starAlt,
+                                                  color:
+                                                      AppColors.orange.shade200,
+                                                  size: 20),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
                       minHeight: 20,
@@ -318,28 +416,71 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                         Padding(
                           padding: const EdgeInsets.only(left: 3.0),
                           child: Tooltip(
-                              message:
-                                  languageConverter(context, "averagePoint"),
+                              message: languageConverter(context, "forumCount"),
                               triggerMode: TooltipTriggerMode.tap,
                               child: Row(children: [
                                 FittedBox(
                                     fit: BoxFit.fitHeight,
                                     child: Text(
-                                      widget.data.rank.oneDigitForRankString,
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .bodyText2
-                                              .color),
-                                    )),
+                                        NumberFormat.compact(locale: 'en_US')
+                                            .format(widget.data.commentCount))),
                                 Padding(
                                     padding: const EdgeInsets.only(left: 3.0),
                                     child: FittedBox(
                                         fit: BoxFit.fitHeight,
                                         child: Center(
-                                            child: LineIcon(LineIcons.star)))),
+                                            child:
+                                                LineIcon(LineIcons.comments)))),
                               ])),
                         ),
+                        const VerticalDivider(),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: Tooltip(
+                              message:
+                                  languageConverter(context, "questionCount"),
+                              triggerMode: TooltipTriggerMode.tap,
+                              child: Row(children: [
+                                FittedBox(
+                                    fit: BoxFit.fitHeight,
+                                    child: Text(
+                                        NumberFormat.compact(locale: 'en_US')
+                                            .format(widget.data.commentCount))),
+                                Padding(
+                                    padding: const EdgeInsets.only(left: 3.0),
+                                    child: FittedBox(
+                                        fit: BoxFit.fitHeight,
+                                        child: Center(
+                                            child: LineIcon(
+                                                LineIcons.commentDots)))),
+                              ])),
+                        ),
+                        // const VerticalDivider(),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 3.0),
+                        //   child: Tooltip(
+                        //       message:
+                        //           languageConverter(context, "averagePoint"),
+                        //       triggerMode: TooltipTriggerMode.tap,
+                        //       child: Row(children: [
+                        //         FittedBox(
+                        //             fit: BoxFit.fitHeight,
+                        //             child: Text(
+                        //               widget.data.rank.oneDigitForRankString,
+                        //               style: TextStyle(
+                        //                   color: Theme.of(context)
+                        //                       .textTheme
+                        //                       .bodyText2
+                        //                       .color),
+                        //             )),
+                        //         Padding(
+                        //             padding: const EdgeInsets.only(left: 3.0),
+                        //             child: FittedBox(
+                        //                 fit: BoxFit.fitHeight,
+                        //                 child: Center(
+                        //                     child: LineIcon(LineIcons.star)))),
+                        //       ])),
+                        // ),
                       ],
                     ),
                   ),
@@ -386,77 +527,80 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   }
 
   Widget buildProductSpecs(BuildContext context) {
-    return MultiSliver(
-      pushPinnedChildren: true,
-      children: [
-        SliverPersistentHeader(
-          pinned: true,
-          floating: false,
-          key: LabeledGlobalKey('specs'),
-          delegate: CustomSliverPersistentHeader(context,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Özellikler",
-                    style: TextStyle(
-                      fontSize: 23,
-                    ),
-                  ),
-                ),
-              )),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                fakeSpecs(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: BouncingWidget(
-                    duration: Duration(milliseconds: 300),
-                    onPressed: () {},
-                    child: Center(
-                      child: Text(
-                        'Satıcılardan ürün hakkında bilgi al',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.outline),
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 50),
+      sliver: MultiSliver(
+        pushPinnedChildren: true,
+        children: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            key: LabeledGlobalKey('specs'),
+            delegate: CustomSliverPersistentHeader(context,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Özellikler",
+                      style: TextStyle(
+                        fontSize: 23,
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: BouncingWidget(
-                    duration: Duration(milliseconds: 300),
-                    onPressed: () {},
-                    child: Center(
-                      child: Text(
-                        'Daha fazla bilgi almak için ürün adresine git',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.outline),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                )),
           ),
-        )
-        // SliverList(
-        //     delegate: SliverChildListDelegate.fixed(List.generate(
-        //   5,
-        //   (index) => SizedBox(
-        //     height: 200,
-        //     child: Center(
-        //       child: Text(index.toString()),
-        //     ),
-        //   ),
-        // )))
-      ],
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  fakeSpecs(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: BouncingWidget(
+                      duration: Duration(milliseconds: 300),
+                      onPressed: () {},
+                      child: Center(
+                        child: Text(
+                          'Satıcılardan ürün hakkında bilgi al',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.outline),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: BouncingWidget(
+                      duration: Duration(milliseconds: 300),
+                      onPressed: () {},
+                      child: Center(
+                        child: Text(
+                          'Daha fazla bilgi almak için ürün adresine git',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.outline),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          // SliverList(
+          //     delegate: SliverChildListDelegate.fixed(List.generate(
+          //   5,
+          //   (index) => SizedBox(
+          //     height: 200,
+          //     child: Center(
+          //       child: Text(index.toString()),
+          //     ),
+          //   ),
+          // )))
+        ],
+      ),
     );
   }
 
@@ -492,147 +636,172 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   }
 
   Widget buildProductComments(BuildContext context) {
-    return MultiSliver(
-      pushPinnedChildren: true,
-      children: [
-        SliverPersistentHeader(
-          pinned: true,
-          floating: false,
-          key: LabeledGlobalKey('comments'),
-          delegate: CustomSliverPersistentHeader(context,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Değerlendirmeler",
-                    style: TextStyle(
-                      fontSize: 23,
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 50),
+      sliver: MultiSliver(
+        pushPinnedChildren: true,
+        children: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            key: LabeledGlobalKey('comments'),
+            delegate: CustomSliverPersistentHeader(context,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Değerlendirmeler",
+                      style: TextStyle(
+                        fontSize: 23,
+                      ),
                     ),
                   ),
-                ),
-              )),
-        ),
-      SliverToBoxAdapter(
-          child: SizedBox(height: context.height,),
-        ),
-      ],
+                )),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: context.height,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildProductSuppliers(BuildContext context) {
-    return MultiSliver(
-      pushPinnedChildren: true,
-      children: [
-        SliverPersistentHeader(
-          pinned: true,
-          floating: false,
-          key: LabeledGlobalKey('supplier'),
-          delegate: CustomSliverPersistentHeader(context,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Satıcılar",
-                    style: TextStyle(
-                      fontSize: 23,
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 50),
+      sliver: MultiSliver(
+        pushPinnedChildren: true,
+        children: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            key: LabeledGlobalKey('supplier'),
+            delegate: CustomSliverPersistentHeader(context,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Satıcılar",
+                      style: TextStyle(
+                        fontSize: 23,
+                      ),
                     ),
                   ),
-                ),
-              )),
-        ),
-      SliverToBoxAdapter(
-          child: SizedBox(height: context.height,),
-        ),
-      ],
+                )),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: context.height,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildPaymentMethods(BuildContext context) {
-    return MultiSliver(
-      pushPinnedChildren: true,
-      children: [
-        SliverPersistentHeader(
-          pinned: true,
-          floating: false,
-          key: LabeledGlobalKey('payment'),
-          delegate: CustomSliverPersistentHeader(context,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Ödeme Seçenekleri",
-                    style: TextStyle(
-                      fontSize: 23,
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 50),
+      sliver: MultiSliver(
+        pushPinnedChildren: true,
+        children: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            key: LabeledGlobalKey('payment'),
+            delegate: CustomSliverPersistentHeader(context,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Ödeme Seçenekleri",
+                      style: TextStyle(
+                        fontSize: 23,
+                      ),
                     ),
                   ),
-                ),
-              )),
-        ),
-      SliverToBoxAdapter(
-          child: SizedBox(height: context.height,),
-        ),
-      ],
+                )),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: context.height,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildCombinationSuggestion(BuildContext context) {
-    return MultiSliver(
-      pushPinnedChildren: true,
-      children: [
-        SliverPersistentHeader(
-          pinned: true,
-          floating: false,
-          key: LabeledGlobalKey('combination'),
-          delegate: CustomSliverPersistentHeader(context,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Kombinasyon Önerisi",
-                    style: TextStyle(
-                      fontSize: 23,
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 50),
+      sliver: MultiSliver(
+        pushPinnedChildren: true,
+        children: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            key: LabeledGlobalKey('combination'),
+            delegate: CustomSliverPersistentHeader(context,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Kombinasyon Önerisi",
+                      style: TextStyle(
+                        fontSize: 23,
+                      ),
                     ),
                   ),
-                ),
-              )),
-        ),
-       SliverToBoxAdapter(
-          child: SizedBox(height: context.height,),
-        ),
-      ],
+                )),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: context.height,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildInterestedSuggestion(BuildContext context) {
-    return MultiSliver(
-      pushPinnedChildren: true,
-      children: [
-        SliverPersistentHeader(
-          pinned: true,
-          floating: false,
-          key: LabeledGlobalKey('interesteded'),
-          delegate: CustomSliverPersistentHeader(context,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Şunlar da ilgini çekebilir",
-                    style: TextStyle(
-                      fontSize: 23,
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 50),
+      sliver: MultiSliver(
+        pushPinnedChildren: true,
+        children: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            key: LabeledGlobalKey('interesteded'),
+            delegate: CustomSliverPersistentHeader(context,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Şunlar da ilgini çekebilir",
+                      style: TextStyle(
+                        fontSize: 23,
+                      ),
                     ),
                   ),
-                ),
-              )),
-        ),
-        SliverToBoxAdapter(
-          child: SizedBox(height: context.height,),
-        ),
-      ],
+                )),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: context.height,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -665,12 +834,22 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                       Tooltip(
                         message: 'Beğen',
                         child: IconButton(
-                          icon: Icon(
-                            LineIcons.heart,
-                            color: provider.constainsLike(widget.data)
-                                ? AppColors.red.shade300
-                                : widget.palette.dominantColor.bodyTextColor
-                                    .withAlpha(255),
+                          icon: Pulse(
+                            key: UniqueKey(),
+                            animate: false,
+                            manualTrigger: true,
+                            controller: (c) {
+                              if (provider.constainsLike(widget.data)) {
+                                c.forward().whenComplete(() => c.reset());
+                              }
+                            },
+                            child: Icon(
+                              LineIcons.heart,
+                              color: provider.constainsLike(widget.data)
+                                  ? AppColors.red.shade300
+                                  : widget.palette.dominantColor.bodyTextColor
+                                      .withAlpha(255),
+                            ),
                           ),
                           onPressed: () {
                             if (provider.constainsLike(widget.data)) {
@@ -684,12 +863,25 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                       Tooltip(
                         message: 'Listene Ekle',
                         child: IconButton(
-                          icon: Icon(
-                            LineIcons.bookmark,
-                            color: provider.containsItem(widget.data)
-                                ? AppColors.orange.shade300
-                                : widget.palette.dominantColor.bodyTextColor
-                                    .withAlpha(255),
+                          icon: Bounce(
+                            key: UniqueKey(),
+                            from: 30,
+                            manualTrigger: true,
+                            animate: false,
+                            controller: (p0) {
+                              if (provider.containsItem(widget.data)) {
+                                p0.forward().whenComplete(() {
+                                  p0.reset();
+                                });
+                              }
+                            },
+                            child: Icon(
+                              LineIcons.bookmark,
+                              color: provider.containsItem(widget.data)
+                                  ? AppColors.orange.shade300
+                                  : widget.palette.dominantColor.bodyTextColor
+                                      .withAlpha(255),
+                            ),
                           ),
                           onPressed: () {
                             showFlexibleBookmarkSheet(context, widget.data);
@@ -699,32 +891,46 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                       Tooltip(
                         message: 'Sepete Ekle',
                         child: IconButton(
-                          icon: Icon(
-                            LineIcons.shoppingBag,
-                            color: provider.containsOrder(widget.data)
-                                ? AppColors.blue.shade200
-                                : widget.palette.dominantColor.bodyTextColor
-                                    .withAlpha(255),
+                          icon: Roulette(
+                            key: UniqueKey(),
+                            spins: 1,
+                            animate: false,
+                            manualTrigger: true,
+                            controller: (c) {
+                              if (provider.containsOrder(widget.data)) {
+                                c.forward().whenComplete(() => c.reset());
+                              }
+                            },
+                            child: Icon(
+                              LineIcons.shoppingBag,
+                              color: provider.containsOrder(widget.data)
+                                  ? AppColors.blue.shade200
+                                  : widget.palette.dominantColor.bodyTextColor
+                                      .withAlpha(255),
+                            ),
                           ),
                           onPressed: () {
                             if (provider.containsOrder(widget.data)) {
                               provider.removeOrder(widget.data);
                             } else {
                               provider.addOrder(widget.data).whenComplete(() {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content: const Text('Sepete eklendi'),
-                                  action: SnackBarAction(
-                                      label: 'Sepete Git',
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            CupertinoPageRoute(
-                                              builder: (context) =>
-                                                  const BasketPage(),
-                                            ));
-                                      }),
-                                ));
+                                Timer(Duration(milliseconds: 1000), () {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                                    content: const Text('Sepete eklendi'),
+                                    action: SnackBarAction(
+                                        label: 'Sepete Git',
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                builder: (context) =>
+                                                    const BasketPage(),
+                                              ));
+                                        }),
+                                  ));
+                                });
                               });
                             }
                           },

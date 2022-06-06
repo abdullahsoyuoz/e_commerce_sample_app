@@ -26,31 +26,19 @@ class ProductViewBody extends StatefulWidget {
 
 class _ProductViewBodyState extends State<ProductViewBody>
     with TickerProviderStateMixin {
-  // AnimationController _rankAnimationController;
 
   @override
   void initState() {
-    // _rankAnimationController = AnimationController(
-    //   vsync: this,
-    //   lowerBound: 0,
-    //   upperBound: 1,
-    //   duration: const Duration(milliseconds: 1000) * widget.data.rank,
-    // );
-
     super.initState();
   }
 
   @override
   void dispose() {
-    // _rankAnimationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // _rankAnimationController.animateTo(widget.data.rank / 5);
-    });
     return Consumer<MyListsProvider>(builder: (context, provider, _) {
       return SlideInDown(
         child: ClipRRect(
