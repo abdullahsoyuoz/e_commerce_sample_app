@@ -94,7 +94,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       children: [
                         Align(
                           alignment: Alignment.topRight,
-                          child: LogoWidget(size: context.width * 0.15, color: AppColors.black.shade300),
+                          child: LogoWidget(
+                              size: context.width * 0.15,
+                              color: AppColors.black.shade300),
                         ),
                         Align(
                           alignment: Alignment.bottomLeft,
@@ -107,10 +109,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 languageConverter(context, 'login')
                                     .toUpperCase(),
                                 textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    color: AppColors.black.shade300,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w500),
+                                style: getAccentBoldStyle(),
                               )),
                         ),
                       ],
@@ -187,13 +186,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                             // widget.onLoginPressed.call();
                           },
                           child: Text(
-                            languageConverter(context, 'forgetPassword'),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              letterSpacing: 5,
-                            ),
-                          ),
+                              languageConverter(context, 'forgetPassword'),
+                              textAlign: TextAlign.center,
+                              style: getSpacingStyle()),
                         ),
                       ),
                       Padding(
@@ -203,13 +198,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                             widget.onLoginPressed.call();
                           },
                           child: Text(
-                            languageConverter(context, 'notYetRegister'),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              letterSpacing: 5,
-                            ),
-                          ),
+                              languageConverter(context, 'notYetRegister'),
+                              textAlign: TextAlign.center,
+                              style: getSpacingStyle()),
                         ),
                       ),
                     ],
@@ -243,7 +234,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       child: TextFormField(
                         controller: _emailController,
                         focusNode: _emailFocus,
-                        style: textfieldstyle(context),
+                        style: getTextFieldStyle(context),
                         decoration: getAuthInputDecoration(
                             languageConverter(context, 'yourEmail'),
                             Provider.of<ThemeChanger>(context, listen: false)
@@ -257,7 +248,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ],
                         validator: (string) {
                           if (!string.isEmail()) {
-                            return languageConverter(context, 'yourEmailValidation');
+                            return languageConverter(
+                                context, 'yourEmailValidation');
                           }
                           return null;
                         },
@@ -286,7 +278,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       child: TextFormField(
                         controller: _passwordController,
                         focusNode: _passwordFocus,
-                        style: textfieldstyle(context),
+                        style: getTextFieldStyle(context),
                         decoration: getAuthInputDecoration(
                             languageConverter(context, 'yourPassword'),
                             Provider.of<ThemeChanger>(context, listen: false)
@@ -301,7 +293,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ],
                         validator: (string) {
                           if (!string.isPasswordEasy()) {
-                            return languageConverter(context, 'yourPasswordValidation');
+                            return languageConverter(
+                                context, 'yourPasswordValidation');
                           }
                           return null;
                         },
@@ -346,8 +339,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     child: FittedBox(
                         child: Text(
                       languageConverter(context, 'submit').toUpperCase(),
-                      style: const TextStyle(
-                          fontSize: 21, fontWeight: FontWeight.w500),
+                      style: getAccentStyle()
                     )),
                   ),
                 ),

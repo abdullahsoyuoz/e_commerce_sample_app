@@ -11,7 +11,8 @@
     "_GETTINGSTARTED_" : "------------------------------------------------------------------------------------------------------------------------",
     "gettingStarted" : "Getting Started",
     "chooseYourLanguage" : "Choose your language",
-    "chooseYourTheme" : "Choose the theme",
+    "chooseYourTheme" : "Choose your theme",
+    "letStarted" : "Let's start",
 
     "_ONBOARD_" : "------------------------------------------------------------------------------------------------------------------------",
     "onboard1Title" : "Modern",
@@ -116,6 +117,11 @@
     "forumCount" : "How many people spoke about the product?",
     "questionCount" : "How many people asked questions about the product?",
     "averagePoint" : "The average score of the product.",
+    "like" : "Like",
+    "bookmark" : "Add to your lists",
+    "basket" : "Add to Basket",
+    "share" : "Share",
+    "gift" : "Gift it to a friend",
     "new" : "new",
        
     "_END_" : "------------------------------------------------------------------------------------------------------------------------"

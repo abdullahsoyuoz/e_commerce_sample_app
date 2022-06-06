@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -827,116 +825,207 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                     ),
                     onPressed: () => Navigator.pop(context),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Tooltip(
-                        message: 'Beğen',
-                        child: IconButton(
-                          icon: Pulse(
-                            key: UniqueKey(),
-                            animate: false,
-                            manualTrigger: true,
-                            controller: (c) {
-                              if (provider.constainsLike(widget.data)) {
-                                c.forward().whenComplete(() => c.reset());
-                              }
-                            },
-                            child: Icon(
-                              LineIcons.heart,
-                              color: provider.constainsLike(widget.data)
-                                  ? AppColors.red.shade300
-                                  : widget.palette.dominantColor.bodyTextColor
+                  Expanded(
+                    child: FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Tooltip(
+                            message: languageConverter(context, "share"),
+                            triggerMode: TooltipTriggerMode.longPress,
+                            child: IconButton(
+                              icon: Pulse(
+                                key: UniqueKey(),
+                                animate: false,
+                                manualTrigger: true,
+                                controller: (c) {
+                                  if (provider.constainsLike(widget.data)) {
+                                    c.forward().whenComplete(() => c.reset());
+                                  }
+                                },
+                                child: Icon(
+                                  LineIcons.share,
+                                  color: widget
+                                      .palette.dominantColor.bodyTextColor
                                       .withAlpha(255),
+                                ),
+                              ),
+                              onPressed: () {},
                             ),
                           ),
-                          onPressed: () {
-                            if (provider.constainsLike(widget.data)) {
-                              provider.removeLike(widget.data);
-                            } else {
-                              provider.addLike(widget.data);
-                            }
-                          },
-                        ),
-                      ),
-                      Tooltip(
-                        message: 'Listene Ekle',
-                        child: IconButton(
-                          icon: Bounce(
-                            key: UniqueKey(),
-                            from: 30,
-                            manualTrigger: true,
-                            animate: false,
-                            controller: (p0) {
-                              if (provider.containsItem(widget.data)) {
-                                p0.forward().whenComplete(() {
-                                  p0.reset();
-                                });
-                              }
-                            },
-                            child: Icon(
-                              LineIcons.bookmark,
-                              color: provider.containsItem(widget.data)
-                                  ? AppColors.orange.shade300
-                                  : widget.palette.dominantColor.bodyTextColor
-                                      .withAlpha(255),
+                          Tooltip(
+                            message: languageConverter(context, "like"),
+                            triggerMode: TooltipTriggerMode.longPress,
+                            child: IconButton(
+                              icon: Pulse(
+                                key: UniqueKey(),
+                                animate: false,
+                                manualTrigger: true,
+                                controller: (c) {
+                                  if (provider.constainsLike(widget.data)) {
+                                    c.forward().whenComplete(() => c.reset());
+                                  }
+                                },
+                                child: Icon(
+                                  LineIcons.heart,
+                                  color: provider.constainsLike(widget.data)
+                                      ? AppColors.red.shade300
+                                      : widget
+                                          .palette.dominantColor.bodyTextColor
+                                          .withAlpha(255),
+                                ),
+                              ),
+                              onPressed: () {
+                                if (provider.constainsLike(widget.data)) {
+                                  provider.removeLike(widget.data);
+                                } else {
+                                  provider.addLike(widget.data);
+                                }
+                              },
                             ),
                           ),
-                          onPressed: () {
-                            showFlexibleBookmarkSheet(context, widget.data);
-                          },
-                        ),
-                      ),
-                      Tooltip(
-                        message: 'Sepete Ekle',
-                        child: IconButton(
-                          icon: Roulette(
-                            key: UniqueKey(),
-                            spins: 1,
-                            animate: false,
-                            manualTrigger: true,
-                            controller: (c) {
-                              if (provider.containsOrder(widget.data)) {
-                                c.forward().whenComplete(() => c.reset());
-                              }
-                            },
-                            child: Icon(
-                              LineIcons.shoppingBag,
-                              color: provider.containsOrder(widget.data)
-                                  ? AppColors.blue.shade200
-                                  : widget.palette.dominantColor.bodyTextColor
-                                      .withAlpha(255),
+                          Tooltip(
+                            message: languageConverter(context, "bookmark"),
+                            triggerMode: TooltipTriggerMode.longPress,
+                            child: IconButton(
+                              icon: Bounce(
+                                key: UniqueKey(),
+                                from: 30,
+                                manualTrigger: true,
+                                animate: false,
+                                controller: (p0) {
+                                  if (provider.containsItem(widget.data)) {
+                                    p0.forward().whenComplete(() {
+                                      p0.reset();
+                                    });
+                                  }
+                                },
+                                child: Icon(
+                                  LineIcons.bookmark,
+                                  color: provider.containsItem(widget.data)
+                                      ? AppColors.orange.shade300
+                                      : widget
+                                          .palette.dominantColor.bodyTextColor
+                                          .withAlpha(255),
+                                ),
+                              ),
+                              onPressed: () {
+                                showFlexibleBookmarkSheet(context, widget.data);
+                              },
                             ),
                           ),
-                          onPressed: () {
-                            if (provider.containsOrder(widget.data)) {
-                              provider.removeOrder(widget.data);
-                            } else {
-                              provider.addOrder(widget.data).whenComplete(() {
-                                Timer(Duration(milliseconds: 1000), () {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-                                    content: const Text('Sepete eklendi'),
-                                    action: SnackBarAction(
-                                        label: 'Sepete Git',
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              CupertinoPageRoute(
-                                                builder: (context) =>
-                                                    const BasketPage(),
-                                              ));
-                                        }),
-                                  ));
-                                });
-                              });
-                            }
-                          },
-                        ),
+                          Tooltip(
+                            message: languageConverter(context, "basket"),
+                            triggerMode: TooltipTriggerMode.longPress,
+                            child: IconButton(
+                              icon: Roulette(
+                                key: UniqueKey(),
+                                spins: 1,
+                                animate: false,
+                                manualTrigger: true,
+                                controller: (c) {
+                                  if (provider.containsOrder(widget.data)) {
+                                    c.forward().whenComplete(() => c.reset());
+                                  }
+                                },
+                                child: Icon(
+                                  LineIcons.shoppingBag,
+                                  color: provider.containsOrder(widget.data)
+                                      ? AppColors.blue.shade200
+                                      : widget
+                                          .palette.dominantColor.bodyTextColor
+                                          .withAlpha(255),
+                                ),
+                              ),
+                              onPressed: () {
+                                if (provider.containsOrder(widget.data)) {
+                                  provider.removeOrder(widget.data);
+                                } else {
+                                  provider
+                                      .addOrder(widget.data)
+                                      .whenComplete(() {
+                                    Timer(Duration(milliseconds: 1000), () {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .tertiaryContainer,
+                                        content: const Text('Sepete eklendi'),
+                                        action: SnackBarAction(
+                                            label: 'Sepete Git',
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  CupertinoPageRoute(
+                                                    builder: (context) =>
+                                                        const BasketPage(),
+                                                  ));
+                                            }),
+                                      ));
+                                    });
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                          Tooltip(
+                            message: languageConverter(context, "gift"),
+                            triggerMode: TooltipTriggerMode.longPress,
+                            child: IconButton(
+                              icon: Roulette(
+                                key: UniqueKey(),
+                                spins: 1,
+                                animate: false,
+                                manualTrigger: true,
+                                controller: (c) {
+                                  if (provider.containsOrder(widget.data)) {
+                                    c.forward().whenComplete(() => c.reset());
+                                  }
+                                },
+                                child: Icon(
+                                  LineIcons.gift,
+                                  color: provider.containsOrder(widget.data)
+                                      ? AppColors.blue.shade200
+                                      : widget
+                                          .palette.dominantColor.bodyTextColor
+                                          .withAlpha(255),
+                                ),
+                              ),
+                              onPressed: () {
+                                if (provider.containsOrder(widget.data)) {
+                                  provider.removeOrder(widget.data);
+                                } else {
+                                  provider
+                                      .addOrder(widget.data)
+                                      .whenComplete(() {
+                                    Timer(Duration(milliseconds: 1000), () {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .tertiaryContainer,
+                                        content: const Text('Sepete eklendi'),
+                                        action: SnackBarAction(
+                                            label: 'Sepete Git',
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  CupertinoPageRoute(
+                                                    builder: (context) =>
+                                                        const BasketPage(),
+                                                  ));
+                                            }),
+                                      ));
+                                    });
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                   AbsorbPointer(
                     absorbing: !showBackToTop,

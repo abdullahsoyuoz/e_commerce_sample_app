@@ -12,6 +12,7 @@
     "gettingStarted" : "Başlarken",
     "chooseYourLanguage" : "Dilini Seç",
     "chooseYourTheme" : "Temanı Seç",
+    "letStarted" : "Hadi Başlayalım",
     
     "_ONBOARD_" : "------------------------------------------------------------------------------------------------------------------------",
     "onboard1Title" : "Modern",
@@ -116,6 +117,11 @@
     "forumCount" : "Ürün hakkında kaç kişi konuştu?",
     "questionCount" : "Ürün hakkında kaç kişi soru sordu?",
     "averagePoint" : "Ürünün ortalama puanı.",
+    "like" : "Beğen",
+    "bookmark" : "Listene ekle",
+    "basket" : "Sepete ekle",
+    "share" : "Paylaş",
+    "gift" : "Hediye et",
     "new" : "yeni",
        
     "_END_" : "------------------------------------------------------------------------------------------------------------------------"

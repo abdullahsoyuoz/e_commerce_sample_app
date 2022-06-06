@@ -119,8 +119,7 @@ class _RegisterPageState extends State<RegisterPage>
                               child: Text(
                                 languageConverter(context, 'register').toUpperCase(),
                                 textAlign: TextAlign.start,
-                                style: const TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.w500),
+                                style: getAccentBoldStyle(),
                               )),
                         ),
                       ],
@@ -153,10 +152,7 @@ class _RegisterPageState extends State<RegisterPage>
                       },
                       child: Text(
                         languageConverter(context, 'iWantLogin'),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          letterSpacing: 5,
-                        ),
+                        style: getSpacingStyle()
                       ),
                     ),
                   ),
@@ -188,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _nameController,
                         focusNode: _nameFocus,
-                        style: textfieldstyle(context),
+                        style: getTextFieldStyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourName'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         maxLines: 1,
@@ -228,7 +224,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _phoneNumberController,
                         focusNode: _phoneNumberFocus,
-                        style: textfieldstyle(context),
+                        style: getTextFieldStyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourContactNumber'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.phone,
                         maxLines: 1,
@@ -267,7 +263,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _emailController,
                         focusNode: _emailFocus,
-                        style: textfieldstyle(context),
+                        style: getTextFieldStyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourEmail'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
@@ -306,7 +302,7 @@ class _RegisterPageState extends State<RegisterPage>
                       child: TextFormField(
                         controller: _passwordController,
                         focusNode: _passwordFocus,
-                        style: textfieldstyle(context),
+                        style: getTextFieldStyle(context),
                         decoration: getAuthInputDecoration(languageConverter(context, 'yourPassword'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
                         keyboardType: TextInputType.text,
                         obscureText: true,
@@ -354,7 +350,7 @@ class _RegisterPageState extends State<RegisterPage>
                     child:  FittedBox(
                         child: Text(
                       languageConverter(context, 'submit').toUpperCase(),
-                      style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+                      style: getAccentStyle(),
                     )),
                   ),
                 ),

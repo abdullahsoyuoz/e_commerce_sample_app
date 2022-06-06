@@ -8,6 +8,7 @@ import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/Auth/onboaring.dart';
 import 'package:sepet_demo/View/Painter/vertical_half_painter.dart';
 import 'package:sepet_demo/View/Style/Theme/themedata.dart';
+import 'package:sepet_demo/View/Style/textstyle.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,10 +71,7 @@ class _GettingStartedState extends State<GettingStarted>
                                     child: Text(
                                       languageConverter(
                                           context, "gettingStarted"),
-                                      style: const TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: getAccentBoldStyle(),
                                     ),
                                   ),
                                   LogoWidget(
@@ -91,10 +89,7 @@ class _GettingStartedState extends State<GettingStarted>
                               child: Text(
                                 languageConverter(
                                     context, 'chooseYourLanguage'),
-                                style: const TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: getAccentBoldStyle(),
                               ),
                             ),
                             SizedBox(
@@ -135,11 +130,9 @@ class _GettingStartedState extends State<GettingStarted>
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 5.0),
-                                          child: Text(
-                                            data.title,
-                                            style:
-                                                const TextStyle(fontSize: 12),
-                                          ),
+                                          child: Text(data.title,
+                                              style:
+                                                  getTextFieldStyle(context)),
                                         )
                                       ],
                                     ),
@@ -155,10 +148,7 @@ class _GettingStartedState extends State<GettingStarted>
                               ),
                               child: Text(
                                 languageConverter(context, 'chooseYourTheme'),
-                                style: const TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: getAccentBoldStyle(),
                               ),
                             ),
                             SizedBox(
@@ -213,8 +203,7 @@ class _GettingStartedState extends State<GettingStarted>
                                                 : languageConverter(
                                                     context, "light"),
                                             textAlign: TextAlign.center,
-                                            style:
-                                                const TextStyle(fontSize: 12),
+                                            style: getTextFieldStyle(context),
                                           ),
                                         )
                                       ],
@@ -238,7 +227,10 @@ class _GettingStartedState extends State<GettingStarted>
                       child: BouncingWidget(
                         key: LabeledGlobalKey('submitButton'),
                         duration: const Duration(milliseconds: 300),
-                        child: Text(languageConverter(context, 'next'), style: TextStyle(color: Theme.of(context).iconTheme.color, fontSize: 19),),
+                        child: Text(
+                          languageConverter(context, 'letStarted'),
+                          style: getAccentStyle(),
+                        ),
                         onPressed: () {
                           Navigator.push(
                               context,
