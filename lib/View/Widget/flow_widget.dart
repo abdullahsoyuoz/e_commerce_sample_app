@@ -155,3 +155,50 @@ class _FlowWidgetState extends State<FlowWidget>
     );
   }
 }
+
+class FlowWidgetForShimmer extends StatelessWidget {
+  const FlowWidgetForShimmer({ Key key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+          width: context.width,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Card(
+                  elevation: 0,
+                  color: Colors.white,
+                  child: ClipRRect(
+                    borderRadius: appRadius(),
+                  ),
+                ),
+              ),
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
+  }
+}

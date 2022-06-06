@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:sepet_demo/Model/shop.dart';
 
 class Product {
   int id;

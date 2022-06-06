@@ -27,6 +27,7 @@ import 'package:sepet_demo/View/Widget/flow_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:swipe/swipe.dart';
 
 class HomePage extends StatefulWidget {
@@ -110,13 +111,13 @@ class _HomePageState extends State<HomePage>
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.ease);
                   },
-                  onSwipeLeft: (){
+                  onSwipeLeft: () {
                     _pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.ease);
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.ease);
                   },
-                  child: Consumer<FlowsProvider>(
-                      builder: (context, provider, _) {
+                  child:
+                      Consumer<FlowsProvider>(builder: (context, provider, _) {
                     return RefreshIndicator(
                       edgeOffset: context.padding.top + 120,
                       onRefresh: () async {
@@ -130,22 +131,25 @@ class _HomePageState extends State<HomePage>
                           future: provider.getList(),
                           builder: (context, snapshot) {
                             if (provider.isLoading) {
-                              return ColoredBox(
-                                color: Colors.transparent,
-                                child: SizedBox.expand(
+                              return SizedBox.expand(
                                   child: Center(
-                                      child: Lottie.asset(lottieWaiting)),
-                                ),
-                              );
+                                child: Shimmer.fromColors(
+                                    baseColor: Colors.white.withOpacity(.2),
+                                    highlightColor: Colors.grey.shade200,
+                                    child: const Text(
+                                      'Listeler getiriliyor',
+                                      style: TextStyle(fontSize: 17),
+                                    )),
+                              ));
                             }
                             if (!snapshot.hasData || snapshot.data.isEmpty) {
-                              return ColoredBox(
-                                color: Colors.transparent,
-                                child: SizedBox.expand(
+                              return const SizedBox.expand(
                                   child: Center(
-                                      child: Lottie.asset(lottieNotFound)),
+                                child: Text(
+                                  'Herhangi bir veri bulunamadı',
+                                  style: TextStyle(fontSize: 17),
                                 ),
-                              );
+                              ));
                             } else {
                               return ListView.builder(
                                 controller: _listViewController,
@@ -158,8 +162,7 @@ class _HomePageState extends State<HomePage>
                                 itemCount: snapshot.data.length,
                                 itemExtent: context.width * 0.5,
                                 itemBuilder: (context, index) {
-                                  return FlowWidget(
-                                      data: snapshot.data[index]);
+                                  return FlowWidget(data: snapshot.data[index]);
                                 },
                               );
                             }

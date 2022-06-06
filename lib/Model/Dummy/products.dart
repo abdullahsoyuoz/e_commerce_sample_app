@@ -28,6 +28,7 @@ Future<void> fetchProduct() async {
 
 Future<void> generateProduct() async {
   try {
+    // ignore: unused_local_variable
     final faker = Faker.instance;
     for (var i = 0; i < 50; i++) {
 

@@ -10,7 +10,6 @@ import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/product.dart';
 import 'package:sepet_demo/View/Page/User/Order/basket.dart';
-import 'package:sepet_demo/View/Page/User/Product/product_detail.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/View/Sheets/bookmark_sheet.dart';

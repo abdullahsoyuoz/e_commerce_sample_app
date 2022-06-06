@@ -4,7 +4,7 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
   CustomSliverPersistentHeader(
     this.context, {
     this.child,
-    this.maxExtentValue = 70,
+    this.maxExtentValue = 50,
     this.minExtentValue = 50,
   });
 

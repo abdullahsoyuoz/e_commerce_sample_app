@@ -1,17 +1,21 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:io';
 
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
+import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/product.dart';
-import 'package:sepet_demo/View/Painter/vertical_half_painter.dart';
+import 'package:sepet_demo/View/Page/User/Order/basket.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
+import 'package:sepet_demo/View/View/Sheets/bookmark_sheet.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 import 'package:sepet_demo/View/Widget/stacked_carousel.dart';
@@ -133,11 +137,12 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 verticalScrolling: false,
                 reverse: false,
                 padding: 0,
-                incrementalVerticalPadding: 5,
+                incrementalVerticalPadding: 25,
                 pageControllerCallback: (c) {
-                  _pageController = c;
                   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                    setState(() {});
+                    setState(() {
+                      _pageController = c;
+                    });
                   });
                 },
                 itemCount: widget.data.photosUrl.length,
@@ -191,8 +196,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
           floating: false,
           key: LabeledGlobalKey('productOverview'),
           delegate: CustomSliverPersistentHeader(context,
-              maxExtentValue: context.padding.top * 1.5,
-              minExtentValue: context.padding.top * 1.5,
+              maxExtentValue: context.padding.top * 2,
+              minExtentValue: context.padding.top * 2,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
@@ -410,46 +415,29 @@ class _ProductDetailPageState extends State<ProductDetailPage>
               children: [
                 fakeSpecs(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 20.0),
                   child: BouncingWidget(
                     duration: Duration(milliseconds: 300),
                     onPressed: () {},
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: AspectRatio(
-                        aspectRatio: 1.6,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            AbsorbPointer(
-                              child: WebView(
-                                initialUrl: widget.data.productWebUrl,
-                                gestureNavigationEnabled: true,
-                                javascriptMode: JavascriptMode.unrestricted,
-                                zoomEnabled: true,
-                              ),
-                            ),
-                            DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .iconTheme
-                                    .color
-                                    .withOpacity(.85),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(35.0),
-                              child: Center(
-                                  child: Text(
-                                'Daha fazla bilgi almak için tıklatın',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor),
-                              )),
-                            )
-                          ],
-                        ),
+                    child: Center(
+                      child: Text(
+                        'Satıcılardan ürün hakkında bilgi al',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.outline),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: BouncingWidget(
+                    duration: Duration(milliseconds: 300),
+                    onPressed: () {},
+                    child: Center(
+                      child: Text(
+                        'Daha fazla bilgi almak için ürün adresine git',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.outline),
                       ),
                     ),
                   ),
@@ -525,16 +513,9 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 ),
               )),
         ),
-        SliverList(
-            delegate: SliverChildListDelegate.fixed(List.generate(
-          5,
-          (index) => SizedBox(
-            height: 200,
-            child: Center(
-              child: Text(index.toString()),
-            ),
-          ),
-        )))
+      SliverToBoxAdapter(
+          child: SizedBox(height: context.height,),
+        ),
       ],
     );
   }
@@ -561,16 +542,9 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 ),
               )),
         ),
-        SliverList(
-            delegate: SliverChildListDelegate.fixed(List.generate(
-          5,
-          (index) => SizedBox(
-            height: 200,
-            child: Center(
-              child: Text(index.toString()),
-            ),
-          ),
-        )))
+      SliverToBoxAdapter(
+          child: SizedBox(height: context.height,),
+        ),
       ],
     );
   }
@@ -597,16 +571,9 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 ),
               )),
         ),
-        SliverList(
-            delegate: SliverChildListDelegate.fixed(List.generate(
-          5,
-          (index) => SizedBox(
-            height: 200,
-            child: Center(
-              child: Text(index.toString()),
-            ),
-          ),
-        )))
+      SliverToBoxAdapter(
+          child: SizedBox(height: context.height,),
+        ),
       ],
     );
   }
@@ -633,16 +600,9 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 ),
               )),
         ),
-        SliverList(
-            delegate: SliverChildListDelegate.fixed(List.generate(
-          5,
-          (index) => SizedBox(
-            height: 200,
-            child: Center(
-              child: Text(index.toString()),
-            ),
-          ),
-        )))
+       SliverToBoxAdapter(
+          child: SizedBox(height: context.height,),
+        ),
       ],
     );
   }
@@ -669,102 +629,132 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 ),
               )),
         ),
-        SliverList(
-            delegate: SliverChildListDelegate.fixed(List.generate(
-          5,
-          (index) => SizedBox(
-            height: 200,
-            child: Center(
-              child: Text(index.toString()),
-            ),
-          ),
-        )))
+        SliverToBoxAdapter(
+          child: SizedBox(height: context.height,),
+        ),
       ],
     );
   }
 
   Widget buildBottomController(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: EdgeInsets.only(bottom: context.padding.bottom),
-        child: SizedBox(
-          height: 50,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    LineIcons.arrowLeft,
-                    color: widget.palette.dominantColor.bodyTextColor
-                        .withAlpha(255),
+    return Consumer<MyListsProvider>(builder: (context, provider, _) {
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: context.padding.bottom),
+          child: SizedBox(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      LineIcons.arrowLeft,
+                      color: widget.palette.dominantColor.bodyTextColor
+                          .withAlpha(255),
+                    ),
+                    onPressed: () => Navigator.pop(context),
                   ),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Tooltip(
-                      message: 'Beğen',
-                      child: IconButton(
-                        icon: Icon(
-                          LineIcons.heart,
-                          color: widget.palette.dominantColor.bodyTextColor
-                              .withAlpha(255),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Tooltip(
+                        message: 'Beğen',
+                        child: IconButton(
+                          icon: Icon(
+                            LineIcons.heart,
+                            color: provider.constainsLike(widget.data)
+                                ? AppColors.red.shade300
+                                : widget.palette.dominantColor.bodyTextColor
+                                    .withAlpha(255),
+                          ),
+                          onPressed: () {
+                            if (provider.constainsLike(widget.data)) {
+                              provider.removeLike(widget.data);
+                            } else {
+                              provider.addLike(widget.data);
+                            }
+                          },
                         ),
-                        onPressed: () {},
                       ),
-                    ),
-                    Tooltip(
-                      message: 'Listene Ekle',
-                      child: IconButton(
-                        icon: Icon(
-                          LineIcons.bookmark,
-                          color: widget.palette.dominantColor.bodyTextColor
-                              .withAlpha(255),
+                      Tooltip(
+                        message: 'Listene Ekle',
+                        child: IconButton(
+                          icon: Icon(
+                            LineIcons.bookmark,
+                            color: provider.containsItem(widget.data)
+                                ? AppColors.orange.shade300
+                                : widget.palette.dominantColor.bodyTextColor
+                                    .withAlpha(255),
+                          ),
+                          onPressed: () {
+                            showFlexibleBookmarkSheet(context, widget.data);
+                          },
                         ),
-                        onPressed: () {},
                       ),
-                    ),
-                    Tooltip(
-                      message: 'Sepete Ekle',
-                      child: IconButton(
-                        icon: Icon(
-                          LineIcons.shoppingBag,
-                          color: widget.palette.dominantColor.bodyTextColor
-                              .withAlpha(255),
+                      Tooltip(
+                        message: 'Sepete Ekle',
+                        child: IconButton(
+                          icon: Icon(
+                            LineIcons.shoppingBag,
+                            color: provider.containsOrder(widget.data)
+                                ? AppColors.blue.shade200
+                                : widget.palette.dominantColor.bodyTextColor
+                                    .withAlpha(255),
+                          ),
+                          onPressed: () {
+                            if (provider.containsOrder(widget.data)) {
+                              provider.removeOrder(widget.data);
+                            } else {
+                              provider.addOrder(widget.data).whenComplete(() {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: const Text('Sepete eklendi'),
+                                  action: SnackBarAction(
+                                      label: 'Sepete Git',
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            CupertinoPageRoute(
+                                              builder: (context) =>
+                                                  const BasketPage(),
+                                            ));
+                                      }),
+                                ));
+                              });
+                            }
+                          },
                         ),
-                        onPressed: () {},
                       ),
-                    ),
-                  ],
-                ),
-                AbsorbPointer(
-                  absorbing: !showBackToTop,
-                  child: Tooltip(
-                    message: "Başa Dön",
-                    triggerMode: TooltipTriggerMode.longPress,
-                    child: IconButton(
-                        onPressed: backToTop,
-                        icon: Icon(
-                          LineIcons.arrowUp,
-                          color: showBackToTop
-                              ? widget.palette.dominantColor.bodyTextColor
-                                  .withAlpha(255)
-                              : Colors.transparent,
-                        )),
+                    ],
                   ),
-                )
-              ],
+                  AbsorbPointer(
+                    absorbing: !showBackToTop,
+                    child: Tooltip(
+                      message: "Başa Dön",
+                      triggerMode: TooltipTriggerMode.longPress,
+                      child: IconButton(
+                          onPressed: backToTop,
+                          icon: Icon(
+                            LineIcons.arrowUp,
+                            color: showBackToTop
+                                ? widget.palette.dominantColor.bodyTextColor
+                                    .withAlpha(255)
+                                : Colors.transparent,
+                          )),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   void backToTop() {
@@ -773,7 +763,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
       duration: Duration(
           milliseconds:
               _customScrollViewController.position.pixels.toInt() ~/ 2),
-      curve: Curves.ease,
+      curve: Curves.easeOutCirc,
     );
   }
 }
