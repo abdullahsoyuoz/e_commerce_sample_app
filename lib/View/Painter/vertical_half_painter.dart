@@ -7,17 +7,17 @@ class HalfPainter extends CustomPainter {
     this.leftColor,
     this.rightColor,
   });
-  BuildContext context;
-  Color leftColor;
-  Color rightColor;
+  BuildContext? context;
+  Color? leftColor;
+  Color? rightColor;
 
   @override
   void paint(Canvas canvas, Size size) {
     if (leftColor != null) {
-      leftPaint(canvas, size, leftColor);
+      leftPaint(canvas, size, leftColor!);
     }
     if (rightColor != null) {
-      rightPaint(canvas, size, rightColor);
+      rightPaint(canvas, size, rightColor!);
     }
   }
 

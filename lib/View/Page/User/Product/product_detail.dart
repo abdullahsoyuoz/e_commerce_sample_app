@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api
 import 'dart:async';
 import 'dart:io';
 import 'package:animate_do/animate_do.dart';
@@ -26,9 +26,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  final Product data;
-  final PaletteGenerator palette;
-  const ProductDetailPage({Key key, this.data, this.palette}) : super(key: key);
+  final Product? data;
+  final PaletteGenerator? palette;
+  const ProductDetailPage({Key? key, this.data, this.palette}) : super(key: key);
 
   @override
   _ProductDetailPageState createState() => _ProductDetailPageState();
@@ -37,10 +37,10 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  PageController _pageController;
-  PageController _customScrollViewController;
+  late PageController _pageController;
+  PageController? _customScrollViewController;
   bool showBackToTop = false;
-  AnimationController _rankAnimationController;
+  AnimationController? _rankAnimationController;
 
   @override
   void initState() {
@@ -48,17 +48,17 @@ class _ProductDetailPageState extends State<ProductDetailPage>
       vsync: this,
       lowerBound: 0,
       upperBound: 1,
-      duration: const Duration(milliseconds: 700) * widget.data.rank,
+      duration: const Duration(milliseconds: 700) * widget.data!.rank!,
     );
     _pageController = PageController();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _rankAnimationController.animateTo(widget.data.rank / 5);
+      _rankAnimationController!.animateTo(widget.data!.rank! / 5);
     });
     if (Platform.isAndroid) WebView.platform = AndroidWebView();
     _customScrollViewController = PageController()
       ..addListener(() {
         setState(() {
-          if (_customScrollViewController.position.pixels > 300) {
+          if (_customScrollViewController!.position.pixels > 300) {
             showBackToTop = true;
           } else {
             showBackToTop = false;
@@ -71,8 +71,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   @override
   void dispose() {
     _pageController.dispose();
-    _customScrollViewController.dispose();
-    _rankAnimationController.dispose();
+    _customScrollViewController!.dispose();
+    _rankAnimationController!.dispose();
     super.dispose();
   }
 
@@ -80,7 +80,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: widget.palette.dominantColor.color,
+        // backgroundColor: widget.palette!.dominantColor!.color,
+        backgroundColor: AppColors.black.shade100,
         body: SafeArea(
           bottom: false,
           child: SizedBox.expand(
@@ -153,13 +154,13 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 pageControllerCallback: (c) {
                   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                     setState(() {
-                      _pageController = c;
+                      _pageController = c!;
                     });
                   });
                 },
-                itemCount: widget.data.photosUrl.length,
+                itemCount: widget.data!.photosUrl!.length,
                 itemBuilder: (context, index) {
-                  final data = widget.data.photosUrl[index];
+                  final data = widget.data!.photosUrl![index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: ClipRRect(
@@ -177,10 +178,10 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 alignment: Alignment.bottomCenter,
                 child: SmoothPageIndicator(
                   controller: _pageController,
-                  count: widget.data.photosUrl.length,
+                  count: widget.data!.photosUrl!.length,
                   effect: ExpandingDotsEffect(
                     dotHeight: 5,
-                    activeDotColor: Theme.of(context).iconTheme.color,
+                    activeDotColor: Theme.of(context).iconTheme.color!,
                     dotColor: Theme.of(context).colorScheme.primaryContainer,
                   ),
                   onDotClicked: (page) {
@@ -221,7 +222,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                       children: [
                         Expanded(
                           child: Text(
-                            widget.data.title,
+                            widget.data!.title!,
                             maxLines: 1,
                             overflow: TextOverflow.fade,
                             style: TextStyle(
@@ -237,7 +238,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                             Padding(
                               padding: const EdgeInsets.only(left: 3.0),
                               child: Text(
-                                widget.data.shop,
+                                widget.data!.shop!,
                                 style: TextStyle(
                                     fontSize: 12,
                                     height: 1,
@@ -250,7 +251,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                       ],
                     ),
                     Text(
-                      widget.data.brand,
+                      widget.data!.brand!,
                       style: TextStyle(
                           fontSize: 12,
                           height: 1,
@@ -268,12 +269,12 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    widget.data.description,
+                    widget.data!.description!,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2
+                        .bodyText2!
                         .copyWith(fontSize: 12, fontStyle: FontStyle.normal),
                   ),
                 ),
@@ -290,13 +291,13 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            widget.data.rank.oneDigitForRankString,
+                            widget.data!.rank!.oneDigitForRankString,
                             style: TextStyle(
                                 fontSize: 20,
                                 // height: 30,
                                 color: Theme.of(context)
                                     .textTheme
-                                    .bodyText2
+                                    .bodyText2!
                                     .color),
                           ),
                           Expanded(
@@ -333,7 +334,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                     children: [
                                       ClipPath(
                                         clipper: StarRankPainter(
-                                            rank: widget.data.rank,
+                                            rank: widget.data!.rank,
                                             animationController:
                                                 _rankAnimationController,
                                             animate: true),
@@ -380,7 +381,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   fit: BoxFit.fitHeight,
                                   child: Text(
                                       NumberFormat.compact(locale: 'en_US')
-                                          .format(widget.data.purchasesCount))),
+                                          .format(widget.data!.purchasesCount))),
                               Padding(
                                   padding: const EdgeInsets.only(left: 3.0),
                                   child: FittedBox(
@@ -400,7 +401,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                     fit: BoxFit.fitHeight,
                                     child: Text(
                                         NumberFormat.compact(locale: 'en_US')
-                                            .format(widget.data.commentCount))),
+                                            .format(widget.data!.commentCount))),
                                 Padding(
                                     padding: const EdgeInsets.only(left: 3.0),
                                     child: FittedBox(
@@ -421,7 +422,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                     fit: BoxFit.fitHeight,
                                     child: Text(
                                         NumberFormat.compact(locale: 'en_US')
-                                            .format(widget.data.commentCount))),
+                                            .format(widget.data!.commentCount))),
                                 Padding(
                                     padding: const EdgeInsets.only(left: 3.0),
                                     child: FittedBox(
@@ -443,7 +444,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                     fit: BoxFit.fitHeight,
                                     child: Text(
                                         NumberFormat.compact(locale: 'en_US')
-                                            .format(widget.data.commentCount))),
+                                            .format(widget.data!.commentCount))),
                                 Padding(
                                     padding: const EdgeInsets.only(left: 3.0),
                                     child: FittedBox(
@@ -489,15 +490,15 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      widget.data.discountRate == null
+                      widget.data!.discountRate == null
                           ? const SizedBox()
                           : Padding(
                               padding: const EdgeInsets.only(right: 5.0),
                               child: Text(
-                                widget.data.price.twoDigitForMoney,
+                                widget.data!.price!.twoDigitForMoney,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle2
+                                    .subtitle2!
                                     .copyWith(
                                       fontSize: 17,
                                       backgroundColor: AppColors.red.shade300,
@@ -507,9 +508,9 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                             ),
                       Text(
                         discountedCalculate(
-                                widget.data.price, widget.data.discountRate)
+                                widget.data!.price, widget.data!.discountRate)!
                             .twoDigitForMoney,
-                        style: Theme.of(context).textTheme.subtitle2.copyWith(
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
                               fontSize: 17,
                             ),
                       ),
@@ -820,7 +821,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   IconButton(
                     icon: Icon(
                       LineIcons.arrowLeft,
-                      color: widget.palette.dominantColor.bodyTextColor
+                      color: widget.palette!.lightMutedColor!.color
                           .withAlpha(255),
                     ),
                     onPressed: () => Navigator.pop(context),
@@ -846,8 +847,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                 },
                                 child: Icon(
                                   LineIcons.share,
-                                  color: widget
-                                      .palette.dominantColor.bodyTextColor
+                                  color: widget.palette!.lightMutedColor!.color
                                       .withAlpha(255),
                                 ),
                               ),
@@ -872,7 +872,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   color: provider.constainsLike(widget.data)
                                       ? AppColors.red.shade300
                                       : widget
-                                          .palette.dominantColor.bodyTextColor
+                                          .palette!.lightMutedColor!.color
                                           .withAlpha(255),
                                 ),
                               ),
@@ -906,7 +906,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   color: provider.containsItem(widget.data)
                                       ? AppColors.orange.shade300
                                       : widget
-                                          .palette.dominantColor.bodyTextColor
+                                          .palette!.lightMutedColor!.color
                                           .withAlpha(255),
                                 ),
                               ),
@@ -934,7 +934,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   color: provider.containsOrder(widget.data)
                                       ? AppColors.blue.shade200
                                       : widget
-                                          .palette.dominantColor.bodyTextColor
+                                          .palette!.lightMutedColor!.color
                                           .withAlpha(255),
                                 ),
                               ),
@@ -988,7 +988,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   color: provider.containsOrder(widget.data)
                                       ? AppColors.blue.shade200
                                       : widget
-                                          .palette.dominantColor.bodyTextColor
+                                          .palette!.lightMutedColor!.color
                                           .withAlpha(255),
                                 ),
                               ),
@@ -1037,7 +1037,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                           icon: Icon(
                             LineIcons.arrowUp,
                             color: showBackToTop
-                                ? widget.palette.dominantColor.bodyTextColor
+                                ? widget.palette!.lightMutedColor!.color
                                     .withAlpha(255)
                                 : Colors.transparent,
                           )),
@@ -1053,11 +1053,11 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   }
 
   void backToTop() {
-    _customScrollViewController.animateTo(
+    _customScrollViewController!.animateTo(
       0,
       duration: Duration(
           milliseconds:
-              _customScrollViewController.position.pixels.toInt() ~/ 2),
+              _customScrollViewController!.position.pixels.toInt() ~/ 2),
       curve: Curves.easeOutCirc,
     );
   }

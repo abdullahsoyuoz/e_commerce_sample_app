@@ -3,9 +3,9 @@ import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/curves.dart';
 
 class RegisterPainter extends CustomPainter {
-  RegisterPainter({this.animation}) : super(repaint: animation) {
+  RegisterPainter({required this.animation}) : super(repaint: animation) {
     brush = Paint()
-      ..color = AppColors.turquaz.shade100
+      ..color = AppColors.turquaz.shade100.withOpacity(.5)
       ..style = PaintingStyle.fill;
 
     curvedAnimation = CurvedAnimation(
@@ -14,8 +14,8 @@ class RegisterPainter extends CustomPainter {
     );
   }
 
-  Paint brush;
-  Animation<double> curvedAnimation;
+  late Paint brush;
+  Animation<double>? curvedAnimation;
   AnimationController animation;
 
   @override

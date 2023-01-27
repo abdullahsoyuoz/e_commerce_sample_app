@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/Constant/constant.dart';
 
 class AppLanguage {
-  String title;
-  String icon;
-  Locale locale;
+  String? title;
+  String? icon;
+  Locale? locale;
   AppLanguage({
     this.title,
     this.icon,

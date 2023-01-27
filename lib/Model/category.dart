@@ -14,14 +14,14 @@ class Category {
     this.imageUrl,
   });
 
-   int categoryId; // nullable
-   int id;
-   String title;
-   String description;
- IconData icon;
-   MaterialColor color;
- List<Category> subCategory;
-   String imageUrl;
+   int? categoryId; // nullable
+   int? id;
+   String? title;
+   String? description;
+ IconData? icon;
+   MaterialColor? color;
+ List<Category>? subCategory;
+   String? imageUrl;
 
   factory Category.fromJson(Map<String, dynamic> item) {
     return Category(
@@ -41,11 +41,11 @@ class Category {
 
   @override
   String toString() {
-    return title;
+    return title!;
   }
 }
 
-IconData getIcon(int category, int index) {
+IconData getIcon(int? category, int? index) {
   if (category == 0 && index == 0) return FontAwesomeIcons.tv;
   if (category == 0 && index == 1) return FontAwesomeIcons.gamepad;
   if (category == 0 && index == 2) return FontAwesomeIcons.clapperboard;
@@ -73,7 +73,7 @@ IconData getIcon(int category, int index) {
   return FontAwesomeIcons.question;
 }
 
-MaterialColor getCategoryColor(int category) {
+MaterialColor getCategoryColor(int? category) {
   if (category == 0) return AppColors.turquaz;
   if (category == 1) return AppColors.red;
   if (category == 2) return AppColors.green;
@@ -91,7 +91,7 @@ String getCategoryTitle(int index) {
   return '';
 }
 
-String getEnglishTitle(int category, int index) {
+String getEnglishTitle(int? category, int? index) {
   if (category == 0 && index == 0) return 'Technology';
   if (category == 0 && index == 1) return 'Gaming';
   if (category == 0 && index == 2) return 'Movie';

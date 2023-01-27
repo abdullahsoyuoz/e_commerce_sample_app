@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, library_private_types_in_public_api
 
 import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -31,7 +31,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:swipe/swipe.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,9 +40,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, RestorationMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  AnimationController _animationController;
-  PageController _pageController;
-  ScrollController _listViewController;
+  AnimationController? _animationController;
+  PageController? _pageController;
+  ScrollController? _listViewController;
   final RestorableInt currentPage = RestorableInt(0);
 
   @override
@@ -58,9 +58,9 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
-    _animationController.dispose();
-    _listViewController.dispose();
-    _pageController.dispose();
+    _animationController!.dispose();
+    _listViewController!.dispose();
+    _pageController!.dispose();
     super.dispose();
   }
 
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage>
   String get restorationId => 'flowPage';
 
   @override
-  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(currentPage, 'currentPage');
   }
 
@@ -107,12 +107,12 @@ class _HomePageState extends State<HomePage>
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: Swipe(
                   onSwipeRight: () {
-                    _pageController.previousPage(
+                    _pageController!.previousPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.ease);
                   },
                   onSwipeLeft: () {
-                    _pageController.nextPage(
+                    _pageController!.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.ease);
                   },
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage>
                                     )),
                               ));
                             }
-                            if (!snapshot.hasData || snapshot.data.isEmpty) {
+                            if (!snapshot.hasData || snapshot.data!.isEmpty) {
                               return const SizedBox.expand(
                                   child: Center(
                                 child: Text(
@@ -159,10 +159,10 @@ class _HomePageState extends State<HomePage>
                                   bottom: 100,
                                 ),
                                 physics: const BouncingScrollPhysics(),
-                                itemCount: snapshot.data.length,
+                                itemCount: snapshot.data!.length,
                                 itemExtent: context.width * 0.5,
                                 itemBuilder: (context, index) {
-                                  return FlowWidget(data: snapshot.data[index]);
+                                  return FlowWidget(data: snapshot.data![index]);
                                 },
                               );
                             }
@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage>
                 elevation: 0,
                 backgroundColor: Theme.of(context)
                     .appBarTheme
-                    .backgroundColor
+                    .backgroundColor!
                     .withOpacity(0.5),
                 automaticallyImplyLeading: false,
                 title: Row(
@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage>
                               : CrossFadeState.showSecond,
                           firstChild: Lottie.asset(
                             Provider.of<ThemeChanger>(context, listen: false)
-                                    .isDark()
+                                    .isDark()!
                                 ? lottieSpinnerWhite
                                 : lottieSpinnerPurple,
                             height: 120,
@@ -258,13 +258,13 @@ class _HomePageState extends State<HomePage>
                                                 .map(
                                                   (title) => TypewriterAnimatedText(
                                                       languageConverter(
-                                                          context, title),
+                                                          context, title)!,
                                                       cursor: '|',
                                                       textAlign: TextAlign.end,
                                                       textStyle: Theme.of(
                                                               context)
                                                           .textTheme
-                                                          .bodyText2
+                                                          .bodyText2!
                                                           .copyWith(
                                                               color: Theme.of(
                                                                       context)
@@ -304,7 +304,7 @@ class _HomePageState extends State<HomePage>
                       icon: AdvancedAvatar(
                         size: 50,
                         child: Image.network(
-                          loginUser.photoUrl,
+                          loginUser.photoUrl!,
                           loadingBuilder: loadingIndicator,
                           width: 50,
                           fit: BoxFit.cover,
@@ -335,7 +335,7 @@ class _HomePageState extends State<HomePage>
                           final data = flowFilter[index];
                           return GestureDetector(
                             onTap: () {
-                              _pageController.animateToPage(index,
+                              _pageController!.animateToPage(index,
                                   duration: const Duration(milliseconds: 300),
                                   curve: Curves.ease);
                             },
@@ -348,7 +348,7 @@ class _HomePageState extends State<HomePage>
                                       width: 2,
                                       color: index == currentPage.value
                                           ? getFilterIndicatorColor(
-                                              index, context)
+                                              index, context)!
                                           : Colors.transparent,
                                     )),
                                 duration: const Duration(milliseconds: 300),
@@ -365,7 +365,7 @@ class _HomePageState extends State<HomePage>
                                         alignment: Alignment.center,
                                         child: Text(
                                           languageConverter(
-                                              context, data.toString()),
+                                              context, data.toString())!,
                                           style: TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w100,
@@ -395,12 +395,12 @@ class _HomePageState extends State<HomePage>
   }
 
   void quickMenuToggle() {
-    if (!_animationController.isAnimating) {
-      if (_animationController.value == 0) {
-        _animationController.forward();
+    if (!_animationController!.isAnimating) {
+      if (_animationController!.value == 0) {
+        _animationController!.forward();
       }
-      if (_animationController.value == 1) {
-        _animationController.reverse();
+      if (_animationController!.value == 1) {
+        _animationController!.reverse();
       }
     }
   }

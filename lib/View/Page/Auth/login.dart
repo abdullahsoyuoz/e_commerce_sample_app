@@ -1,5 +1,8 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,8 +22,8 @@ import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 
 class LoginPage extends StatefulWidget {
-  final VoidCallback onLoginPressed;
-  const LoginPage({Key key, this.onLoginPressed}) : super(key: key);
+  final VoidCallback? onLoginPressed;
+  const LoginPage({Key? key, this.onLoginPressed}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -29,13 +32,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
-  TextEditingController _emailController;
-  TextEditingController _passwordController;
+  TextEditingController? _emailController;
+  TextEditingController? _passwordController;
 
-  FocusNode _emailFocus;
-  FocusNode _passwordFocus;
+  FocusNode? _emailFocus;
+  FocusNode? _passwordFocus;
 
   @override
   void initState() {
@@ -52,8 +55,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     _emailFocus = FocusNode();
     _passwordFocus = FocusNode();
     // LISTENERS
-    _emailController.addListener(() => _validation());
-    _passwordController.addListener(() => _validation());
+    _emailController!.addListener(() => _validation());
+    _passwordController!.addListener(() => _validation());
 
     super.initState();
   }
@@ -106,7 +109,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 minWidth: context.width * 0.5,
                               ),
                               child: Text(
-                                languageConverter(context, 'login')
+                                languageConverter(context, 'login')!
                                     .toUpperCase(),
                                 textAlign: TextAlign.start,
                                 style: getAccentBoldStyle(),
@@ -186,7 +189,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                             // widget.onLoginPressed.call();
                           },
                           child: Text(
-                              languageConverter(context, 'forgetPassword'),
+                              languageConverter(context, 'forgetPassword')!,
                               textAlign: TextAlign.center,
                               style: getSpacingStyle()),
                         ),
@@ -195,10 +198,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         padding: const EdgeInsets.only(top: 20.0),
                         child: BouncingWidget(
                           onPressed: () {
-                            widget.onLoginPressed.call();
+                            widget.onLoginPressed!.call();
                           },
                           child: Text(
-                              languageConverter(context, 'notYetRegister'),
+                              languageConverter(context, 'notYetRegister')!,
                               textAlign: TextAlign.center,
                               style: getSpacingStyle()),
                         ),
@@ -238,7 +241,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         decoration: getAuthInputDecoration(
                             languageConverter(context, 'yourEmail'),
                             Provider.of<ThemeChanger>(context, listen: false)
-                                .isDark()),
+                                .isDark()!),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -247,7 +250,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string.isEmail()) {
+                          if (!string!.isEmail()) {
                             return languageConverter(
                                 context, 'yourEmailValidation');
                           }
@@ -282,7 +285,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         decoration: getAuthInputDecoration(
                             languageConverter(context, 'yourPassword'),
                             Provider.of<ThemeChanger>(context, listen: false)
-                                .isDark()),
+                                .isDark()!),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         maxLines: 1,
@@ -292,7 +295,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string.isPasswordEasy()) {
+                          if (!string!.isPasswordEasy()) {
                             return languageConverter(
                                 context, 'yourPasswordValidation');
                           }
@@ -310,12 +313,17 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
           flex: 1,
           child: BouncingWidget(
             onPressed: () {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState!.validate()) {
                 FocusScope.of(context).unfocus();
                 _animationController.animateTo(3).whenComplete(() {
                   Timer(const Duration(milliseconds: 300), () {
-                    Navigator.push(
-                        context, fadeRouteBuilder(context, const HomePage()));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                      (route) => false,
+                    );
                   });
                 });
               } else {
@@ -323,8 +331,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     _animationController.animateBack(value.toDouble()));
               }
               Timer(const Duration(milliseconds: 1000), () {
-                Navigator.push(
-                    context, fadeRouteBuilder(context, const HomePage()));
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                  (route) => false,
+                );
               });
             },
             child: SizedBox.expand(
@@ -338,9 +351,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     ),
                     child: FittedBox(
                         child: Text(
-                      languageConverter(context, 'submit').toUpperCase(),
-                      style: getAccentStyle()
-                    )),
+                            languageConverter(context, 'submit')!.toUpperCase(),
+                            style: getAccentStyle())),
                   ),
                 ),
               ),
@@ -352,12 +364,12 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   }
 
   Future<int> _validation() async {
-    if (_emailController.text.isEmail() &&
-        _passwordController.text.isPasswordEasy()) {
+    if (_emailController!.text.isEmail() &&
+        _passwordController!.text.isPasswordEasy()) {
       _animationController.animateTo(2);
       return 2;
     }
-    if (_emailController.text.isEmail()) {
+    if (_emailController!.text.isEmail()) {
       _animationController.animateTo(1);
       return 1;
     } else {

@@ -1,12 +1,12 @@
 class Shop {
-   int id; // nullable
-   String name;
-   String logoUrl;
-   String email;
-   String websiteUrl;
-   String city;
- String country;
-   String contactNumber;
+   int? id; // nullable
+   String? name;
+   String? logoUrl;
+   String? email;
+   String? websiteUrl;
+   String? city;
+ String? country;
+   String? contactNumber;
 
   Shop({
     this.id,

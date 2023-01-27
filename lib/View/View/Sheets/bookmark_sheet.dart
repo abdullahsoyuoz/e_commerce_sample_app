@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:animate_do/animate_do.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +16,10 @@ import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 import 'package:sepet_demo/View/View/Picker/color_picker.dart';
 import 'package:sepet_demo/View/View/Picker/icon_picker.dart';
+// import 'package:sepet_demo/View/View/Picker/icon_picker.dart';
 
 Future<void> showFlexibleBookmarkSheet(
-    BuildContext context, Product data) async {
+    BuildContext context, Product? data) async {
   showFlexibleBottomSheet<void>(
     context: context,
     minHeight: 0,
@@ -38,14 +41,14 @@ Future<void> showFlexibleBookmarkSheet(
 }
 
 class _BookmarkSheet extends StatefulWidget {
-  final ScrollController scrollController;
-  final double bottomSheetOffset;
-  final Product productData;
+  final ScrollController? scrollController;
+  final double? bottomSheetOffset;
+  final Product? productData;
 
   const _BookmarkSheet({
     this.scrollController,
      this.bottomSheetOffset,
-    Key key,
+    Key? key,
      this.productData,
   }) : super(key: key);
 
@@ -86,10 +89,10 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    languageConverter(context, "myList"),
+                    languageConverter(context, "myList")!,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2
+                        .bodyText2!
                         .copyWith(fontSize: 17,),
                   ),
                   Row(
@@ -113,9 +116,9 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
               return ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: value.getList().length,
+                itemCount: value.getList()!.length,
                 itemBuilder: (context, index) {
-                  final data = value.getList()[index];
+                  final data = value.getList()![index];
                   return ListItem(
                       data: data,
                       index: index,
@@ -135,11 +138,11 @@ class _BookmarkSheetState extends State<_BookmarkSheet> {
 }
 
 class ListItem extends StatefulWidget {
-  final MyList data;
-  final int index;
-  final Product productData;
+  final MyList? data;
+  final int? index;
+  final Product? productData;
   const ListItem({
-    Key key,
+    Key? key,
      this.data,
      this.index,
      this.productData,
@@ -151,7 +154,7 @@ class ListItem extends StatefulWidget {
 
 class _ListItemState extends State<ListItem>
     with SingleTickerProviderStateMixin {
-   AnimationController _bookmarkAnimationController;
+   late AnimationController _bookmarkAnimationController;
 
   @override
   void initState() {
@@ -172,13 +175,13 @@ class _ListItemState extends State<ListItem>
   Widget build(BuildContext context) {
     return Consumer<MyListsProvider>(builder: (context, provider, _) {
       return Slidable(
-        key: LabeledGlobalKey(widget.data.products.hashCode.toString()),
+        key: LabeledGlobalKey(widget.data!.products.hashCode.toString()),
         endActionPane: ActionPane(
           motion: const DrawerMotion(),
           children: [
             SlidableAction(
               onPressed: (context) {
-                if (!widget.data.isConst) {
+                if (!widget.data!.isConst) {
                   provider.removeList(widget.index);
                 }
               },
@@ -192,13 +195,13 @@ class _ListItemState extends State<ListItem>
         ),
         child: ListTile(
           title: Text(
-            widget.data.isConst ? languageConverter(context, widget.data.title) + ' (${widget.data.products.length ?? 0})' : widget.data.title + ' (${widget.data.products.length ?? 0})',
+            widget.data!.isConst ? languageConverter(context, widget.data!.title)! + ' (${widget.data!.products!.length})' : widget.data!.title! + ' (${widget.data!.products!.length})',
             style: Theme.of(context).textTheme.bodyText2,
           ),
-          leading: widget.data.iconData != null
+          leading: widget.data!.iconData != null
               ? LineIcon(
-                  widget.data.iconData,
-                  color: widget.data.color ?? Theme.of(context).iconTheme.color,
+                  widget.data!.iconData!,
+                  color: widget.data!.color ?? Theme.of(context).iconTheme.color,
                 )
               : const SizedBox(),
           trailing: IconButton(
@@ -213,18 +216,18 @@ class _ListItemState extends State<ListItem>
               child: LineIcon(
                 LineIcons.bookmark,
                 // ignore: iterable_contains_unrelated_type
-                color: provider.myList[widget.index].products == null
+                color: provider.myList![widget.index!].products == null
                     ? Theme.of(context).iconTheme.color
-                    : !provider.myList[widget.index].products
+                    : !provider.myList![widget.index!].products!
                             .contains(widget.productData)
                         ? Theme.of(context).iconTheme.color
                         : AppColors.orange,
               ),
             ),
             onPressed: () {
-              if (provider.myList[widget.index].products == null) {
+              if (provider.myList![widget.index!].products == null) {
                 provider
-                    .addItem(widget.productData, widget.index)
+                    .addItem(widget.productData, widget.index!)
                     .whenComplete(() {
                   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                     _bookmarkAnimationController.forward().whenComplete(() {
@@ -233,12 +236,12 @@ class _ListItemState extends State<ListItem>
                   });
                 });
               }
-              if (provider.myList[widget.index].products
+              if (provider.myList![widget.index!].products!
                   .contains(widget.productData)) {
-                provider.removeItem(widget.productData, widget.index);
+                provider.removeItem(widget.productData, widget.index!);
               } else {
                 provider
-                    .addItem(widget.productData, widget.index)
+                    .addItem(widget.productData, widget.index!)
                     .whenComplete(() {
                   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                     _bookmarkAnimationController.forward().whenComplete(() {
@@ -276,13 +279,13 @@ void showFlexibleNewBookmarkSheet(BuildContext context) {
 }
 
 class _NewBookmarkSheet extends StatefulWidget {
-  final ScrollController scrollController;
-  final double bottomSheetOffset;
+  final ScrollController? scrollController;
+  final double? bottomSheetOffset;
 
   const _NewBookmarkSheet({
      this.scrollController,
      this.bottomSheetOffset,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -291,8 +294,8 @@ class _NewBookmarkSheet extends StatefulWidget {
 
 class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
   final TextEditingController _title = TextEditingController();
-  IconData pickedIconData;
-  Color pickedColor;
+  IconData? pickedIconData;
+  Color? pickedColor;
 
   @override
   Widget build(BuildContext context) {
@@ -317,10 +320,10 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      languageConverter(context, "newList"),
+                      languageConverter(context, "newList")!,
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText2
+                          .bodyText2!
                           .copyWith(fontSize: 17),
                     ),
                     Row(
@@ -361,7 +364,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                             size: 40,
                           )
                         : LineIcon(
-                            pickedIconData,
+                            pickedIconData!,
                             size: 40,
                             color: pickedColor ??
                                 Theme.of(context).iconTheme.color,
@@ -390,13 +393,13 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                     children: [
                       OutlinedButton(
                           onPressed: () {
-                            iconPicker(context).then((value) {
-                              pickedIconData = value;
-                            }).whenComplete(() {
-                              setState(() {});
-                            });
+                            // iconPicker(context).then((value) {
+                            //   pickedIconData = value;
+                            // }).whenComplete(() {
+                            //   setState(() {});
+                            // });
                           },
-                          child: Text(languageConverter(context, "listIcon"))),
+                          child: Text(languageConverter(context, "listIcon")!)),
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
                         child: OutlinedButton(
@@ -407,7 +410,7 @@ class _NewBookmarkSheetState extends State<_NewBookmarkSheet> {
                                 setState(() {});
                               });
                             },
-                            child: Text(languageConverter(context, "listColor"))),
+                            child: Text(languageConverter(context, "listColor")!)),
                       )
                     ],
                   )),

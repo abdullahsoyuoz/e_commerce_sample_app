@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -37,9 +39,9 @@ Future<void> showWaitDialog(BuildContext context,
 enum CustomProgressIndicatorType { bounce, angle, clock }
 
 class CustomProgressIndicator extends StatefulWidget {
-  final String title;
-  final CustomProgressIndicatorType type;
-  const CustomProgressIndicator({Key key, this.title, this.type})
+  final String? title;
+  final CustomProgressIndicatorType? type;
+  const CustomProgressIndicator({Key? key, this.title, this.type})
       : super(key: key);
 
   @override
@@ -50,7 +52,7 @@ class CustomProgressIndicator extends StatefulWidget {
 class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
@@ -85,7 +87,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
             painter: ProgressPainter(_animationController, type: widget.type),
             child: Center(
               child: Text(
-                widget.title.toUpperCase(),
+                widget.title!.toUpperCase(),
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
@@ -105,8 +107,8 @@ class ProgressPainter extends CustomPainter {
     );
   }
    Animation<double> animation;
-   Animation curve;
-   CustomProgressIndicatorType type;
+   late Animation curve;
+   CustomProgressIndicatorType? type;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -129,10 +131,10 @@ class ProgressPainter extends CustomPainter {
   void bouncePaint(Canvas canvas, Size size) {
     canvas.drawArc(
         Rect.fromLTRB(
-          lerpDouble(size.width * .45, -size.width, curve.value),
-          lerpDouble(size.width * .45, -size.width, curve.value),
-          lerpDouble(size.width * 0.55, size.width * 2, curve.value),
-          lerpDouble(size.width * 0.55, size.width * 2, curve.value),
+          lerpDouble(size.width * .45, -size.width, curve.value)!,
+          lerpDouble(size.width * .45, -size.width, curve.value)!,
+          lerpDouble(size.width * 0.55, size.width * 2, curve.value)!,
+          lerpDouble(size.width * 0.55, size.width * 2, curve.value)!,
         ),
         math.pi * 1.5,
         math.pi * 2,
@@ -152,7 +154,7 @@ class ProgressPainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.fill
         ..color = Color.lerp(
-            AppColors.purple.shade200, AppColors.purple.shade200, curve.value)
+            AppColors.purple.shade200, AppColors.purple.shade200, curve.value)!
         ..strokeWidth = 20
         ..strokeCap = StrokeCap.round,
     );
@@ -163,7 +165,7 @@ class ProgressPainter extends CustomPainter {
       Rect.fromPoints(Offset(-size.width, -size.height),
           Offset(size.width * 2, size.height * 2)),
       math.pi * 1.5,
-      lerpDouble(-math.pi * 2, math.pi * 2, curve.value),
+      lerpDouble(-math.pi * 2, math.pi * 2, curve.value)!,
       true,
       Paint()
         ..style = PaintingStyle.fill

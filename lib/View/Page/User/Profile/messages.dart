@@ -1,7 +1,9 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class MessagesPage extends StatefulWidget {
-  const MessagesPage({ Key key }) : super(key: key);
+  const MessagesPage({ Key? key }) : super(key: key);
 
   @override
   _MessagesPageState createState() => _MessagesPageState();

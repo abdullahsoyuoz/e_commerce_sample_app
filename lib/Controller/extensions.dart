@@ -12,19 +12,19 @@ extension GetSize on BuildContext {
 }
 
 extension AddWhitespace on String {
-  String get addWhitespace => ' ' + this + ' ';
+  String get addWhitespace => ' ${this} ';
 }
 
 extension TwoDigit on double {
-  String get twoDigitForMoney => ' ' + toStringAsFixed(2) + ' ' + NumberFormat.simpleCurrency(locale: 'TR').currencySymbol + ' ';
+  String get twoDigitForMoney => ' ${toStringAsFixed(2)} ${NumberFormat.simpleCurrency(locale: 'TR').currencySymbol} ';
 }
 
 extension OneDigit on double {
-  String get oneDigitForRankString => toString()[0] + '.' + toString()[2];
+  String get oneDigitForRankString => '${toString()[0]}.${toString()[2]}';
 }
 
 extension AddParanthesis on String {
-  String get addParanthesis => '(' + toString() + ')';
+  String get addParanthesis => '(${toString()})';
 }
 
 extension RankRoundToHalf on double {
@@ -37,11 +37,11 @@ extension RankRoundToHalf on double {
 
 // OFFSIDE
 
-double discountedCalculate(double price, int rate) {
+double? discountedCalculate(double? price, int? rate) {
   if (rate == null) {
     return price;
   } else {
-    return (price - ((price * rate) / 100));
+    return (price! - ((price * rate) / 100));
   }
 }
 
@@ -49,8 +49,8 @@ double safeArea(
   BuildContext context, {
   double appBarHeight = 70,
   double extra = 0,
-  double paddingBottom,
-  double paddingTop,
+  double? paddingBottom,
+  double? paddingTop,
 }) =>
     (context.height -
         (paddingTop ?? context.padding.top) -

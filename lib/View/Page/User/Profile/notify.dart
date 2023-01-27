@@ -1,7 +1,9 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class NotifyPage extends StatefulWidget {
-  const NotifyPage({ Key key }) : super(key: key);
+  const NotifyPage({ Key? key }) : super(key: key);
 
   @override
   _NotifyPageState createState() => _NotifyPageState();

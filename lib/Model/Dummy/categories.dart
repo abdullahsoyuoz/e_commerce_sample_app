@@ -17,6 +17,6 @@ Future<void> fetchCategories() async {
       categoryList.add(catItem);
     }
   } on Exception catch (e) {
-    debugPrint('categories fetching error: ' + e.toString());
+    debugPrint('categories fetching error: $e');
   }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, library_private_types_in_public_api
 
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -11,14 +11,14 @@ class StackedCarousel extends StatefulWidget {
   bool verticalScrolling;
   double padding;
   double incrementalVerticalPadding;
-  Function(int index) onPageChanged;
-  Function(PageController pageController) pageControllerCallback;
+  Function(int index)? onPageChanged;
+  Function(PageController? pageController)? pageControllerCallback;
   IndexedWidgetBuilder itemBuilder;
 
   StackedCarousel({
-    Key key,
-    @required this.itemCount,
-    @required this.itemBuilder,
+    Key? key,
+    required this.itemCount,
+    required this.itemBuilder,
     this.itemAspectRatio = 4 / 5,
     this.aspectRatio = 1,
     this.reverse = false,
@@ -28,27 +28,26 @@ class StackedCarousel extends StatefulWidget {
     this.onPageChanged,
     this.pageControllerCallback,
   })  : assert(itemAspectRatio >= 0.45),
-        assert(itemCount != null && itemCount > 0),
-        assert(itemBuilder != null),
+        assert(itemCount > 0),
         super(key: key);
   @override
   StackedCarouselState createState() => StackedCarouselState();
 }
 
 class StackedCarouselState extends State<StackedCarousel> {
-  PageController pageController;
-  double currentPageIndex = 0.0;
+  PageController? pageController;
+  double? currentPageIndex = 0.0;
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController(initialPage: currentPageIndex.toInt());
-    pageController.addListener(() {
+    pageController = PageController(initialPage: currentPageIndex!.toInt());
+    pageController!.addListener(() {
       setState(() {
-        currentPageIndex = pageController.page;
+        currentPageIndex = pageController!.page;
       });
     });
-    widget.pageControllerCallback.call(pageController);
+    widget.pageControllerCallback!.call(pageController);
   }
 
   @override
@@ -81,7 +80,7 @@ class StackedCarouselState extends State<StackedCarousel> {
                   widget.verticalScrolling ? Axis.vertical : Axis.horizontal,
               onPageChanged: (value) {
                 if (widget.onPageChanged != null) {
-                  widget.onPageChanged(value);
+                  widget.onPageChanged!(value);
                 }
               },
               itemCount: widget.itemCount,
@@ -97,7 +96,7 @@ class StackedCarouselState extends State<StackedCarousel> {
 }
 
 class CustomWidget extends StatefulWidget {
-  double currentPageIndex;
+  double? currentPageIndex;
   int itemCount;
   IndexedWidgetBuilder itemBuilder;
   bool reverse;
@@ -117,7 +116,7 @@ class CustomWidget extends StatefulWidget {
       this.aspectRatio,
       this.itemAspectRatio,
       this.verticalScrolling,
-      {Key key})
+      {Key? key})
       : super(key: key);
   @override
   _CustomWidgetState createState() => _CustomWidgetState();
@@ -143,7 +142,7 @@ class _CustomWidgetState extends State<CustomWidget> {
 
           for (var index = 0; index < widget.itemCount; index++) {
             double end = 0;
-            double currentPosition = -(widget.currentPageIndex - index);
+            double currentPosition = -(widget.currentPageIndex! - index);
 
             if (currentPosition <= 0) {
               end = padding +

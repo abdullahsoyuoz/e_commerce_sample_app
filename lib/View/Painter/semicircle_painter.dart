@@ -16,7 +16,7 @@ class SemiCirclePainter extends CustomPainter {
     Paint paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
-      ..color = Provider.of<ThemeChanger>(context, listen: false).isDark()
+      ..color = Provider.of<ThemeChanger>(context, listen: false).isDark()!
           ? Colors.white
           : Colors.black;
 
@@ -34,7 +34,7 @@ class SemiCirclePainter extends CustomPainter {
     Paint paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
-      ..color = Provider.of<ThemeChanger>(context, listen: false).isDark()
+      ..color = Provider.of<ThemeChanger>(context, listen: false).isDark()!
           ? Colors.white
           : Colors.black;
 

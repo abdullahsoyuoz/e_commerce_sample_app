@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 
 List<BoxShadow> appShadow(BuildContext context) =>
-    Provider.of<ThemeChanger>(context, listen: false).isDark()
+    Provider.of<ThemeChanger>(context, listen: false).isDark()!
         ? []
         : [
             BoxShadow(

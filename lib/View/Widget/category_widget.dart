@@ -5,8 +5,8 @@ import 'package:sepet_demo/View/Clipper/category_widget_clipper.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 
 class CategoryWidget extends StatefulWidget {
-  final Category data;
-  const CategoryWidget({Key key, this.data}) : super(key: key);
+  final Category? data;
+  const CategoryWidget({Key? key, this.data}) : super(key: key);
 
   @override
   State<CategoryWidget> createState() => _CategoryWidgetState();
@@ -36,15 +36,15 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-              widget.data.color.shade300,
-              widget.data.color.shade300,
+              widget.data!.color!.shade300,
+              widget.data!.color!.shade300,
             ])),
           ),
           ClipRect(
             child: ClipPath(
               clipper: CategoryBlurClipper(),
               child: Image.network(
-                widget.data.imageUrl,
+                widget.data!.imageUrl!,
                 fit: BoxFit.cover,
               ),
             ),
@@ -54,11 +54,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             child: Padding(
               padding: const EdgeInsets.all(3.0),
               child: Text(
-                widget.data.title,
+                widget.data!.title!,
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle2
+                    .subtitle2!
                     .copyWith(fontSize: 15),
               ),
             ),

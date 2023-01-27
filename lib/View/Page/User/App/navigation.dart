@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
@@ -13,11 +15,11 @@ import 'package:sepet_demo/Model/category.dart';
 import 'package:sepet_demo/View/Style/decorations.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
-import 'package:sepet_demo/View/Widget/menu_item.dart';
+import 'package:sepet_demo/View/Widget/menu_item.dart' as menu;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigationPage extends StatefulWidget {
-  const NavigationPage({Key key}) : super(key: key);
+  const NavigationPage({Key? key}) : super(key: key);
 
   @override
   _NavigationPageState createState() => _NavigationPageState();
@@ -26,8 +28,8 @@ class NavigationPage extends StatefulWidget {
 class _NavigationPageState extends State<NavigationPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  ScrollController _scrollController;
-  AnimationController _openAnimationController;
+  ScrollController? _scrollController;
+  late AnimationController _openAnimationController;
   // DUMMY
   bool notify = true;
 
@@ -44,7 +46,7 @@ class _NavigationPageState extends State<NavigationPage>
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController!.dispose();
     _openAnimationController.dispose();
     super.dispose();
   }
@@ -121,7 +123,7 @@ class _NavigationPageState extends State<NavigationPage>
               elevation: 0,
               backgroundColor: Theme.of(context)
                   .appBarTheme
-                  .backgroundColor
+                  .backgroundColor!
                   .withOpacity(0.1),
               automaticallyImplyLeading: false,
               title: Row(
@@ -239,10 +241,10 @@ class _NavigationPageState extends State<NavigationPage>
                 startAfter: const Duration(seconds: 1),
                 startPadding: 0.1,
                 blankSpace: context.width * 0.2,
-                text: languageConverter(context, data.title),
+                text: languageConverter(context, data.title)!,
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText2
+                    .bodyText2!
                     .copyWith(fontSize: 17),
               ),
             ),
@@ -261,7 +263,7 @@ class _NavigationPageState extends State<NavigationPage>
       itemCount: settingsMenuItems.length,
       itemBuilder: (context, index) {
         final data = settingsMenuItems[index];
-        return MenuItem(data: data);
+        return menu.MenuItem(data: data);
       },
     );
   }
@@ -275,7 +277,7 @@ class _NavigationPageState extends State<NavigationPage>
       itemCount: supportMenuItems.length,
       itemBuilder: (c, i) {
         final data = supportMenuItems[i];
-        return MenuItem(data: data);
+        return menu.MenuItem(data: data);
       },
     );
   }
@@ -300,15 +302,15 @@ class _NavigationPageState extends State<NavigationPage>
                   duration: const Duration(milliseconds: 300),
                   onPressed: () {
                     SharedPreferences.getInstance().then((value) {
-                      value.setString("lang", data.locale.languageCode);
-                      AppLocalizations.of(context).load();
+                      value.setString("lang", data.locale!.languageCode);
+                      AppLocalizations.of(context)!.load();
                       setState(() {});
                     });
                   },
                   child: SizedBox(
                     width: 50,
                     height: 50,
-                    child: Image.asset(data.icon),
+                    child: Image.asset(data.icon!),
                   ),
                 ),
               ),
@@ -317,10 +319,10 @@ class _NavigationPageState extends State<NavigationPage>
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Text(
-                    data.title,
+                    data.title!,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2
+                        .bodyText2!
                         .copyWith(fontSize: 21),
                   ),
                 ),
@@ -357,20 +359,20 @@ class _NavigationPageState extends State<NavigationPage>
 }
 
 class TitleWidget extends StatelessWidget {
-  final String title;
-  const TitleWidget({Key key, this.title}) : super(key: key);
+  final String? title;
+  const TitleWidget({Key? key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Text(
-        title,
-        style: Theme.of(context).textTheme.bodyText2.copyWith(
+        title!,
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(
             fontSize: 35,
             foreground: Paint()
               ..style = PaintingStyle.fill
-              ..color = Theme.of(context).iconTheme.color),
+              ..color = Theme.of(context).iconTheme.color!),
       ),
     );
   }

@@ -1,3 +1,6 @@
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -8,7 +11,7 @@ import 'package:sepet_demo/View/Style/route_builder.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -17,7 +20,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-   AnimationController animationController;
+  late AnimationController animationController;
 
   @override
   void initState() {
@@ -26,18 +29,15 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
       duration: const Duration(seconds: 3),
     );
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       animationController.forward();
     });
     Future.delayed(
       const Duration(seconds: 3),
-      () => Navigator.push(
+      () => Navigator.pushAndRemoveUntil(
         context,
-        fadeRouteBuilder(
-          context,
-          const GettingStarted(),
-          barrierColor: AppColors.red,
-        ),
+        CupertinoPageRoute(builder: (context) => const GettingStarted()),
+        (route) => false,
       ),
     );
   }
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: SizedBox.expand(
         child: Stack(
           children: [
@@ -61,10 +61,13 @@ class _SplashScreenState extends State<SplashScreen>
                 painter: SplashPainter(animation: animationController),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                animationController.reset();
-                animationController.forward();
+            AnimatedBuilder(
+              animation: animationController,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: animationController.value,
+                  child: child,
+                );
               },
               child: Center(
                   child: LogoWidget(
@@ -72,14 +75,32 @@ class _SplashScreenState extends State<SplashScreen>
                 size: context.width * 0.5,
               )),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 50),
-                child: Image.asset(
-                  logoSyz,
-                  color: Colors.white,
-                  width: context.width * 0.2,
+            AnimatedBuilder(
+              animation: animationController,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: animationController.value,
+                  child: child,
+                );
+              },
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Produced by ',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Image.asset(
+                        logoSyz,
+                        color: Colors.white,
+                        width: context.width * 0.15,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

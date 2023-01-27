@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/Provider/flows_provider.dart';
 import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
@@ -46,7 +47,7 @@ Future run() async {
 }
 
 class AppStarter extends StatefulWidget {
-  const AppStarter({Key key}) : super(key: key);
+  const AppStarter({Key? key}) : super(key: key);
 
   // void setStatus() async {
   //   await StatusBarControl.setTranslucent(true);
@@ -76,17 +77,14 @@ class _AppStarterState extends State<AppStarter> {
           return MaterialApp(
             title: 'Sepet',
             // locale: Locale('en', 'US'),
-            supportedLocales: const [
-              Locale('en', 'US'),
-              Locale('tr', 'TR'),
-            ],
+            supportedLocales: supportedLanguages,
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            theme: value.isDark() ? appDarkTheme : appLightTheme,
+            theme: value.isDark()! ? appDarkTheme : appLightTheme,
             themeMode: SchedulerBinding.instance.window.platformBrightness ==
                     Brightness.light
                 ? ThemeMode.light

@@ -16,16 +16,16 @@ class FlowEntity {
     this.targetString,
   });
 
-   String title;
-   String description;
-   String imageUrl;
- IconData icon;
-   Color color;
- FlowType type;
-   String typeString;
-   Product targetProduct;
-   List<Product> targetProducts;
-   String targetString;
+   String? title;
+   String? description;
+   String? imageUrl;
+ IconData? icon;
+   Color? color;
+ FlowType? type;
+   String? typeString;
+   Product? targetProduct;
+   List<Product?>? targetProducts;
+   String? targetString;
 }
 
 enum FlowType {

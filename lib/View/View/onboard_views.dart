@@ -28,10 +28,10 @@ List<Widget> onBoardList = [
 ];
 
 class OnboardWidget extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String description;
-  const OnboardWidget({Key key, this.icon, this.title, this.description})
+  final IconData? icon;
+  final String? title;
+  final String? description;
+  const OnboardWidget({Key? key, this.icon, this.title, this.description})
       : super(key: key);
 
   @override
@@ -59,7 +59,7 @@ class OnboardWidget extends StatelessWidget {
                 child: FittedBox(
                   alignment: Alignment.center,
                   child: Text(
-                    languageConverter(context, title).toUpperCase(),
+                    languageConverter(context, title)!.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.white,
@@ -77,7 +77,7 @@ class OnboardWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 50.0),
               child: FittedBox(
                 child: Text(
-                  languageConverter(context, description).toUpperCase(),
+                  languageConverter(context, description)!.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,

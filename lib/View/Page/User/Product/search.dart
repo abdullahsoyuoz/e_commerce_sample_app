@@ -1,10 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key key}) : super(key: key);
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -13,8 +15,8 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController _searchController;
-   FocusNode _searchNode;
+  TextEditingController? _searchController;
+   FocusNode? _searchNode;
 
   @override
   void initState() {
@@ -22,7 +24,7 @@ class _SearchPageState extends State<SearchPage>
     _searchController = TextEditingController();
     _searchNode = FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _searchNode.requestFocus();
+      _searchNode!.requestFocus();
     });
   }
 

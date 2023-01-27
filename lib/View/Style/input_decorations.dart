@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InputDecoration getAuthInputDecoration(String hint, bool isDark) {
+InputDecoration getAuthInputDecoration(String? hint, bool isDark) {
   return InputDecoration(
     hintText: hint,
     hintStyle: TextStyle(
@@ -16,7 +16,7 @@ InputDecoration getAuthInputDecoration(String hint, bool isDark) {
   );
 }
 
-InputDecoration getSearchInputDecoration(BuildContext context, String hint) {
+InputDecoration getSearchInputDecoration(BuildContext context, String? hint) {
   return InputDecoration(
     hintText: hint,
     enabledBorder: const UnderlineInputBorder(
@@ -24,7 +24,7 @@ InputDecoration getSearchInputDecoration(BuildContext context, String hint) {
     ),
     focusedBorder: UnderlineInputBorder(
       borderSide:
-          BorderSide(color: Theme.of(context).iconTheme.color, width: 2),
+          BorderSide(color: Theme.of(context).iconTheme.color!, width: 2),
     ),
   );
 }

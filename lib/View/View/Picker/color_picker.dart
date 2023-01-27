@@ -6,8 +6,8 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
 
-Future<Color> colorPickerDialog(BuildContext context) async {
-  Color pickedColor;
+Future<Color?> colorPickerDialog(BuildContext context) async {
+  Color? pickedColor;
   await ColorPicker(
     // Use the dialogPickerColor as start color.
     color: Theme.of(context).scaffoldBackgroundColor,
@@ -40,17 +40,17 @@ Future<Color> colorPickerDialog(BuildContext context) async {
         Padding(
             padding: const EdgeInsets.only(left: 3.0),
             child: Text(
-              languageConverter(context, "colorSheetTitle"),
-              style: Theme.of(context).textTheme.bodyText2.copyWith(color: Theme.of(context).iconTheme.color),
+              languageConverter(context, "colorSheetTitle")!,
+              style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Theme.of(context).iconTheme.color),
             ),
           )
       ],),
     ),
     subheading: Text(
-      languageConverter(context, "colorTone"),
+      languageConverter(context, "colorTone")!,
       style: Theme.of(context)
           .textTheme
-          .caption.copyWith(color: Theme.of(context).iconTheme.color),
+          .caption!.copyWith(color: Theme.of(context).iconTheme.color),
     ),
     padding: const EdgeInsets.all(5),
     actionButtons: ColorPickerActionButtons(
@@ -61,10 +61,10 @@ Future<Color> colorPickerDialog(BuildContext context) async {
     ),
     materialNameTextStyle: Theme.of(context)
         .textTheme
-        .caption
+        .caption!
         .copyWith(color: Theme.of(context).iconTheme.color),
-    colorNameTextStyle: Theme.of(context).textTheme.caption.copyWith(color: Theme.of(context).iconTheme.color),
-    colorCodeTextStyle: Theme.of(context).textTheme.caption.copyWith(color: Theme.of(context).iconTheme.color),
+    colorNameTextStyle: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).iconTheme.color),
+    colorCodeTextStyle: Theme.of(context).textTheme.caption!.copyWith(color: Theme.of(context).iconTheme.color),
     pickersEnabled: const <ColorPickerType, bool>{
       ColorPickerType.both: false,
       ColorPickerType.primary: true,

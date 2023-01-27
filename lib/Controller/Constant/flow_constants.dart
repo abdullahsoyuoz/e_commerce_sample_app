@@ -10,7 +10,7 @@ Map<int, String> flowFilter = {
   5: "flowFollows",
 };
 
-Color getFilterIndicatorColor(int index, BuildContext context) {
+Color? getFilterIndicatorColor(int index, BuildContext context) {
   switch (index) {
     case 0:
       return Theme.of(context).iconTheme.color;

@@ -19,8 +19,8 @@ import 'package:sepet_demo/View/View/flow_product_body_view.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 
 class FlowProductsListPage extends StatefulWidget {
-  final FlowEntity data;
-  const FlowProductsListPage({Key key, this.data}) : super(key: key);
+  final FlowEntity? data;
+  const FlowProductsListPage({Key? key, this.data}) : super(key: key);
 
   @override
   State<FlowProductsListPage> createState() => _FlowProductsListPageState();
@@ -29,8 +29,8 @@ class FlowProductsListPage extends StatefulWidget {
 class _FlowProductsListPageState extends State<FlowProductsListPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  PageController _pageController;
-  AnimationController _bellAnimationController;
+  PageController? _pageController;
+  AnimationController? _bellAnimationController;
 
   int pageIndex = 0;
   @override
@@ -42,7 +42,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
   @override
   void dispose() {
     super.dispose();
-    _pageController.dispose();
+    _pageController!.dispose();
   }
 
   @override
@@ -63,20 +63,20 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                 pageSnapping: true,
                 physics:
                     const PageScrollPhysics(parent: BouncingScrollPhysics()),
-                itemCount: widget.data.targetProducts.length,
+                itemCount: widget.data!.targetProducts!.length,
                 itemBuilder: (context, index) {
-                  final data = widget.data.targetProducts[index];
+                  final data = widget.data!.targetProducts![index];
                   return BouncingWidget(
                     onPressed: () {
-                      PaletteGenerator _palette;
-                      generatePalette(data.photosUrl[0]).then((value) {
-                        _palette = value;
+                      PaletteGenerator? palette;
+                      generatePalette(data!.photosUrl![0]).then((value) {
+                        palette = value;
                       }).whenComplete(() {
                         Navigator.push(context,
                             CupertinoPageRoute(builder: (context) {
                           return ProductDetailPage(
                             data: data,
-                            palette: _palette,
+                            palette: palette,
                           );
                         }));
                       });
@@ -119,7 +119,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
               elevation: 0,
               backgroundColor: Theme.of(context)
                   .appBarTheme
-                  .backgroundColor
+                  .backgroundColor!
                   .withOpacity(0.1),
               automaticallyImplyLeading: false,
               title: SizedBox(
@@ -156,7 +156,7 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                                     'Akış takibe alındı.',
                                   ),
                                 ));
-                                _bellAnimationController
+                                _bellAnimationController!
                                     .forward()
                                     .whenComplete(() {
                                   _bellAnimationController?.reset();
@@ -189,10 +189,10 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                                               const Duration(seconds: 1),
                                           startPadding: 20,
                                           blankSpace: context.width * 0.5,
-                                          text: widget.data.title.toUpperCase(),
+                                          text: widget.data!.title!.toUpperCase(),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText2
+                                              .bodyText2!
                                               .copyWith(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w600),
@@ -211,6 +211,11 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                                       child: Padding(
                                         padding: const EdgeInsets.all(7),
                                         child: Swing(
+                                          animate: false,
+                                          manualTrigger: true,
+                                          controller: (va) {
+                                            _bellAnimationController = va;
+                                          },
                                           child: LineIcon(
                                             LineIcons.bell,
                                             color:
@@ -220,11 +225,6 @@ class _FlowProductsListPageState extends State<FlowProductsListPage>
                                                         .iconTheme
                                                         .color,
                                           ),
-                                          animate: false,
-                                          manualTrigger: true,
-                                          controller: (va) {
-                                            _bellAnimationController = va;
-                                          },
                                         ),
                                       ),
                                     ),

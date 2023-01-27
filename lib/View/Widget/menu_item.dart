@@ -7,8 +7,8 @@ import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 
 class MenuItem extends StatelessWidget {
-  final AppMenu data;
-  const MenuItem({Key key, this.data}) : super(key: key);
+  final AppMenu? data;
+  const MenuItem({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +21,16 @@ class MenuItem extends StatelessWidget {
             flex: 2,
             child: BouncingWidget(
               onPressed: () {
-                settingsCallbackHelper(context, data.index);
+                settingsCallbackHelper(context, data!.index);
               },
               child: Card(
                 child: AspectRatio(
                     aspectRatio: 1,
                     child: LineIcon(
                         Provider.of<ThemeChanger>(context, listen: false)
-                                .isDark()
-                            ? data.icon
-                            : data.secondaryIcon ?? data.icon)),
+                                .isDark()!
+                            ? data!.icon!
+                            : data!.secondaryIcon ?? data!.icon!)),
               ),
             ),
           ),
@@ -39,15 +39,15 @@ class MenuItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 15.0),
               child: Text(
-                data.title != "theme"
-                    ? languageConverter(context, data.title)
+                data!.title != "theme"
+                    ? languageConverter(context, data!.title)!
                     : (Provider.of<ThemeChanger>(context, listen: false)
-                                .isDark()
-                            ? (languageConverter(context, "light") + " " + languageConverter(context, data.title))
-                            : (languageConverter(context, "dark")) + " " + languageConverter(context, data.title)),
+                                .isDark()!
+                            ? ("${languageConverter(context, "light")!} ${languageConverter(context, data!.title)!}")
+                            : "${languageConverter(context, "dark")!} ${languageConverter(context, data!.title)!}"),
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText2
+                    .bodyText2!
                     .copyWith(fontSize: 21),
               ),
             ),

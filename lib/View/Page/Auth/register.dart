@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:line_icons/line_icons.dart';
@@ -14,8 +16,8 @@ import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 
 class RegisterPage extends StatefulWidget {
-  final VoidCallback onRegisterPressed;
-  const RegisterPage({Key key, this.onRegisterPressed})
+  final VoidCallback? onRegisterPressed;
+  const RegisterPage({Key? key, this.onRegisterPressed})
       : super(key: key);
 
   @override
@@ -27,18 +29,18 @@ class _RegisterPageState extends State<RegisterPage>
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  AnimationController _animationController;
+  late AnimationController _animationController;
   double lastAnimationState = 0;
 
-   TextEditingController _nameController;
-   TextEditingController _phoneNumberController;
-   TextEditingController _emailController;
-   TextEditingController _passwordController;
+   TextEditingController? _nameController;
+   TextEditingController? _phoneNumberController;
+   TextEditingController? _emailController;
+   TextEditingController? _passwordController;
 
-   FocusNode _nameFocus;
-   FocusNode _phoneNumberFocus;
-   FocusNode _emailFocus;
-   FocusNode _passwordFocus;
+   FocusNode? _nameFocus;
+   FocusNode? _phoneNumberFocus;
+   FocusNode? _emailFocus;
+   FocusNode? _passwordFocus;
 
   @override
   void initState() {
@@ -62,10 +64,10 @@ class _RegisterPageState extends State<RegisterPage>
     _passwordFocus = FocusNode();
     // LISTENERS
     //
-    _nameController.addListener(() => _validation());
-    _phoneNumberController.addListener(() => _validation());
-    _emailController.addListener(() => _validation());
-    _passwordController.addListener(() => _validation());
+    _nameController!.addListener(() => _validation());
+    _phoneNumberController!.addListener(() => _validation());
+    _emailController!.addListener(() => _validation());
+    _passwordController!.addListener(() => _validation());
   }
 
   @override
@@ -117,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage>
                                 minWidth: context.width * 0.5,
                               ),
                               child: Text(
-                                languageConverter(context, 'register').toUpperCase(),
+                                languageConverter(context, 'register')!.toUpperCase(),
                                 textAlign: TextAlign.start,
                                 style: getAccentBoldStyle(),
                               )),
@@ -148,10 +150,10 @@ class _RegisterPageState extends State<RegisterPage>
                   child: Center(
                     child: BouncingWidget(
                       onPressed: () {
-                        widget.onRegisterPressed.call();
+                        widget.onRegisterPressed!.call();
                       },
                       child: Text(
-                        languageConverter(context, 'iWantLogin'),
+                        languageConverter(context, 'iWantLogin')!,
                         style: getSpacingStyle()
                       ),
                     ),
@@ -185,7 +187,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _nameController,
                         focusNode: _nameFocus,
                         style: getTextFieldStyle(context),
-                        decoration: getAuthInputDecoration(languageConverter(context, 'yourName'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourName'), Provider.of<ThemeChanger>(context, listen: false).isDark()!),
                         keyboardType: TextInputType.text,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -194,7 +196,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (string.length < 3) {
+                          if (string!.length < 3) {
                             return languageConverter(context, 'yourEmailValidation');
                           } else {
                             return null;
@@ -225,7 +227,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _phoneNumberController,
                         focusNode: _phoneNumberFocus,
                         style: getTextFieldStyle(context),
-                        decoration: getAuthInputDecoration(languageConverter(context, 'yourContactNumber'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourContactNumber'), Provider.of<ThemeChanger>(context, listen: false).isDark()!),
                         keyboardType: TextInputType.phone,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -234,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         validator: (string) {
-                          if (string.length != 11) {
+                          if (string!.length != 11) {
                             return languageConverter(context, 'yourContactNumberValidation');
                           }
                           return null;
@@ -264,7 +266,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _emailController,
                         focusNode: _emailFocus,
                         style: getTextFieldStyle(context),
-                        decoration: getAuthInputDecoration(languageConverter(context, 'yourEmail'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourEmail'), Provider.of<ThemeChanger>(context, listen: false).isDark()!),
                         keyboardType: TextInputType.emailAddress,
                         maxLines: 1,
                         textInputAction: TextInputAction.next,
@@ -273,7 +275,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string.isEmail()) {
+                          if (!string!.isEmail()) {
                             return languageConverter(context, 'yourEmailValidation');
                           }
                           return null;
@@ -303,7 +305,7 @@ class _RegisterPageState extends State<RegisterPage>
                         controller: _passwordController,
                         focusNode: _passwordFocus,
                         style: getTextFieldStyle(context),
-                        decoration: getAuthInputDecoration(languageConverter(context, 'yourPassword'), Provider.of<ThemeChanger>(context, listen: false).isDark()),
+                        decoration: getAuthInputDecoration(languageConverter(context, 'yourPassword'), Provider.of<ThemeChanger>(context, listen: false).isDark()!),
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         maxLines: 1,
@@ -313,7 +315,7 @@ class _RegisterPageState extends State<RegisterPage>
                           FilteringTextInputFormatter.singleLineFormatter
                         ],
                         validator: (string) {
-                          if (!string.isPasswordEasy()) {
+                          if (!string!.isPasswordEasy()) {
                             return languageConverter(context, 'yourPasswordValidation');
                           }
                           return null;
@@ -330,7 +332,7 @@ class _RegisterPageState extends State<RegisterPage>
           flex: 1,
           child: BouncingWidget(
             onPressed: () {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState!.validate()) {
                 FocusScope.of(context).unfocus();
                 _animationController.animateTo(5);
               } else {
@@ -349,7 +351,7 @@ class _RegisterPageState extends State<RegisterPage>
                     ),
                     child:  FittedBox(
                         child: Text(
-                      languageConverter(context, 'submit').toUpperCase(),
+                      languageConverter(context, 'submit')!.toUpperCase(),
                       style: getAccentStyle(),
                     )),
                   ),
@@ -364,25 +366,25 @@ class _RegisterPageState extends State<RegisterPage>
   }
 
   Future<int> _validation() async {
-    if (_nameController.text.length > 2 &&
-        _phoneNumberController.text.length == 11 &&
-        _emailController.text.isEmail() &&
-        _passwordController.text.isPasswordEasy()) {
+    if (_nameController!.text.length > 2 &&
+        _phoneNumberController!.text.length == 11 &&
+        _emailController!.text.isEmail() &&
+        _passwordController!.text.isPasswordEasy()) {
       _animationController.animateTo(4);
       return 4;
     }
-    if (_nameController.text.length > 2 &&
-        _phoneNumberController.text.length == 11 &&
-        _emailController.text.isEmail()) {
+    if (_nameController!.text.length > 2 &&
+        _phoneNumberController!.text.length == 11 &&
+        _emailController!.text.isEmail()) {
       _animationController.animateTo(3);
       return 3;
     }
-    if (_nameController.text.length > 2 &&
-        _phoneNumberController.text.length == 11) {
+    if (_nameController!.text.length > 2 &&
+        _phoneNumberController!.text.length == 11) {
       _animationController.animateTo(2);
       return 2;
     }
-    if (_nameController.text.length > 2) {
+    if (_nameController!.text.length > 2) {
       _animationController.animateTo(1);
       return 1;
     } else {

@@ -5,8 +5,8 @@ import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/flow.dart';
 
 class FlowsProvider with ChangeNotifier {
-  List<FlowEntity> _flows = [];
-  List<FlowEntity> _followedFlows = [];
+  List<FlowEntity?> _flows = [];
+  List<FlowEntity?> _followedFlows = [];
   int _currentFilter = 0;
   bool isLoading = false;
   bool isAllLoaded = false;
@@ -153,11 +153,11 @@ class FlowsProvider with ChangeNotifier {
     }
   }
 
-  Future<List<FlowEntity>> getList() async => _flows;
+  Future<List<FlowEntity?>> getList() async => _flows;
 
   // FOLLOW
 
-  Future<bool> followedListToggleItem(FlowEntity data) async {
+  Future<bool> followedListToggleItem(FlowEntity? data) async {
     if (!isFollowed(data)) {
       _followedFlows.add(data);
       notifyListeners();
@@ -169,7 +169,7 @@ class FlowsProvider with ChangeNotifier {
     }
   }
 
-  bool isFollowed(FlowEntity data) {
+  bool isFollowed(FlowEntity? data) {
     return _followedFlows.contains(data) ? true : false;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-TextStyle getTextFieldStyle(BuildContext context) =>
+TextStyle? getTextFieldStyle(BuildContext context) =>
     Theme.of(context).textTheme.bodyText2;
 
 TextStyle getNoenStyle(BuildContext context, MaterialColor color) => TextStyle(

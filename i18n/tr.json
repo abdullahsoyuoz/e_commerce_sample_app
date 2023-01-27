@@ -28,8 +28,8 @@
     "login" : "Giriş Yap",
     "register" : "Bize Katıl",
     "forgetPassword" : "Parolamı unuttum",
-    "notYetRegister" : "Henüz bize katılmadın mı?",
-    "iWantLogin" : "Giriş yapmak istiyorum",
+    "notYetRegister" : "Katılmak istiyorum",
+    "iWantLogin" : "Hesabıma giriş yapmak istiyorum",
     
     "yourEmail" : "e-mail adresiniz",
     "yourEmailValidation" : "e-mail adresinizin formatı doğrulanamadı.",

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,7 @@ import 'package:sepet_demo/View/Widget/logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GettingStarted extends StatefulWidget {
-  const GettingStarted({Key key}) : super(key: key);
+  const GettingStarted({Key? key}) : super(key: key);
 
   @override
   _GettingStartedState createState() => _GettingStartedState();
@@ -23,10 +25,15 @@ class GettingStarted extends StatefulWidget {
 class _GettingStartedState extends State<GettingStarted>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
+  final ScrollController languageScrollController = ScrollController(
+    initialScrollOffset: 1000
+  );
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    });
   }
 
   @override
@@ -56,7 +63,8 @@ class _GettingStartedState extends State<GettingStarted>
                     children: [
                       SingleChildScrollView(
                         padding: EdgeInsets.symmetric(
-                            vertical: context.padding.top * 1.5),
+                          vertical: context.padding.top * 1.5,
+                        ),
                         physics: const AlwaysScrollableScrollPhysics(
                             parent: BouncingScrollPhysics()),
                         child: Column(
@@ -70,7 +78,7 @@ class _GettingStartedState extends State<GettingStarted>
                                   Expanded(
                                     child: Text(
                                       languageConverter(
-                                          context, "gettingStarted"),
+                                          context, "gettingStarted")!,
                                       style: getAccentBoldStyle(),
                                     ),
                                   ),
@@ -88,7 +96,7 @@ class _GettingStartedState extends State<GettingStarted>
                               ),
                               child: Text(
                                 languageConverter(
-                                    context, 'chooseYourLanguage'),
+                                    context, 'chooseYourLanguage')!,
                                 style: getAccentBoldStyle(),
                               ),
                             ),
@@ -97,6 +105,7 @@ class _GettingStartedState extends State<GettingStarted>
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
+                                controller: languageScrollController,
                                 padding: const EdgeInsets.only(left: 20),
                                 physics: const AlwaysScrollableScrollPhysics(
                                     parent: BouncingScrollPhysics()),
@@ -115,8 +124,8 @@ class _GettingStartedState extends State<GettingStarted>
                                             SharedPreferences.getInstance()
                                                 .then((value) {
                                               value.setString("lang",
-                                                  data.locale.languageCode);
-                                              AppLocalizations.of(context)
+                                                  data.locale!.languageCode);
+                                              AppLocalizations.of(context)!
                                                   .load();
                                               setState(() {});
                                             });
@@ -124,13 +133,13 @@ class _GettingStartedState extends State<GettingStarted>
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: Image.asset(data.icon),
+                                            child: Image.asset(data.icon!),
                                           ),
                                         ),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 5.0),
-                                          child: Text(data.title,
+                                          child: Text(data.title!,
                                               style:
                                                   getTextFieldStyle(context)),
                                         )
@@ -147,12 +156,13 @@ class _GettingStartedState extends State<GettingStarted>
                                 bottom: 20,
                               ),
                               child: Text(
-                                languageConverter(context, 'chooseYourTheme'),
+                                languageConverter(context, 'chooseYourTheme')!,
                                 style: getAccentBoldStyle(),
                               ),
                             ),
                             SizedBox(
                               height: 90,
+                              width: context.width,
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
@@ -188,7 +198,7 @@ class _GettingStartedState extends State<GettingStarted>
                                                     border: Border.all(
                                                         color: Theme.of(context)
                                                             .iconTheme
-                                                            .color,
+                                                            .color!,
                                                         width: 2),
                                                     shape: BoxShape.circle),
                                               ),
@@ -199,9 +209,9 @@ class _GettingStartedState extends State<GettingStarted>
                                           child: Text(
                                             data.brightness == Brightness.dark
                                                 ? languageConverter(
-                                                    context, "dark")
+                                                    context, "dark")!
                                                 : languageConverter(
-                                                    context, "light"),
+                                                    context, "light")!,
                                             textAlign: TextAlign.center,
                                             style: getTextFieldStyle(context),
                                           ),
@@ -228,13 +238,14 @@ class _GettingStartedState extends State<GettingStarted>
                         key: LabeledGlobalKey('submitButton'),
                         duration: const Duration(milliseconds: 300),
                         child: Text(
-                          languageConverter(context, 'letStarted'),
+                          languageConverter(context, 'letStarted')!,
                           style: getAccentStyle(),
                         ),
                         onPressed: () {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
+                                fullscreenDialog: false,
                                 builder: (context) => const OnboardPage(),
                               ));
                         },

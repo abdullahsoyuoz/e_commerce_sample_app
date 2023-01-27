@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 import '../Provider/theme_provider.dart';
 
 class AppMenu {
-  int index;
-  String title;
-  IconData icon;
-  IconData secondaryIcon;
+  int? index;
+  String? title;
+  IconData? icon;
+  IconData? secondaryIcon;
   AppMenu({
     this.index,
     this.title,
@@ -27,7 +27,7 @@ List<AppMenu> settingsMenuItems = [
   AppMenu(index: 2, title: "editProfile", icon: LineIcons.user),
 ];
 
-void settingsCallbackHelper(BuildContext context, int index) {
+void settingsCallbackHelper(BuildContext context, int? index) {
   switch (index) {
     case 0:
       Provider.of<ThemeChanger>(context, listen: false).toggle();

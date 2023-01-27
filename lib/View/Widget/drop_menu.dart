@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 
 class DropMenu extends StatefulWidget {
-  final Widget lowLayer;
+  final Widget? lowLayer;
 
-  final Widget highLayer;
+  final Widget? highLayer;
 
-  final Widget indicator;
+  final Widget? indicator;
 
   /// call the widget's initState again so that the change can be applied.
   final double lowLayerHeight;
@@ -23,13 +23,13 @@ class DropMenu extends StatefulWidget {
 
   ///
   // Function(bool isOpen)? openCallback;
-  final VoidCallback onTabCallback;
+  final VoidCallback? onTabCallback;
 
-  final AnimationController animationController;
+  final AnimationController? animationController;
 
-  final BoxDecoration decoration;
+  final BoxDecoration? decoration;
   const DropMenu({
-    Key key,
+    Key? key,
     this.highLayer,
     this.indicator,
     this.lowLayer,
@@ -49,9 +49,9 @@ class DropMenu extends StatefulWidget {
 
 class _DropMenuState extends State<DropMenu>
     with SingleTickerProviderStateMixin {
-   AnimationController _animationController;
-   Animation<double> _animation;
-   ScrollController _scrollController;
+   AnimationController? _animationController;
+   late Animation<double> _animation;
+   late ScrollController _scrollController;
 
   @override
   void initState() {
@@ -60,14 +60,14 @@ class _DropMenuState extends State<DropMenu>
     _animation = Tween<double>(
       begin: 0,
       end: -(widget.lowLayerHeight + widget.lowLayerBottomPadding),
-    ).animate(_animationController);
+    ).animate(_animationController!);
     _scrollController = ScrollController();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _animationController.dispose();
+    _animationController!.dispose();
     _scrollController.dispose();
   }
 
@@ -100,24 +100,24 @@ class _DropMenuState extends State<DropMenu>
           alignment: Alignment.bottomCenter,
           child: AnimatedBuilder(
             animation: _animation,
-            builder: (BuildContext context, Widget child) {
+            builder: (BuildContext context, Widget? child) {
               return Transform.translate(
                 offset: Offset(0, _animation.value),
                 child: GestureDetector(
                   onTap: () {
-                    if (!_animationController.isAnimating) {
-                      if (_animationController.value == 0) {
-                        _animationController.forward();
+                    if (!_animationController!.isAnimating) {
+                      if (_animationController!.value == 0) {
+                        _animationController!.forward();
                       } else {
-                        _animationController.reverse();
+                        _animationController!.reverse();
                       }
                     }
                   },
                   onVerticalDragUpdate: (details) {
-                    if (!_animationController.isAnimating) {
+                    if (!_animationController!.isAnimating) {
                       details.delta.dy < 0
-                          ? _animationController.forward()
-                          : _animationController.reverse();
+                          ? _animationController!.forward()
+                          : _animationController!.reverse();
                     }
                   },
                   child: ColoredBox(
@@ -161,23 +161,23 @@ class _DropMenuState extends State<DropMenu>
   Widget _buildLowLayerWidget(BuildContext context) {
     return GestureDetector(
       onVerticalDragUpdate: (details) {
-        if (!_animationController.isAnimating) {
+        if (!_animationController!.isAnimating) {
           details.delta.dy < 0
-              ? _animationController.forward()
-              : _animationController.reverse();
+              ? _animationController!.forward()
+              : _animationController!.reverse();
         }
       },
       child: Align(
         alignment: Alignment.bottomCenter,
         child: AnimatedBuilder(
           animation: _animation,
-          builder: (BuildContext context, Widget child) {
+          builder: (BuildContext context, Widget? child) {
             return ConstrainedBox(
               constraints: BoxConstraints(
                 maxHeight: lerpDouble(
                     widget.lowLayerHeight + 0,
                     widget.lowLayerHeight + widget.lowLayerBottomPadding,
-                    _animationController.value),
+                    _animationController!.value)!,
                 maxWidth: MediaQuery.of(context).size.width,
               ),
               child: Align(
@@ -210,7 +210,7 @@ class _DropMenuState extends State<DropMenu>
           child: widget.highLayer ?? const SizedBox(),
         ),
       ),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Transform.translate(
           offset: Offset(0, _animation.value),
           child: child,

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
@@ -6,7 +8,7 @@ import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/View/onboard_views.dart';
 
 class OnboardPage extends StatefulWidget {
-  const OnboardPage({Key key}) : super(key: key);
+  const OnboardPage({Key? key}) : super(key: key);
 
   @override
   _OnboardPageState createState() => _OnboardPageState();
@@ -15,8 +17,8 @@ class OnboardPage extends StatefulWidget {
 class _OnboardPageState extends State<OnboardPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-   AnimationController _animationController;
-   PageController _pageController;
+   AnimationController? _animationController;
+   PageController? _pageController;
   int onboardIndex = 0;
 
   @override
@@ -34,8 +36,8 @@ class _OnboardPageState extends State<OnboardPage>
   @override
   void dispose() {
     super.dispose();
-    _animationController.dispose();
-    _pageController.dispose();
+    _animationController!.dispose();
+    _pageController!.dispose();
   }
 
   @override
@@ -53,7 +55,7 @@ class _OnboardPageState extends State<OnboardPage>
               ),
               PageView.builder(
                 onPageChanged: (value) {
-                  _animationController.animateTo(value.toDouble());
+                  _animationController!.animateTo(value.toDouble());
                 },
                 controller: _pageController,
                 itemCount: onBoardList.length,
@@ -69,8 +71,8 @@ class _OnboardPageState extends State<OnboardPage>
                     splashColor: AppColors.purple,
                     icon: const SizedBox(),
                     onPressed: () {
-                      if (_animationController.value < 3) {
-                        _pageController.nextPage(
+                      if (_animationController!.value < 3) {
+                        _pageController!.nextPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.ease);
                       } else {

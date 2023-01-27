@@ -9,10 +9,10 @@ class OnboardingPainter extends CustomPainter {
     level2Paint = Paint()..style = PaintingStyle.fill;
   }
 
-  Animation<double> animation;
-  Paint level1Paint;
-  Paint level2Paint;
-  Paint level3Paint;
+  Animation<double>? animation;
+  late Paint level1Paint;
+  late Paint level2Paint;
+  Paint? level3Paint;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -24,20 +24,20 @@ class OnboardingPainter extends CustomPainter {
   void paintLevel1(Canvas canvas, Size size) {
     final path = Path();
     path.moveTo(0, 0);
-    path.lineTo(lerpDouble(size.width / 4, size.width, animation.value / 3), 0);
-    path.lineTo(lerpDouble(size.width / 4, size.width, animation.value / 3),
+    path.lineTo(lerpDouble(size.width / 4, size.width, animation!.value / 3)!, 0);
+    path.lineTo(lerpDouble(size.width / 4, size.width, animation!.value / 3)!,
         size.height);
     path.lineTo(0, size.height);
     path.close();
     canvas.drawPath(
       path,
-      level1Paint..color = getColor(animation.value).withOpacity(.5),
+      level1Paint..color = getColor(animation!.value)!.withOpacity(.5),
     );
   }
 
   void paintBackground(Canvas canvas, Size size) {
     canvas.drawRect(Rect.largest,
-        level2Paint..color = getColor(animation.value).withOpacity(0.75));
+        level2Paint..color = getColor(animation!.value)!.withOpacity(0.75));
   }
 
   void paintSliceProgress(Canvas canvas, Size size) {
@@ -48,7 +48,7 @@ class OnboardingPainter extends CustomPainter {
         Offset(size.width * 0.5 + 25, size.height - 100),
       ),
       -math.pi / 2,
-      math.pi * animation.value / 2 + math.pi / 2,
+      math.pi * animation!.value / 2 + math.pi / 2,
       true,
       Paint()
         ..color = Colors.white
@@ -56,24 +56,24 @@ class OnboardingPainter extends CustomPainter {
         ..style = PaintingStyle.fill,
     );
 
-    canvas.drawPath(path, level1Paint..color = getColor(animation.value));
+    canvas.drawPath(path, level1Paint..color = getColor(animation!.value)!);
   }
 
-  Color getColor(double value) {
+  Color? getColor(double value) {
     if (value <= 1) {
       return Color.lerp(AppColors.purple.shade300, AppColors.orange.shade300,
-          animation.value);
+          animation!.value);
     }
     if (value <= 2) {
       return Color.lerp(AppColors.orange.shade300, AppColors.red.shade300,
-          animation.value - 1);
+          animation!.value - 1);
     }
     if (value <= 3) {
       return Color.lerp(
-          AppColors.red.shade300, AppColors.blue.shade300, animation.value - 2);
+          AppColors.red.shade300, AppColors.blue.shade300, animation!.value - 2);
     }
     return Color.lerp(
-        AppColors.grey.shade300, AppColors.grey.shade300, animation.value);
+        AppColors.grey.shade300, AppColors.grey.shade300, animation!.value);
   }
 
   @override

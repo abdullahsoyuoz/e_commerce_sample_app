@@ -16,9 +16,9 @@ import 'package:sepet_demo/View/View/Sheets/bookmark_sheet.dart';
 import 'package:sepet_demo/View/Widget/loading_indicator.dart';
 
 class ProductViewBody extends StatefulWidget {
-  final Product data;
-  final int index;
-  const ProductViewBody({Key key, this.data, this.index}) : super(key: key);
+  final Product? data;
+  final int? index;
+  const ProductViewBody({Key? key, this.data, this.index}) : super(key: key);
 
   @override
   State<ProductViewBody> createState() => _ProductViewBodyState();
@@ -50,15 +50,15 @@ class _ProductViewBodyState extends State<ProductViewBody>
                   Flexible(
                       flex: 2,
                       child: Stack(fit: StackFit.expand, children: [
-                        ColoredBox(color: Theme.of(context).iconTheme.color),
+                        ColoredBox(color: Theme.of(context).iconTheme.color!),
                         Image.network(
-                          widget.data.photosUrl[0],
+                          widget.data!.photosUrl![0],
                           width: context.width,
                           fit: BoxFit.cover,
                           loadingBuilder: (context, child, loadingProgress) =>
                               loadingIndicator(context, child, loadingProgress),
                         ),
-                        !widget.data.isNew
+                        !widget.data!.isNew
                             ? const SizedBox()
                             : Align(
                                 alignment: Alignment.topLeft,
@@ -73,7 +73,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                           backgroundColor: AppColors.red,
                                           foregroundColor: Colors.white,
                                           child: Text(languageConverter(
-                                              context, "new")),
+                                              context, "new")!),
                                         )))))
                       ])),
                   Flexible(
@@ -91,24 +91,24 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                      Text(widget.data.title + '',
+                                      Text(widget.data!.title!,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText2
+                                              .bodyText2!
                                               .copyWith(
                                                   fontSize: 17,
                                                   fontWeight: FontWeight.w600)),
                                       Padding(
                                           padding:
                                               const EdgeInsets.only(top: 5.0),
-                                          child: Text(widget.data.description,
+                                          child: Text(widget.data!.description!,
                                               maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText2
+                                                  .bodyText2!
                                                   .copyWith(
                                                       fontSize: 12,
                                                       fontStyle:
@@ -145,7 +145,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                                       fit: BoxFit
                                                                           .fitHeight,
                                                                       child: Text(NumberFormat.compact(locale: 'en_US').format(widget
-                                                                          .data
+                                                                          .data!
                                                                           .purchasesCount))),
                                                                   Padding(
                                                                       padding: const EdgeInsets
@@ -178,7 +178,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                                           fit: BoxFit
                                                                               .fitHeight,
                                                                           child: Text(NumberFormat.compact(locale: 'en_US').format(widget
-                                                                              .data
+                                                                              .data!
                                                                               .commentCount))),
                                                                       Padding(
                                                                           padding: const EdgeInsets.only(
@@ -209,9 +209,9 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                                               .fitHeight,
                                                                           child:
                                                                               Text(
-                                                                            widget.data.rank.oneDigitForRankString,
+                                                                            widget.data!.rank!.oneDigitForRankString,
                                                                             style:
-                                                                                TextStyle(color: Theme.of(context).textTheme.bodyText2.color),
+                                                                                TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),
                                                                           )),
                                                                       Padding(
                                                                           padding: const EdgeInsets.only(
@@ -231,7 +231,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                widget.data.discountRate == null
+                                                widget.data!.discountRate == null
                                                     ? const SizedBox()
                                                     : Padding(
                                                         padding:
@@ -239,12 +239,12 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                                     .only(
                                                                 right: 5.0),
                                                         child: Text(
-                                                            widget.data.price
+                                                            widget.data!.price!
                                                                 .twoDigitForMoney,
                                                             style: Theme
                                                                     .of(context)
                                                                 .textTheme
-                                                                .subtitle2
+                                                                .subtitle2!
                                                                 .copyWith(
                                                                     fontSize:
                                                                         17,
@@ -257,13 +257,13 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                                             .lineThrough))),
                                                 Text(
                                                     discountedCalculate(
-                                                            widget.data.price,
-                                                            widget.data
-                                                                .discountRate)
+                                                            widget.data!.price,
+                                                            widget.data!
+                                                                .discountRate)!
                                                         .twoDigitForMoney,
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .subtitle2
+                                                        .subtitle2!
                                                         .copyWith(
                                                           fontSize: 17,
                                                         ))
@@ -282,7 +282,7 @@ class _ProductViewBodyState extends State<ProductViewBody>
                                                       child: Text(
                                                           languageConverter(
                                                               context,
-                                                              "goProduct"),
+                                                              "goProduct")!,
                                                           style: TextStyle(
                                                               color: Theme.of(
                                                                       context)

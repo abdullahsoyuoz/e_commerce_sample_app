@@ -1,7 +1,9 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class BasketPage extends StatefulWidget {
-  const BasketPage({ Key key }) : super(key: key);
+  const BasketPage({ Key? key }) : super(key: key);
 
   @override
   _BasketPageState createState() => _BasketPageState();

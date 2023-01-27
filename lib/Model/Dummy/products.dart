@@ -7,8 +7,8 @@ import 'package:sepet_demo/Model/shop.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-Product productItem;
-List<Product> productList = [];
+Product? productItem;
+List<Product?> productList = [];
 List<Shop> shopList = [];
 List<String> brandList = [];
 
@@ -22,7 +22,7 @@ Future<void> fetchProduct() async {
       // categoryList.add(catItem);
     }
   } on Exception catch (e) {
-    debugPrint('product fetching error: ' + e.toString());
+    debugPrint('product fetching error: $e');
   }
 }
 
@@ -76,14 +76,12 @@ Future<void> generateShop() async {
     for (var index = 0; index < 50; index++) {
       final data = Shop(
         id: index,
-        name: faker.lorem.word() + ' ' + faker.company.companySuffix(),
+        name: '${faker.lorem.word()} ${faker.company.companySuffix()}',
         city: faker.address.city(),
         country: faker.address.country(),
         contactNumber: faker.phoneNumber.phoneNumber(),
-        email: faker.lorem.word() +
-            '@' +
-            faker.locale.internet.freeEmail[
-                Random().nextInt(faker.locale.internet.freeEmail.length)],
+        email: '${faker.lorem.word()}@${faker.locale.internet.freeEmail![
+                Random().nextInt(faker.locale.internet.freeEmail!.length)]}',
         logoUrl: faker.image.unsplash.objects(keyword: 'logo'),
         websiteUrl: faker.internet.url(),
       );
@@ -100,14 +98,12 @@ Future<void> generateBrand() async {
     final faker = Faker.instance;
     for (var i = 0; i < 20; i++) {
       brandList.add(
-        faker.lorem.word() +
-            ' ' +
-            faker.locale.commerce.department[
-                Random().nextInt(faker.locale.commerce.department.length - 1)],
+        '${faker.lorem.word()} ${faker.locale.commerce.department![
+                Random().nextInt(faker.locale.commerce.department!.length - 1)]}',
       );
     }
   } on Exception catch (e) {
-    debugPrint('brand:: ' + e.toString());
+    debugPrint('brand:: $e');
   }
 }
 

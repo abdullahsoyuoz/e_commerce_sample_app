@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 
-PreferredSizeWidget blurAppBar(BuildContext context, {Widget title, Widget leading, List<Widget> action}){
+PreferredSizeWidget blurAppBar(BuildContext context, {Widget? title, Widget? leading, List<Widget>? action}){
   return PreferredSize(
       preferredSize: const Size.fromHeight(70),
       child: ClipRect(

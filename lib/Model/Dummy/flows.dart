@@ -30,7 +30,7 @@ Future<void> generateFlow() async {
 
       flowList.add(item);
     } on Exception catch (e) {
-      debugPrint('flow generate error: ' + e.toString());
+      debugPrint('flow generate error: $e');
     }
   }
 }
@@ -74,7 +74,7 @@ String getTypeString(FlowType type) {
   }
 }
 
-List<String> getFlowTitle(FlowType type, String assistText) {
+List<String> getFlowTitle(FlowType type, String? assistText) {
   List<String> time = ['aylık', 'haftalık', 'günlük'];
   List<String> summer = ['yaz', 'kış', 'bahar'];
   List<String> tamamlayici = ['sevilen', 'favori', 'popüler', 'ekonomik'];

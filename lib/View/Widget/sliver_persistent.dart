@@ -9,7 +9,7 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
   });
 
   BuildContext context;
-  Widget child;
+  Widget? child;
   double maxExtentValue;
   double minExtentValue;
 

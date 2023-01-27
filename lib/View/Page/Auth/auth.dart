@@ -5,15 +5,16 @@ import 'package:sepet_demo/View/Page/Auth/register.dart';
 import 'package:sepet_demo/View/Painter/auth_background_painter.dart';
 
 class AuthMainPage extends StatefulWidget {
-  const AuthMainPage({Key key}) : super(key: key);
+  const AuthMainPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AuthMainPageState createState() => _AuthMainPageState();
 }
 
 class _AuthMainPageState extends State<AuthMainPage>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
   ValueNotifier<bool> showRegisterPage = ValueNotifier<bool>(false);
 
   @override

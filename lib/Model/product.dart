@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 
 class Product {
-  int id;
-  String title;
-  String description;
-  String brand;
-  String model;
-  String category;
-  double rank;
-  int purchasesCount;
-  int commentCount;
-  double price;
-  int discountRate;
-  DateTime publishedDate;
-  List<String> photosUrl;
-  String shop;
+  int? id;
+  String? title;
+  String? description;
+  String? brand;
+  String? model;
+  String? category;
+  double? rank;
+  int? purchasesCount;
+  int? commentCount;
+  double? price;
+  int? discountRate;
+  DateTime? publishedDate;
+  List<String>? photosUrl;
+  String? shop;
   bool isLiked;
   bool isAddedBookmark;
   bool isAddedCart;
   bool isNew;
 
-  List<Color> colorOptions;
-  Map<int, String> sizeOptions;
-  DateTime modelDate;
-  String productWebUrl;
+  List<Color>? colorOptions;
+  Map<int, String>? sizeOptions;
+  DateTime? modelDate;
+  String? productWebUrl;
 
   Product({
     this.id,

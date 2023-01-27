@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class ThemeChanger with ChangeNotifier {
-   bool _isDark;
+   bool? _isDark;
 
   ThemeChanger() {
     _isDark =
@@ -10,7 +10,7 @@ class ThemeChanger with ChangeNotifier {
             ? true
             : false;
   }
-  bool isDark() => _isDark;
+  bool? isDark() => _isDark;
 
   void setTheme(bool dark) {
     _isDark = dark;

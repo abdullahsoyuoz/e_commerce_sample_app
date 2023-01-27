@@ -11,21 +11,21 @@ class AppLocalizations {
 
   AppLocalizations(this.locale);
 
-  static AppLocalizations of(BuildContext context) {
+  static AppLocalizations? of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
-  Map<String, String> _localizedStrings;
+  late Map<String, String?> _localizedStrings;
 
   Future<bool> load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     locale = Locale(locale.languageCode == "tr" ? "tr" : "en",locale.languageCode == "tr" ? "tr" : "en");
-    String lang;
+    String? lang;
     if (prefs.containsKey("lang")) {
       lang = prefs.getString("lang");
-      locale = Locale(prefs.getString("lang"), prefs.getString("lang"));
+      locale = Locale(prefs.getString("lang")!, prefs.getString("lang"));
     }
     var currentLangCode = lang ?? locale.languageCode;
     var otherLangCode = currentLangCode == "tr" ? "en" : "tr";
@@ -49,8 +49,8 @@ class AppLocalizations {
     return true;
   }
 
-  String translate(String key) {
-    return _localizedStrings[key];
+  String? translate(String? key) {
+    return _localizedStrings[key!];
   }
 }
 
@@ -67,7 +67,7 @@ class _AppLocalizationsDelegate
   Future<AppLocalizations> load(Locale locale) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey("lang")) {
-      locale = Locale(prefs.getString("lang"), prefs.getString("lang"));
+      locale = Locale(prefs.getString("lang")!, prefs.getString("lang"));
     }
     // AppLocalizations class is where the JSON loading actually runs
     AppLocalizations localizations = AppLocalizations(locale);
@@ -79,6 +79,6 @@ class _AppLocalizationsDelegate
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
-String languageConverter(BuildContext context, String nameParam){
-  return AppLocalizations.of(context).translate(nameParam);
+String? languageConverter(BuildContext context, String? nameParam){
+  return AppLocalizations.of(context)!.translate(nameParam);
 }

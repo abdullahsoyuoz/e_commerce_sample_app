@@ -1,13 +1,15 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 class BouncingWidget extends StatefulWidget {
   /// Set it to `null` to disable `onTap`.
-  final VoidCallback onPressed;
-  final void Function(TapUpDetails) onTapUp;
-  final void Function(TapDownDetails) onTapDown;
-  final VoidCallback onTapCancel;
+  final VoidCallback? onPressed;
+  final void Function(TapUpDetails)? onTapUp;
+  final void Function(TapDownDetails)? onTapDown;
+  final VoidCallback? onTapCancel;
 
   /// The reverse duration of the scaling animation when `onTapUp`.
   final Duration duration;
@@ -24,10 +26,10 @@ class BouncingWidget extends StatefulWidget {
   /// The scale factor of the child widget. The valid range of `scaleFactor` is from `0.0` to `1.0`.
   final double scaleFactor;
 
-  final Widget child;
+  final Widget? child;
 
   const BouncingWidget({
-    Key key,
+    Key? key,
     this.onPressed,
     this.child,
     this.onTapUp,
@@ -50,7 +52,7 @@ class BouncingWidget extends StatefulWidget {
 
 class _BouncingWidgetState extends State<BouncingWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -76,7 +78,7 @@ class _BouncingWidgetState extends State<BouncingWidget>
     void onTap() {
       if (widget.onPressed != null) {
         Timer(widget.duration * 2, () {
-          widget.onPressed();
+          widget.onPressed!();
         });
       }
 
@@ -86,17 +88,17 @@ class _BouncingWidgetState extends State<BouncingWidget>
     }
 
     void onTapUp(TapUpDetails details) {
-      if (widget.onTapUp != null) widget.onTapUp(details);
+      if (widget.onTapUp != null) widget.onTapUp!(details);
       _controller.forward();
     }
 
     void onTapDown(TapDownDetails details) {
-      if (widget.onTapDown != null) widget.onTapDown(details);
+      if (widget.onTapDown != null) widget.onTapDown!(details);
       _controller.reverse();
     }
 
     void onTapCancel() {
-      if (widget.onTapCancel != null) widget.onTapCancel();
+      if (widget.onTapCancel != null) widget.onTapCancel!();
       _controller.forward();
     }
 
