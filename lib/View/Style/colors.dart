@@ -13,15 +13,15 @@ import 'package:flutter/material.dart';
 // }
 
 class AppColors {
-  static MaterialColor grey = MaterialColor(0xffE6E6E6, _materialGrey);
-  static MaterialColor black = MaterialColor(0xff272A30, _materialBlack);
-  static MaterialColor orange = MaterialColor(0xffFFB433, _materialOrange);
-  static MaterialColor yellow = MaterialColor(0xffFFFA2E, _materialYellow);
-  static MaterialColor green = MaterialColor(0xff88C158, _materialGreen);
-  static MaterialColor turquaz = MaterialColor(0xff2F819C, _materialTurquaz);
-  static MaterialColor blue = MaterialColor(0xff1C5A9A, _materialBlue);
-  static MaterialColor purple = MaterialColor(0xff764F9E, _materialPurple);
-  static MaterialColor red = MaterialColor(0xffFF4545, _materialRed);
+  static MaterialColor grey = MaterialColor(AppBaseColors.greyS2.value, _materialGrey);
+  static MaterialColor black = MaterialColor(AppBaseColors.blackS2.value, _materialBlack);
+  static MaterialColor orange = MaterialColor(AppBaseColors.orangeS2.value, _materialOrange);
+  static MaterialColor yellow = MaterialColor(AppBaseColors.yellowS2.value, _materialYellow);
+  static MaterialColor green = MaterialColor(AppBaseColors.greenS2.value, _materialGreen);
+  static MaterialColor turquaz = MaterialColor(AppBaseColors.turquazS2.value, _materialTurquaz);
+  static MaterialColor blue = MaterialColor(AppBaseColors.blueS2.value, _materialBlue);
+  static MaterialColor purple = MaterialColor(AppBaseColors.purpleS2.value, _materialPurple);
+  static MaterialColor red = MaterialColor(AppBaseColors.redS2.value, _materialRed);
 }
 
 class AppBaseColors {

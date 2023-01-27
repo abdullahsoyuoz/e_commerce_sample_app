@@ -18,10 +18,6 @@ class _MyListPageState extends State<MyListPage> with SingleTickerProviderStateM
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,

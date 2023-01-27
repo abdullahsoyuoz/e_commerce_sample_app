@@ -6,8 +6,6 @@ import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/View/Page/Auth/getting_started.dart';
 import 'package:sepet_demo/View/Painter/splash_painter.dart';
-import 'package:sepet_demo/View/Style/colors.dart';
-import 'package:sepet_demo/View/Style/route_builder.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';
 
 class SplashScreen extends StatefulWidget {

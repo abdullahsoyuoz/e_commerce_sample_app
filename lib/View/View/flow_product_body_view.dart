@@ -31,10 +31,6 @@ class _ProductViewBodyState extends State<ProductViewBody>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

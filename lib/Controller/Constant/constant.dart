@@ -14,8 +14,8 @@ String flagES = "assets/image/flags/es.png";
 String flagPT = "assets/image/flags/pt.png";
 
 final supportedLanguages = [
-  Locale('en', 'US'),
-  Locale('tr', 'TR'),
+  const Locale('en', 'US'),
+  const Locale('tr', 'TR'),
 ];
 
 enum Direction { UP, DOWN, LEFT, RIGHT }

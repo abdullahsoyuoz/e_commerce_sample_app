@@ -18,10 +18,6 @@ class _NotifyPageState extends State<NotifyPage> with SingleTickerProviderStateM
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,

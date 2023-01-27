@@ -12,7 +12,7 @@ extension GetSize on BuildContext {
 }
 
 extension AddWhitespace on String {
-  String get addWhitespace => ' ${this} ';
+  String get addWhitespace => ' $this ';
 }
 
 extension TwoDigit on double {

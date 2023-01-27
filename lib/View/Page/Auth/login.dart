@@ -16,7 +16,6 @@ import 'package:sepet_demo/View/Page/User/home.dart';
 import 'package:sepet_demo/View/Painter/login_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
 import 'package:sepet_demo/View/Style/input_decorations.dart';
-import 'package:sepet_demo/View/Style/route_builder.dart';
 import 'package:sepet_demo/View/Style/textstyle.dart';
 import 'package:sepet_demo/View/Widget/bouncing_widget.dart';
 import 'package:sepet_demo/View/Widget/logo.dart';

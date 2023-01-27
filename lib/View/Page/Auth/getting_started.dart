@@ -25,19 +25,17 @@ class GettingStarted extends StatefulWidget {
 class _GettingStartedState extends State<GettingStarted>
     with SingleTickerProviderStateMixin {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  final ScrollController languageScrollController = ScrollController(
-    initialScrollOffset: 1000
-  );
+  final ScrollController languageScrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
   }
 
   @override
   void dispose() {
+    languageScrollController.dispose();
     super.dispose();
   }
 
