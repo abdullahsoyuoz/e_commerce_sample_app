@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/View/Page/Auth/auth.dart';
 import 'package:sepet_demo/View/Painter/onboarding_painter.dart';
 import 'package:sepet_demo/View/Style/colors.dart';
@@ -24,11 +25,11 @@ class _OnboardPageState extends State<OnboardPage>
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0);
+    _pageController = PageController(initialPage: onboardIndex);
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
-      upperBound: 3,
+      duration: Duration(milliseconds: ConstantDuration.normal),
+      upperBound: onBoardList.length - 1 ,
       lowerBound: 0,
     );
   }
@@ -56,6 +57,7 @@ class _OnboardPageState extends State<OnboardPage>
               PageView.builder(
                 onPageChanged: (value) {
                   _animationController!.animateTo(value.toDouble());
+                  debugPrint(_animationController!.value.toString());
                 },
                 controller: _pageController,
                 itemCount: onBoardList.length,
@@ -71,9 +73,9 @@ class _OnboardPageState extends State<OnboardPage>
                     splashColor: AppColors.purple,
                     icon: const SizedBox(),
                     onPressed: () {
-                      if (_animationController!.value < 3) {
+                      if (_animationController!.value < onBoardList.length - 1) {
                         _pageController!.nextPage(
-                            duration: const Duration(milliseconds: 300),
+                            duration: Duration(milliseconds: ConstantDuration.normal),
                             curve: Curves.ease);
                       } else {
                         Navigator.push(

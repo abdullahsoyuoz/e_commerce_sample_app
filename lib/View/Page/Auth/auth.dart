@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/View/Page/Auth/login.dart';
 import 'package:sepet_demo/View/Page/Auth/register.dart';
 import 'package:sepet_demo/View/Painter/auth_background_painter.dart';
@@ -22,8 +23,8 @@ class _AuthMainPageState extends State<AuthMainPage>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
-      reverseDuration: const Duration(milliseconds: 500),
+      duration: Duration(milliseconds: ConstantDuration.normal),
+      reverseDuration: Duration(milliseconds: ConstantDuration.normal),
     );
   }
 

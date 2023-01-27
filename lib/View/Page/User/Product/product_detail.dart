@@ -10,6 +10,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/Provider/mylist_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Model/product.dart';
@@ -187,7 +188,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   onDotClicked: (page) {
                     _pageController.animateToPage(
                       page,
-                      duration: Duration(milliseconds: 500),
+                      duration: Duration(milliseconds: ConstantDuration.normal),
                       curve: Curves.ease,
                     );
                   },
@@ -559,7 +560,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: BouncingWidget(
-                      duration: Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: ConstantDuration.normal),
                       onPressed: () {},
                       child: Center(
                         child: Text(
@@ -573,7 +574,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: BouncingWidget(
-                      duration: Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: ConstantDuration.normal),
                       onPressed: () {},
                       child: Center(
                         child: Text(
@@ -945,7 +946,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   provider
                                       .addOrder(widget.data)
                                       .whenComplete(() {
-                                    Timer(Duration(milliseconds: 1000), () {
+                                    Timer(Duration(milliseconds: ConstantDuration.slowly), () {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
                                         backgroundColor: Theme.of(context)
@@ -999,7 +1000,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                   provider
                                       .addOrder(widget.data)
                                       .whenComplete(() {
-                                    Timer(Duration(milliseconds: 1000), () {
+                                    Timer(Duration(milliseconds: ConstantDuration.slowly), () {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
                                         backgroundColor: Theme.of(context)

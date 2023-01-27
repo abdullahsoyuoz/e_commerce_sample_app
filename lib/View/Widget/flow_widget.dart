@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Model/flow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -24,7 +25,7 @@ class _FlowWidgetState extends State<FlowWidget>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration:  Duration(milliseconds: ConstantDuration.normal),
       lowerBound: 0,
       upperBound: 1,
     );

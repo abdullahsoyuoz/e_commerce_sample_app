@@ -299,7 +299,7 @@ class _NavigationPageState extends State<NavigationPage>
               Expanded(
                 flex: 2,
                 child: BouncingWidget(
-                  duration: const Duration(milliseconds: 300),
+                  duration: Duration(milliseconds: ConstantDuration.normal),
                   onPressed: () {
                     SharedPreferences.getInstance().then((value) {
                       value.setString("lang", data.locale!.languageCode);

@@ -6,6 +6,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/View/Painter/register_painter.dart';
@@ -50,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage>
       upperBound: 5,
       lowerBound: 0,
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: Duration(milliseconds: ConstantDuration.normal),
     );
     //
     _nameController = TextEditingController();

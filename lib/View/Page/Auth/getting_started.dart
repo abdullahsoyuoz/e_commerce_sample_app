@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/Controller/AppLocalizations.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Controller/Constant/languages.dart';
 import 'package:sepet_demo/Controller/Provider/theme_provider.dart';
 import 'package:sepet_demo/Controller/extensions.dart';
@@ -117,7 +118,7 @@ class _GettingStartedState extends State<GettingStarted>
                                       children: [
                                         BouncingWidget(
                                           duration:
-                                              const Duration(milliseconds: 300),
+                                              Duration(milliseconds: ConstantDuration.normal),
                                           onPressed: () {
                                             SharedPreferences.getInstance()
                                                 .then((value) {
@@ -176,8 +177,8 @@ class _GettingStartedState extends State<GettingStarted>
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         BouncingWidget(
-                                            duration: const Duration(
-                                                milliseconds: 300),
+                                            duration: Duration(
+                                                milliseconds: ConstantDuration.normal),
                                             onPressed: () {
                                               Provider.of<ThemeChanger>(context,
                                                       listen: false)
@@ -234,7 +235,7 @@ class _GettingStartedState extends State<GettingStarted>
                       padding: const EdgeInsets.only(right: 30.0, top: 30),
                       child: BouncingWidget(
                         key: LabeledGlobalKey('submitButton'),
-                        duration: const Duration(milliseconds: 300),
+                        duration: Duration(milliseconds: ConstantDuration.normal),
                         child: Text(
                           languageConverter(context, 'letStarted')!,
                           style: getAccentStyle(),

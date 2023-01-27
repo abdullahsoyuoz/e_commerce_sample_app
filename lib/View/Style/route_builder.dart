@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:sepet_demo/Controller/Constant/constant.dart';
+
 // Route fadeRouteBuilder(
 //   BuildContext context,
 //   Widget routePage, {
@@ -11,7 +13,7 @@ import 'dart:math' as math;
 //   Duration? reverseTransitionDuration,
 // }) {
 //   return PageRouteBuilder(
-//     transitionDuration: transitionDuration ?? const Duration(milliseconds: 500),
+//     transitionDuration: transitionDuration ?? const Duration(milliseconds: ConstantDuration.normal),
 //     barrierColor: barrierColor ?? Colors.transparent,
 //     barrierDismissible: false,
 //     opaque: false,
@@ -37,7 +39,7 @@ Route leftSlideRouteBuilder(
   Duration? reverseTransitionDuration,
 }) {
   return PageRouteBuilder(
-    transitionDuration: transitionDuration ?? const Duration(milliseconds: 300),
+    transitionDuration: transitionDuration ??  Duration(milliseconds: ConstantDuration.normal),
     barrierColor: barrierColor ?? Colors.transparent,
     barrierDismissible: false,
     opaque: false,

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
+import 'package:sepet_demo/Controller/Constant/constant.dart';
 import 'package:sepet_demo/Model/Dummy/flows.dart';
 import 'package:sepet_demo/Model/flow.dart';
 
@@ -74,7 +75,7 @@ class FlowsProvider with ChangeNotifier {
 
   Future<void> fetchData() async {
     isLoading = true;
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(Duration(milliseconds: ConstantDuration.slowly));
 
     // if (_flows.length != flowList.length) {
     if (_currentFilter == 0) {

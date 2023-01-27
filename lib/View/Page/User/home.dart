@@ -30,6 +30,8 @@ import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:swipe/swipe.dart';
 
+import '../../../Controller/Constant/constant.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -51,7 +53,7 @@ class _HomePageState extends State<HomePage>
     _listViewController = ScrollController();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: Duration(milliseconds: ConstantDuration.normal),
     );
     super.initState();
   }
@@ -108,12 +110,12 @@ class _HomePageState extends State<HomePage>
                 child: Swipe(
                   onSwipeRight: () {
                     _pageController!.previousPage(
-                        duration: const Duration(milliseconds: 300),
+                        duration: Duration(milliseconds: ConstantDuration.normal),
                         curve: Curves.ease);
                   },
                   onSwipeLeft: () {
                     _pageController!.nextPage(
-                        duration: const Duration(milliseconds: 300),
+                        duration: Duration(milliseconds: ConstantDuration.normal),
                         curve: Curves.ease);
                   },
                   child:
@@ -336,7 +338,7 @@ class _HomePageState extends State<HomePage>
                           return GestureDetector(
                             onTap: () {
                               _pageController!.animateToPage(index,
-                                  duration: const Duration(milliseconds: 300),
+                                  duration: Duration(milliseconds: ConstantDuration.normal),
                                   curve: Curves.ease);
                             },
                             child: Padding(
@@ -351,7 +353,7 @@ class _HomePageState extends State<HomePage>
                                               index, context)!
                                           : Colors.transparent,
                                     )),
-                                duration: const Duration(milliseconds: 300),
+                                duration: Duration(milliseconds: ConstantDuration.normal),
                                 child: Center(
                                   child: ConstrainedBox(
                                     constraints: const BoxConstraints(

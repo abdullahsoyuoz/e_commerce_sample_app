@@ -18,4 +18,10 @@ final supportedLanguages = [
   const Locale('tr', 'TR'),
 ];
 
+class ConstantDuration {
+  static int slowly = 1000;
+  static int normal = 500;
+  static int faster = 300;
+}
+
 enum Direction { UP, DOWN, LEFT, RIGHT }
